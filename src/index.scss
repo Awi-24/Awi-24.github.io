@@ -1,0 +1,25 @@
+@import url('https://fonts.googleapis.com/css2?family=Epilogue:wght@500&family=Roboto:wght@500&family=Sora:wght@500&display=swap');
+@import "./node_modules/bootstrap/scss/bootstrap";
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+:root {
+    
+    /* CORES */
+
+    --bg-rosa: #FF0068;
+    --bg-branco: white;
+    --bg-preto: #090909;
+    --bg-cinza: #2D2D2D;
+
+    /*FONTES*/
+
+    --font-epilogue: 'Epilogue', sans-serif;
+    --font-roboto: 'Roboto', sans-serif;
+    --font-sore: 'Sora', sans-serif;
+
+}
