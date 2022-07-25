@@ -7,6 +7,10 @@
     box-sizing: border-box;
 }
 
+html {
+    scroll-behavior: smooth;
+}
+
 :root {
     
     /* CORES */
@@ -20,6 +24,6 @@
 
     --font-epilogue: 'Epilogue', sans-serif;
     --font-roboto: 'Roboto', sans-serif;
-    --font-sore: 'Sora', sans-serif;
+    --font-sora: 'Sora', sans-serif;
 
 }

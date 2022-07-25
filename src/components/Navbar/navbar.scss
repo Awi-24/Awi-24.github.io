@@ -1,0 +1,48 @@
+@import "bootstrap/scss/bootstrap";
+
+.container-navbar {
+    width: 100%;
+    height: max-content;
+    align-items: center;
+    padding: 0 10px;
+    background-color: var(--bg-rosa);
+    font-family: var(--font-roboto);
+
+
+        ul {
+            li {
+                a {
+                    color: var(--bg-branco);
+                    font-weight: 500;
+                    margin-inline: 25px;
+                    letter-spacing: 3px;
+                    align-items: center;
+                    justify-content: center;
+                    font-size: 12px;
+                    &:hover {
+                        color: var(--bg-preto);
+                
+                    }
+                }
+            }
+        }
+}
+
+
+//HOVER ANIMATIONS
+
+.hvr-grow {
+      display: inline-block;
+      vertical-align: middle;
+      -webkit-transform: perspective(1px) translateZ(0);
+      transform: perspective(1px) translateZ(0);
+      box-shadow: 0 0 1px rgba(0, 0, 0, 0);
+      -webkit-transition-duration: 0.3s;
+      transition-duration: 0.3s;
+      -webkit-transition-property: transform;
+      transition-property: transform;
+}
+.hvr-grow:hover, .hvr-grow:focus, .hvr-grow:active {
+      -webkit-transform: scale(1.1);
+      transform: scale(1.1);
+}
