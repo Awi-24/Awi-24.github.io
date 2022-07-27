@@ -1,0 +1,39 @@
+@import "bootstrap/scss/bootstrap";
+
+.habilidades-container {
+    background-color: var(--bg-cinza);
+    .habilidades {
+        padding-top: 10%;
+        padding-bottom: 5%;
+        .caixas {
+            img {
+                height: auto;
+                width: 450px;
+            }
+        }
+        .content-text {
+            font-family: var(--font-roboto);
+            color: var(--bg-branco);
+            align-items: center;
+            h4 {
+                color: var(--bg-rosa);
+                font-family: var(--font-sora);
+                letter-spacing: 5px;
+                font-size: 20px;
+            }
+            h1 {
+                font-weight: 700;
+            }
+            p {
+                font-size: 17px;
+
+                a {
+                    text-decoration: none;
+                    color: var(--bg-rosa);
+                }
+            }
+        
+        }
+
+    }
+}

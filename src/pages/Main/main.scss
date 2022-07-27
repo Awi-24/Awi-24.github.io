@@ -1,0 +1,43 @@
+@import "bootstrap/scss/bootstrap";
+
+.container-main {
+
+    height: 100%;
+    width: 100%;
+    background: url('../../assets/background.png') center fixed;
+    background-size: cover;
+    background-repeat: no-repeat;
+    .content-text {
+        padding-top: 20%;
+        padding-bottom: 20% ;
+        padding-left: 10%;
+        .text {
+            z-index: 999;
+            font-family: var(--font-roboto);
+            color: var(--bg-branco);
+            h1 {
+                text-align: center;
+                align-items: center;
+                font-weight: 800;
+                span {
+                    font-weight: 300;
+                    color: var(--bg-rosa);
+                }
+            }
+            h4 {
+                letter-spacing: 5px;
+                text-align: center;
+                align-items: center;
+                span {
+                    color: var(--bg-rosa);
+                }
+            }
+        }
+    }
+    .arrow {
+        color: var(--bg-rosa);
+        height: 70px;
+        width: auto;
+    }
+    
+}
