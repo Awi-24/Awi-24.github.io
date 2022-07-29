@@ -15,8 +15,7 @@ function SobreMim() {
                 Nintendo DS que recebi de familiares e desde então sou fascinado por tudo que envolve a área de TI. Inicialmente
                 tinha a vontade de iniciar no desenvolvimento de jogos eletrônicos, por causa do meu hobbie gamer e minha familiaridade
                 com aplicativos de design e modelagem. Contudo, foi com o desenvolvimento páginas da Web que eu me encontrei e desde
-                então tenho usado meu tempo livre para aprender novas tecnologias como React JS e me aprofundei nos conceitos mais
-                modernos de design e experiência de usuário.
+                então tenho usado meu tempo livre para aprender novas tecnologias como React JS.
                 </p>
 
             </div>
