@@ -1,0 +1,23 @@
+{
+  "files": {
+    "main.css": "/Awi-24.github.io/static/css/main.3a65bb8c.css",
+    "main.js": "/Awi-24.github.io/static/js/main.fcf69c5e.js",
+    "static/media/background.png": "/Awi-24.github.io/static/media/background.e121639862c0df3ed4dd.png",
+    "static/media/proto.jpg": "/Awi-24.github.io/static/media/proto.f7237ac227e32f1db692.jpg",
+    "static/media/id.jpg": "/Awi-24.github.io/static/media/id.c5e08f56d8d75006cff7.jpg",
+    "static/media/site.jpg": "/Awi-24.github.io/static/media/site.a6b5b8bdb5fc74b42869.jpg",
+    "static/media/img02.png": "/Awi-24.github.io/static/media/img02.a069479dc787131e5454.png",
+    "static/media/clube.png": "/Awi-24.github.io/static/media/clube.8c8f3e6715db6644610d.png",
+    "static/media/img01.png": "/Awi-24.github.io/static/media/img01.9305db5aedcc77f26f71.png",
+    "static/media/noproj.png": "/Awi-24.github.io/static/media/noproj.d3f5b0cbcdd4c805c022.png",
+    "static/media/circle-chevron-left-solid.png": "/Awi-24.github.io/static/media/circle-chevron-left-solid.629afa838712c08a37ef.png",
+    "static/media/circle-chevron-right-solid.png": "/Awi-24.github.io/static/media/circle-chevron-right-solid.4452e6996bec8f8328a4.png",
+    "index.html": "/Awi-24.github.io/index.html",
+    "main.3a65bb8c.css.map": "/Awi-24.github.io/static/css/main.3a65bb8c.css.map",
+    "main.fcf69c5e.js.map": "/Awi-24.github.io/static/js/main.fcf69c5e.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.3a65bb8c.css",
+    "static/js/main.fcf69c5e.js"
+  ]
+}
