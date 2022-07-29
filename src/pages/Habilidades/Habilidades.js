@@ -4,7 +4,7 @@ import img02 from '../../assets/img02.png'
 
 function Habilidades() {
   return (
-    <div className='habilidades-container'>
+    <div className='habilidades-container' id='habilidades'>
         <div className='habilidades row g-0 justify-content-evenly alin-content-center'>
             <div className='caixas col-5'>
                <img src={img02} alt={img02} className='img02'/>

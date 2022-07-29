@@ -1,0 +1,63 @@
+@import "bootstrap/scss/bootstrap";
+
+.projetos-container {
+    background-color: var(--bg-cinza);
+    .projetos {
+        padding-top: 5%;
+        padding-bottom: 5%;
+        .caixas {
+            img {
+                height: auto;
+                width: 450px;
+            }
+        }
+        .content-text {
+            font-family: var(--font-roboto);
+            color: var(--bg-branco);
+            align-items: center;
+            padding-right: 5%;
+            h4 {
+                color: var(--bg-rosa);
+                font-family: var(--font-sora);
+                letter-spacing: 5px;
+                font-size: 20px;
+            }
+            h1 {
+                font-weight: 700;
+            }
+        
+        }
+        .content-projets {
+            padding-top: 10%;
+            padding-bottom: 10%;
+            color: white;
+            .box {
+               
+                img {
+                    height: auto;
+                    width: 200px;
+                    
+                }
+            }
+            .box-clube {
+                h1 {
+                    color: white;
+                    font-family: var(--font-sora);
+                    margin-top: 5%;
+                    font-size: 15px;
+                }
+                img {
+                    height: auto;
+                    width: 250px;
+                    filter: blur(5px);
+                    &:hover {
+                        filter: blur(0px);
+                    }
+                }
+            }
+
+        
+        }
+
+    }
+}

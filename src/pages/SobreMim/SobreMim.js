@@ -4,7 +4,7 @@ import img01 from '../../assets/img01.png'
 
 function SobreMim() {
   return (
-    <div className='container-sobremim'>
+    <div className='container-sobremim' id='sobremim'>
         <div className='content-row row g-0 justify-content-evenly align-content-center'>
             <div className='content-text col-md-6'>
                 <h4 className='text-uppercase'>Quem eu sou</h4>

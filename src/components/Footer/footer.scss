@@ -1,0 +1,26 @@
+@import "bootstrap/scss/bootstrap";
+
+.footer-container {
+    width: 100%;
+    height: 100%;
+    background-color: var(--bg-rosa);
+    h1 {
+        font-size:20px;
+        color: white;
+        font-family: var(--font-sora);
+    }
+    .footer {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+
+        flex-direction: row;
+        
+        a {
+            padding-left: 20px;
+            padding-right: 20px;
+            text-decoration: none;
+            color: white;
+        }
+    }
+}

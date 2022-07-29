@@ -5,8 +5,9 @@
     height: max-content;
     align-items: center;
     padding: 0 10px;
-    background-color: var(--bg-rosa);
     font-family: var(--font-roboto);
+    background-color: var(--bg-rosa);
+    cursor: pointer;
 
 
         ul {
@@ -19,6 +20,7 @@
                     align-items: center;
                     justify-content: center;
                     font-size: 12px;
+                    
                     &:hover {
                         color: var(--bg-preto);
                         text-decoration: underline;
