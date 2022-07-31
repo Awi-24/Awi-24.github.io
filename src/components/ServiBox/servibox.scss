@@ -47,3 +47,227 @@
         }
     }
 }
+
+// Extra small devices (portrait phones, less than 576px)
+@media (max-width: 575.98px) { 
+    .container-servibox {
+        display: flex;
+        flex-direction: row;
+        height: 450px;
+        width: 100%;
+        background-color: var(--bg-preto);
+        .content-row {
+            padding-top: 5%;
+            padding-bottom: 2%;
+            padding-left: 6%;
+            padding-right: 6%;
+            .content-text {
+                font-family: var(--font-roboto);
+                color: var(--bg-branco);
+                align-items: center;
+                h4 {
+                    color: var(--bg-rosa);
+                    font-family: var(--font-sora);
+                    letter-spacing: 5px;
+                    font-size: 15px;
+                }
+                h1 {
+                    font-size: 40px;
+                    font-weight: 700;
+                }
+                p {
+                    display: none;
+                    font-size: 12px;
+    
+
+                }
+            }
+    
+            .content-img {
+                img {
+                    
+                    height: 100px;
+                    width: auto;
+                    border-radius: 15px;
+                    border: 3px solid var(--bg-cinza);
+                    opacity: 0.7;
+                    &:hover{
+                        opacity: 1;
+                    }
+                    
+                }
+            }
+        }
+    }
+    
+}
+
+// Small devices (landscape phones, 576px and up)
+@media (min-width: 576px) and (max-width: 767.98px) { 
+    .container-servibox {
+        height: 600px;
+        width: 100%;
+        background-color: var(--bg-preto);
+        .content-row {
+  
+            padding-top: 5%;
+            padding-bottom: 2%;
+            padding-left: 6%;
+            padding-right: 6%;
+            .content-text {
+                font-family: var(--font-roboto);
+                color: var(--bg-branco);
+                align-items: center;
+                h4 {
+                    color: var(--bg-rosa);
+                    font-family: var(--font-sora);
+                    letter-spacing: 5px;
+                    font-size: 15px;
+                }
+                h1 {
+                    font-size: 40px;
+                    font-weight: 700;
+                }
+                p {
+                    font-size: 12px;
+    
+
+                }
+            }
+    
+            .content-img {
+                img {
+                    height: 250px;
+                    width: auto;
+                    border-radius: 15px;
+                    border: 3px solid var(--bg-cinza);
+                    opacity: 0.7;
+                    &:hover{
+                        opacity: 1;
+                    }
+                    
+                }
+            }
+        }
+    }
+
+}
+
+// Medium devices (tablets, 768px and up)
+@media (min-width: 768px) and (max-width: 991.98px) { 
+ 
+.container-servibox {
+    height: 400px;
+    width: 100%;
+    background-color: var(--bg-preto);
+    .content-row {
+        padding-top: 5%;
+        padding-bottom: 2%;
+        padding-left: 6%;
+        padding-right: 6%;
+        .content-text {
+            font-family: var(--font-roboto);
+            color: var(--bg-branco);
+            align-items: center;
+            h4 {
+                color: var(--bg-rosa);
+                font-family: var(--font-sora);
+                letter-spacing: 5px;
+                font-size: 15px;
+            }
+            h1 {
+                font-size: 40px;
+                font-weight: 700;
+            }
+            p {
+                font-size: 12px;
+
+                a {
+                    text-decoration: none;
+                    color: var(--bg-rosa);
+                }
+            }
+        }
+
+        .content-img {
+            img {
+                height: 260px;
+                width: auto;
+                border-radius: 15px;
+                border: 3px solid var(--bg-cinza);
+                opacity: 0.7;
+                &:hover{
+                    opacity: 1;
+                }
+                
+            }
+        }
+    }
+}
+
+
+ }
+
+// Large devices (desktops, 992px and up)
+@media (min-width: 992px) and (max-width: 1199.98px) { 
+   
+.container-servibox {
+    height: 500px;
+    width: 100%;
+    background-color: var(--bg-preto);
+    .content-row {
+        padding-top: 5%;
+        padding-bottom: 5%;
+        padding-left: 6%;
+        padding-right: 6%;
+        display: flex;
+        justify-content: center;
+        .content-text {
+            font-family: var(--font-roboto);
+            color: var(--bg-branco);
+            align-items: center;
+            h4 {
+                color: var(--bg-rosa);
+                font-family: var(--font-sora);
+                letter-spacing: 5px;
+                font-size: 20px;
+            }
+            h1 {
+                font-weight: 700;
+            }
+            p {
+                font-size: 17px;
+
+                a {
+                    text-decoration: none;
+                    color: var(--bg-rosa);
+                }
+            }
+        }
+
+        .content-img {
+            padding-top: 5%;
+            img {
+                
+                height: 250px;
+                width: auto;
+                border-radius: 15px;
+                border: 3px solid var(--bg-cinza);
+                opacity: 0.7;
+                &:hover{
+                    opacity: 1;
+                }
+                
+            }
+        }
+    }
+}
+ 
+
+}
+
+// Extra large devices (large desktops, 1200px and up)
+@media (min-width: 1200px) { 
+
+
+ }

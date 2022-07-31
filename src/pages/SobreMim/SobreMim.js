@@ -9,7 +9,7 @@ function SobreMim() {
             <div className='content-text col-md-6'>
                 <h4 className='text-uppercase'>Quem eu sou</h4>
                 <h1 className='display-3 text-uppercase'>Sobre Mim</h1>
-                <p className='text-start'>
+                <p className='text-mf-start text-lg-start'>
                 Olá! Meu nome é Adrian. Sou graduando do quarto semestre em Engenharia da Computação no <a href='https://www.senaicimatec.com.br/' target='_blank' rel='noreferrer' className='hvr-grow'>CIMATEC</a> Salvador. 
                 Nasci na Suíça e vim para o Brasil quando ainda era um bebê. Meu primeiro contato com tecnologia foi um 
                 Nintendo DS que recebi de familiares e desde então sou fascinado por tudo que envolve a área de TI. Inicialmente
