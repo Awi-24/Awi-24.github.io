@@ -14,13 +14,10 @@ function Habilidades() {
                 <h4 className='text-uppercase text-md-end text-lg-end text-sm-center'>O que eu faço</h4>
                 <h1 className='display-3 text-uppercase text-md-end text-lg-end text-sm-center'>Habilidades</h1>
                 <p className='text-md-end text-lg-end text-sm-center'>
-                Tenho habilidades de longa data envolvendo design e criação artística. Junto a isso, possuo o conhecimento
-                adquirido aos longo do curso de Engenharia da Computação, como o estruturas de dados, construção de banco de
-                dados com SQL, envolvendo todas as etapas de planejamento e código, linguagem C/C++ e Java. Estou estudando
-                e já desenvolvi Websites com as tecnologias do React JS e HTML5/CSS3 puro ou com auxílio do BOOTSTRAP 5.
-                Posso construir sites pessoais, de lojas pequenas e sites profissionais (como sites de porfifólio) do zero,
-                começando pela prototipação e até desenvolvimento de logotipos. Aprendo relativamente rápido e estou sempre
-                buscando me aprimorar.
+                Tenho habilidades de longa data envolvendo design, criação artística, e por estar cursando Engenharia de Computação,
+                conheço boa parte dos processos que envolve a criação de sites, aplicativos e outros tipos de projetos. Tenho uma base 
+                em construção de banco de dados e programação em C++. Atualmente estou estudando desenvolvimento Web com React JS, framework
+                desenvolvido pelo Facebook.
                 </p>
 
             </div>
