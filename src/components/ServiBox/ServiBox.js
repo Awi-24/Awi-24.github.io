@@ -13,7 +13,7 @@ function ServiBox(props) {
             </p>
 
         </div>
-        <div className='content-img col-4'>
+        <div className='content-img col-sm-4'>
             <img src={props.image} alt='img' className='hvr-grow' />      
         </div>
     </div>
