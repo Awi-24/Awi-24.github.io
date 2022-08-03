@@ -20,8 +20,8 @@ function Servicos() {
       <Carousel.Item>
             <ServiBox className='' 
             title2='Serviços Realizados'
-            title='MODELO DE PORTIFÓLIO'
-            text='O primeiro passo para desenvolver o seu portifólio Web é criar um modelo, para que seja possível
+            title='MODELO DE PORTFÓLIO'
+            text='O primeiro passo para desenvolver o seu portfólio Web é criar um modelo, para que seja possível
             determnar o visual e as funcionalidades que você quer expôr para deixar seu site mais atrativo ao seu público.
             Realizo esse trabalho usando programas como Figma, Abode Photoshop e Adobe XD.'
             image={require('../../assets/proto.jpg')}
@@ -30,10 +30,10 @@ function Servicos() {
       <Carousel.Item>
             <ServiBox className='' 
             title2='Serviços Realizados'
-            title='PORTIFÓLIO WEB'
+            title='PORTFÓLIO WEB'
             text='Depois da prototipação é hora de construir o seu site e colocar no ar.
             Utilizando React JS ou apenas os recursos padrões de Web (HTML, CSS, JS) construo o seu site. O deploy e o hosting fica
-            a critério do cliente, não estando inclusto no preço do serviço.'
+            a critério do cliente, não estando inclusto no serviço.'
             image={require('../../assets/site.jpg')}
             />
       </Carousel.Item>
