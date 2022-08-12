@@ -10,7 +10,7 @@ function Main() {
         <div className='text col-sm-10 col-md-6 col-lg-6 text-uppercase'>
         <h1 className='display-3 slide-in-bottom text-nowrap'>&lt;Adrian <span>Widmer&gt;</span></h1>
         <h4 className='text-lowercase slide-in-bottom text-nowrap'><span>Designer e</span> Web Dev</h4>
-        <h1 className='display-3 slide-in-bottom text-nowrap'>&lt;Adrian <span>Widmer/&gt;</span></h1>
+        <h1 className='display-3 slide-in-bottom text-nowrap'>&lt;/Adrian <span>Widmer&gt;</span></h1>
 
         </div> 
       </div>
