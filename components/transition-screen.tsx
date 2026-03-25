@@ -11,16 +11,10 @@ const ASCII_CHARS = "アイウエオカキクケコサシスセソタチツテ�
 const HACKING_MESSAGES = [
   "INICIANDO PROTOCOLO ICE-BREAKER...",
   "BYPASSANDO BLACKWALL_FIREWALL...",
-  "ACESSANDO NET_ARCHITECTURE v2.077...",
-  "CARREGANDO NEURAL_LINK.protocol...",
-  "DESCRIPTOGRAFANDO BRAINDANCE_DATA...",
-  "SINCRONIZANDO GHOST_IN_THE_SHELL...",
   "INJETANDO SHARD: WIDMER_OS.exe...",
-  "DESVIO DE ROTA: NIGHT_CITY_NODE...",
   "ATIVANDO SANDEVISTAN_OVERCLOCK...",
   "CONECTANDO GITHUB://AWI-24...",
   "AUTENTICANDO: CORPO_CERTIFIED...",
-  "ATIVANDO MODO CYBERPUNK_2077...",
   "SISTEMA ADRIAN.WIDMER ONLINE...",
   "ACESSO TOTAL CONCEDIDO...",
 ]
@@ -70,7 +64,7 @@ export default function TransitionScreen({ onComplete }: TransitionScreenProps) 
     const typeInterval = setInterval(() => {
       if (lineIndex >= HACKING_MESSAGES.length) {
         clearInterval(typeInterval)
-        setTimeout(onComplete, 1000)
+        setTimeout(onComplete, 400)
         return
       }
 
@@ -102,7 +96,7 @@ export default function TransitionScreen({ onComplete }: TransitionScreenProps) 
           setTimeout(() => setNoiseOpacity(0), 100)
         }
       }
-    }, 30)
+    }, 10)
 
     return () => clearInterval(typeInterval)
   }, [onComplete])

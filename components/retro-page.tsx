@@ -12,6 +12,9 @@ export default function RetroPage({ onEnterModern }: RetroPageProps) {
   const [currentTime, setCurrentTime] = useState("")
   const [blinkVisible, setBlink] = useState(true)
   const [activeTab, setActiveTab] = useState<"home" | "experiencia" | "projetos" | "formacao">("home")
+  const [msnVisible, setMsnVisible] = useState(false)
+  const [msnMsg] = useState("Adrian diz: Oi! Bem-vindo ao meu portfolio! 😎")
+  const [xpTime, setXpTime] = useState("")
 
   useEffect(() => {
     const timer = setInterval(() => {
@@ -28,6 +31,23 @@ export default function RetroPage({ onEnterModern }: RetroPageProps) {
     return () => clearInterval(counter)
   }, [])
 
+  // XP taskbar clock
+  useEffect(() => {
+    const updateClock = () => {
+      const now = new Date()
+      setXpTime(now.toLocaleTimeString("pt-BR", { hour: "2-digit", minute: "2-digit" }))
+    }
+    updateClock()
+    const t = setInterval(updateClock, 1000)
+    return () => clearInterval(t)
+  }, [])
+
+  // MSN Messenger popup after 2s
+  useEffect(() => {
+    const t = setTimeout(() => setMsnVisible(true), 2000)
+    return () => clearTimeout(t)
+  }, [])
+
   const RetroButton = ({ active, onClick, children }: { active: boolean, onClick: () => void, children: React.ReactNode }) => (
     <button
       onClick={onClick}
@@ -41,13 +61,189 @@ export default function RetroPage({ onEnterModern }: RetroPageProps) {
   )
 
   return (
-    <div 
-      className="min-h-screen p-2"
-      style={{
-        background: `url("data:image/svg+xml,%3Csvg width='40' height='40' viewBox='0 0 40 40' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='%23000080' fill-opacity='0.15'%3E%3Cpath d='M0 0h20v20H0zM20 20h20v20H20z'/%3E%3C/g%3E%3C/svg%3E"), #c0c0c0`,
-        fontFamily: "'Comic Sans MS', cursive, sans-serif"
-      }}
+    <div
+      className="min-h-screen relative overflow-x-hidden"
+      style={{ fontFamily: "'Comic Sans MS', cursive, sans-serif" }}
     >
+      {/* ===== WINDOWS XP DESKTOP BACKGROUND ===== */}
+      <div className="fixed inset-0 z-0 overflow-hidden select-none pointer-events-none">
+        {/* Sky */}
+        <div className="absolute inset-0" style={{
+          background: "linear-gradient(to bottom, #1565c0 0%, #1e88e5 20%, #42a5f5 45%, #90caf9 62%, #bbdefb 72%, #e3f2fd 80%)"
+        }} />
+        {/* Green ground */}
+        <div className="absolute bottom-0 left-0 right-0" style={{ height: "42%", background: "#5aad3f" }} />
+        {/* Hills SVG */}
+        <svg className="absolute left-0 right-0 w-full" style={{ bottom: "38%", height: "120px" }} viewBox="0 0 1440 120" preserveAspectRatio="none">
+          <path d="M0,80 C120,30 280,110 480,55 C660,5 820,90 1000,45 C1160,5 1320,65 1440,50 L1440,120 L0,120 Z" fill="#4caf50" />
+          <path d="M0,95 C200,50 380,115 580,75 C760,38 940,95 1100,65 C1250,40 1370,78 1440,70 L1440,120 L0,120 Z" fill="#5aad3f" />
+        </svg>
+        {/* Animated clouds */}
+        <div className="absolute" style={{ top: "6%", animation: "cloudDrift 40s linear infinite", left: "-200px" }}>
+          <div style={{ width: 200, height: 60, background: "rgba(255,255,255,0.9)", borderRadius: 40, position: "relative" }}>
+            <div style={{ width: 110, height: 80, background: "rgba(255,255,255,0.95)", borderRadius: 50, position: "absolute", top: -30, left: 30 }} />
+            <div style={{ width: 70, height: 55, background: "rgba(255,255,255,0.88)", borderRadius: 35, position: "absolute", top: -20, left: 100 }} />
+          </div>
+        </div>
+        <div className="absolute" style={{ top: "12%", animation: "cloudDrift 60s linear infinite", animationDelay: "-20s", left: "-300px" }}>
+          <div style={{ width: 260, height: 70, background: "rgba(255,255,255,0.85)", borderRadius: 45, position: "relative" }}>
+            <div style={{ width: 140, height: 90, background: "rgba(255,255,255,0.9)", borderRadius: 55, position: "absolute", top: -35, left: 50 }} />
+          </div>
+        </div>
+        <div className="absolute" style={{ top: "4%", animation: "cloudDrift 50s linear infinite", animationDelay: "-35s", left: "-150px" }}>
+          <div style={{ width: 150, height: 45, background: "rgba(255,255,255,0.8)", borderRadius: 30, position: "relative" }}>
+            <div style={{ width: 90, height: 65, background: "rgba(255,255,255,0.85)", borderRadius: 40, position: "absolute", top: -25, left: 25 }} />
+          </div>
+        </div>
+      </div>
+
+      {/* ===== DESKTOP ICONS (fixed, left side) ===== */}
+      <div className="fixed top-3 left-3 z-10 flex flex-col gap-3 select-none pointer-events-none">
+        {[
+          { label: "Meu Computador", icon: "🖥️" },
+          { label: "Meus Documentos", icon: "📁" },
+          { label: "Recycle Bin", icon: "🗑️" },
+          { label: "Internet\nExplorer", icon: "🌐" },
+          { label: "MSN Messenger", icon: "💬" },
+          { label: "WinAmp", icon: "🎵" },
+        ].map((item) => (
+          <div key={item.label} className="flex flex-col items-center gap-0.5 w-16 text-center cursor-pointer">
+            <span style={{ fontSize: 28, filter: "drop-shadow(1px 1px 2px rgba(0,0,0,0.5))" }}>{item.icon}</span>
+            <span style={{
+              fontSize: 10,
+              color: "white",
+              textShadow: "1px 1px 2px #000, -1px -1px 2px #000",
+              lineHeight: 1.2,
+              whiteSpace: "pre-line"
+            }}>{item.label}</span>
+          </div>
+        ))}
+      </div>
+
+      {/* ===== MSN MESSENGER POPUP ===== */}
+      {msnVisible && (
+        <div
+          className="fixed z-40 pointer-events-auto"
+          style={{ bottom: 36, right: 16, width: 280 }}
+        >
+          <div style={{ background: "#fffde7", border: "2px solid #1565c0", borderRadius: 4, boxShadow: "2px 2px 8px rgba(0,0,0,0.4)", overflow: "hidden" }}>
+            {/* MSN title bar */}
+            <div style={{
+              background: "linear-gradient(to right, #0a246a, #3a6ea5)",
+              padding: "3px 6px",
+              display: "flex",
+              alignItems: "center",
+              justifyContent: "space-between"
+            }}>
+              <div style={{ display: "flex", alignItems: "center", gap: 6 }}>
+                <span style={{ fontSize: 14 }}>💬</span>
+                <span style={{ color: "white", fontSize: 11, fontWeight: "bold" }}>MSN Messenger</span>
+              </div>
+              <button
+                onClick={() => setMsnVisible(false)}
+                style={{ background: "#c0c0c0", border: "1px solid #808080", width: 16, height: 14, fontSize: 9, cursor: "pointer", display: "flex", alignItems: "center", justifyContent: "center" }}
+              >x</button>
+            </div>
+            {/* Message */}
+            <div style={{ padding: "10px 12px", display: "flex", alignItems: "flex-start", gap: 10 }}>
+              <span style={{ fontSize: 28 }}>😎</span>
+              <div>
+                <div style={{ fontSize: 11, fontWeight: "bold", color: "#0a246a", marginBottom: 2 }}>Adrian Widmer</div>
+                <div style={{ fontSize: 11, color: "#333" }}>{msnMsg}</div>
+              </div>
+            </div>
+            <div style={{ borderTop: "1px solid #c0c0c0", padding: "4px 8px", display: "flex", justifyContent: "flex-end", gap: 6, background: "#f0f0f0" }}>
+              <button
+                onClick={() => setMsnVisible(false)}
+                style={{ background: "#c0c0c0", border: "2px solid", borderColor: "white #404040 #404040 white", fontSize: 11, padding: "2px 10px", cursor: "pointer" }}
+              >OK</button>
+            </div>
+          </div>
+        </div>
+      )}
+
+      {/* ===== WINDOWS XP TASKBAR ===== */}
+      <div
+        className="fixed bottom-0 left-0 right-0 z-30 flex items-center"
+        style={{
+          height: 30,
+          background: "linear-gradient(to bottom, #3a7bd5 0%, #245edc 40%, #1444b0 100%)",
+          borderTop: "1px solid #5b9bd5",
+        }}
+      >
+        {/* Start button */}
+        <button style={{
+          height: "100%",
+          padding: "0 14px 0 8px",
+          background: "linear-gradient(to bottom, #5cb85c 0%, #3d9b3d 50%, #2d7a2d 100%)",
+          borderRight: "1px solid #4a8a4a",
+          borderRadius: "0 12px 12px 0",
+          color: "white",
+          fontWeight: "bold",
+          fontSize: 13,
+          display: "flex",
+          alignItems: "center",
+          gap: 5,
+          cursor: "pointer",
+          boxShadow: "inset 0 1px 0 rgba(255,255,255,0.3)"
+        }}>
+          <span style={{ fontSize: 16 }}>🏁</span> Iniciar
+        </button>
+
+        {/* Taskbar items */}
+        <div style={{ flex: 1, display: "flex", alignItems: "center", paddingLeft: 8, gap: 4, overflow: "hidden" }}>
+          <div style={{
+            background: "rgba(0,0,50,0.3)",
+            border: "1px solid rgba(100,150,255,0.3)",
+            borderRadius: 2,
+            padding: "2px 10px",
+            color: "white",
+            fontSize: 11,
+            display: "flex",
+            alignItems: "center",
+            gap: 5,
+            maxWidth: 200,
+            overflow: "hidden",
+            textOverflow: "ellipsis",
+            whiteSpace: "nowrap"
+          }}>
+            🌐 Portfolio do Adrian Widmer — Internet Explorer
+          </div>
+          <div style={{
+            background: "rgba(0,0,50,0.2)",
+            border: "1px solid rgba(100,150,255,0.2)",
+            borderRadius: 2,
+            padding: "2px 10px",
+            color: "rgba(255,255,255,0.7)",
+            fontSize: 11,
+            display: "flex",
+            alignItems: "center",
+            gap: 5
+          }}>
+            🎵 WinAmp — Linkin Park - In The End
+          </div>
+        </div>
+
+        {/* System tray */}
+        <div style={{
+          background: "linear-gradient(to bottom, #1b5bce 0%, #0e3da0 100%)",
+          borderLeft: "1px solid #4a7ad5",
+          height: "100%",
+          display: "flex",
+          alignItems: "center",
+          padding: "0 10px",
+          gap: 8,
+          fontSize: 11,
+          color: "white"
+        }}>
+          <span title="Volume">🔊</span>
+          <span title="Rede">🌐</span>
+          <span style={{ fontSize: 12, fontWeight: "bold", letterSpacing: 0.5 }}>{xpTime}</span>
+        </div>
+      </div>
+
+      {/* ===== IE WINDOW (main content, over the desktop) ===== */}
+      <div className="relative z-20 p-2 pb-10">
       {/* Browser Window Frame */}
       <div className="max-w-4xl mx-auto bg-[#c0c0c0] border-[3px] border-t-white border-l-white border-r-[#404040] border-b-[#404040] shadow-lg">
         {/* Title Bar */}
@@ -510,6 +706,7 @@ export default function RetroPage({ onEnterModern }: RetroPageProps) {
           <span>Zona da Internet</span>
         </div>
       </div>
+      </div>{/* closes z-20 IE wrapper */}
 
       <style jsx>{`
         @keyframes marquee {
@@ -518,6 +715,10 @@ export default function RetroPage({ onEnterModern }: RetroPageProps) {
         }
         .animate-marquee {
           animation: marquee 15s linear infinite;
+        }
+        @keyframes cloudDrift {
+          0% { transform: translateX(0); }
+          100% { transform: translateX(calc(100vw + 400px)); }
         }
       `}</style>
     </div>
