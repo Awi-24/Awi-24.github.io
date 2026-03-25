@@ -174,7 +174,7 @@ export default function RetroPage({ onEnterModern }: RetroPageProps) {
                 <a href="mailto:adrianwidmer.work@gmail.com" className="text-lime-400 hover:text-yellow-400 flex items-center gap-2 text-sm">
                   <Mail className="w-4 h-4" /> Mande um Email
                 </a>
-                <a href="https://linkedin.com/in/adrian-widmer" target="_blank" rel="noopener noreferrer" className="text-lime-400 hover:text-yellow-400 flex items-center gap-2 text-sm">
+                <a href="https://linkedin.com/in/adrian-widmer-0587a9230" target="_blank" rel="noopener noreferrer" className="text-lime-400 hover:text-yellow-400 flex items-center gap-2 text-sm">
                   <Globe className="w-4 h-4" /> Meu LinkedIn
                 </a>
                 <a href="#" className="text-lime-400 hover:text-yellow-400 flex items-center gap-2 text-sm">

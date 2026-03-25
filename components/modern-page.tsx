@@ -845,7 +845,7 @@ export default function ModernPage({ onBack, glitchIntensity }: ModernPageProps)
 
                   {/* LinkedIn */}
                   <a 
-                    href="https://linkedin.com/in/adrian-widmer"
+                    href="https://linkedin.com/in/adrian-widmer-0587a9230"
                     target="_blank"
                     rel="noopener noreferrer"
                     className="block"
@@ -855,7 +855,7 @@ export default function ModernPage({ onBack, glitchIntensity }: ModernPageProps)
                         <Linkedin className="w-8 h-8 text-[#00ff9f] flex-shrink-0" />
                         <div className="flex-grow">
                           <div className="text-[#00ffff] font-bold">LinkedIn</div>
-                          <div className="text-[#00ffff]/60 text-sm">linkedin.com/in/adrian-widmer</div>
+                          <div className="text-[#00ffff]/60 text-sm">linkedin.com/in/adrian-widmer-0587a9230</div>
                         </div>
                         <ExternalLink className="w-5 h-5 text-[#ff00ff] flex-shrink-0" />
                       </div>
