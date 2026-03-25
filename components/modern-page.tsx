@@ -1,0 +1,895 @@
+"use client"
+
+import { useState, useEffect } from "react"
+import { Code2, User, Briefcase, Mail, ExternalLink, Github, Linkedin, Terminal, Cpu, Shield, Database, Globe, ChevronRight, Zap, Lock, ArrowLeft, Brain, Cloud, BarChart3, FileCode, Layers, Server, Microscope, GraduationCap, Award, Languages, Play } from "lucide-react"
+import AsciiRain from "@/components/ascii-rain"
+import GlitchText from "@/components/glitch-text"
+import CyberCard from "@/components/cyber-card"
+import VannexCycleoDemo from "@/components/projects/vannex-cycleo-demo"
+import MonnexDemo from "@/components/projects/monnex-demo"
+import AwiOSDemo from "@/components/projects/awiOS-demo"
+import TSEAnalysesDemo from "@/components/projects/tse-analyses-demo"
+import AnomalyDetectionDemo from "@/components/projects/anomaly-detection-demo"
+import FastenerHunterDemo from "@/components/projects/fastener-hunter-demo"
+import TorqueCalcDemo from "@/components/projects/torque-calc-demo"
+
+interface ModernPageProps {
+  onBack: () => void
+  glitchIntensity: number
+}
+
+const SKILLS = {
+  mlAi: [
+    { name: "Keras / TensorFlow", level: 70 },
+    { name: "PyTorch", level: 65 },
+    { name: "Scikit-learn", level: 72 },
+    { name: "Vertex AI", level: 65 },
+    { name: "MLflow", level: 62 },
+  ],
+  mlTechniques: [
+    { name: "Detecção de Anomalias", level: 75 },
+    { name: "Regressão", level: 70 },
+    { name: "Clusterização", level: 65 },
+    { name: "PCA / EDA", level: 68 },
+  ],
+  dataEng: [
+    { name: "BigQuery", level: 72 },
+    { name: "Pandas / NumPy", level: 75 },
+    { name: "Pipelines ETL", level: 70 },
+    { name: "Alteryx", level: 62 },
+  ],
+  cloudMlops: [
+    { name: "GCP", level: 72 },
+    { name: "Terraform (IaC)", level: 65 },
+    { name: "Docker", level: 68 },
+    { name: "CI/CD / Tekton", level: 65 },
+    { name: "AWS", level: 62 },
+  ],
+  languages: [
+    { name: "Python", level: 75 },
+    { name: "SQL", level: 72 },
+    { name: "TypeScript / JS", level: 68 },
+    { name: "C++", level: 62 },
+  ],
+  visualization: [
+    { name: "Plotly / Dash", level: 72 },
+    { name: "Matplotlib", level: 70 },
+    { name: "PyQt", level: 63 },
+  ],
+  frontend: [
+    { name: "React.js / Next.js", level: 68 },
+    { name: "Tailwind CSS", level: 70 },
+    { name: "Figma", level: 63 },
+  ],
+  genAi: [
+    { name: "Claude API", level: 70 },
+    { name: "GPT-4", level: 68 },
+    { name: "Prompt Engineering", level: 75 },
+    { name: "LLM Integration", level: 70 },
+  ]
+}
+
+const EXPERIENCES = [
+  {
+    title: "Software Development Analyst",
+    company: "Ford Motor Company",
+    location: "Camaçari, BA",
+    period: "Mai 2024 - Presente",
+    type: "Híbrido",
+    highlights: [
+      "Projetei e implantei sistema de ML end-to-end para detecção de anomalias (Keras + BigQuery + Vertex AI) no GCP",
+      "Gerenciei infraestrutura cloud e pipelines de ML como código com Terraform (IaC) e Tekton (CI/CD)",
+      "Construí pipelines ETL no BigQuery processando dados de sensores de manufatura em larga escala",
+      "Desenvolvi ferramentas Python para cálculos de física de juntas (torque + ângulo)",
+      "Criei banco de dados interno com extração automática de PDFs - redução de 60%+ no tempo de busca"
+    ],
+    tags: ["Python", "GCP", "BigQuery", "Vertex AI", "Keras", "Terraform", "Tekton", "ETL", "Pandas", "Docker", "Plotly"]
+  },
+  {
+    title: "Estagiário de Engenharia de Software",
+    company: "Ford Brasil",
+    location: "Salvador, BA",
+    period: "Jan 2023 - Mai 2024",
+    type: "Híbrido",
+    highlights: [
+      "Automação de processos internos com Python, reduzindo tempo de tarefas repetitivas",
+      "Desenvolvimento e otimização de processos de dados e fluxos operacionais",
+      "Desenvolvimento de produtos e soluções com foco em eficiência produtiva"
+    ],
+    tags: ["Python", "Automação", "Pandas", "Otimização de Processos"]
+  },
+  {
+    title: "Desenvolvedor Web Front-End",
+    company: "Clube de Programação Cimatec",
+    location: "Salvador, BA",
+    period: "Jul 2022 - Mai 2024",
+    type: "Híbrido",
+    highlights: [
+      "Desenvolvi apps web com React.js / Next.js com foco em UX e SEO",
+      "Contribuí no desenvolvimento do site oficial do Clube de Programação com Figma e ReactJS",
+      "Participei de competições de algoritmos com C++ e Python"
+    ],
+    tags: ["React.js", "Next.js", "TypeScript", "Tailwind CSS", "Figma", "Vite"]
+  },
+  {
+    title: "Gerente de Marketing",
+    company: "Clube de Programação Cimatec",
+    location: "Salvador, BA",
+    period: "Jun 2021 - Mar 2023",
+    type: "Presencial",
+    highlights: [
+      "Criação da identidade visual do Instagram e demais eventos do Clube de Programação",
+      "Responsável pela comunicação com membros, venda de produtos e divulgação da iniciativa"
+    ],
+    tags: ["Marketing", "Design", "Identidade Visual", "Comunicação"]
+  },
+  {
+    title: "Iniciação Científica — Sistema MES / Indústria 4.0",
+    company: "SENAI CIMATEC",
+    location: "Salvador, BA",
+    period: "Ago 2022 - Jan 2023",
+    type: "Presencial",
+    highlights: [
+      "Desenvolvimento de software de sistema de execução de manufaturas avançadas (MES)",
+      "Aplicação de recursos da Indústria 4.0 em ambiente de pesquisa e desenvolvimento"
+    ],
+    tags: ["MES", "Indústria 4.0", "Pesquisa", "Desenvolvimento de Software"]
+  }
+]
+
+const PUBLICATIONS = [
+  {
+    title: "Statistical Study of Eco-Efficiency in Compact and Average Cars",
+    venue: "VIII SIINTEC International Symposium",
+    year: "Nov 2022",
+    description: "Análise estatística e modelagem de dados para avaliação de ecoeficiência entre marcas automotivas brasileiras."
+  },
+  {
+    title: "Viability of Using Piezoelectric Devices in Urban Zones for Energy Generation",
+    venue: "VII SIINTEC International Symposium",
+    year: "Dec 2021",
+    description: "Pesquisa de viabilidade do uso de piezoelétricos em zonas urbanas de alto fluxo para geração de energia."
+  }
+]
+
+const CERTIFICATIONS = [
+  { name: "Google Cloud Fundamentals: Core Infrastructure", issuer: "Google", year: "2026" },
+  { name: "AWS Machine Learning Foundations", issuer: "Amazon Web Services", year: "2026" },
+  { name: "Designer de Experimentos (DOE)", issuer: "SENAI CIMATEC", year: "2025" },
+  { name: "Supervised ML: Regression", issuer: "IBM / Coursera", year: "2025" },
+  { name: "Exploratory Data Analysis for ML", issuer: "IBM / Coursera", year: "2024" },
+  { name: "Introduction to AI", issuer: "IBM / Coursera", year: "2024" },
+  { name: "Assistente de Engenharia", issuer: "SENAI CIMATEC", year: "2024" },
+  { name: "AWS Cloud Practitioner Essentials", issuer: "Grupo Boticário", year: "2022" },
+  { name: "Introdução à Nuvem e Serviços de AWS", issuer: "Grupo Boticário", year: "2022" },
+]
+
+const PROJECTS = [
+  {
+    id: "anomaly-detect",
+    title: "ANOMALY_DETECT.ai",
+    description: "Sistema de ML end-to-end para detecção de anomalias em custos de garantia entre concessionárias Ford, identificando overcharges via BigQuery e Vertex AI.",
+    previewHint: "Execute o modelo ao vivo · Veja anomalias sendo detectadas · Score de risco por concessionária",
+    demoType: "ML em tempo real",
+    tags: ["Keras", "BigQuery", "Vertex AI", "GCP", "Anomaly Detection"],
+    status: "PROD",
+    type: "ford"
+  },
+  {
+    id: "fastener-hunter",
+    title: "FASTENER_HUNTER.ai",
+    description: "Sistema de recomendação de fixadores integrando 3 BDs internos Ford. Busca por BAS Number → recomendações ranqueadas com assessment de LLM e checklist de validação.",
+    previewHint: "Busca interativa nos BDs · Recomendações com score de match · Assessment automático via LLM",
+    demoType: "Busca + LLM",
+    tags: ["Python", "LLM", "SQL", "Prompt Engineering", "Recommendation"],
+    status: "PROD",
+    type: "ford"
+  },
+  {
+    id: "torque-calc",
+    title: "TORQUE_ANGLE_CALC.py",
+    description: "Calculadora de física de juntas para fixadores automotivos. Dado torque + tipo de junta, calcula ângulo exato sem danificar o material e garante fixação segura.",
+    previewHint: "Ajuste torque em tempo real · Selecione tipo de junta · Veja ângulo calculado + status de segurança",
+    demoType: "Calculadora física",
+    tags: ["Python", "PyQt", "NumPy", "Matplotlib", "Physics"],
+    status: "PROD",
+    type: "ford"
+  },
+  {
+    id: "vannex-cycleo",
+    title: "Vannex Cycleo",
+    description: "App Flutter de rastreamento de ciclo menstrual com previsões de fertilidade e insights personalizados. 100% privacy-first: SQLite local, sem cloud, sem tracking.",
+    previewHint: "Explore features do app · Veja UI do ciclo mensal · Privacidade e arquitetura técnica",
+    demoType: "Preview UI",
+    tags: ["Flutter", "Dart", "SQLite", "Privacy First", "Health Tech"],
+    status: "PROD",
+    type: "personal"
+  },
+  {
+    id: "monnex",
+    title: "Monnex",
+    description: "App Flutter de finanças pessoais com análise de gastos, metas e score de saúde financeira. Privacy-first: dados 100% locais com criptografia AES-256.",
+    previewHint: "Navegue pelo dashboard · Veja gráficos de gastos · Score de saúde financeira",
+    demoType: "Preview UI",
+    tags: ["Flutter", "Dart", "SQLite", "Privacy First", "FinTech"],
+    status: "PROD",
+    type: "personal"
+  },
+  {
+    id: "awiOS",
+    title: "awiOS Engine",
+    description: "Engine Flutter para visual novels com linguagem de scripting própria. Sistema de branching narrativo + diálogos estilo The Sims com sincronia emocional dos personagens.",
+    previewHint: "Veja o motor de diálogos ao vivo · Personagens reagindo em tempo real · Explore o scripting engine",
+    demoType: "Demo ao vivo",
+    tags: ["Flutter", "Dart", "Visual Novel", "Game Engine"],
+    status: "PROD",
+    type: "personal"
+  },
+  {
+    id: "tse-analyses",
+    title: "TSE Analyses",
+    description: "EDA + ML sobre gastos CEAP de deputados federais. Anomaly detection revela inconsistências ocultas que passam despercebidas no relatório oficial.",
+    previewHint: "Passe o mouse no gráfico · Revele anomalias escondidas · Veja valores reais vs relatório oficial",
+    demoType: "Visualização EDA",
+    tags: ["Python", "Pandas", "Anomaly Detection", "EDA"],
+    status: "PROD",
+    type: "personal"
+  },
+]
+
+export default function ModernPage({ onBack, glitchIntensity }: ModernPageProps) {
+  const [activeSection, setActiveSection] = useState("home")
+  const [selectedProject, setSelectedProject] = useState<string | null>(null)
+  const [mousePos, setMousePos] = useState({ x: 0, y: 0 })
+  const [currentTime, setCurrentTime] = useState("")
+  const [scanlinePos, setScanlinePos] = useState(0)
+
+  useEffect(() => {
+    const timer = setInterval(() => {
+      setCurrentTime(new Date().toLocaleTimeString("pt-BR", { hour12: false }))
+    }, 1000)
+    return () => clearInterval(timer)
+  }, [])
+
+  useEffect(() => {
+    const handleMouseMove = (e: MouseEvent) => {
+      setMousePos({ x: e.clientX, y: e.clientY })
+    }
+    window.addEventListener("mousemove", handleMouseMove)
+    return () => window.removeEventListener("mousemove", handleMouseMove)
+  }, [])
+
+  useEffect(() => {
+    const scanInterval = setInterval(() => {
+      setScanlinePos(prev => (prev + 1) % 100)
+    }, 50)
+    return () => clearInterval(scanInterval)
+  }, [])
+
+  const renderSkillBar = (name: string, level: number, index: number) => (
+    <div key={index} className="mb-3">
+      <div className="flex justify-between text-xs mb-1">
+        <span className="text-[#00ffff]/80">{name}</span>
+        <span className="text-[#00ff9f] font-mono">{level}%</span>
+      </div>
+      <div className="h-1.5 bg-[#1a1a2e] rounded overflow-hidden">
+        <div 
+          className="h-full bg-gradient-to-r from-[#00ffff] to-[#ff00ff] transition-all duration-1000"
+          style={{ 
+            width: `${level}%`,
+            boxShadow: "0 0 10px #00ffff"
+          }}
+        />
+      </div>
+    </div>
+  )
+
+  return (
+    <div className="relative min-h-screen bg-[#050508] overflow-hidden">
+      <AsciiRain />
+
+      <div 
+        className="fixed inset-0 pointer-events-none z-50"
+        style={{
+          background: `linear-gradient(transparent ${scanlinePos}%, rgba(0, 255, 255, 0.03) ${scanlinePos + 0.5}%, transparent ${scanlinePos + 1}%)`
+        }}
+      />
+
+      {glitchIntensity > 0 && (
+        <div 
+          className="fixed inset-0 pointer-events-none z-50"
+          style={{
+            transform: `translate(${(Math.random() - 0.5) * glitchIntensity * 20}px, ${(Math.random() - 0.5) * glitchIntensity * 10}px)`
+          }}
+        />
+      )}
+
+      <div 
+        className="fixed inset-0 pointer-events-none z-30"
+        style={{
+          background: "radial-gradient(circle at center, transparent 30%, rgba(0,0,0,0.8) 100%)"
+        }}
+      />
+
+      {/* Navigation */}
+      <nav className="fixed top-0 left-0 right-0 z-50 bg-[#0a0a0f]/80 backdrop-blur-sm border-b border-[#00ffff]/20">
+        <div className="max-w-7xl mx-auto px-4 py-3 flex items-center justify-between">
+          <div className="flex items-center gap-4">
+            <button 
+              onClick={onBack}
+              className="flex items-center gap-2 text-[#ff00ff] hover:text-[#00ffff] transition-colors text-sm"
+            >
+              <ArrowLeft className="w-4 h-4" />
+              <span className="hidden sm:inline">RETRO</span>
+            </button>
+            <div className="hidden sm:flex items-center gap-2">
+              <Zap className="w-5 h-5 text-[#00ffff]" />
+              <GlitchText text="ADRIAN.WIDMER" className="text-xl font-bold text-[#00ffff]" />
+            </div>
+          </div>
+
+          <div className="flex items-center gap-2 sm:gap-6 text-xs sm:text-sm">
+            {[
+              { id: "home", label: "Home" },
+              { id: "skills", label: "Skills" },
+              { id: "experiencia", label: "XP" },
+              { id: "projetos", label: "Projetos" },
+              { id: "contato", label: "Contato" }
+            ].map((section) => (
+              <button
+                key={section.id}
+                onClick={() => setActiveSection(section.id)}
+                className={`uppercase tracking-wider transition-all px-2 py-1 ${
+                  activeSection === section.id 
+                    ? "text-[#00ffff] cyber-glow" 
+                    : "text-[#00ffff]/50 hover:text-[#00ffff]"
+                }`}
+              >
+                {section.label}
+              </button>
+            ))}
+          </div>
+
+          <div className="hidden md:flex items-center gap-4 text-xs text-[#00ff9f] font-mono">
+            <span className="flex items-center gap-1">
+              <span className="w-2 h-2 bg-[#00ff9f] rounded-full animate-pulse" />
+              ONLINE
+            </span>
+            <span>{currentTime}</span>
+          </div>
+        </div>
+      </nav>
+
+      {/* Main Content */}
+      <main className="relative z-20 pt-20 pb-16 px-4">
+        <div className="max-w-6xl mx-auto">
+          
+          {/* Hero Section */}
+          {activeSection === "home" && (
+            <section className="min-h-[80vh] flex flex-col items-center justify-center text-center py-20">
+              <div className="relative mb-8">
+                <div className="w-48 h-48 rounded-full border-2 border-[#00ffff]/30 flex items-center justify-center relative">
+                  <div className="absolute inset-0 rounded-full border-2 border-[#ff00ff]/30 animate-spin" style={{ animationDuration: "10s" }} />
+                  <div className="absolute inset-2 rounded-full border border-[#00ffff]/20 animate-spin" style={{ animationDuration: "15s", animationDirection: "reverse" }} />
+                  <div className="w-32 h-32 rounded-full bg-gradient-to-br from-[#00ffff]/20 to-[#ff00ff]/20 flex items-center justify-center backdrop-blur">
+                    <Brain className="w-16 h-16 text-[#00ffff]" />
+                  </div>
+                </div>
+                <div className="absolute inset-0 animate-spin" style={{ animationDuration: "5s" }}>
+                  <div className="absolute top-0 left-1/2 w-3 h-3 -ml-1.5 bg-[#ff00ff] rounded-full" style={{ boxShadow: "0 0 10px #ff00ff, 0 0 20px #ff00ff" }} />
+                </div>
+              </div>
+
+              <GlitchText 
+                text="ADRIAN WIDMER" 
+                className="text-4xl sm:text-6xl font-bold text-[#00ffff] mb-4"
+                intensity={2}
+              />
+              
+              <p className="text-lg sm:text-2xl text-[#ff00ff] mb-2 font-mono">
+                {"< ENGENHEIRO IA/ML | ENG. DE DADOS />"}
+              </p>
+              
+              <p className="text-[#00ff9f]/70 max-w-2xl mb-4 text-base sm:text-lg px-4">
+                Engenheiro IA/ML especializado em projeto e deploy de sistemas de ML end-to-end. 
+                Experiência em ingestão de dados, feature engineering e modelos de detecção de anomalias em produção.
+              </p>
+
+              <p className="text-[#00ffff]/50 text-sm mb-8">
+                Salvador, BA | Inglês C1 | Alemão B1
+              </p>
+
+              <div className="flex flex-wrap justify-center gap-4">
+                <button 
+                  onClick={() => setActiveSection("projetos")}
+                  className="px-6 sm:px-8 py-3 bg-transparent border-2 border-[#00ffff] text-[#00ffff] font-bold uppercase tracking-wider hover:bg-[#00ffff] hover:text-[#0a0a0f] transition-all neon-pulse text-sm sm:text-base"
+                >
+                  Ver Projetos
+                </button>
+                <button 
+                  onClick={() => setActiveSection("contato")}
+                  className="px-6 sm:px-8 py-3 bg-[#ff00ff] text-white font-bold uppercase tracking-wider hover:bg-[#ff00ff]/80 transition-all text-sm sm:text-base"
+                  style={{ boxShadow: "0 0 20px rgba(255, 0, 255, 0.5)" }}
+                >
+                  Contato
+                </button>
+              </div>
+
+              {/* Stats */}
+              <div className="grid grid-cols-2 sm:grid-cols-4 gap-6 sm:gap-8 mt-16 pt-8 border-t border-[#00ffff]/20 w-full max-w-3xl">
+                {[
+                  { label: "Experiência", value: "3+" },
+                  { label: "Publicações", value: "2" },
+                  { label: "Certificações", value: "9" },
+                  { label: "Formação", value: "2025" },
+                ].map((stat, i) => (
+                  <div key={i} className="text-center">
+                    <div className="text-2xl sm:text-4xl font-bold text-[#00ffff] cyber-glow">{stat.value}</div>
+                    <div className="text-xs sm:text-sm text-[#00ff9f]/70 uppercase tracking-wider">{stat.label}</div>
+                  </div>
+                ))}
+              </div>
+
+              {/* Education */}
+              <div className="mt-12 p-4 border border-[#00ffff]/20 rounded bg-[#0a0a0f]/50 backdrop-blur max-w-md">
+                <div className="flex items-center gap-3 mb-2">
+                  <GraduationCap className="w-5 h-5 text-[#ff00ff]" />
+                  <span className="text-[#00ffff] font-bold">B.Sc. Engenharia da Computação</span>
+                </div>
+                <p className="text-[#00ff9f]/70 text-sm">SENAI CIMATEC | 2020 - 2025 | IEEE EMBS Cimatec</p>
+              </div>
+            </section>
+          )}
+
+          {/* Skills Section */}
+          {activeSection === "skills" && (
+            <section className="py-16">
+              <GlitchText 
+                text="// HABILIDADES" 
+                className="text-2xl sm:text-3xl font-bold text-[#00ffff] mb-12 text-center"
+              />
+
+              <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+                {/* ML / IA */}
+                <CyberCard delay={0}>
+                  <div className="p-5">
+                    <div className="flex items-center gap-3 mb-4">
+                      <Brain className="w-6 h-6 text-[#ff00ff]" />
+                      <span className="text-[#00ffff] font-bold">ML / IA</span>
+                    </div>
+                    {SKILLS.mlAi.map((s, i) => renderSkillBar(s.name, s.level, i))}
+                  </div>
+                </CyberCard>
+
+                {/* ML Techniques */}
+                <CyberCard delay={0.1}>
+                  <div className="p-5">
+                    <div className="flex items-center gap-3 mb-4">
+                      <BarChart3 className="w-6 h-6 text-[#ff00ff]" />
+                      <span className="text-[#00ffff] font-bold">Técnicas de ML</span>
+                    </div>
+                    {SKILLS.mlTechniques.map((s, i) => renderSkillBar(s.name, s.level, i))}
+                  </div>
+                </CyberCard>
+
+                {/* Data Engineering */}
+                <CyberCard delay={0.2}>
+                  <div className="p-5">
+                    <div className="flex items-center gap-3 mb-4">
+                      <Database className="w-6 h-6 text-[#ff00ff]" />
+                      <span className="text-[#00ffff] font-bold">Eng. de Dados</span>
+                    </div>
+                    {SKILLS.dataEng.map((s, i) => renderSkillBar(s.name, s.level, i))}
+                  </div>
+                </CyberCard>
+
+                {/* Cloud & MLOps */}
+                <CyberCard delay={0.3}>
+                  <div className="p-5">
+                    <div className="flex items-center gap-3 mb-4">
+                      <Cloud className="w-6 h-6 text-[#ff00ff]" />
+                      <span className="text-[#00ffff] font-bold">Cloud & MLOps</span>
+                    </div>
+                    {SKILLS.cloudMlops.map((s, i) => renderSkillBar(s.name, s.level, i))}
+                  </div>
+                </CyberCard>
+
+                {/* Languages */}
+                <CyberCard delay={0.4}>
+                  <div className="p-5">
+                    <div className="flex items-center gap-3 mb-4">
+                      <FileCode className="w-6 h-6 text-[#ff00ff]" />
+                      <span className="text-[#00ffff] font-bold">Linguagens</span>
+                    </div>
+                    {SKILLS.languages.map((s, i) => renderSkillBar(s.name, s.level, i))}
+                  </div>
+                </CyberCard>
+
+                {/* Visualization & Frontend */}
+                <CyberCard delay={0.5}>
+                  <div className="p-5">
+                    <div className="flex items-center gap-3 mb-4">
+                      <Layers className="w-6 h-6 text-[#ff00ff]" />
+                      <span className="text-[#00ffff] font-bold">Visualização & Frontend</span>
+                    </div>
+                    {SKILLS.visualization.map((s, i) => renderSkillBar(s.name, s.level, i))}
+                    <div className="mt-4 pt-4 border-t border-[#00ffff]/10">
+                      {SKILLS.frontend.map((s, i) => renderSkillBar(s.name, s.level, i))}
+                    </div>
+                  </div>
+                </CyberCard>
+
+                {/* Generative AI & Prompt Engineering */}
+                <CyberCard delay={0.6}>
+                  <div className="p-5">
+                    <div className="flex items-center gap-3 mb-4">
+                      <Zap className="w-6 h-6 text-[#00ff9f]" />
+                      <span className="text-[#00ffff] font-bold">IA Generativa</span>
+                    </div>
+                    {SKILLS.genAi.map((s, i) => renderSkillBar(s.name, s.level, i))}
+                  </div>
+                </CyberCard>
+              </div>
+
+              {/* Prompt Engineering Expertise */}
+              <div className="mt-12 p-6 border border-[#00ff9f]/50 rounded bg-[#001a00]/30 backdrop-blur">
+                <div className="flex items-center gap-3 mb-4">
+                  <Brain className="w-6 h-6 text-[#00ff9f]" />
+                  <h3 className="text-xl font-bold text-[#00ff9f]">EXPERTISE: PROMPT ENGINEERING & LLMs</h3>
+                </div>
+                <p className="text-[#00ffff]/80 text-sm leading-relaxed">
+                  Expertise em disseminação de conhecimento em prompt engineering e uso de ferramentas generativas em ambientes corporativos. 
+                  Desenvolvimento de estratégias avançadas de prompting (Chain-of-Thought, Few-Shot, Role-Based), integração de LLMs em pipelines ML, 
+                  fine-tuning de modelos e implementação de RAG (Retrieval-Augmented Generation) para casos de uso empresariais.
+                </p>
+              </div>
+
+              {/* Certifications */}
+              <div className="mt-12">
+                <h3 className="text-xl font-bold text-[#00ffff] mb-6 flex items-center gap-2">
+                  <Award className="w-5 h-5 text-[#ff00ff]" />
+                  Certificações
+                </h3>
+                <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-4">
+                  {CERTIFICATIONS.map((cert, i) => (
+                    <div key={i} className="p-4 border border-[#00ffff]/20 rounded bg-[#0a0a0f]/50 backdrop-blur">
+                      <p className="text-[#00ffff] font-medium text-sm">{cert.name}</p>
+                      <p className="text-[#00ff9f]/60 text-xs mt-1">{cert.issuer} | {cert.year}</p>
+                    </div>
+                  ))}
+                </div>
+              </div>
+
+              {/* Languages */}
+              <div className="mt-12">
+                <h3 className="text-xl font-bold text-[#00ffff] mb-6 flex items-center gap-2">
+                  <Languages className="w-5 h-5 text-[#ff00ff]" />
+                  Idiomas
+                </h3>
+                <div className="flex flex-wrap gap-4">
+                  {[
+                    { lang: "Português", level: "Nativo | C2" },
+                    { lang: "Inglês", level: "Avançado | C1" },
+                    { lang: "Alemão", level: "Intermediário | B1" },
+                  ].map((l, i) => (
+                    <div key={i} className="px-4 py-2 border border-[#ff00ff]/30 rounded bg-[#ff00ff]/5">
+                      <span className="text-[#00ffff] font-medium">{l.lang}</span>
+                      <span className="text-[#00ff9f]/60 text-sm ml-2">{l.level}</span>
+                    </div>
+                  ))}
+                </div>
+              </div>
+            </section>
+          )}
+
+          {/* Experience Section */}
+          {activeSection === "experiencia" && (
+            <section className="py-16">
+              <GlitchText 
+                text="// EXPERIÊNCIA" 
+                className="text-2xl sm:text-3xl font-bold text-[#00ffff] mb-12 text-center"
+              />
+
+              <div className="space-y-8">
+                {EXPERIENCES.map((exp, i) => (
+                  <CyberCard key={i} delay={i * 0.1}>
+                    <div className="p-6">
+                      <div className="flex flex-col sm:flex-row sm:items-start sm:justify-between gap-2 mb-4">
+                        <div>
+                          <h3 className="text-xl font-bold text-[#00ffff]">{exp.title}</h3>
+                          <p className="text-[#ff00ff]">{exp.company}</p>
+                          <p className="text-[#00ff9f]/60 text-sm">{exp.location} | {exp.type}</p>
+                        </div>
+                        <span className="text-[#00ff9f] font-mono text-sm shrink-0">{exp.period}</span>
+                      </div>
+                      
+                      <ul className="space-y-2 mb-4">
+                        {exp.highlights.map((h, j) => (
+                          <li key={j} className="text-[#00ffff]/70 text-sm flex items-start gap-2">
+                            <ChevronRight className="w-4 h-4 text-[#ff00ff] shrink-0 mt-0.5" />
+                            {h}
+                          </li>
+                        ))}
+                      </ul>
+
+                      <div className="flex flex-wrap gap-2">
+                        {exp.tags.map((tag, j) => (
+                          <span 
+                            key={j}
+                            className="text-xs px-2 py-1 border border-[#00ffff]/30 text-[#00ffff]/70 rounded"
+                          >
+                            {tag}
+                          </span>
+                        ))}
+                      </div>
+                    </div>
+                  </CyberCard>
+                ))}
+              </div>
+
+              {/* Publications */}
+              <div className="mt-16">
+                <h3 className="text-xl font-bold text-[#00ffff] mb-6 flex items-center gap-2">
+                  <Microscope className="w-5 h-5 text-[#ff00ff]" />
+                  Pesquisa & Publicações
+                </h3>
+                <div className="space-y-4">
+                  {PUBLICATIONS.map((pub, i) => (
+                    <CyberCard key={i} delay={i * 0.1}>
+                      <div className="p-5">
+                        <h4 className="text-[#00ffff] font-bold mb-1">{pub.title}</h4>
+                        <p className="text-[#ff00ff] text-sm mb-2">{pub.venue} | {pub.year}</p>
+                        <p className="text-[#00ffff]/60 text-sm">{pub.description}</p>
+                      </div>
+                    </CyberCard>
+                  ))}
+                </div>
+              </div>
+            </section>
+          )}
+
+          {/* Projects Section */}
+          {activeSection === "projetos" && (
+            <section className="py-16">
+              <GlitchText 
+                text="// PROJETOS" 
+                className="text-2xl sm:text-3xl font-bold text-[#00ffff] mb-12 text-center"
+              />
+
+              {selectedProject ? (
+                // Project Detail View
+                <div className="space-y-4">
+                  <div className="flex items-center justify-between">
+                    <button
+                      onClick={() => setSelectedProject(null)}
+                      className="flex items-center gap-2 text-[#ff00ff] hover:text-[#00ffff] transition-colors text-sm"
+                    >
+                      <ArrowLeft className="w-4 h-4" />
+                      Voltar aos Projetos
+                    </button>
+                    {(() => {
+                      const proj = PROJECTS.find(p => p.id === selectedProject)
+                      return proj ? (
+                        <div className="flex items-center gap-2">
+                          <span className="text-xs text-[#00ffff]/50 font-mono">{(proj as any).demoType}</span>
+                          <span className={`text-xs px-2 py-0.5 rounded font-mono ${proj.type === "ford" ? "bg-[#ff00ff]/20 text-[#ff00ff]" : "bg-[#00ff9f]/20 text-[#00ff9f]"}`}>
+                            {proj.title}
+                          </span>
+                        </div>
+                      ) : null
+                    })()}
+                  </div>
+
+                  <div className="bg-[#1a1a2e] rounded border border-[#00ffff]/20 p-6">
+                    {/* Personal Projects */}
+                    {selectedProject === "vannex-cycleo" && <VannexCycleoDemo />}
+                    {selectedProject === "monnex" && <MonnexDemo />}
+                    {selectedProject === "awiOS" && <AwiOSDemo />}
+                    {selectedProject === "tse-analyses" && <TSEAnalysesDemo />}
+                    {/* Ford Projects */}
+                    {selectedProject === "anomaly-detect" && <AnomalyDetectionDemo />}
+                    {selectedProject === "fastener-hunter" && <FastenerHunterDemo />}
+                    {selectedProject === "torque-calc" && <TorqueCalcDemo />}
+                  </div>
+                </div>
+              ) : (
+                // Projects Grid
+                <>
+                  {/* Category: Ford Projects */}
+                  <div className="mb-12">
+                    <div className="flex items-center gap-3 mb-6">
+                      <h3 className="text-lg font-bold text-[#ff00ff]">▓ PROJETOS FORD</h3>
+                      <span className="text-xs text-[#ff00ff]/50 border border-[#ff00ff]/20 px-2 py-0.5 rounded font-mono">
+                        🔒 Repos Privados / Corporativos
+                      </span>
+                    </div>
+                    <div className="grid md:grid-cols-3 gap-4">
+                      {PROJECTS.filter(p => p.type === "ford").map((project, i) => (
+                        <CyberCard key={i} delay={i * 0.1}>
+                          <div className="p-4 h-full flex flex-col">
+                            <div className="flex items-center justify-between mb-2">
+                              <h3 className="text-sm font-bold text-[#00ffff]">{project.title}</h3>
+                              <span className="text-[10px] px-1.5 py-0.5 rounded font-mono bg-[#ff00ff]/20 text-[#ff00ff]">
+                                FORD
+                              </span>
+                            </div>
+                            <p className="text-[#00ffff]/60 mb-3 text-xs flex-grow">{project.description}</p>
+                            {/* Preview Hint */}
+                            <div className="mb-3 px-2 py-1.5 rounded bg-[#ff00ff]/5 border border-[#ff00ff]/15">
+                              <p className="text-[10px] text-[#ff00ff]/70 leading-relaxed">
+                                <span className="text-[#ff00ff] font-bold">▶ {(project as any).demoType}:</span>{" "}
+                                {(project as any).previewHint}
+                              </p>
+                            </div>
+                            <div className="flex flex-wrap gap-1 mb-3">
+                              {project.tags.slice(0, 3).map((tag, j) => (
+                                <span
+                                  key={j}
+                                  className="text-[10px] px-1.5 py-0.5 border border-[#00ffff]/20 text-[#00ffff]/60 rounded"
+                                >
+                                  {tag}
+                                </span>
+                              ))}
+                            </div>
+                            <button
+                              onClick={() => setSelectedProject(project.id)}
+                              className="w-full flex items-center justify-center gap-2 px-3 py-2 bg-[#ff00ff]/10 border border-[#ff00ff]/30 text-[#ff00ff] rounded hover:bg-[#ff00ff]/20 hover:border-[#ff00ff]/60 transition-all text-xs font-medium group"
+                            >
+                              <Play className="w-3 h-3 group-hover:scale-110 transition-transform" />
+                              Abrir Simulação Interativa
+                            </button>
+                          </div>
+                        </CyberCard>
+                      ))}
+                    </div>
+                  </div>
+
+                  {/* Category: Personal Projects */}
+                  <div>
+                    <div className="flex items-center gap-3 mb-6">
+                      <h3 className="text-lg font-bold text-[#00ff9f]">▓ PROJETOS PESSOAIS</h3>
+                      <span className="text-xs text-[#00ff9f]/50 border border-[#00ff9f]/20 px-2 py-0.5 rounded font-mono">
+                        Demos interativos disponíveis
+                      </span>
+                    </div>
+                    <div className="grid md:grid-cols-2 gap-4">
+                      {PROJECTS.filter(p => p.type === "personal").map((project, i) => (
+                        <CyberCard key={i} delay={i * 0.1}>
+                          <div className="p-5 h-full flex flex-col">
+                            <div className="flex items-center justify-between mb-2">
+                              <h3 className="text-lg font-bold text-[#00ffff]">{project.title}</h3>
+                              <span className="text-xs px-2 py-1 rounded font-mono bg-[#00ff9f]/20 text-[#00ff9f]">
+                                {project.status}
+                              </span>
+                            </div>
+                            <p className="text-[#00ffff]/60 mb-3 text-sm flex-grow">{project.description}</p>
+                            {/* Preview Hint */}
+                            <div className="mb-3 px-3 py-2 rounded bg-[#00ff9f]/5 border border-[#00ff9f]/15">
+                              <p className="text-xs text-[#00ff9f]/70 leading-relaxed">
+                                <span className="text-[#00ff9f] font-bold">▶ {(project as any).demoType}:</span>{" "}
+                                {(project as any).previewHint}
+                              </p>
+                            </div>
+                            <div className="flex flex-wrap gap-1.5 mb-4">
+                              {project.tags.map((tag, j) => (
+                                <span 
+                                  key={j}
+                                  className="text-xs px-2 py-0.5 border border-[#00ffff]/30 text-[#00ffff]/70 rounded"
+                                >
+                                  {tag}
+                                </span>
+                              ))}
+                            </div>
+                            <button
+                              onClick={() => setSelectedProject(project.id)}
+                              className="w-full flex items-center justify-center gap-2 px-4 py-2.5 bg-[#00ff9f]/10 border border-[#00ff9f]/30 text-[#00ff9f] rounded hover:bg-[#00ff9f]/20 hover:border-[#00ff9f]/60 transition-all text-sm font-medium group"
+                            >
+                              <Play className="w-4 h-4 group-hover:scale-110 transition-transform" />
+                              Abrir Demo Interativo
+                            </button>
+                          </div>
+                        </CyberCard>
+                      ))}
+                    </div>
+                  </div>
+                </>
+              )}
+            </section>
+          )}
+
+          {/* Contact Section */}
+          {activeSection === "contato" && (
+            <section className="py-16">
+              <GlitchText 
+                text="// CONTATO" 
+                className="text-2xl sm:text-3xl font-bold text-[#00ffff] mb-16 text-center"
+              />
+
+              <div className="max-w-2xl mx-auto">
+                <div className="space-y-6">
+                  {/* GitHub */}
+                  <a 
+                    href="https://github.com/Awi-24"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="block"
+                  >
+                    <CyberCard>
+                      <div className="p-6 flex items-center gap-4 hover:bg-[#1a1a2e]/80 transition-colors cursor-pointer">
+                        <Github className="w-8 h-8 text-[#00ff9f] flex-shrink-0" />
+                        <div className="flex-grow">
+                          <div className="text-[#00ffff] font-bold">GitHub</div>
+                          <div className="text-[#00ffff]/60 text-sm">github.com/Awi-24</div>
+                        </div>
+                        <ExternalLink className="w-5 h-5 text-[#ff00ff] flex-shrink-0" />
+                      </div>
+                    </CyberCard>
+                  </a>
+
+                  {/* Email */}
+                  <a 
+                    href="mailto:adrianwidmer.work@gmail.com"
+                    className="block"
+                  >
+                    <CyberCard>
+                      <div className="p-6 flex items-center gap-4 hover:bg-[#1a1a2e]/80 transition-colors cursor-pointer">
+                        <Mail className="w-8 h-8 text-[#00ffff] flex-shrink-0" />
+                        <div className="flex-grow">
+                          <div className="text-[#00ffff] font-bold">Email</div>
+                          <div className="text-[#00ffff]/60 text-sm">adrianwidmer.work@gmail.com</div>
+                        </div>
+                        <ExternalLink className="w-5 h-5 text-[#ff00ff] flex-shrink-0" />
+                      </div>
+                    </CyberCard>
+                  </a>
+
+                  {/* LinkedIn */}
+                  <a 
+                    href="https://linkedin.com/in/adrian-widmer"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="block"
+                  >
+                    <CyberCard>
+                      <div className="p-6 flex items-center gap-4 hover:bg-[#1a1a2e]/80 transition-colors cursor-pointer">
+                        <Linkedin className="w-8 h-8 text-[#00ff9f] flex-shrink-0" />
+                        <div className="flex-grow">
+                          <div className="text-[#00ffff] font-bold">LinkedIn</div>
+                          <div className="text-[#00ffff]/60 text-sm">linkedin.com/in/adrian-widmer</div>
+                        </div>
+                        <ExternalLink className="w-5 h-5 text-[#ff00ff] flex-shrink-0" />
+                      </div>
+                    </CyberCard>
+                  </a>
+                </div>
+              </div>
+            </section>
+          )}
+
+        </div>
+      </main>
+
+      {/* Footer */}
+      <footer className="relative z-20 border-t border-[#00ffff]/20 py-6 text-center">
+        <p className="text-[#00ffff]/40 text-sm font-mono">
+          {"<"} ADRIAN WIDMER | ENGENHEIRO IA/ML {"/>"} | 2025
+        </p>
+      </footer>
+
+      {/* Corner HUD Elements */}
+      <div className="fixed bottom-4 left-4 z-40 text-xs font-mono text-[#00ff9f]/50 space-y-1 hidden sm:block">
+        <div>FPS: 60</div>
+        <div>LAT: {Math.round(Math.random() * 10 + 10)}ms</div>
+        <div>MEM: {Math.round(Math.random() * 20 + 60)}%</div>
+      </div>
+
+      <div className="fixed bottom-4 right-4 z-40 text-xs font-mono text-[#00ff9f]/50 text-right space-y-1 hidden sm:block">
+        <div>X: {mousePos.x}</div>
+        <div>Y: {mousePos.y}</div>
+        <div className="flex items-center gap-1 justify-end">
+          <Lock className="w-3 h-3" /> SECURE
+        </div>
+      </div>
+    </div>
+  )
+}
