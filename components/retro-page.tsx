@@ -339,7 +339,7 @@ export default function RetroPage({ onEnterModern }: RetroPageProps) {
               <div className="bg-[#c0c0c0] text-black p-4 border-2 border-t-white border-l-white border-r-[#404040] border-b-[#404040] inline-block max-w-lg mx-auto">
                 <h2 className="text-lg font-bold text-[#800000] mb-2">Ola Amigo da Internet!</h2>
                 <p className="text-sm mb-2">
-                  Meu nome e <strong>Adrian Widmer</strong>, sou Engenheiro de IA/ML especializado em sistemas de ML em producao, Salvador, BA.
+                  Meu nome e <strong>Adrian Widmer</strong>, sou Engenheiro de Computacao com experiencia em projetos de ML com Python e solucoes end-to-end, Salvador, BA.
                 </p>
                 <p className="text-sm mb-2">
                   Trabalho com <span className="text-red-600">Machine Learning</span>, <span className="text-red-600">BigQuery</span>, <span className="text-red-600">GCP</span> e <span className="text-red-600">Python</span>!
@@ -512,14 +512,14 @@ export default function RetroPage({ onEnterModern }: RetroPageProps) {
                 </div>
               </div>
               <div className="grid md:grid-cols-2 gap-4 max-w-3xl mx-auto">
-                {/* Vannex Cycleo */}
+                {/* Vannex Cycle */}
                 <div className="bg-[#c0c0c0] text-black p-3 border-2 border-t-white border-l-white border-r-[#404040] border-b-[#404040]">
-                  <h3 className="font-bold text-[#800000] text-sm mb-1">Vannex Cycleo</h3>
-                  <p className="text-xs mb-2">App mobile para registro e analise de atividades de ciclismo</p>
+                  <h3 className="font-bold text-[#800000] text-sm mb-1">Vannex Cycle</h3>
+                  <p className="text-xs mb-2">App Flutter de ciclo menstrual. Privacy-first: 100% local, sem cloud.</p>
                   <div className="flex flex-wrap gap-1">
-                    <span className="bg-[#000080] text-white text-[10px] px-1">React Native</span>
-                    <span className="bg-[#000080] text-white text-[10px] px-1">TypeScript</span>
-                    <span className="bg-[#000080] text-white text-[10px] px-1">Firebase</span>
+                    <span className="bg-[#000080] text-white text-[10px] px-1">Flutter</span>
+                    <span className="bg-[#000080] text-white text-[10px] px-1">Dart</span>
+                    <span className="bg-[#000080] text-white text-[10px] px-1">SQLite</span>
                   </div>
                   <a href="https://github.com/Awi-24/Vannex-Cycleo" target="_blank" rel="noopener noreferrer" className="text-blue-600 text-xs hover:underline block mt-1">
                     Ver no GitHub
@@ -529,11 +529,11 @@ export default function RetroPage({ onEnterModern }: RetroPageProps) {
                 {/* Monnex */}
                 <div className="bg-[#c0c0c0] text-black p-3 border-2 border-t-white border-l-white border-r-[#404040] border-b-[#404040]">
                   <h3 className="font-bold text-[#800000] text-sm mb-1">Monnex</h3>
-                  <p className="text-xs mb-2">App de financas pessoais com categorizacao inteligente</p>
+                  <p className="text-xs mb-2">App Flutter de financas pessoais. Privacy-first: dados so no dispositivo.</p>
                   <div className="flex flex-wrap gap-1">
-                    <span className="bg-[#000080] text-white text-[10px] px-1">Python</span>
-                    <span className="bg-[#000080] text-white text-[10px] px-1">Flask</span>
-                    <span className="bg-[#000080] text-white text-[10px] px-1">React</span>
+                    <span className="bg-[#000080] text-white text-[10px] px-1">Flutter</span>
+                    <span className="bg-[#000080] text-white text-[10px] px-1">Dart</span>
+                    <span className="bg-[#000080] text-white text-[10px] px-1">SQLite</span>
                   </div>
                   <a href="https://github.com/Awi-24/Monnex" target="_blank" rel="noopener noreferrer" className="text-blue-600 text-xs hover:underline block mt-1">
                     Ver no GitHub

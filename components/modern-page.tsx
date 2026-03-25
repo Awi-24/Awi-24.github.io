@@ -197,8 +197,8 @@ const PROJECTS = [
     type: "ford"
   },
   {
-    id: "vannex-cycleo",
-    title: "Vannex Cycleo",
+    id: "vannex-cycle",
+    title: "Vannex Cycle",
     description: "App Flutter de rastreamento de ciclo menstrual com previsões de fertilidade e insights personalizados. 100% privacy-first: SQLite local, sem cloud, sem tracking.",
     previewHint: "Explore features do app · Veja UI do ciclo mensal · Privacidade e arquitetura técnica",
     demoType: "Preview UI",
@@ -390,8 +390,8 @@ export default function ModernPage({ onBack, glitchIntensity }: ModernPageProps)
               </p>
               
               <p className="text-[#00B4FF]/70 max-w-2xl mb-4 text-base sm:text-lg px-4">
-                Engenheiro IA/ML especializado em projeto e deploy de sistemas de ML end-to-end. 
-                Experiência em ingestão de dados, feature engineering e modelos de detecção de anomalias em produção.
+                Engenheiro de Computação com experiência em projetos de ML com Python — de ingestão de dados ao deploy de modelos em produção.
+                Construí soluções com detecção de anomalias, pipelines de dados e me aprofundando em MLOps.
               </p>
 
               <p className="text-[#FCE94F]/50 text-sm mb-8">
@@ -681,7 +681,7 @@ export default function ModernPage({ onBack, glitchIntensity }: ModernPageProps)
 
                   <div className="bg-[#1a1a2e] rounded border border-[#FCE94F]/20 p-6">
                     {/* Personal Projects */}
-                    {selectedProject === "vannex-cycleo" && <VannexCycleoDemo />}
+                    {selectedProject === "vannex-cycle" && <VannexCycleoDemo />}
                     {selectedProject === "monnex" && <MonnexDemo />}
                     {selectedProject === "awiOS" && <AwiOSDemo />}
                     {selectedProject === "tse-analyses" && <TSEAnalysesDemo />}

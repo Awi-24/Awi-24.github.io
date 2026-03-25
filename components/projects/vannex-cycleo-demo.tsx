@@ -1,256 +1,333 @@
 "use client"
 
-import { useState, useEffect } from "react"
-import { Calendar, Flame, ChevronRight, Home, BarChart3, Settings, Shield, Database, Smartphone, Bell, Lock } from "lucide-react"
+import { useState } from "react"
+import { Calendar, Flame, Home, BarChart3, Settings, Shield, Database, Lock, Bell, Heart, ChevronRight, Activity, Droplets } from "lucide-react"
+
+const PHASES = [
+  { id: "menstrual", label: "Menstrual", days: "1 – 5", color: "#e75480", light: "#ff8fab", bg: "#3d0d1e", emoji: "🔴", desc: "Descamação do endométrio. Priorize descanso, hidratação e calor local." },
+  { id: "folicular", label: "Folicular", days: "6 – 13", color: "#f4a261", light: "#ffd09b", bg: "#3d2008", emoji: "🌱", desc: "Estrogênio aumentando. Energia alta — ótimo para exercícios e novos projetos." },
+  { id: "ovulacao", label: "Ovulação", days: "14 – 16", color: "#ffd60a", light: "#fff176", bg: "#3d3200", emoji: "✨", desc: "Pico de LH. Janela fértil. Pico de energia e libido." },
+  { id: "lutea", label: "Lútea", days: "17 – 28", color: "#b48ded", light: "#d4b4fe", bg: "#2a1a45", emoji: "🌙", desc: "Progesterona sobe. Possível TPM nos dias finais. Priorize autocuidado." },
+]
+
+const SYMPTOMS = [
+  { label: "Cólica", icon: "⚡", active: true },
+  { label: "Humor", icon: "😔", active: true },
+  { label: "Fadiga", icon: "😴", active: false },
+  { label: "Dor de cabeça", icon: "🤯", active: false },
+  { label: "Inchaço", icon: "💧", active: true },
+  { label: "Acne", icon: "🔴", active: false },
+]
+
+const WEEK = [
+  { d: "D", n: 28, past: true },
+  { d: "S", n: 1, menstrual: true },
+  { d: "T", n: 2, menstrual: true },
+  { d: "Q", n: 3, menstrual: true, today: true },
+  { d: "Q", n: 4, menstrual: true },
+  { d: "S", n: 5 },
+  { d: "S", n: 6 },
+]
 
 export default function VannexCycleoDemo() {
-  const [activeTab, setActiveTab] = useState<"demo" | "info">("info")
-  const [currentDay] = useState(8)
-  const [cycleProgress, setCycleProgress] = useState(0)
+  const [tab, setTab] = useState<"info" | "preview">("preview")
+  const [screen, setScreen] = useState<"home" | "ciclo" | "log">("home")
+  const [loggedSymptoms, setLoggedSymptoms] = useState<Set<number>>(new Set([0, 1, 4]))
 
-  useEffect(() => {
-    const interval = setInterval(() => {
-      setCycleProgress(prev => (prev + 1) % 360)
-    }, 50)
-    return () => clearInterval(interval)
-  }, [])
+  const toggleSymptom = (i: number) => {
+    setLoggedSymptoms(prev => {
+      const next = new Set(prev)
+      next.has(i) ? next.delete(i) : next.add(i)
+      return next
+    })
+  }
 
-  const weekDays = [
-    { day: "d", date: 15 },
-    { day: "s", date: 16 },
-    { day: "t", date: 17 },
-    { day: "q", date: 18, highlight: true },
-    { day: "q", date: 19, active: true },
-    { day: "s", date: 20 },
-    { day: "s", date: 21 },
-    { day: "d", date: 22 },
-  ]
-
-  const particles = Array.from({ length: 12 }, (_, i) => ({
-    id: i,
-    x: Math.random() * 100,
-    y: Math.random() * 100,
-    size: Math.random() * 6 + 2,
-    delay: Math.random() * 2
-  }))
-
-  const features = [
-    { icon: Shield, title: "Privacy First", desc: "Dados armazenados apenas localmente no dispositivo. Sem servidores, sem cloud, sem tracking." },
-    { icon: Database, title: "SQLite Local", desc: "Banco de dados SQLite embedded. Seus dados nunca saem do seu celular." },
-    { icon: Lock, title: "Criptografia", desc: "Dados sensíveis criptografados com AES-256. Proteção por biometria opcional." },
-    { icon: Bell, title: "Notificações Inteligentes", desc: "Lembretes de ciclo, janela fértil e sintomas baseados no seu histórico." },
-    { icon: BarChart3, title: "Insights Personalizados", desc: "ML local para previsões de ciclo cada vez mais precisas com o uso." },
-    { icon: Smartphone, title: "React Native", desc: "App nativo para iOS e Android com performance otimizada." },
-  ]
+  const currentPhase = PHASES[0] // menstrual, day 3
 
   return (
-    <div className="space-y-6">
-      {/* Tab Navigation */}
-      <div className="flex gap-2 mb-6">
-        <button
-          onClick={() => setActiveTab("info")}
-          className={`flex-1 py-2 px-4 rounded text-sm font-medium transition-colors ${
-            activeTab === "info" 
-              ? "bg-[#e75480] text-white" 
-              : "bg-[#2d1b3d] text-[#e75480] hover:bg-[#3d2a4a]"
-          }`}
-        >
-          Sobre o Projeto
-        </button>
-        <button
-          onClick={() => setActiveTab("demo")}
-          className={`flex-1 py-2 px-4 rounded text-sm font-medium transition-colors ${
-            activeTab === "demo" 
-              ? "bg-[#e75480] text-white" 
-              : "bg-[#2d1b3d] text-[#e75480] hover:bg-[#3d2a4a]"
-          }`}
-        >
-          Preview da Interface
-        </button>
+    <div className="space-y-4">
+      {/* Tab Nav */}
+      <div className="flex gap-2">
+        {[["info", "Sobre o Projeto"], ["preview", "Preview da UI"]].map(([id, label]) => (
+          <button
+            key={id}
+            onClick={() => setTab(id as "info" | "preview")}
+            className={`flex-1 py-2 px-4 rounded text-sm font-medium transition-colors ${
+              tab === id ? "bg-[#e75480] text-white" : "bg-[#2d1b3d] text-[#e75480] hover:bg-[#3d2a4a]"
+            }`}
+          >
+            {label}
+          </button>
+        ))}
       </div>
 
-      {activeTab === "info" ? (
-        <div className="space-y-6">
-          {/* Project Header */}
-          <div className="bg-gradient-to-br from-[#2d1b3d] to-[#1a0f24] rounded-xl p-6 border border-[#4a2d5e]/30">
-            <div className="flex items-center gap-3 mb-4">
-              <div className="w-12 h-12 bg-gradient-to-br from-[#e75480] to-[#a65d7a] rounded-xl flex items-center justify-center">
-                <Flame className="w-6 h-6 text-white" />
+      {tab === "info" ? (
+        <div className="space-y-5">
+          {/* Header */}
+          <div className="bg-gradient-to-br from-[#2d1b3d] to-[#1a0f24] rounded-xl p-5 border border-[#4a2d5e]/40">
+            <div className="flex items-center gap-3 mb-3">
+              <div className="w-12 h-12 bg-gradient-to-br from-[#e75480] to-[#a83060] rounded-2xl flex items-center justify-center shadow-lg shadow-[#e75480]/30">
+                <Heart className="w-6 h-6 text-white" />
               </div>
               <div>
-                <h3 className="text-xl font-bold text-white">Vannex Cycleo</h3>
-                <p className="text-[#b8a0c4] text-sm">App de Ciclo Menstrual</p>
+                <h3 className="text-lg font-bold text-white">Vannex Cycle</h3>
+                <p className="text-[#b8a0c4] text-xs">App de Ciclo Menstrual · Flutter</p>
               </div>
             </div>
             <p className="text-[#b8a0c4] text-sm leading-relaxed">
-              Aplicativo de rastreamento de ciclo menstrual focado em privacidade. Diferente de apps populares que vendem dados para terceiros, 
-              o Vannex Cycleo mantém todas as informações sensíveis <span className="text-[#e75480] font-medium">exclusivamente no dispositivo da usuária</span>.
+              Tracker de ciclo menstrual que coloca a privacidade da usuária acima de tudo.
+              Enquanto apps populares monetizam dados de saúde, o Vannex Cycle garante que{" "}
+              <span className="text-[#e75480] font-semibold">nenhum dado sai do dispositivo</span> — nem para analytics anônimos.
             </p>
           </div>
 
-          {/* Privacy Badge */}
-          <div className="bg-[#0d3d2e]/30 border border-[#00ff9f]/30 rounded-xl p-4 flex items-center gap-4">
-            <Shield className="w-10 h-10 text-[#00ff9f]" />
+          {/* Privacy badge */}
+          <div className="bg-[#0d3020]/50 border border-[#4caf50]/40 rounded-xl p-4 flex items-center gap-4">
+            <Shield className="w-9 h-9 text-[#4caf50] shrink-0" />
             <div>
-              <h4 className="text-[#00ff9f] font-bold">100% Privacy First</h4>
-              <p className="text-[#00ff9f]/70 text-sm">Zero dados enviados para servidores. Zero tracking. Zero ads. Seus dados são só seus.</p>
+              <p className="text-[#4caf50] font-bold text-sm">100% Privacy First</p>
+              <p className="text-[#4caf50]/70 text-xs mt-0.5">Zero cloud · Zero tracking · Zero ads · Código aberto</p>
             </div>
           </div>
 
-          {/* Features Grid */}
-          <div className="grid md:grid-cols-2 gap-4">
-            {features.map((feature, i) => (
-              <div key={i} className="bg-[#1a1a2e] rounded-xl p-4 border border-[#4a2d5e]/30">
-                <div className="flex items-start gap-3">
-                  <feature.icon className="w-5 h-5 text-[#e75480] mt-0.5" />
-                  <div>
-                    <h4 className="text-white font-medium text-sm">{feature.title}</h4>
-                    <p className="text-[#8b7a95] text-xs mt-1">{feature.desc}</p>
-                  </div>
+          {/* Features */}
+          <div className="grid md:grid-cols-2 gap-3">
+            {[
+              { icon: Database, title: "SQLite Local", desc: "Banco embedded no device. Dados nunca saem do celular." },
+              { icon: Lock, title: "Criptografia", desc: "flutter_secure_storage + AES-256 para dados sensíveis." },
+              { icon: Activity, title: "Previsão de Ciclo", desc: "Algoritmo local (sem ML em servidor) com histórico pessoal." },
+              { icon: Bell, title: "Notificações", desc: "Lembretes de ciclo, ovulação e sintomas. Gerados localmente." },
+              { icon: BarChart3, title: "Insights", desc: "Padrões de humor, dor e fluxo com gráficos por ciclo." },
+              { icon: Droplets, title: "Log de Sintomas", desc: "Registro diário de sintomas e intensidade de fluxo." },
+            ].map(({ icon: Icon, title, desc }, i) => (
+              <div key={i} className="bg-[#1e1030] rounded-xl p-4 border border-[#4a2d5e]/30 flex items-start gap-3">
+                <Icon className="w-5 h-5 text-[#e75480] mt-0.5 shrink-0" />
+                <div>
+                  <p className="text-white font-medium text-sm">{title}</p>
+                  <p className="text-[#8b7a95] text-xs mt-0.5">{desc}</p>
                 </div>
               </div>
             ))}
           </div>
 
-          {/* Tech Stack */}
-          <div className="bg-[#1a1a2e] rounded-xl p-4 border border-[#4a2d5e]/30">
-            <h4 className="text-white font-bold mb-3">Stack Tecnológico</h4>
+          {/* Stack */}
+          <div className="bg-[#1e1030] rounded-xl p-4 border border-[#4a2d5e]/30">
+            <p className="text-white font-bold text-sm mb-3">Stack Tecnológico</p>
             <div className="flex flex-wrap gap-2">
-              {["React Native", "TypeScript", "SQLite", "Expo", "AES-256 Encryption", "Local ML", "Biometric Auth"].map((tech, i) => (
-                <span key={i} className="px-3 py-1 bg-[#2d1b3d] text-[#e75480] text-xs rounded-full border border-[#e75480]/30">
-                  {tech}
-                </span>
+              {["Flutter", "Dart", "SQLite (sqflite)", "flutter_secure_storage", "Provider", "Riverpod", "Local Notifications", "fl_chart"].map((t, i) => (
+                <span key={i} className="px-3 py-1 bg-[#2d1b3d] text-[#e75480] text-xs rounded-full border border-[#e75480]/30">{t}</span>
               ))}
             </div>
           </div>
         </div>
       ) : (
-        /* Demo Preview */
-        <div className="w-full max-w-sm mx-auto">
-          <div className="relative bg-gradient-to-b from-[#2d1b3d] to-[#1a0f24] rounded-3xl overflow-hidden shadow-2xl border border-[#4a2d5e]/30">
-            {particles.map(p => (
-              <div
-                key={p.id}
-                className="absolute rounded-full bg-[#e75480]/40 animate-pulse"
-                style={{
-                  left: `${p.x}%`,
-                  top: `${p.y}%`,
-                  width: p.size,
-                  height: p.size,
-                  animationDelay: `${p.delay}s`
-                }}
-              />
+        /* ===== PHONE PREVIEW ===== */
+        <div className="flex flex-col items-center gap-3">
+          {/* Screen nav */}
+          <div className="flex gap-1 bg-[#1a0f24] p-1 rounded-lg">
+            {[["home", "🏠 Início"], ["ciclo", "🔴 Ciclo"], ["log", "📝 Log"]].map(([id, label]) => (
+              <button
+                key={id}
+                onClick={() => setScreen(id as "home" | "ciclo" | "log")}
+                className={`px-3 py-1.5 rounded text-xs font-medium transition-colors ${
+                  screen === id ? "bg-[#e75480] text-white" : "text-[#b8a0c4] hover:text-white"
+                }`}
+              >
+                {label}
+              </button>
             ))}
+          </div>
 
-            <div className="p-6 pb-2">
-              <div className="flex justify-between items-start">
-                <div>
-                  <div className="flex items-center gap-2">
-                    <span className="text-white text-2xl font-bold">Ola!</span>
-                    <Flame className="w-5 h-5 text-orange-400" />
-                  </div>
-                  <p className="text-[#b8a0c4] text-sm">quinta-feira, 19 marco</p>
-                </div>
-                <button className="p-2 border border-[#4a2d5e] rounded-lg">
-                  <Calendar className="w-5 h-5 text-[#b8a0c4]" />
-                </button>
+          {/* Phone frame */}
+          <div className="w-full max-w-xs bg-[#120820] rounded-3xl border border-[#4a2d5e]/40 overflow-hidden shadow-2xl shadow-[#e75480]/10">
+
+            {/* Status bar */}
+            <div className="flex justify-between items-center px-5 pt-3 pb-1">
+              <span className="text-[#6b5178] text-[10px] font-medium">9:41</span>
+              <div className="flex gap-1 items-center">
+                <span className="text-[#6b5178] text-[9px]">●●●</span>
+                <span className="text-[#6b5178] text-[9px]">WiFi</span>
+                <span className="text-[#6b5178] text-[9px]">87%</span>
               </div>
             </div>
 
-            <div className="flex justify-between px-4 py-3">
-              {weekDays.map((d, i) => (
-                <div key={i} className="flex flex-col items-center gap-1">
-                  <span className="text-[#6b5178] text-xs">{d.day}</span>
-                  <div className={`relative w-9 h-9 rounded-full flex items-center justify-center text-sm font-medium transition-all ${
-                    d.highlight 
-                      ? "bg-[#8b7355] text-white" 
-                      : d.active 
-                        ? "bg-[#a65d7a] text-white"
-                        : "bg-[#3d2a4a] text-[#8b7a95]"
-                  }`}>
-                    {d.date}
-                    {d.highlight && <span className="absolute -top-0.5 -right-0.5 w-2 h-2 bg-orange-400 rounded-full" />}
+            {screen === "home" && (
+              <div className="px-4 pb-4">
+                {/* Header */}
+                <div className="flex justify-between items-start py-3">
+                  <div>
+                    <p className="text-[#b8a0c4] text-xs">quinta-feira, 3 de abril</p>
+                    <p className="text-white text-xl font-bold mt-0.5">Olá! 👋</p>
+                  </div>
+                  <div className="w-8 h-8 rounded-full bg-[#e75480]/20 border border-[#e75480]/40 flex items-center justify-center">
+                    <Bell className="w-4 h-4 text-[#e75480]" />
                   </div>
                 </div>
+
+                {/* Phase card */}
+                <div
+                  className="rounded-2xl p-4 mb-3"
+                  style={{ background: `linear-gradient(135deg, ${currentPhase.bg} 0%, #1a0f24 100%)`, border: `1px solid ${currentPhase.color}30` }}
+                >
+                  <div className="flex items-center justify-between mb-3">
+                    <div>
+                      <p className="text-xs font-medium" style={{ color: currentPhase.color }}>Fase Atual</p>
+                      <p className="text-white text-lg font-bold">{currentPhase.emoji} {currentPhase.label}</p>
+                    </div>
+                    <div className="text-right">
+                      <p className="text-3xl font-bold text-white">Dia 3</p>
+                      <p className="text-[10px]" style={{ color: `${currentPhase.color}99` }}>de 28</p>
+                    </div>
+                  </div>
+                  {/* Progress bar cycle */}
+                  <div className="h-1.5 bg-[#ffffff15] rounded-full overflow-hidden">
+                    <div className="h-full rounded-full" style={{ width: "11%", background: currentPhase.color }} />
+                  </div>
+                  <p className="text-[10px] mt-2" style={{ color: `${currentPhase.color}90` }}>{currentPhase.desc}</p>
+                </div>
+
+                {/* Week strip */}
+                <div className="bg-[#1e1030] rounded-2xl p-3 mb-3">
+                  <div className="flex justify-between">
+                    {WEEK.map((w, i) => (
+                      <div key={i} className="flex flex-col items-center gap-1">
+                        <span className="text-[#6b5178] text-[9px]">{w.d}</span>
+                        <div
+                          className="w-7 h-7 rounded-full flex items-center justify-center text-[10px] font-medium"
+                          style={{
+                            background: w.today ? currentPhase.color : w.menstrual ? `${currentPhase.color}30` : w.past ? "#1e1030" : "#2d1b3d",
+                            color: w.today ? "white" : w.menstrual ? currentPhase.light : "#6b5178",
+                            border: w.today ? "none" : `1px solid ${w.menstrual ? `${currentPhase.color}40` : "transparent"}`
+                          }}
+                        >
+                          {w.n}
+                        </div>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+
+                {/* Next prediction */}
+                <div className="bg-[#1e1030] rounded-2xl p-3 flex items-center justify-between">
+                  <div className="flex items-center gap-2">
+                    <div className="w-8 h-8 rounded-xl bg-[#e75480]/15 flex items-center justify-center">
+                      <Calendar className="w-4 h-4 text-[#e75480]" />
+                    </div>
+                    <div>
+                      <p className="text-white text-xs font-medium">Próx. ciclo previsto</p>
+                      <p className="text-[#b8a0c4] text-[10px]">em 25 dias · ~1 de maio</p>
+                    </div>
+                  </div>
+                  <ChevronRight className="w-4 h-4 text-[#6b5178]" />
+                </div>
+              </div>
+            )}
+
+            {screen === "ciclo" && (
+              <div className="px-4 pb-4">
+                <p className="text-white font-bold text-sm py-3">Fases do Ciclo</p>
+                <div className="space-y-2">
+                  {PHASES.map((p, i) => (
+                    <div
+                      key={p.id}
+                      className="rounded-xl p-3 border"
+                      style={{ background: p.bg, borderColor: `${p.color}30` }}
+                    >
+                      <div className="flex items-center justify-between mb-1">
+                        <div className="flex items-center gap-2">
+                          <span className="text-base">{p.emoji}</span>
+                          <div>
+                            <p className="text-white text-xs font-semibold">{p.label}</p>
+                            <p className="text-[10px]" style={{ color: `${p.color}90` }}>Dias {p.days}</p>
+                          </div>
+                        </div>
+                        {i === 0 && (
+                          <span className="text-[9px] px-2 py-0.5 rounded-full font-medium" style={{ background: `${p.color}30`, color: p.color }}>
+                            AGORA
+                          </span>
+                        )}
+                      </div>
+                      <p className="text-[10px] leading-relaxed" style={{ color: `${p.color}80` }}>{p.desc}</p>
+                    </div>
+                  ))}
+                </div>
+              </div>
+            )}
+
+            {screen === "log" && (
+              <div className="px-4 pb-4">
+                <p className="text-white font-bold text-sm py-3">Log de Hoje · Dia 3</p>
+                {/* Flow */}
+                <div className="bg-[#1e1030] rounded-2xl p-3 mb-3 border border-[#4a2d5e]/30">
+                  <p className="text-[#b8a0c4] text-xs mb-2">Intensidade do fluxo</p>
+                  <div className="flex gap-2">
+                    {["Sem fluxo", "Leve", "Moderado", "Intenso"].map((label, i) => (
+                      <button
+                        key={i}
+                        className="flex-1 py-1.5 rounded-lg text-[9px] font-medium transition-colors"
+                        style={{
+                          background: i === 2 ? "#e75480" : "#2d1b3d",
+                          color: i === 2 ? "white" : "#8b7a95",
+                          border: `1px solid ${i === 2 ? "#e75480" : "#4a2d5e40"}`
+                        }}
+                      >
+                        {label}
+                      </button>
+                    ))}
+                  </div>
+                </div>
+                {/* Symptoms */}
+                <div className="bg-[#1e1030] rounded-2xl p-3 border border-[#4a2d5e]/30">
+                  <p className="text-[#b8a0c4] text-xs mb-2">Sintomas</p>
+                  <div className="grid grid-cols-3 gap-2">
+                    {SYMPTOMS.map((s, i) => (
+                      <button
+                        key={i}
+                        onClick={() => toggleSymptom(i)}
+                        className="flex flex-col items-center gap-0.5 py-2 rounded-xl text-[9px] transition-all"
+                        style={{
+                          background: loggedSymptoms.has(i) ? "#e7548020" : "#2d1b3d",
+                          color: loggedSymptoms.has(i) ? "#e75480" : "#8b7a95",
+                          border: `1px solid ${loggedSymptoms.has(i) ? "#e7548050" : "#4a2d5e30"}`
+                        }}
+                      >
+                        <span className="text-base">{s.icon}</span>
+                        {s.label}
+                      </button>
+                    ))}
+                  </div>
+                </div>
+              </div>
+            )}
+
+            {/* Bottom nav */}
+            <div className="flex justify-around items-center py-3 border-t border-[#2d1b3d]" style={{ background: "#0d0818" }}>
+              {[
+                { id: "home", icon: Home, label: "Início" },
+                { id: "ciclo", icon: Calendar, label: "Ciclo" },
+                { id: "log", icon: Activity, label: "Log" },
+                { id: "stats", icon: BarChart3, label: "Insights" },
+                { id: "settings", icon: Settings, label: "Config" },
+              ].map(({ id, icon: Icon, label }) => (
+                <button
+                  key={id}
+                  onClick={() => ["home", "ciclo", "log"].includes(id) && setScreen(id as "home" | "ciclo" | "log")}
+                  className="flex flex-col items-center gap-0.5"
+                >
+                  <Icon
+                    className="w-4 h-4"
+                    style={{ color: screen === id ? "#e75480" : "#6b5178" }}
+                  />
+                  <span className="text-[9px]" style={{ color: screen === id ? "#e75480" : "#6b5178" }}>{label}</span>
+                </button>
               ))}
             </div>
+          </div>
 
-            <div className="relative flex items-center justify-center py-8">
-              <div 
-                className="absolute w-56 h-56 rounded-full"
-                style={{
-                  background: `conic-gradient(from ${cycleProgress}deg, transparent 0%, #e75480 25%, #a65d7a 50%, transparent 75%)`,
-                  opacity: 0.3,
-                  filter: 'blur(20px)'
-                }}
-              />
-              
-              <div className="relative w-48 h-48 rounded-full bg-gradient-to-br from-[#3d2a4a] to-[#2d1b3d] flex items-center justify-center border-4 border-[#e75480]/50 shadow-lg shadow-[#e75480]/20">
-                <div className="text-center">
-                  <p className="text-5xl font-bold text-white">Dia {currentDay}</p>
-                  <div className="flex items-center justify-center gap-2 mt-2">
-                    <Flame className="w-4 h-4 text-orange-400" />
-                    <span className="text-[#e75480] font-medium text-sm">Janela Fertil</span>
-                  </div>
-                </div>
-                
-                <div className="absolute bottom-3 bg-[#3d2a4a] px-3 py-1 rounded-full">
-                  <span className="text-white text-xs font-medium">0%</span>
-                </div>
-              </div>
-
-              <div className="absolute bottom-2">
-                <Flame className="w-5 h-5 text-orange-400" />
-              </div>
-            </div>
-
-            <div className="mx-4 mb-4 bg-gradient-to-r from-[#3d2a4a] to-[#4a2d5e] rounded-2xl p-4 border border-[#5a3d6a]/30">
-              <div className="flex items-center justify-between">
-                <div className="flex items-center gap-3">
-                  <div className="w-9 h-9 bg-[#4a5d3a] rounded-lg flex items-center justify-center text-sm">
-                    🌱
-                  </div>
-                  <div>
-                    <p className="text-white font-medium text-sm">Iniciante</p>
-                    <p className="text-[#8b7a95] text-xs">65 pts para Em progresso</p>
-                  </div>
-                </div>
-                <div className="flex items-center gap-2">
-                  <span className="text-[#e75480] font-bold text-sm">10 pts</span>
-                  <ChevronRight className="w-4 h-4 text-[#8b7a95]" />
-                </div>
-              </div>
-              
-              <div className="mt-3 h-1.5 bg-[#2d1b3d] rounded-full overflow-hidden">
-                <div className="h-full bg-gradient-to-r from-[#e75480] to-[#a65d7a] rounded-full" style={{ width: '15%' }} />
-              </div>
-            </div>
-
-            <div className="relative flex justify-around items-center py-4 bg-[#2d1b3d]/50 border-t border-[#4a2d5e]/30">
-              <button className="flex flex-col items-center gap-1 px-3 py-2 bg-[#e75480]/20 rounded-xl">
-                <Home className="w-4 h-4 text-[#e75480]" />
-                <span className="text-[#e75480] text-[10px]">Inicio</span>
-              </button>
-              <button className="flex flex-col items-center gap-1 px-3 py-2">
-                <Calendar className="w-4 h-4 text-[#8b7a95]" />
-                <span className="text-[#8b7a95] text-[10px]">Calendario</span>
-              </button>
-              
-              <div className="w-12 h-12 bg-gradient-to-br from-[#e75480] to-[#a65d7a] rounded-full flex items-center justify-center shadow-lg shadow-[#e75480]/30 -mt-6">
-                <div className="w-5 h-5 bg-white rounded-full flex items-center justify-center">
-                  <div className="w-2.5 h-2.5 bg-[#e75480] rounded-full" />
-                </div>
-              </div>
-              
-              <button className="flex flex-col items-center gap-1 px-3 py-2">
-                <BarChart3 className="w-4 h-4 text-[#8b7a95]" />
-                <span className="text-[#8b7a95] text-[10px]">Insights</span>
-              </button>
-              <button className="flex flex-col items-center gap-1 px-3 py-2">
-                <Settings className="w-4 h-4 text-[#8b7a95]" />
-                <span className="text-[#8b7a95] text-[10px]">Config</span>
-              </button>
-            </div>
+          {/* Privacy note */}
+          <div className="flex items-center gap-2 text-[10px] text-[#4caf50]/70 bg-[#0d3020]/30 px-3 py-1.5 rounded-full border border-[#4caf50]/20">
+            <Shield className="w-3 h-3 text-[#4caf50]" />
+            Todos os dados ficam só no seu dispositivo
           </div>
         </div>
       )}
