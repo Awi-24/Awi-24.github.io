@@ -12,6 +12,7 @@ import TSEAnalysesDemo from "@/components/projects/tse-analyses-demo"
 import AnomalyDetectionDemo from "@/components/projects/anomaly-detection-demo"
 import FastenerHunterDemo from "@/components/projects/fastener-hunter-demo"
 import TorqueCalcDemo from "@/components/projects/torque-calc-demo"
+import KDDCupDemo from "@/components/projects/kdd-cup-demo"
 
 interface ModernPageProps {
   onBack: () => void
@@ -235,6 +236,16 @@ const PROJECTS = [
     status: "PROD",
     type: "personal"
   },
+  {
+    id: "kdd-cup",
+    title: "KDD Cup 1999 — Model Comparison",
+    description: "Comparação de 5 modelos de ML (Random Forest, Decision Tree, Naive Bayes, KNN, MLP) para detecção de intrusão em rede. Dataset com 494k conexões e 41 features.",
+    previewHint: "Compare modelos ao vivo · Veja métricas F1/Precision/Recall · Explore matriz de confusão",
+    demoType: "Benchmark ML",
+    tags: ["Python", "Sklearn", "Pandas", "Anomaly Detection", "KDD Cup"],
+    status: "PUB",
+    type: "personal"
+  },
 ]
 
 export default function ModernPage({ onBack, glitchIntensity }: ModernPageProps) {
@@ -269,15 +280,15 @@ export default function ModernPage({ onBack, glitchIntensity }: ModernPageProps)
   const renderSkillBar = (name: string, level: number, index: number) => (
     <div key={index} className="mb-3">
       <div className="flex justify-between text-xs mb-1">
-        <span className="text-[#00ffff]/80">{name}</span>
-        <span className="text-[#00ff9f] font-mono">{level}%</span>
+        <span className="text-[#FCE94F]/80">{name}</span>
+        <span className="text-[#00B4FF] font-mono">{level}%</span>
       </div>
       <div className="h-1.5 bg-[#1a1a2e] rounded overflow-hidden">
         <div 
-          className="h-full bg-gradient-to-r from-[#00ffff] to-[#ff00ff] transition-all duration-1000"
+          className="h-full bg-gradient-to-r from-[#FCE94F] to-[#FF4400] transition-all duration-1000"
           style={{ 
             width: `${level}%`,
-            boxShadow: "0 0 10px #00ffff"
+            boxShadow: "0 0 10px #FCE94F"
           }}
         />
       </div>
@@ -291,7 +302,7 @@ export default function ModernPage({ onBack, glitchIntensity }: ModernPageProps)
       <div 
         className="fixed inset-0 pointer-events-none z-50"
         style={{
-          background: `linear-gradient(transparent ${scanlinePos}%, rgba(0, 255, 255, 0.03) ${scanlinePos + 0.5}%, transparent ${scanlinePos + 1}%)`
+          background: `linear-gradient(transparent ${scanlinePos}%, rgba(252, 233, 79, 0.03) ${scanlinePos + 0.5}%, transparent ${scanlinePos + 1}%)`
         }}
       />
 
@@ -312,19 +323,19 @@ export default function ModernPage({ onBack, glitchIntensity }: ModernPageProps)
       />
 
       {/* Navigation */}
-      <nav className="fixed top-0 left-0 right-0 z-50 bg-[#0a0a0f]/80 backdrop-blur-sm border-b border-[#00ffff]/20">
+      <nav className="fixed top-0 left-0 right-0 z-50 bg-[#0a0a0f]/80 backdrop-blur-sm border-b border-[#FCE94F]/20">
         <div className="max-w-7xl mx-auto px-4 py-3 flex items-center justify-between">
           <div className="flex items-center gap-4">
             <button 
               onClick={onBack}
-              className="flex items-center gap-2 text-[#ff00ff] hover:text-[#00ffff] transition-colors text-sm"
+              className="flex items-center gap-2 text-[#FF4400] hover:text-[#FCE94F] transition-colors text-sm"
             >
               <ArrowLeft className="w-4 h-4" />
               <span className="hidden sm:inline">RETRO</span>
             </button>
             <div className="hidden sm:flex items-center gap-2">
-              <Zap className="w-5 h-5 text-[#00ffff]" />
-              <GlitchText text="ADRIAN.WIDMER" className="text-xl font-bold text-[#00ffff]" />
+              <Zap className="w-5 h-5 text-[#FCE94F]" />
+              <GlitchText text="ADRIAN.WIDMER" className="text-xl font-bold text-[#FCE94F]" />
             </div>
           </div>
 
@@ -341,8 +352,8 @@ export default function ModernPage({ onBack, glitchIntensity }: ModernPageProps)
                 onClick={() => setActiveSection(section.id)}
                 className={`uppercase tracking-wider transition-all px-2 py-1 ${
                   activeSection === section.id 
-                    ? "text-[#00ffff] cyber-glow" 
-                    : "text-[#00ffff]/50 hover:text-[#00ffff]"
+                    ? "text-[#FCE94F] cyber-glow" 
+                    : "text-[#FCE94F]/50 hover:text-[#FCE94F]"
                 }`}
               >
                 {section.label}
@@ -350,9 +361,9 @@ export default function ModernPage({ onBack, glitchIntensity }: ModernPageProps)
             ))}
           </div>
 
-          <div className="hidden md:flex items-center gap-4 text-xs text-[#00ff9f] font-mono">
+          <div className="hidden md:flex items-center gap-4 text-xs text-[#00B4FF] font-mono">
             <span className="flex items-center gap-1">
-              <span className="w-2 h-2 bg-[#00ff9f] rounded-full animate-pulse" />
+              <span className="w-2 h-2 bg-[#00B4FF] rounded-full animate-pulse" />
               ONLINE
             </span>
             <span>{currentTime}</span>
@@ -367,76 +378,64 @@ export default function ModernPage({ onBack, glitchIntensity }: ModernPageProps)
           {/* Hero Section */}
           {activeSection === "home" && (
             <section className="min-h-[80vh] flex flex-col items-center justify-center text-center py-20">
-              <div className="relative mb-8">
-                <div className="w-48 h-48 rounded-full border-2 border-[#00ffff]/30 flex items-center justify-center relative">
-                  <div className="absolute inset-0 rounded-full border-2 border-[#ff00ff]/30 animate-spin" style={{ animationDuration: "10s" }} />
-                  <div className="absolute inset-2 rounded-full border border-[#00ffff]/20 animate-spin" style={{ animationDuration: "15s", animationDirection: "reverse" }} />
-                  <div className="w-32 h-32 rounded-full bg-gradient-to-br from-[#00ffff]/20 to-[#ff00ff]/20 flex items-center justify-center backdrop-blur">
-                    <Brain className="w-16 h-16 text-[#00ffff]" />
-                  </div>
-                </div>
-                <div className="absolute inset-0 animate-spin" style={{ animationDuration: "5s" }}>
-                  <div className="absolute top-0 left-1/2 w-3 h-3 -ml-1.5 bg-[#ff00ff] rounded-full" style={{ boxShadow: "0 0 10px #ff00ff, 0 0 20px #ff00ff" }} />
-                </div>
-              </div>
 
               <GlitchText 
                 text="ADRIAN WIDMER" 
-                className="text-4xl sm:text-6xl font-bold text-[#00ffff] mb-4"
+                className="text-4xl sm:text-6xl font-bold text-[#FCE94F] mb-4"
                 intensity={2}
               />
               
-              <p className="text-lg sm:text-2xl text-[#ff00ff] mb-2 font-mono">
+              <p className="text-lg sm:text-2xl text-[#FF4400] mb-2 font-mono">
                 {"< ENGENHEIRO IA/ML | ENG. DE DADOS />"}
               </p>
               
-              <p className="text-[#00ff9f]/70 max-w-2xl mb-4 text-base sm:text-lg px-4">
+              <p className="text-[#00B4FF]/70 max-w-2xl mb-4 text-base sm:text-lg px-4">
                 Engenheiro IA/ML especializado em projeto e deploy de sistemas de ML end-to-end. 
                 Experiência em ingestão de dados, feature engineering e modelos de detecção de anomalias em produção.
               </p>
 
-              <p className="text-[#00ffff]/50 text-sm mb-8">
+              <p className="text-[#FCE94F]/50 text-sm mb-8">
                 Salvador, BA | Inglês C1 | Alemão B1
               </p>
 
               <div className="flex flex-wrap justify-center gap-4">
                 <button 
                   onClick={() => setActiveSection("projetos")}
-                  className="px-6 sm:px-8 py-3 bg-transparent border-2 border-[#00ffff] text-[#00ffff] font-bold uppercase tracking-wider hover:bg-[#00ffff] hover:text-[#0a0a0f] transition-all neon-pulse text-sm sm:text-base"
+                  className="px-6 sm:px-8 py-3 bg-transparent border-2 border-[#FCE94F] text-[#FCE94F] font-bold uppercase tracking-wider hover:bg-[#FCE94F] hover:text-[#0a0a0f] transition-all neon-pulse text-sm sm:text-base"
                 >
                   Ver Projetos
                 </button>
                 <button 
                   onClick={() => setActiveSection("contato")}
-                  className="px-6 sm:px-8 py-3 bg-[#ff00ff] text-white font-bold uppercase tracking-wider hover:bg-[#ff00ff]/80 transition-all text-sm sm:text-base"
-                  style={{ boxShadow: "0 0 20px rgba(255, 0, 255, 0.5)" }}
+                  className="px-6 sm:px-8 py-3 bg-[#FF4400] text-white font-bold uppercase tracking-wider hover:bg-[#FF4400]/80 transition-all text-sm sm:text-base"
+                  style={{ boxShadow: "0 0 20px rgba(255, 68, 0, 0.5)" }}
                 >
                   Contato
                 </button>
               </div>
 
               {/* Stats */}
-              <div className="grid grid-cols-2 sm:grid-cols-4 gap-6 sm:gap-8 mt-16 pt-8 border-t border-[#00ffff]/20 w-full max-w-3xl">
+              <div className="grid grid-cols-2 sm:grid-cols-4 gap-6 sm:gap-8 mt-16 pt-8 border-t border-[#FCE94F]/20 w-full max-w-3xl">
                 {[
                   { label: "Experiência", value: "3+" },
                   { label: "Publicações", value: "2" },
                   { label: "Certificações", value: "9" },
-                  { label: "Formação", value: "2025" },
+                  { label: "Formação", value: "2026" },
                 ].map((stat, i) => (
                   <div key={i} className="text-center">
-                    <div className="text-2xl sm:text-4xl font-bold text-[#00ffff] cyber-glow">{stat.value}</div>
-                    <div className="text-xs sm:text-sm text-[#00ff9f]/70 uppercase tracking-wider">{stat.label}</div>
+                    <div className="text-2xl sm:text-4xl font-bold text-[#FCE94F] cyber-glow">{stat.value}</div>
+                    <div className="text-xs sm:text-sm text-[#00B4FF]/70 uppercase tracking-wider">{stat.label}</div>
                   </div>
                 ))}
               </div>
 
               {/* Education */}
-              <div className="mt-12 p-4 border border-[#00ffff]/20 rounded bg-[#0a0a0f]/50 backdrop-blur max-w-md">
+              <div className="mt-12 p-4 border border-[#FCE94F]/20 rounded bg-[#0a0a0f]/50 backdrop-blur max-w-md">
                 <div className="flex items-center gap-3 mb-2">
-                  <GraduationCap className="w-5 h-5 text-[#ff00ff]" />
-                  <span className="text-[#00ffff] font-bold">B.Sc. Engenharia da Computação</span>
+                  <GraduationCap className="w-5 h-5 text-[#FF4400]" />
+                  <span className="text-[#FCE94F] font-bold">B.Sc. Engenharia da Computação</span>
                 </div>
-                <p className="text-[#00ff9f]/70 text-sm">SENAI CIMATEC | 2020 - 2025 | IEEE EMBS Cimatec</p>
+                <p className="text-[#00B4FF]/70 text-sm">SENAI CIMATEC | 2020 - 2026 | IEEE EMBS Cimatec</p>
               </div>
             </section>
           )}
@@ -446,7 +445,7 @@ export default function ModernPage({ onBack, glitchIntensity }: ModernPageProps)
             <section className="py-16">
               <GlitchText 
                 text="// HABILIDADES" 
-                className="text-2xl sm:text-3xl font-bold text-[#00ffff] mb-12 text-center"
+                className="text-2xl sm:text-3xl font-bold text-[#FCE94F] mb-12 text-center"
               />
 
               <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
@@ -454,8 +453,8 @@ export default function ModernPage({ onBack, glitchIntensity }: ModernPageProps)
                 <CyberCard delay={0}>
                   <div className="p-5">
                     <div className="flex items-center gap-3 mb-4">
-                      <Brain className="w-6 h-6 text-[#ff00ff]" />
-                      <span className="text-[#00ffff] font-bold">ML / IA</span>
+                      <Brain className="w-6 h-6 text-[#FF4400]" />
+                      <span className="text-[#FCE94F] font-bold">ML / IA</span>
                     </div>
                     {SKILLS.mlAi.map((s, i) => renderSkillBar(s.name, s.level, i))}
                   </div>
@@ -465,8 +464,8 @@ export default function ModernPage({ onBack, glitchIntensity }: ModernPageProps)
                 <CyberCard delay={0.1}>
                   <div className="p-5">
                     <div className="flex items-center gap-3 mb-4">
-                      <BarChart3 className="w-6 h-6 text-[#ff00ff]" />
-                      <span className="text-[#00ffff] font-bold">Técnicas de ML</span>
+                      <BarChart3 className="w-6 h-6 text-[#FF4400]" />
+                      <span className="text-[#FCE94F] font-bold">Técnicas de ML</span>
                     </div>
                     {SKILLS.mlTechniques.map((s, i) => renderSkillBar(s.name, s.level, i))}
                   </div>
@@ -476,8 +475,8 @@ export default function ModernPage({ onBack, glitchIntensity }: ModernPageProps)
                 <CyberCard delay={0.2}>
                   <div className="p-5">
                     <div className="flex items-center gap-3 mb-4">
-                      <Database className="w-6 h-6 text-[#ff00ff]" />
-                      <span className="text-[#00ffff] font-bold">Eng. de Dados</span>
+                      <Database className="w-6 h-6 text-[#FF4400]" />
+                      <span className="text-[#FCE94F] font-bold">Eng. de Dados</span>
                     </div>
                     {SKILLS.dataEng.map((s, i) => renderSkillBar(s.name, s.level, i))}
                   </div>
@@ -487,8 +486,8 @@ export default function ModernPage({ onBack, glitchIntensity }: ModernPageProps)
                 <CyberCard delay={0.3}>
                   <div className="p-5">
                     <div className="flex items-center gap-3 mb-4">
-                      <Cloud className="w-6 h-6 text-[#ff00ff]" />
-                      <span className="text-[#00ffff] font-bold">Cloud & MLOps</span>
+                      <Cloud className="w-6 h-6 text-[#FF4400]" />
+                      <span className="text-[#FCE94F] font-bold">Cloud & MLOps</span>
                     </div>
                     {SKILLS.cloudMlops.map((s, i) => renderSkillBar(s.name, s.level, i))}
                   </div>
@@ -498,8 +497,8 @@ export default function ModernPage({ onBack, glitchIntensity }: ModernPageProps)
                 <CyberCard delay={0.4}>
                   <div className="p-5">
                     <div className="flex items-center gap-3 mb-4">
-                      <FileCode className="w-6 h-6 text-[#ff00ff]" />
-                      <span className="text-[#00ffff] font-bold">Linguagens</span>
+                      <FileCode className="w-6 h-6 text-[#FF4400]" />
+                      <span className="text-[#FCE94F] font-bold">Linguagens</span>
                     </div>
                     {SKILLS.languages.map((s, i) => renderSkillBar(s.name, s.level, i))}
                   </div>
@@ -509,11 +508,11 @@ export default function ModernPage({ onBack, glitchIntensity }: ModernPageProps)
                 <CyberCard delay={0.5}>
                   <div className="p-5">
                     <div className="flex items-center gap-3 mb-4">
-                      <Layers className="w-6 h-6 text-[#ff00ff]" />
-                      <span className="text-[#00ffff] font-bold">Visualização & Frontend</span>
+                      <Layers className="w-6 h-6 text-[#FF4400]" />
+                      <span className="text-[#FCE94F] font-bold">Visualização & Frontend</span>
                     </div>
                     {SKILLS.visualization.map((s, i) => renderSkillBar(s.name, s.level, i))}
-                    <div className="mt-4 pt-4 border-t border-[#00ffff]/10">
+                    <div className="mt-4 pt-4 border-t border-[#FCE94F]/10">
                       {SKILLS.frontend.map((s, i) => renderSkillBar(s.name, s.level, i))}
                     </div>
                   </div>
@@ -523,8 +522,8 @@ export default function ModernPage({ onBack, glitchIntensity }: ModernPageProps)
                 <CyberCard delay={0.6}>
                   <div className="p-5">
                     <div className="flex items-center gap-3 mb-4">
-                      <Zap className="w-6 h-6 text-[#00ff9f]" />
-                      <span className="text-[#00ffff] font-bold">IA Generativa</span>
+                      <Zap className="w-6 h-6 text-[#00B4FF]" />
+                      <span className="text-[#FCE94F] font-bold">IA Generativa</span>
                     </div>
                     {SKILLS.genAi.map((s, i) => renderSkillBar(s.name, s.level, i))}
                   </div>
@@ -532,12 +531,12 @@ export default function ModernPage({ onBack, glitchIntensity }: ModernPageProps)
               </div>
 
               {/* Prompt Engineering Expertise */}
-              <div className="mt-12 p-6 border border-[#00ff9f]/50 rounded bg-[#001a00]/30 backdrop-blur">
+              <div className="mt-12 p-6 border border-[#00B4FF]/50 rounded bg-[#001a00]/30 backdrop-blur">
                 <div className="flex items-center gap-3 mb-4">
-                  <Brain className="w-6 h-6 text-[#00ff9f]" />
-                  <h3 className="text-xl font-bold text-[#00ff9f]">EXPERTISE: PROMPT ENGINEERING & LLMs</h3>
+                  <Brain className="w-6 h-6 text-[#00B4FF]" />
+                  <h3 className="text-xl font-bold text-[#00B4FF]">EXPERTISE: PROMPT ENGINEERING & LLMs</h3>
                 </div>
-                <p className="text-[#00ffff]/80 text-sm leading-relaxed">
+                <p className="text-[#FCE94F]/80 text-sm leading-relaxed">
                   Expertise em disseminação de conhecimento em prompt engineering e uso de ferramentas generativas em ambientes corporativos. 
                   Desenvolvimento de estratégias avançadas de prompting (Chain-of-Thought, Few-Shot, Role-Based), integração de LLMs em pipelines ML, 
                   fine-tuning de modelos e implementação de RAG (Retrieval-Augmented Generation) para casos de uso empresariais.
@@ -546,15 +545,15 @@ export default function ModernPage({ onBack, glitchIntensity }: ModernPageProps)
 
               {/* Certifications */}
               <div className="mt-12">
-                <h3 className="text-xl font-bold text-[#00ffff] mb-6 flex items-center gap-2">
-                  <Award className="w-5 h-5 text-[#ff00ff]" />
+                <h3 className="text-xl font-bold text-[#FCE94F] mb-6 flex items-center gap-2">
+                  <Award className="w-5 h-5 text-[#FF4400]" />
                   Certificações
                 </h3>
                 <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-4">
                   {CERTIFICATIONS.map((cert, i) => (
-                    <div key={i} className="p-4 border border-[#00ffff]/20 rounded bg-[#0a0a0f]/50 backdrop-blur">
-                      <p className="text-[#00ffff] font-medium text-sm">{cert.name}</p>
-                      <p className="text-[#00ff9f]/60 text-xs mt-1">{cert.issuer} | {cert.year}</p>
+                    <div key={i} className="p-4 border border-[#FCE94F]/20 rounded bg-[#0a0a0f]/50 backdrop-blur">
+                      <p className="text-[#FCE94F] font-medium text-sm">{cert.name}</p>
+                      <p className="text-[#00B4FF]/60 text-xs mt-1">{cert.issuer} | {cert.year}</p>
                     </div>
                   ))}
                 </div>
@@ -562,8 +561,8 @@ export default function ModernPage({ onBack, glitchIntensity }: ModernPageProps)
 
               {/* Languages */}
               <div className="mt-12">
-                <h3 className="text-xl font-bold text-[#00ffff] mb-6 flex items-center gap-2">
-                  <Languages className="w-5 h-5 text-[#ff00ff]" />
+                <h3 className="text-xl font-bold text-[#FCE94F] mb-6 flex items-center gap-2">
+                  <Languages className="w-5 h-5 text-[#FF4400]" />
                   Idiomas
                 </h3>
                 <div className="flex flex-wrap gap-4">
@@ -572,9 +571,9 @@ export default function ModernPage({ onBack, glitchIntensity }: ModernPageProps)
                     { lang: "Inglês", level: "Avançado | C1" },
                     { lang: "Alemão", level: "Intermediário | B1" },
                   ].map((l, i) => (
-                    <div key={i} className="px-4 py-2 border border-[#ff00ff]/30 rounded bg-[#ff00ff]/5">
-                      <span className="text-[#00ffff] font-medium">{l.lang}</span>
-                      <span className="text-[#00ff9f]/60 text-sm ml-2">{l.level}</span>
+                    <div key={i} className="px-4 py-2 border border-[#FF4400]/30 rounded bg-[#FF4400]/5">
+                      <span className="text-[#FCE94F] font-medium">{l.lang}</span>
+                      <span className="text-[#00B4FF]/60 text-sm ml-2">{l.level}</span>
                     </div>
                   ))}
                 </div>
@@ -587,7 +586,7 @@ export default function ModernPage({ onBack, glitchIntensity }: ModernPageProps)
             <section className="py-16">
               <GlitchText 
                 text="// EXPERIÊNCIA" 
-                className="text-2xl sm:text-3xl font-bold text-[#00ffff] mb-12 text-center"
+                className="text-2xl sm:text-3xl font-bold text-[#FCE94F] mb-12 text-center"
               />
 
               <div className="space-y-8">
@@ -596,17 +595,17 @@ export default function ModernPage({ onBack, glitchIntensity }: ModernPageProps)
                     <div className="p-6">
                       <div className="flex flex-col sm:flex-row sm:items-start sm:justify-between gap-2 mb-4">
                         <div>
-                          <h3 className="text-xl font-bold text-[#00ffff]">{exp.title}</h3>
-                          <p className="text-[#ff00ff]">{exp.company}</p>
-                          <p className="text-[#00ff9f]/60 text-sm">{exp.location} | {exp.type}</p>
+                          <h3 className="text-xl font-bold text-[#FCE94F]">{exp.title}</h3>
+                          <p className="text-[#FF4400]">{exp.company}</p>
+                          <p className="text-[#00B4FF]/60 text-sm">{exp.location} | {exp.type}</p>
                         </div>
-                        <span className="text-[#00ff9f] font-mono text-sm shrink-0">{exp.period}</span>
+                        <span className="text-[#00B4FF] font-mono text-sm shrink-0">{exp.period}</span>
                       </div>
                       
                       <ul className="space-y-2 mb-4">
                         {exp.highlights.map((h, j) => (
-                          <li key={j} className="text-[#00ffff]/70 text-sm flex items-start gap-2">
-                            <ChevronRight className="w-4 h-4 text-[#ff00ff] shrink-0 mt-0.5" />
+                          <li key={j} className="text-[#FCE94F]/70 text-sm flex items-start gap-2">
+                            <ChevronRight className="w-4 h-4 text-[#FF4400] shrink-0 mt-0.5" />
                             {h}
                           </li>
                         ))}
@@ -616,7 +615,7 @@ export default function ModernPage({ onBack, glitchIntensity }: ModernPageProps)
                         {exp.tags.map((tag, j) => (
                           <span 
                             key={j}
-                            className="text-xs px-2 py-1 border border-[#00ffff]/30 text-[#00ffff]/70 rounded"
+                            className="text-xs px-2 py-1 border border-[#FCE94F]/30 text-[#FCE94F]/70 rounded"
                           >
                             {tag}
                           </span>
@@ -629,17 +628,17 @@ export default function ModernPage({ onBack, glitchIntensity }: ModernPageProps)
 
               {/* Publications */}
               <div className="mt-16">
-                <h3 className="text-xl font-bold text-[#00ffff] mb-6 flex items-center gap-2">
-                  <Microscope className="w-5 h-5 text-[#ff00ff]" />
+                <h3 className="text-xl font-bold text-[#FCE94F] mb-6 flex items-center gap-2">
+                  <Microscope className="w-5 h-5 text-[#FF4400]" />
                   Pesquisa & Publicações
                 </h3>
                 <div className="space-y-4">
                   {PUBLICATIONS.map((pub, i) => (
                     <CyberCard key={i} delay={i * 0.1}>
                       <div className="p-5">
-                        <h4 className="text-[#00ffff] font-bold mb-1">{pub.title}</h4>
-                        <p className="text-[#ff00ff] text-sm mb-2">{pub.venue} | {pub.year}</p>
-                        <p className="text-[#00ffff]/60 text-sm">{pub.description}</p>
+                        <h4 className="text-[#FCE94F] font-bold mb-1">{pub.title}</h4>
+                        <p className="text-[#FF4400] text-sm mb-2">{pub.venue} | {pub.year}</p>
+                        <p className="text-[#FCE94F]/60 text-sm">{pub.description}</p>
                       </div>
                     </CyberCard>
                   ))}
@@ -653,7 +652,7 @@ export default function ModernPage({ onBack, glitchIntensity }: ModernPageProps)
             <section className="py-16">
               <GlitchText 
                 text="// PROJETOS" 
-                className="text-2xl sm:text-3xl font-bold text-[#00ffff] mb-12 text-center"
+                className="text-2xl sm:text-3xl font-bold text-[#FCE94F] mb-12 text-center"
               />
 
               {selectedProject ? (
@@ -662,7 +661,7 @@ export default function ModernPage({ onBack, glitchIntensity }: ModernPageProps)
                   <div className="flex items-center justify-between">
                     <button
                       onClick={() => setSelectedProject(null)}
-                      className="flex items-center gap-2 text-[#ff00ff] hover:text-[#00ffff] transition-colors text-sm"
+                      className="flex items-center gap-2 text-[#FF4400] hover:text-[#FCE94F] transition-colors text-sm"
                     >
                       <ArrowLeft className="w-4 h-4" />
                       Voltar aos Projetos
@@ -671,8 +670,8 @@ export default function ModernPage({ onBack, glitchIntensity }: ModernPageProps)
                       const proj = PROJECTS.find(p => p.id === selectedProject)
                       return proj ? (
                         <div className="flex items-center gap-2">
-                          <span className="text-xs text-[#00ffff]/50 font-mono">{(proj as any).demoType}</span>
-                          <span className={`text-xs px-2 py-0.5 rounded font-mono ${proj.type === "ford" ? "bg-[#ff00ff]/20 text-[#ff00ff]" : "bg-[#00ff9f]/20 text-[#00ff9f]"}`}>
+                          <span className="text-xs text-[#FCE94F]/50 font-mono">{(proj as any).demoType}</span>
+                          <span className={`text-xs px-2 py-0.5 rounded font-mono ${proj.type === "ford" ? "bg-[#FF4400]/20 text-[#FF4400]" : "bg-[#00B4FF]/20 text-[#00B4FF]"}`}>
                             {proj.title}
                           </span>
                         </div>
@@ -680,12 +679,13 @@ export default function ModernPage({ onBack, glitchIntensity }: ModernPageProps)
                     })()}
                   </div>
 
-                  <div className="bg-[#1a1a2e] rounded border border-[#00ffff]/20 p-6">
+                  <div className="bg-[#1a1a2e] rounded border border-[#FCE94F]/20 p-6">
                     {/* Personal Projects */}
                     {selectedProject === "vannex-cycleo" && <VannexCycleoDemo />}
                     {selectedProject === "monnex" && <MonnexDemo />}
                     {selectedProject === "awiOS" && <AwiOSDemo />}
                     {selectedProject === "tse-analyses" && <TSEAnalysesDemo />}
+                    {selectedProject === "kdd-cup" && <KDDCupDemo />}
                     {/* Ford Projects */}
                     {selectedProject === "anomaly-detect" && <AnomalyDetectionDemo />}
                     {selectedProject === "fastener-hunter" && <FastenerHunterDemo />}
@@ -698,8 +698,8 @@ export default function ModernPage({ onBack, glitchIntensity }: ModernPageProps)
                   {/* Category: Ford Projects */}
                   <div className="mb-12">
                     <div className="flex items-center gap-3 mb-6">
-                      <h3 className="text-lg font-bold text-[#ff00ff]">▓ PROJETOS FORD</h3>
-                      <span className="text-xs text-[#ff00ff]/50 border border-[#ff00ff]/20 px-2 py-0.5 rounded font-mono">
+                      <h3 className="text-lg font-bold text-[#FF4400]">▓ PROJETOS FORD</h3>
+                      <span className="text-xs text-[#FF4400]/50 border border-[#FF4400]/20 px-2 py-0.5 rounded font-mono">
                         🔒 Repos Privados / Corporativos
                       </span>
                     </div>
@@ -708,16 +708,16 @@ export default function ModernPage({ onBack, glitchIntensity }: ModernPageProps)
                         <CyberCard key={i} delay={i * 0.1}>
                           <div className="p-4 h-full flex flex-col">
                             <div className="flex items-center justify-between mb-2">
-                              <h3 className="text-sm font-bold text-[#00ffff]">{project.title}</h3>
-                              <span className="text-[10px] px-1.5 py-0.5 rounded font-mono bg-[#ff00ff]/20 text-[#ff00ff]">
+                              <h3 className="text-sm font-bold text-[#FCE94F]">{project.title}</h3>
+                              <span className="text-[10px] px-1.5 py-0.5 rounded font-mono bg-[#FF4400]/20 text-[#FF4400]">
                                 FORD
                               </span>
                             </div>
-                            <p className="text-[#00ffff]/60 mb-3 text-xs flex-grow">{project.description}</p>
+                            <p className="text-[#FCE94F]/60 mb-3 text-xs flex-grow">{project.description}</p>
                             {/* Preview Hint */}
-                            <div className="mb-3 px-2 py-1.5 rounded bg-[#ff00ff]/5 border border-[#ff00ff]/15">
-                              <p className="text-[10px] text-[#ff00ff]/70 leading-relaxed">
-                                <span className="text-[#ff00ff] font-bold">▶ {(project as any).demoType}:</span>{" "}
+                            <div className="mb-3 px-2 py-1.5 rounded bg-[#FF4400]/5 border border-[#FF4400]/15">
+                              <p className="text-[10px] text-[#FF4400]/70 leading-relaxed">
+                                <span className="text-[#FF4400] font-bold">▶ {(project as any).demoType}:</span>{" "}
                                 {(project as any).previewHint}
                               </p>
                             </div>
@@ -725,7 +725,7 @@ export default function ModernPage({ onBack, glitchIntensity }: ModernPageProps)
                               {project.tags.slice(0, 3).map((tag, j) => (
                                 <span
                                   key={j}
-                                  className="text-[10px] px-1.5 py-0.5 border border-[#00ffff]/20 text-[#00ffff]/60 rounded"
+                                  className="text-[10px] px-1.5 py-0.5 border border-[#FCE94F]/20 text-[#FCE94F]/60 rounded"
                                 >
                                   {tag}
                                 </span>
@@ -733,7 +733,7 @@ export default function ModernPage({ onBack, glitchIntensity }: ModernPageProps)
                             </div>
                             <button
                               onClick={() => setSelectedProject(project.id)}
-                              className="w-full flex items-center justify-center gap-2 px-3 py-2 bg-[#ff00ff]/10 border border-[#ff00ff]/30 text-[#ff00ff] rounded hover:bg-[#ff00ff]/20 hover:border-[#ff00ff]/60 transition-all text-xs font-medium group"
+                              className="w-full flex items-center justify-center gap-2 px-3 py-2 bg-[#FF4400]/10 border border-[#FF4400]/30 text-[#FF4400] rounded hover:bg-[#FF4400]/20 hover:border-[#FF4400]/60 transition-all text-xs font-medium group"
                             >
                               <Play className="w-3 h-3 group-hover:scale-110 transition-transform" />
                               Abrir Simulação Interativa
@@ -747,8 +747,8 @@ export default function ModernPage({ onBack, glitchIntensity }: ModernPageProps)
                   {/* Category: Personal Projects */}
                   <div>
                     <div className="flex items-center gap-3 mb-6">
-                      <h3 className="text-lg font-bold text-[#00ff9f]">▓ PROJETOS PESSOAIS</h3>
-                      <span className="text-xs text-[#00ff9f]/50 border border-[#00ff9f]/20 px-2 py-0.5 rounded font-mono">
+                      <h3 className="text-lg font-bold text-[#00B4FF]">▓ PROJETOS PESSOAIS</h3>
+                      <span className="text-xs text-[#00B4FF]/50 border border-[#00B4FF]/20 px-2 py-0.5 rounded font-mono">
                         Demos interativos disponíveis
                       </span>
                     </div>
@@ -757,16 +757,16 @@ export default function ModernPage({ onBack, glitchIntensity }: ModernPageProps)
                         <CyberCard key={i} delay={i * 0.1}>
                           <div className="p-5 h-full flex flex-col">
                             <div className="flex items-center justify-between mb-2">
-                              <h3 className="text-lg font-bold text-[#00ffff]">{project.title}</h3>
-                              <span className="text-xs px-2 py-1 rounded font-mono bg-[#00ff9f]/20 text-[#00ff9f]">
+                              <h3 className="text-lg font-bold text-[#FCE94F]">{project.title}</h3>
+                              <span className="text-xs px-2 py-1 rounded font-mono bg-[#00B4FF]/20 text-[#00B4FF]">
                                 {project.status}
                               </span>
                             </div>
-                            <p className="text-[#00ffff]/60 mb-3 text-sm flex-grow">{project.description}</p>
+                            <p className="text-[#FCE94F]/60 mb-3 text-sm flex-grow">{project.description}</p>
                             {/* Preview Hint */}
-                            <div className="mb-3 px-3 py-2 rounded bg-[#00ff9f]/5 border border-[#00ff9f]/15">
-                              <p className="text-xs text-[#00ff9f]/70 leading-relaxed">
-                                <span className="text-[#00ff9f] font-bold">▶ {(project as any).demoType}:</span>{" "}
+                            <div className="mb-3 px-3 py-2 rounded bg-[#00B4FF]/5 border border-[#00B4FF]/15">
+                              <p className="text-xs text-[#00B4FF]/70 leading-relaxed">
+                                <span className="text-[#00B4FF] font-bold">▶ {(project as any).demoType}:</span>{" "}
                                 {(project as any).previewHint}
                               </p>
                             </div>
@@ -774,7 +774,7 @@ export default function ModernPage({ onBack, glitchIntensity }: ModernPageProps)
                               {project.tags.map((tag, j) => (
                                 <span 
                                   key={j}
-                                  className="text-xs px-2 py-0.5 border border-[#00ffff]/30 text-[#00ffff]/70 rounded"
+                                  className="text-xs px-2 py-0.5 border border-[#FCE94F]/30 text-[#FCE94F]/70 rounded"
                                 >
                                   {tag}
                                 </span>
@@ -782,7 +782,7 @@ export default function ModernPage({ onBack, glitchIntensity }: ModernPageProps)
                             </div>
                             <button
                               onClick={() => setSelectedProject(project.id)}
-                              className="w-full flex items-center justify-center gap-2 px-4 py-2.5 bg-[#00ff9f]/10 border border-[#00ff9f]/30 text-[#00ff9f] rounded hover:bg-[#00ff9f]/20 hover:border-[#00ff9f]/60 transition-all text-sm font-medium group"
+                              className="w-full flex items-center justify-center gap-2 px-4 py-2.5 bg-[#00B4FF]/10 border border-[#00B4FF]/30 text-[#00B4FF] rounded hover:bg-[#00B4FF]/20 hover:border-[#00B4FF]/60 transition-all text-sm font-medium group"
                             >
                               <Play className="w-4 h-4 group-hover:scale-110 transition-transform" />
                               Abrir Demo Interativo
@@ -802,7 +802,7 @@ export default function ModernPage({ onBack, glitchIntensity }: ModernPageProps)
             <section className="py-16">
               <GlitchText 
                 text="// CONTATO" 
-                className="text-2xl sm:text-3xl font-bold text-[#00ffff] mb-16 text-center"
+                className="text-2xl sm:text-3xl font-bold text-[#FCE94F] mb-16 text-center"
               />
 
               <div className="max-w-2xl mx-auto">
@@ -816,12 +816,12 @@ export default function ModernPage({ onBack, glitchIntensity }: ModernPageProps)
                   >
                     <CyberCard>
                       <div className="p-6 flex items-center gap-4 hover:bg-[#1a1a2e]/80 transition-colors cursor-pointer">
-                        <Github className="w-8 h-8 text-[#00ff9f] flex-shrink-0" />
+                        <Github className="w-8 h-8 text-[#00B4FF] flex-shrink-0" />
                         <div className="flex-grow">
-                          <div className="text-[#00ffff] font-bold">GitHub</div>
-                          <div className="text-[#00ffff]/60 text-sm">github.com/Awi-24</div>
+                          <div className="text-[#FCE94F] font-bold">GitHub</div>
+                          <div className="text-[#FCE94F]/60 text-sm">github.com/Awi-24</div>
                         </div>
-                        <ExternalLink className="w-5 h-5 text-[#ff00ff] flex-shrink-0" />
+                        <ExternalLink className="w-5 h-5 text-[#FF4400] flex-shrink-0" />
                       </div>
                     </CyberCard>
                   </a>
@@ -833,12 +833,12 @@ export default function ModernPage({ onBack, glitchIntensity }: ModernPageProps)
                   >
                     <CyberCard>
                       <div className="p-6 flex items-center gap-4 hover:bg-[#1a1a2e]/80 transition-colors cursor-pointer">
-                        <Mail className="w-8 h-8 text-[#00ffff] flex-shrink-0" />
+                        <Mail className="w-8 h-8 text-[#FCE94F] flex-shrink-0" />
                         <div className="flex-grow">
-                          <div className="text-[#00ffff] font-bold">Email</div>
-                          <div className="text-[#00ffff]/60 text-sm">adrianwidmer.work@gmail.com</div>
+                          <div className="text-[#FCE94F] font-bold">Email</div>
+                          <div className="text-[#FCE94F]/60 text-sm">adrianwidmer.work@gmail.com</div>
                         </div>
-                        <ExternalLink className="w-5 h-5 text-[#ff00ff] flex-shrink-0" />
+                        <ExternalLink className="w-5 h-5 text-[#FF4400] flex-shrink-0" />
                       </div>
                     </CyberCard>
                   </a>
@@ -852,12 +852,12 @@ export default function ModernPage({ onBack, glitchIntensity }: ModernPageProps)
                   >
                     <CyberCard>
                       <div className="p-6 flex items-center gap-4 hover:bg-[#1a1a2e]/80 transition-colors cursor-pointer">
-                        <Linkedin className="w-8 h-8 text-[#00ff9f] flex-shrink-0" />
+                        <Linkedin className="w-8 h-8 text-[#00B4FF] flex-shrink-0" />
                         <div className="flex-grow">
-                          <div className="text-[#00ffff] font-bold">LinkedIn</div>
-                          <div className="text-[#00ffff]/60 text-sm">linkedin.com/in/adrian-widmer-0587a9230</div>
+                          <div className="text-[#FCE94F] font-bold">LinkedIn</div>
+                          <div className="text-[#FCE94F]/60 text-sm">linkedin.com/in/adrian-widmer-0587a9230</div>
                         </div>
-                        <ExternalLink className="w-5 h-5 text-[#ff00ff] flex-shrink-0" />
+                        <ExternalLink className="w-5 h-5 text-[#FF4400] flex-shrink-0" />
                       </div>
                     </CyberCard>
                   </a>
@@ -870,20 +870,20 @@ export default function ModernPage({ onBack, glitchIntensity }: ModernPageProps)
       </main>
 
       {/* Footer */}
-      <footer className="relative z-20 border-t border-[#00ffff]/20 py-6 text-center">
-        <p className="text-[#00ffff]/40 text-sm font-mono">
-          {"<"} ADRIAN WIDMER | ENGENHEIRO IA/ML {"/>"} | 2025
+      <footer className="relative z-20 border-t border-[#FCE94F]/20 py-6 text-center">
+        <p className="text-[#FCE94F]/40 text-sm font-mono">
+          {"<"} ADRIAN WIDMER | ENGENHEIRO IA/ML {"/>"} | 2026
         </p>
       </footer>
 
       {/* Corner HUD Elements */}
-      <div className="fixed bottom-4 left-4 z-40 text-xs font-mono text-[#00ff9f]/50 space-y-1 hidden sm:block">
+      <div className="fixed bottom-4 left-4 z-40 text-xs font-mono text-[#00B4FF]/50 space-y-1 hidden sm:block">
         <div>FPS: 60</div>
         <div>LAT: {Math.round(Math.random() * 10 + 10)}ms</div>
         <div>MEM: {Math.round(Math.random() * 20 + 60)}%</div>
       </div>
 
-      <div className="fixed bottom-4 right-4 z-40 text-xs font-mono text-[#00ff9f]/50 text-right space-y-1 hidden sm:block">
+      <div className="fixed bottom-4 right-4 z-40 text-xs font-mono text-[#00B4FF]/50 text-right space-y-1 hidden sm:block">
         <div>X: {mousePos.x}</div>
         <div>Y: {mousePos.y}</div>
         <div className="flex items-center gap-1 justify-end">

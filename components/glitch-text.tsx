@@ -61,7 +61,7 @@ export default function GlitchText({ text, className = "", intensity = 1 }: Glit
       <span 
         className="absolute inset-0 z-0"
         style={{
-          color: "#00ffff",
+          color: "#FCE94F",
           clipPath: isGlitching ? `inset(${Math.random() * 100}% 0 ${Math.random() * 100}% 0)` : "none",
           transform: isGlitching ? `translateX(${-2 * intensity}px)` : "none",
           opacity: isGlitching ? 0.8 : 0
@@ -75,7 +75,7 @@ export default function GlitchText({ text, className = "", intensity = 1 }: Glit
       <span 
         className="absolute inset-0 z-0"
         style={{
-          color: "#ff00ff",
+          color: "#FF4400",
           clipPath: isGlitching ? `inset(${Math.random() * 100}% 0 ${Math.random() * 100}% 0)` : "none",
           transform: isGlitching ? `translateX(${2 * intensity}px)` : "none",
           opacity: isGlitching ? 0.8 : 0

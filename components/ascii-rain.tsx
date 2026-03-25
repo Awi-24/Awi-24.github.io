@@ -85,16 +85,16 @@ export default function AsciiRain() {
             const alpha = isHead ? 1 : (1 - i / col.chars.length) * 0.5
             
             if (isHead) {
-              ctx.fillStyle = "#00ffff"
+              ctx.fillStyle = "#FCE94F"
               ctx.shadowBlur = 10
-              ctx.shadowColor = "#00ffff"
+              ctx.shadowColor = "#FCE94F"
             } else if (Math.random() > 0.98) {
               // Random highlight
-              ctx.fillStyle = "#ff00ff"
+              ctx.fillStyle = "#FF4400"
               ctx.shadowBlur = 5
-              ctx.shadowColor = "#ff00ff"
+              ctx.shadowColor = "#FF4400"
             } else {
-              ctx.fillStyle = `rgba(0, 255, 159, ${alpha})`
+              ctx.fillStyle = `rgba(0, 180, 255, ${alpha})`
               ctx.shadowBlur = 0
             }
 

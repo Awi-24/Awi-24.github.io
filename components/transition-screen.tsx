@@ -9,17 +9,17 @@ interface TransitionScreenProps {
 const ASCII_CHARS = "アイウエオカキクケコサシスセソタチツテトナニヌネノハヒフヘホマミムメモヤユヨラリルレロワヲン0123456789ABCDEF@#$%^&*()_+-=[]{}|;:',.<>?/~`"
 
 const HACKING_MESSAGES = [
-  "INICIANDO PROTOCOLO DE INVASAO...",
-  "CONECTANDO A FORD_MAINFRAME...",
-  "ACESSANDO VERTEX_AI_PIPELINE...",
-  "CARREGANDO KERAS_NEURAL_NET...",
-  "INJETANDO BIGQUERY_ETL...",
-  "BYPASSANDO FIREWALL_GCP...",
-  "EXTRAINDO DADOS_SENSORES...",
-  "SINCRONIZANDO TERRAFORM_IAC...",
-  "CARREGANDO ANOMALY_DETECTION.model...",
+  "INICIANDO PROTOCOLO ICE-BREAKER...",
+  "BYPASSANDO BLACKWALL_FIREWALL...",
+  "ACESSANDO NET_ARCHITECTURE v2.077...",
+  "CARREGANDO NEURAL_LINK.protocol...",
+  "DESCRIPTOGRAFANDO BRAINDANCE_DATA...",
+  "SINCRONIZANDO GHOST_IN_THE_SHELL...",
+  "INJETANDO SHARD: WIDMER_OS.exe...",
+  "DESVIO DE ROTA: NIGHT_CITY_NODE...",
+  "ATIVANDO SANDEVISTAN_OVERCLOCK...",
   "CONECTANDO GITHUB://AWI-24...",
-  "ESTABELECENDO CONEXAO_CIMATEC...",
+  "AUTENTICANDO: CORPO_CERTIFIED...",
   "ATIVANDO MODO CYBERPUNK_2077...",
   "SISTEMA ADRIAN.WIDMER ONLINE...",
   "ACESSO TOTAL CONCEDIDO...",
@@ -144,7 +144,7 @@ export default function TransitionScreen({ onComplete }: TransitionScreenProps) 
         {matrixColumns.map((col, i) => (
           <div
             key={i}
-            className="absolute text-[#00ff00] text-xs font-mono whitespace-pre leading-tight"
+            className="absolute text-[#FCE94F] text-xs font-mono whitespace-pre leading-tight"
             style={{
               left: col.x,
               animation: `matrixFall ${5 / col.speed}s linear infinite`,
@@ -156,7 +156,7 @@ export default function TransitionScreen({ onComplete }: TransitionScreenProps) 
                 key={j} 
                 style={{ 
                   opacity: 1 - (j / col.chars.length),
-                  textShadow: j === 0 ? "0 0 10px #00ff00, 0 0 20px #00ff00" : "none"
+                  textShadow: j === 0 ? "0 0 10px #FCE94F, 0 0 20px #FCE94F" : "none"
                 }}
               >
                 {char}
@@ -177,13 +177,13 @@ export default function TransitionScreen({ onComplete }: TransitionScreenProps) 
       <div 
         className="absolute inset-0 pointer-events-none"
         style={{
-          background: "repeating-linear-gradient(0deg, transparent, transparent 2px, rgba(0, 255, 0, 0.03) 2px, rgba(0, 255, 0, 0.03) 4px)"
+          background: "repeating-linear-gradient(0deg, transparent, transparent 2px, rgba(252, 233, 79, 0.03) 2px, rgba(252, 233, 79, 0.03) 4px)"
         }}
       />
 
       {/* Flash Effect */}
       <div 
-        className="absolute inset-0 bg-[#00ff00] pointer-events-none transition-opacity duration-50"
+        className="absolute inset-0 bg-[#FCE94F] pointer-events-none transition-opacity duration-50"
         style={{ opacity: flashOpacity }}
       />
 
@@ -191,9 +191,9 @@ export default function TransitionScreen({ onComplete }: TransitionScreenProps) 
       <div className={`relative z-10 flex flex-col items-center justify-center min-h-screen p-4 ${showGlitch ? "animate-glitch" : ""}`}>
         {/* ASCII Logo */}
         <pre 
-          className="text-[#00ff00] text-[8px] sm:text-xs md:text-sm font-mono mb-8 text-center"
+          className="text-[#FCE94F] text-[8px] sm:text-xs md:text-sm font-mono mb-8 text-center"
           style={{
-            textShadow: "0 0 10px #00ff00, 0 0 20px #00ff00",
+            textShadow: "0 0 10px #FCE94F, 0 0 20px #FCE94F",
             filter: showGlitch ? `hue-rotate(${Math.random() * 360}deg)` : "none"
           }}
         >
@@ -202,15 +202,15 @@ export default function TransitionScreen({ onComplete }: TransitionScreenProps) 
 
         {/* Terminal Window */}
         <div 
-          className="w-full max-w-2xl bg-black/80 border border-[#00ff00] rounded p-4"
-          style={{ boxShadow: "0 0 20px rgba(0, 255, 0, 0.3), inset 0 0 20px rgba(0, 255, 0, 0.1)" }}
+          className="w-full max-w-2xl bg-black/80 border border-[#FCE94F] rounded p-4"
+          style={{ boxShadow: "0 0 20px rgba(252, 233, 79, 0.3), inset 0 0 20px rgba(252, 233, 79, 0.1)" }}
         >
           {/* Terminal Header */}
-          <div className="flex items-center gap-2 mb-4 pb-2 border-b border-[#00ff00]/30">
+          <div className="flex items-center gap-2 mb-4 pb-2 border-b border-[#FCE94F]/30">
             <div className="w-3 h-3 rounded-full bg-red-500" />
             <div className="w-3 h-3 rounded-full bg-yellow-500" />
             <div className="w-3 h-3 rounded-full bg-green-500" />
-            <span className="ml-4 text-[#00ff00] text-sm font-mono">ADRIAN_WIDMER_PORTFOLIO.exe</span>
+            <span className="ml-4 text-[#FCE94F] text-sm font-mono">ADRIAN_WIDMER_PORTFOLIO.exe</span>
           </div>
 
           {/* Terminal Output */}
@@ -218,9 +218,9 @@ export default function TransitionScreen({ onComplete }: TransitionScreenProps) 
             {terminalLines.map((line, i) => (
               <div 
                 key={i} 
-                className="text-[#00ff00]"
+                className="text-[#FCE94F]"
                 style={{ 
-                  textShadow: "0 0 5px #00ff00",
+                  textShadow: "0 0 5px #FCE94F",
                   opacity: 0.5 + (i / terminalLines.length) * 0.5
                 }}
               >
@@ -228,24 +228,24 @@ export default function TransitionScreen({ onComplete }: TransitionScreenProps) 
               </div>
             ))}
             {currentMessage && (
-              <div className="text-[#00ff00]" style={{ textShadow: "0 0 10px #00ff00" }}>
+              <div className="text-[#FCE94F]" style={{ textShadow: "0 0 10px #FCE94F" }}>
                 {">"} {currentMessage}
               </div>
             )}
           </div>
 
           {/* Progress Bar */}
-          <div className="mt-4 pt-4 border-t border-[#00ff00]/30">
-            <div className="flex justify-between text-xs text-[#00ff00] mb-2">
-              <span>PROGRESSO DA INVASÃO</span>
+          <div className="mt-4 pt-4 border-t border-[#FCE94F]/30">
+            <div className="flex justify-between text-xs text-[#FCE94F] mb-2">
+              <span>JACK-IN PROGRESS</span>
               <span>{Math.round(progress)}%</span>
             </div>
-            <div className="h-2 bg-black border border-[#00ff00] rounded overflow-hidden">
+            <div className="h-2 bg-black border border-[#FCE94F] rounded overflow-hidden">
               <div 
-                className="h-full bg-gradient-to-r from-[#00ff00] to-[#00ffff] transition-all duration-300"
+                className="h-full bg-gradient-to-r from-[#FF4400] to-[#FCE94F] transition-all duration-300"
                 style={{ 
                   width: `${progress}%`,
-                  boxShadow: "0 0 10px #00ff00"
+                  boxShadow: "0 0 10px #FCE94F"
                 }}
               />
             </div>
@@ -259,7 +259,7 @@ export default function TransitionScreen({ onComplete }: TransitionScreenProps) 
               className="text-6xl font-bold text-red-500"
               style={{ 
                 fontFamily: "monospace",
-                textShadow: "-2px 0 #00ffff, 2px 0 #ff00ff"
+                textShadow: "-2px 0 #00B4FF, 2px 0 #FF4400"
               }}
             >
               {Array.from({ length: 10 }, () => 
@@ -271,14 +271,14 @@ export default function TransitionScreen({ onComplete }: TransitionScreenProps) 
       </div>
 
       {/* Corner Decorations */}
-      <div className="absolute top-4 left-4 text-[#00ff00] text-xs font-mono opacity-50">
-        <div>SYS://WIDMER_PROTOCOL</div>
-        <div>NODE: FORD.GCP.2077</div>
+      <div className="absolute top-4 left-4 text-[#FCE94F] text-xs font-mono opacity-50">
+        <div>SYS://WIDMER_NETRUNNER</div>
+        <div>NODE: NIGHT_CITY.2077</div>
         <div>github.com/Awi-24</div>
       </div>
-      <div className="absolute top-4 right-4 text-[#00ff00] text-xs font-mono opacity-50 text-right">
-        <div>STATUS: ML_PIPELINE</div>
-        <div>THREAT: ANOMALY</div>
+      <div className="absolute top-4 right-4 text-[#FCE94F] text-xs font-mono opacity-50 text-right">
+        <div>STATUS: JACKED_IN</div>
+        <div>ICE: BYPASSED</div>
         <div>LOC: SALVADOR.BA</div>
       </div>
 

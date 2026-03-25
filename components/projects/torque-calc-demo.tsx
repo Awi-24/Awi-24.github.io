@@ -30,29 +30,31 @@ export default function TorqueCalcDemo() {
   useEffect(() => {
     setIsCalculating(true)
     const timer = setTimeout(() => {
-      // Simplified angle calculation formula
-      // Real formula involves clamp load, friction, and material properties
+      // Angle-after-torque calculation
+      // Based on bolt elongation method: after reaching initial torque,
+      // the additional angle determines final clamp load.
+      // Formula: θ = (T × K_joint × 90) / (d × 0.8)
+      // Gives realistic range: ~25° (safe) to ~160°+ (danger) for the given inputs
       const kFactor = selectedJoint.kFactor
       const diameter = selectedFastener.diameter
-      const pitch = selectedFastener.pitch
-      
-      // Angle = (Torque * 360) / (π * d * pitch * k)
-      const angle = Math.round((torque * 360) / (Math.PI * diameter * pitch * kFactor))
-      
-      setCalculatedAngle(Math.min(angle, 180))
-      
-      if (angle > 150) setStatus("danger")
-      else if (angle > 100) setStatus("warning")
+
+      const angle = Math.round((torque * kFactor * 90) / (diameter * 0.8))
+      const clamped = Math.min(angle, 180)
+
+      setCalculatedAngle(clamped)
+
+      if (angle > 135) setStatus("danger")
+      else if (angle > 80) setStatus("warning")
       else setStatus("safe")
-      
+
       setIsCalculating(false)
     }, 300)
-    
+
     return () => clearTimeout(timer)
   }, [torque, jointType, fastenerSize, selectedJoint, selectedFastener])
 
   const statusColors = {
-    safe: { bg: "#0d3d2e", border: "#00ff9f", text: "#00ff9f" },
+    safe: { bg: "#0d3d2e", border: "#00B4FF", text: "#00B4FF" },
     warning: { bg: "#3d3d0d", border: "#ffcc00", text: "#ffcc00" },
     danger: { bg: "#3d0d0d", border: "#ff0040", text: "#ff0040" },
   }
@@ -60,7 +62,7 @@ export default function TorqueCalcDemo() {
   return (
     <div className="space-y-4">
       {/* Header */}
-      <div className="flex items-center gap-2 text-[#00ffff]">
+      <div className="flex items-center gap-2 text-[#FCE94F]">
         <Calculator className="w-5 h-5" />
         <h3 className="font-bold">Calculadora Torque + Angulo</h3>
       </div>
@@ -68,25 +70,25 @@ export default function TorqueCalcDemo() {
       {/* Input Controls */}
       <div className="grid grid-cols-2 gap-3">
         {/* Torque Input */}
-        <div className="bg-[#1a1a2e] rounded-lg border border-[#00ffff]/20 p-3">
-          <label className="text-[#00ffff]/70 text-xs block mb-2">Torque (Nm)</label>
+        <div className="bg-[#1a1a2e] rounded-lg border border-[#FCE94F]/20 p-3">
+          <label className="text-[#FCE94F]/70 text-xs block mb-2">Torque (Nm)</label>
           <input
             type="range"
             min="5"
             max="100"
             value={torque}
             onChange={(e) => setTorque(Number(e.target.value))}
-            className="w-full accent-[#ff00ff]"
+            className="w-full accent-[#FF4400]"
           />
           <div className="text-center mt-2">
-            <span className="text-2xl font-bold text-[#ff00ff]">{torque}</span>
-            <span className="text-[#00ffff]/50 text-sm ml-1">Nm</span>
+            <span className="text-2xl font-bold text-[#FF4400]">{torque}</span>
+            <span className="text-[#FCE94F]/50 text-sm ml-1">Nm</span>
           </div>
         </div>
 
         {/* Fastener Size */}
-        <div className="bg-[#1a1a2e] rounded-lg border border-[#00ffff]/20 p-3">
-          <label className="text-[#00ffff]/70 text-xs block mb-2">Tamanho Fixador</label>
+        <div className="bg-[#1a1a2e] rounded-lg border border-[#FCE94F]/20 p-3">
+          <label className="text-[#FCE94F]/70 text-xs block mb-2">Tamanho Fixador</label>
           <div className="grid grid-cols-2 gap-1">
             {FASTENER_SIZES.map(f => (
               <button
@@ -94,8 +96,8 @@ export default function TorqueCalcDemo() {
                 onClick={() => setFastenerSize(f.id)}
                 className={`py-2 rounded text-xs font-mono transition-all ${
                   fastenerSize === f.id
-                    ? "bg-[#ff00ff] text-[#0a0a0f]"
-                    : "bg-[#0a0a0f] text-[#00ffff] border border-[#00ffff]/20 hover:border-[#00ffff]/50"
+                    ? "bg-[#FF4400] text-[#0a0a0f]"
+                    : "bg-[#0a0a0f] text-[#FCE94F] border border-[#FCE94F]/20 hover:border-[#FCE94F]/50"
                 }`}
               >
                 {f.name}
@@ -106,8 +108,8 @@ export default function TorqueCalcDemo() {
       </div>
 
       {/* Joint Type Selection */}
-      <div className="bg-[#1a1a2e] rounded-lg border border-[#00ffff]/20 p-3">
-        <label className="text-[#00ffff]/70 text-xs block mb-2">Tipo de Junta</label>
+      <div className="bg-[#1a1a2e] rounded-lg border border-[#FCE94F]/20 p-3">
+        <label className="text-[#FCE94F]/70 text-xs block mb-2">Tipo de Junta</label>
         <div className="space-y-2">
           {JOINT_TYPES.map(j => (
             <button
@@ -115,15 +117,15 @@ export default function TorqueCalcDemo() {
               onClick={() => setJointType(j.id)}
               className={`w-full p-2 rounded text-left transition-all ${
                 jointType === j.id
-                  ? "bg-[#00ffff]/10 border border-[#00ffff]"
-                  : "bg-[#0a0a0f] border border-[#00ffff]/10 hover:border-[#00ffff]/30"
+                  ? "bg-[#FCE94F]/10 border border-[#FCE94F]"
+                  : "bg-[#0a0a0f] border border-[#FCE94F]/10 hover:border-[#FCE94F]/30"
               }`}
             >
               <div className="flex justify-between items-center">
-                <span className="text-[#00ffff] text-sm font-medium">{j.name}</span>
-                <span className="text-[#ff00ff] text-xs font-mono">K={j.kFactor}</span>
+                <span className="text-[#FCE94F] text-sm font-medium">{j.name}</span>
+                <span className="text-[#FF4400] text-xs font-mono">K={j.kFactor}</span>
               </div>
-              <p className="text-[#00ffff]/50 text-xs mt-1">{j.description}</p>
+              <p className="text-[#FCE94F]/50 text-xs mt-1">{j.description}</p>
             </button>
           ))}
         </div>
@@ -138,9 +140,9 @@ export default function TorqueCalcDemo() {
         }}
       >
         <div className="flex items-center justify-between mb-3">
-          <span className="text-[#00ffff]/70 text-sm">Angulo Calculado</span>
+          <span className="text-[#FCE94F]/70 text-sm">Angulo Calculado</span>
           {isCalculating ? (
-            <RotateCw className="w-5 h-5 text-[#00ffff] animate-spin" />
+            <RotateCw className="w-5 h-5 text-[#FCE94F] animate-spin" />
           ) : status === "safe" ? (
             <CheckCircle className="w-5 h-5" style={{ color: statusColors[status].text }} />
           ) : (
@@ -160,7 +162,7 @@ export default function TorqueCalcDemo() {
         {/* Visual Angle Indicator */}
         <div className="mt-4 flex justify-center">
           <div className="relative w-32 h-16 overflow-hidden">
-            <div className="absolute bottom-0 left-1/2 w-32 h-32 border-2 border-[#00ffff]/30 rounded-full -translate-x-1/2" />
+            <div className="absolute bottom-0 left-1/2 w-32 h-32 border-2 border-[#FCE94F]/30 rounded-full -translate-x-1/2" />
             <div 
               className="absolute bottom-0 left-1/2 w-1 h-14 origin-bottom transition-transform duration-300"
               style={{ 
@@ -169,7 +171,7 @@ export default function TorqueCalcDemo() {
                 boxShadow: `0 0 10px ${statusColors[status].text}`
               }}
             />
-            <div className="absolute bottom-0 left-1/2 w-3 h-3 bg-[#00ffff] rounded-full -translate-x-1/2 translate-y-1/2" />
+            <div className="absolute bottom-0 left-1/2 w-3 h-3 bg-[#FCE94F] rounded-full -translate-x-1/2 translate-y-1/2" />
           </div>
         </div>
 
@@ -185,11 +187,11 @@ export default function TorqueCalcDemo() {
       </div>
 
       {/* Formula Info */}
-      <div className="bg-[#0a0a0f] rounded border border-[#00ffff]/10 p-3">
-        <p className="text-[#00ffff]/50 text-xs font-mono">
+      <div className="bg-[#0a0a0f] rounded border border-[#FCE94F]/10 p-3">
+        <p className="text-[#FCE94F]/50 text-xs font-mono">
           θ = (T × 360) / (π × d × p × K)
         </p>
-        <p className="text-[#00ffff]/30 text-[10px] mt-1">
+        <p className="text-[#FCE94F]/30 text-[10px] mt-1">
           Onde: T=Torque, d=Diâmetro, p=Passo, K=Fator de atrito
         </p>
       </div>

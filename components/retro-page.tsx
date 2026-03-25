@@ -149,7 +149,7 @@ export default function RetroPage({ onEnterModern }: RetroPageProps) {
                   Trabalho com <span className="text-red-600">Machine Learning</span>, <span className="text-red-600">BigQuery</span>, <span className="text-red-600">GCP</span> e <span className="text-red-600">Python</span>!
                 </p>
                 <p className="text-sm">
-                  Estou me formando em Engenharia da Computacao no SENAI CIMATEC em 2025.
+                  Estou me formando em Engenharia da Computacao no SENAI CIMATEC em 2026.
                   {blinkVisible && <span className="text-red-500"> _</span>}
                 </p>
               </div>
@@ -288,11 +288,12 @@ export default function RetroPage({ onEnterModern }: RetroPageProps) {
 
                   {/* Fastener Hunter */}
                   <div className="bg-[#c0c0c0] text-black p-3 border-2 border-t-white border-l-white border-r-[#404040] border-b-[#404040]">
-                    <h3 className="font-bold text-[#800000] text-sm mb-1">FASTENER_HUNTER.exe</h3>
-                    <p className="text-[10px] mb-2">Sistema de visao computacional para identificacao de fixadores</p>
+                    <h3 className="font-bold text-[#800000] text-sm mb-1">FASTENER_HUNTER.ai</h3>
+                    <p className="text-[10px] mb-2">Recomendacao de fixadores com busca em 3 BDs internos e assessment via LLM</p>
                     <div className="flex flex-wrap gap-1">
-                      <span className="bg-[#000080] text-white text-[10px] px-1">YOLOv8</span>
-                      <span className="bg-[#000080] text-white text-[10px] px-1">OpenCV</span>
+                      <span className="bg-[#000080] text-white text-[10px] px-1">Python</span>
+                      <span className="bg-[#000080] text-white text-[10px] px-1">LLM</span>
+                      <span className="bg-[#000080] text-white text-[10px] px-1">SQL</span>
                     </div>
                   </div>
 
@@ -359,13 +360,27 @@ export default function RetroPage({ onEnterModern }: RetroPageProps) {
                 {/* TSE Analyses */}
                 <div className="bg-[#c0c0c0] text-black p-3 border-2 border-t-white border-l-white border-r-[#404040] border-b-[#404040]">
                   <h3 className="font-bold text-[#800000] text-sm mb-1">TSE Analyses</h3>
-                  <p className="text-xs mb-2">Analise de dados eleitorais brasileiros com visualizacoes interativas</p>
+                  <p className="text-xs mb-2">EDA + Anomaly Detection sobre gastos CEAP de deputados federais</p>
                   <div className="flex flex-wrap gap-1">
                     <span className="bg-[#000080] text-white text-[10px] px-1">Python</span>
                     <span className="bg-[#000080] text-white text-[10px] px-1">Pandas</span>
                     <span className="bg-[#000080] text-white text-[10px] px-1">Plotly</span>
                   </div>
-                  <a href="https://github.com/Awi-24/TSE-analyses" target="_blank" rel="noopener noreferrer" className="text-blue-600 text-xs hover:underline block mt-1">
+                  <a href="https://github.com/Awi-24/TSE-DataAnalytics" target="_blank" rel="noopener noreferrer" className="text-blue-600 text-xs hover:underline block mt-1">
+                    Ver no GitHub
+                  </a>
+                </div>
+
+                {/* KDD Cup 1999 */}
+                <div className="bg-[#c0c0c0] text-black p-3 border-2 border-t-white border-l-white border-r-[#404040] border-b-[#404040]">
+                  <h3 className="font-bold text-[#800000] text-sm mb-1">KDD Cup 1999</h3>
+                  <p className="text-xs mb-2">Comparacao de 5 modelos ML para deteccao de intrusao (494k conexoes)</p>
+                  <div className="flex flex-wrap gap-1">
+                    <span className="bg-[#000080] text-white text-[10px] px-1">Python</span>
+                    <span className="bg-[#000080] text-white text-[10px] px-1">Sklearn</span>
+                    <span className="bg-[#000080] text-white text-[10px] px-1">Pandas</span>
+                  </div>
+                  <a href="https://github.com/Awi-24/KDD-Cup-1999-Anomaly-Detection" target="_blank" rel="noopener noreferrer" className="text-blue-600 text-xs hover:underline block mt-1">
                     Ver no GitHub
                   </a>
                 </div>
@@ -397,7 +412,7 @@ export default function RetroPage({ onEnterModern }: RetroPageProps) {
                 <div className="border-l-4 border-[#000080] pl-3">
                   <p className="font-bold">Engenharia da Computacao</p>
                   <p className="text-sm">SENAI CIMATEC - Salvador, BA</p>
-                  <p className="text-xs text-gray-600">2021 - 2025 (Previsao)</p>
+                  <p className="text-xs text-gray-600">2020 - 2026 (Previsao)</p>
                 </div>
               </div>
 
@@ -406,28 +421,26 @@ export default function RetroPage({ onEnterModern }: RetroPageProps) {
                 <h3 className="font-bold text-[#000080] mb-3 flex items-center gap-2">
                   <Award className="w-5 h-5" /> CERTIFICACOES
                 </h3>
-                <div className="grid gap-3">
-                  <div className="flex items-center gap-2 border-l-4 border-blue-600 pl-3">
-                    <div className="w-10 h-10 bg-blue-600 flex items-center justify-center text-white font-bold text-xs">IBM</div>
-                    <div>
-                      <p className="font-bold text-sm">IBM Data Science Professional</p>
-                      <p className="text-xs text-gray-600">IBM | 2023</p>
+                <div className="grid gap-2">
+                  {[
+                    { tag: "GCP", color: "bg-blue-500", name: "Google Cloud Fundamentals: Core Infrastructure", org: "Google | 2026" },
+                    { tag: "AWS", color: "bg-orange-500", name: "AWS Machine Learning Foundations", org: "Amazon Web Services | 2026" },
+                    { tag: "DOE", color: "bg-[#000080]", name: "Designer de Experimentos (DOE)", org: "SENAI CIMATEC | 2025" },
+                    { tag: "IBM", color: "bg-blue-700", name: "Supervised ML: Regression", org: "IBM / Coursera | 2025" },
+                    { tag: "IBM", color: "bg-blue-700", name: "Exploratory Data Analysis for ML", org: "IBM / Coursera | 2024" },
+                    { tag: "IBM", color: "bg-blue-700", name: "Introduction to AI", org: "IBM / Coursera | 2024" },
+                    { tag: "CIM", color: "bg-green-700", name: "Assistente de Engenharia", org: "SENAI CIMATEC | 2024" },
+                    { tag: "AWS", color: "bg-orange-500", name: "AWS Cloud Practitioner Essentials", org: "Grupo Boticario | 2022" },
+                    { tag: "AWS", color: "bg-orange-500", name: "Intro a Nuvem e Servicos de AWS", org: "Grupo Boticario | 2022" },
+                  ].map((cert, i) => (
+                    <div key={i} className="flex items-center gap-2 border-l-4 border-[#000080] pl-2">
+                      <div className={`w-8 h-8 ${cert.color} flex items-center justify-center text-white font-bold text-[9px] flex-shrink-0`}>{cert.tag}</div>
+                      <div>
+                        <p className="font-bold text-xs">{cert.name}</p>
+                        <p className="text-[10px] text-gray-600">{cert.org}</p>
+                      </div>
                     </div>
-                  </div>
-                  <div className="flex items-center gap-2 border-l-4 border-orange-500 pl-3">
-                    <div className="w-10 h-10 bg-orange-500 flex items-center justify-center text-white font-bold text-xs">AWS</div>
-                    <div>
-                      <p className="font-bold text-sm">AWS Cloud Practitioner</p>
-                      <p className="text-xs text-gray-600">Amazon Web Services | 2023</p>
-                    </div>
-                  </div>
-                  <div className="flex items-center gap-2 border-l-4 border-green-600 pl-3">
-                    <div className="w-10 h-10 bg-green-600 flex items-center justify-center text-white font-bold text-xs">CIM</div>
-                    <div>
-                      <p className="font-bold text-sm">Machine Learning Fundamentals</p>
-                      <p className="text-xs text-gray-600">SENAI CIMATEC | 2022</p>
-                    </div>
-                  </div>
+                  ))}
                 </div>
               </div>
 

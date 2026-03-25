@@ -52,7 +52,7 @@ export default function CyberCard({ children, delay = 0, className = "" }: Cyber
       <div 
         className="absolute inset-0 rounded-lg"
         style={{
-          background: "linear-gradient(135deg, #00ffff 0%, #ff00ff 50%, #00ff9f 100%)",
+          background: "linear-gradient(135deg, #FCE94F 0%, #FF4400 50%, #00B4FF 100%)",
           padding: "1px"
         }}
       />
@@ -64,22 +64,22 @@ export default function CyberCard({ children, delay = 0, className = "" }: Cyber
       <div 
         className="absolute inset-0 rounded-lg pointer-events-none transition-opacity duration-300"
         style={{
-          background: `radial-gradient(circle at ${glowPosition.x}% ${glowPosition.y}%, rgba(0, 255, 255, 0.15) 0%, transparent 50%)`,
+          background: `radial-gradient(circle at ${glowPosition.x}% ${glowPosition.y}%, rgba(252, 233, 79, 0.15) 0%, transparent 50%)`,
           opacity: transform ? 1 : 0
         }}
       />
 
       {/* Corner accents */}
-      <div className="absolute top-0 left-0 w-4 h-4 border-t-2 border-l-2 border-[#00ffff] rounded-tl-lg" />
-      <div className="absolute top-0 right-0 w-4 h-4 border-t-2 border-r-2 border-[#ff00ff] rounded-tr-lg" />
-      <div className="absolute bottom-0 left-0 w-4 h-4 border-b-2 border-l-2 border-[#ff00ff] rounded-bl-lg" />
-      <div className="absolute bottom-0 right-0 w-4 h-4 border-b-2 border-r-2 border-[#00ffff] rounded-br-lg" />
+      <div className="absolute top-0 left-0 w-4 h-4 border-t-2 border-l-2 border-[#FCE94F] rounded-tl-lg" />
+      <div className="absolute top-0 right-0 w-4 h-4 border-t-2 border-r-2 border-[#FF4400] rounded-tr-lg" />
+      <div className="absolute bottom-0 left-0 w-4 h-4 border-b-2 border-l-2 border-[#FF4400] rounded-bl-lg" />
+      <div className="absolute bottom-0 right-0 w-4 h-4 border-b-2 border-r-2 border-[#FCE94F] rounded-br-lg" />
 
       {/* Scanline effect */}
       <div 
         className="absolute inset-0 pointer-events-none rounded-lg overflow-hidden"
         style={{
-          background: "repeating-linear-gradient(0deg, transparent, transparent 2px, rgba(0, 255, 255, 0.03) 2px, rgba(0, 255, 255, 0.03) 4px)"
+          background: "repeating-linear-gradient(0deg, transparent, transparent 2px, rgba(252, 233, 79, 0.03) 2px, rgba(252, 233, 79, 0.03) 4px)"
         }}
       />
 
