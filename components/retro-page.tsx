@@ -322,6 +322,7 @@ export default function RetroPage({ onEnterModern }: RetroPageProps) {
             </div>
           </div>
 
+          <div key={activeTab} style={{ animation: "retroTabIn 0.22s ease-out" }}>
           {/* TAB: HOME */}
           {activeTab === "home" && (
             <div className="text-center space-y-6">
@@ -406,16 +407,16 @@ export default function RetroPage({ onEnterModern }: RetroPageProps) {
                     ML
                   </div>
                   <div>
-                    <h3 className="font-bold text-[#000080]">Engenheiro de IA/ML</h3>
-                    <p className="text-xs text-gray-600">Nov 2023 - Presente</p>
+                    <h3 className="font-bold text-[#000080]">Software Dev Analyst (ML/Dados)</h3>
+                    <p className="text-xs text-gray-600">Ford Motor Company | Mai 2024 - Presente</p>
                   </div>
                 </div>
                 <ul className="text-sm space-y-1 ml-4">
-                  <li>* Desenvolvo pipelines de ML com Vertex AI e BigQuery</li>
-                  <li>* Crio modelos de deteccao de anomalias com Keras</li>
-                  <li>* Gerencio infraestrutura com Terraform no GCP</li>
-                  <li>* Processa terabytes de dados em sistemas em producao</li>
-                  <li>* Implemento ETL com Python, Pandas e PySpark</li>
+                  <li>* Pipeline de anomaly detection em producao no GCP (Keras + Vertex AI)</li>
+                  <li>* Pipelines ETL no BigQuery para sensores de manufatura</li>
+                  <li>* Infraestrutura como codigo com Terraform + CI/CD Tekton</li>
+                  <li>* Ferramenta de busca tecnica com OCR em PDFs (60%+ menos tempo)</li>
+                  <li>* Sistema de recomendacao de fixadores com LLM + SQL</li>
                 </ul>
               </div>
 
@@ -427,14 +428,14 @@ export default function RetroPage({ onEnterModern }: RetroPageProps) {
                   </div>
                   <div>
                     <h3 className="font-bold text-[#008000]">Clube de Programacao CIMATEC</h3>
-                    <p className="text-xs text-gray-600">Diretor Geral | Jan 2023 - Jun 2024</p>
+                    <p className="text-xs text-gray-600">Dev Front-End + Mkt | Jun 2021 - Mai 2024</p>
                   </div>
                 </div>
                 <ul className="text-sm space-y-1 ml-4">
-                  <li>* Liderei equipe de 15+ desenvolvedores</li>
-                  <li>* Organizei workshops de Python e Web Dev</li>
-                  <li>* Coordenei projetos open-source</li>
-                  <li>* Mentorei estudantes em programacao</li>
+                  <li>* Desenvolvi apps web com React.js / Next.js e TypeScript</li>
+                  <li>* Criei identidade visual e conteudo do Instagram do Clube</li>
+                  <li>* Participei de competicoes de algoritmos (C++ e Python)</li>
+                  <li>* Contribui no site oficial do Clube com Figma + ReactJS</li>
                 </ul>
               </div>
 
@@ -663,6 +664,7 @@ export default function RetroPage({ onEnterModern }: RetroPageProps) {
               </div>
             </div>
           )}
+          </div>{/* closes key={activeTab} wrapper */}
 
           {/* Secret Button to Enter Modern Version */}
           <div className="mt-8 pt-4 border-t border-[#404080] text-center">
@@ -719,6 +721,10 @@ export default function RetroPage({ onEnterModern }: RetroPageProps) {
         @keyframes cloudDrift {
           0% { transform: translateX(0); }
           100% { transform: translateX(calc(100vw + 400px)); }
+        }
+        @keyframes retroTabIn {
+          from { opacity: 0; transform: translateY(10px); }
+          to   { opacity: 1; transform: translateY(0); }
         }
       `}</style>
     </div>

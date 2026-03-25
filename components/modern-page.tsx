@@ -78,11 +78,11 @@ const EXPERIENCES = [
     period: "Mai 2024 - Presente",
     type: "Híbrido",
     highlights: [
-      "Projetei e implantei sistema de ML end-to-end para detecção de anomalias (Keras + BigQuery + Vertex AI) no GCP",
-      "Gerenciei infraestrutura cloud e pipelines de ML como código com Terraform (IaC) e Tekton (CI/CD)",
-      "Construí pipelines ETL no BigQuery processando dados de sensores de manufatura em larga escala",
-      "Desenvolvi ferramentas Python para cálculos de física de juntas (torque + ângulo)",
-      "Criei banco de dados interno com extração automática de PDFs - redução de 60%+ no tempo de busca"
+      "Projetei e implantei pipeline de ML end-to-end para detecção de anomalias em custos de garantia (Keras + BigQuery + Vertex AI), atualmente em produção no GCP",
+      "Gerenciei infraestrutura cloud como código com Terraform (IaC) e CI/CD com Tekton",
+      "Construí pipelines ETL no BigQuery para ingestão e processamento de dados de sensores de múltiplas linhas de manufatura",
+      "Desenvolvi ferramenta Python para cálculo de física de juntas (torque + ângulo) usada em chão de fábrica",
+      "Criei base de dados técnica com extração automática de PDFs via OCR — redução de 60%+ no tempo de busca"
     ],
     tags: ["Python", "GCP", "BigQuery", "Vertex AI", "Keras", "Terraform", "Tekton", "ETL", "Pandas", "Docker", "Plotly"]
   },
@@ -93,9 +93,9 @@ const EXPERIENCES = [
     period: "Jan 2023 - Mai 2024",
     type: "Híbrido",
     highlights: [
-      "Automação de processos internos com Python, reduzindo tempo de tarefas repetitivas",
-      "Desenvolvimento e otimização de processos de dados e fluxos operacionais",
-      "Desenvolvimento de produtos e soluções com foco em eficiência produtiva"
+      "Automatizei rotinas de coleta e formatação de dados com Python, eliminando retrabalho manual recorrente da equipe",
+      "Desenvolvi scripts e ferramentas de apoio para análises de dados e fluxos operacionais",
+      "Iniciou na área de ML colaborando com o time de engenharia em projetos de dados industriais"
     ],
     tags: ["Python", "Automação", "Pandas", "Otimização de Processos"]
   },
@@ -373,7 +373,7 @@ export default function ModernPage({ onBack, glitchIntensity }: ModernPageProps)
 
       {/* Main Content */}
       <main className="relative z-20 pt-20 pb-16 px-4">
-        <div className="max-w-6xl mx-auto">
+        <div key={activeSection} className="max-w-6xl mx-auto" style={{ animation: "sectionEnter 0.38s cubic-bezier(0.16,1,0.3,1)" }}>
           
           {/* Hero Section */}
           {activeSection === "home" && (
@@ -390,8 +390,8 @@ export default function ModernPage({ onBack, glitchIntensity }: ModernPageProps)
               </p>
               
               <p className="text-[#00B4FF]/70 max-w-2xl mb-4 text-base sm:text-lg px-4">
-                Engenheiro de Computação com experiência em projetos de ML com Python — de ingestão de dados ao deploy de modelos em produção.
-                Construí soluções com detecção de anomalias, pipelines de dados e me aprofundando em MLOps.
+                Engenheiro de Computação com 3 anos de experiência em ML na Ford Motor Company —
+                construí pipelines de dados no GCP, sistema de detecção de anomalias em produção e ferramentas internas com LLM e OCR.
               </p>
 
               <p className="text-[#FCE94F]/50 text-sm mb-8">
@@ -417,10 +417,10 @@ export default function ModernPage({ onBack, glitchIntensity }: ModernPageProps)
               {/* Stats */}
               <div className="grid grid-cols-2 sm:grid-cols-4 gap-6 sm:gap-8 mt-16 pt-8 border-t border-[#FCE94F]/20 w-full max-w-3xl">
                 {[
-                  { label: "Experiência", value: "3+" },
-                  { label: "Publicações", value: "2" },
+                  { label: "Anos exp.", value: "3+" },
+                  { label: "Projetos", value: "8" },
                   { label: "Certificações", value: "9" },
-                  { label: "Formação", value: "2026" },
+                  { label: "Publicações", value: "2" },
                 ].map((stat, i) => (
                   <div key={i} className="text-center">
                     <div className="text-2xl sm:text-4xl font-bold text-[#FCE94F] cyber-glow">{stat.value}</div>
@@ -679,7 +679,7 @@ export default function ModernPage({ onBack, glitchIntensity }: ModernPageProps)
                     })()}
                   </div>
 
-                  <div className="bg-[#1a1a2e] rounded border border-[#FCE94F]/20 p-6">
+                  <div key={selectedProject} className="bg-[#1a1a2e] rounded border border-[#FCE94F]/20 p-6" style={{ animation: "panelExpand 0.3s cubic-bezier(0.16,1,0.3,1)" }}>
                     {/* Personal Projects */}
                     {selectedProject === "vannex-cycle" && <VannexCycleoDemo />}
                     {selectedProject === "monnex" && <MonnexDemo />}
@@ -890,6 +890,17 @@ export default function ModernPage({ onBack, glitchIntensity }: ModernPageProps)
           <Lock className="w-3 h-3" /> SECURE
         </div>
       </div>
+
+      <style jsx>{`
+        @keyframes sectionEnter {
+          from { opacity: 0; transform: translateY(22px) scale(0.985); }
+          to   { opacity: 1; transform: translateY(0)   scale(1);     }
+        }
+        @keyframes panelExpand {
+          from { opacity: 0; transform: translateY(12px) scaleY(0.97); }
+          to   { opacity: 1; transform: translateY(0)    scaleY(1);    }
+        }
+      `}</style>
     </div>
   )
 }
