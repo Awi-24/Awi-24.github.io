@@ -387,12 +387,12 @@ export default function ModernPage({ onBack, glitchIntensity }: ModernPageProps)
               />
               
               <p className="text-lg sm:text-2xl text-[#FF4400] mb-2 font-mono">
-                {"< ENGENHEIRO IA/ML | ENG. DE DADOS />"}
+                {"< ENGENHEIRO DE SOFTWARE />"}
               </p>
-              
+
               <p className="text-[#00B4FF]/70 max-w-2xl mb-4 text-base sm:text-lg px-4">
-                Engenheiro de Computação com 3 anos de experiência em ML na Ford Motor Company —
-                construí pipelines de dados no GCP, sistema de detecção de anomalias em produção e ferramentas internas com LLM e OCR.
+                Engenheiro de Computação na Ford Motor Company — 1,5 anos em ML, construindo pipelines de dados no GCP,
+                sistemas de detecção de anomalias veiculares e financeiras, e ferramentas internas com Python e integração com modelos LLM.
               </p>
 
               <p className="text-[#FCE94F]/50 text-sm mb-8">
@@ -873,7 +873,7 @@ export default function ModernPage({ onBack, glitchIntensity }: ModernPageProps)
       {/* Footer */}
       <footer className="relative z-20 border-t border-[#FCE94F]/20 py-6 text-center">
         <p className="text-[#FCE94F]/40 text-sm font-mono">
-          {"<"} ADRIAN WIDMER | ENGENHEIRO IA/ML {"/>"} | 2026
+          {"<"} ADRIAN WIDMER | ENGENHEIRO DE SOFTWARE {"/>"} | 2026
         </p>
       </footer>
 

@@ -314,7 +314,7 @@ export default function RetroPage({ onEnterModern }: RetroPageProps) {
               <span className="text-2xl font-bold text-yellow-300" style={{ textShadow: "2px 2px #ff0000" }}>
                 ~~ BEM VINDO AO PORTFOLIO DO ADRIAN WIDMER ~~ {" "}
                 <Star className="inline w-5 h-5 text-yellow-400" /> {" "}
-                ~~ ENGENHEIRO DE IA/ML ~~ {" "}
+                ~~ ENGENHEIRO DE SOFTWARE ~~ {" "}
                 <Star className="inline w-5 h-5 text-yellow-400" /> {" "}
                 ~~ FORD MOTOR COMPANY ~~ {" "}
                 <Star className="inline w-5 h-5 text-yellow-400" /> {" "}
@@ -340,7 +340,7 @@ export default function RetroPage({ onEnterModern }: RetroPageProps) {
               <div className="bg-[#c0c0c0] text-black p-4 border-2 border-t-white border-l-white border-r-[#404040] border-b-[#404040] inline-block max-w-lg mx-auto">
                 <h2 className="text-lg font-bold text-[#800000] mb-2">Ola Amigo da Internet!</h2>
                 <p className="text-sm mb-2">
-                  Meu nome e <strong>Adrian Widmer</strong>, sou Engenheiro de Computacao com experiencia em projetos de ML com Python e solucoes end-to-end, Salvador, BA.
+                  Meu nome e <strong>Adrian Widmer</strong>, sou Engenheiro de Software na Ford Motor Company — 1,5 anos em ML, com pipelines de dados no GCP, sistemas de deteccao de anomalias e ferramentas com integracao LLM.
                 </p>
                 <p className="text-sm mb-2">
                   Trabalho com <span className="text-red-600">Machine Learning</span>, <span className="text-red-600">BigQuery</span>, <span className="text-red-600">GCP</span> e <span className="text-red-600">Python</span>!
@@ -422,6 +422,24 @@ export default function RetroPage({ onEnterModern }: RetroPageProps) {
                 </ul>
               </div>
 
+              {/* Estagiario Ford */}
+              <div className="bg-[#c0c0c0] text-black p-4 border-2 border-t-white border-l-white border-r-[#404040] border-b-[#404040] max-w-2xl mx-auto">
+                <div className="flex items-center gap-2 mb-2">
+                  <div className="w-8 h-8 bg-[#404080] flex items-center justify-center text-white font-bold text-xs">
+                    INT
+                  </div>
+                  <div>
+                    <h3 className="font-bold text-[#404080]">Estagiario de Engenharia de Software</h3>
+                    <p className="text-xs text-gray-600">Ford Brasil | Jan 2023 - Mai 2024</p>
+                  </div>
+                </div>
+                <ul className="text-sm space-y-1 ml-4">
+                  <li>* Automatizei rotinas de coleta e formatacao de dados com Python</li>
+                  <li>* Desenvolvi scripts de apoio para analises e fluxos operacionais</li>
+                  <li>* Iniciou na area de ML colaborando com time em projetos industriais</li>
+                </ul>
+              </div>
+
               {/* Clube de Programacao */}
               <div className="bg-[#c0c0c0] text-black p-4 border-2 border-t-white border-l-white border-r-[#404040] border-b-[#404040] max-w-2xl mx-auto">
                 <div className="flex items-center gap-2 mb-2">
@@ -441,6 +459,23 @@ export default function RetroPage({ onEnterModern }: RetroPageProps) {
                 </ul>
               </div>
 
+              {/* IC CIMATEC */}
+              <div className="bg-[#c0c0c0] text-black p-4 border-2 border-t-white border-l-white border-r-[#404040] border-b-[#404040] max-w-2xl mx-auto">
+                <div className="flex items-center gap-2 mb-2">
+                  <div className="w-8 h-8 bg-[#800000] flex items-center justify-center text-white font-bold text-xs">
+                    IC
+                  </div>
+                  <div>
+                    <h3 className="font-bold text-[#800000]">Iniciacao Cientifica — MES / Industria 4.0</h3>
+                    <p className="text-xs text-gray-600">SENAI CIMATEC | Ago 2022 - Jan 2023</p>
+                  </div>
+                </div>
+                <ul className="text-sm space-y-1 ml-4">
+                  <li>* Desenvolvimento de software MES (Manufacturing Execution System)</li>
+                  <li>* Aplicacao de recursos de Industria 4.0 em ambiente de P&D</li>
+                </ul>
+              </div>
+
               {/* Publications */}
               <div className="bg-black/50 p-4 border border-cyan-400 max-w-2xl mx-auto">
                 <h3 className="text-cyan-400 text-sm font-bold mb-3 flex items-center gap-2">
@@ -449,7 +484,7 @@ export default function RetroPage({ onEnterModern }: RetroPageProps) {
                 <div className="space-y-3">
                   <div className="border-l-2 border-lime-400 pl-3">
                     <p className="text-lime-300 text-sm font-bold">SIINTEC 2022</p>
-                    <p className="text-white text-xs">Statistical Study of Eco-Efficiency Applying Concepts of Circular Economy to the State of Bahia</p>
+                    <p className="text-white text-xs">Statistical Study of Eco-Efficiency in Compact and Average Cars</p>
                   </div>
                   <div className="border-l-2 border-lime-400 pl-3">
                     <p className="text-lime-300 text-sm font-bold">SIINTEC 2021</p>
@@ -546,11 +581,11 @@ export default function RetroPage({ onEnterModern }: RetroPageProps) {
 
                 {/* AwiOS */}
                 <div className="bg-[#c0c0c0] text-black p-3 border-2 border-t-white border-l-white border-r-[#404040] border-b-[#404040]">
-                  <h3 className="font-bold text-[#800000] text-sm mb-1">AwiOS</h3>
-                  <p className="text-xs mb-2">Sistema operacional de terminal interativo com comandos personalizados</p>
+                  <h3 className="font-bold text-[#800000] text-sm mb-1">AwiOS Engine</h3>
+                  <p className="text-xs mb-2">Engine Flutter para visual novels com linguagem de scripting propria e branching narrativo</p>
                   <div className="flex flex-wrap gap-1">
-                    <span className="bg-[#000080] text-white text-[10px] px-1">TypeScript</span>
-                    <span className="bg-[#000080] text-white text-[10px] px-1">React</span>
+                    <span className="bg-[#000080] text-white text-[10px] px-1">Flutter</span>
+                    <span className="bg-[#000080] text-white text-[10px] px-1">Dart</span>
                   </div>
                   <a href="https://github.com/Awi-24/AwiOS" target="_blank" rel="noopener noreferrer" className="text-blue-600 text-xs hover:underline block mt-1">
                     Ver no GitHub
@@ -612,7 +647,7 @@ export default function RetroPage({ onEnterModern }: RetroPageProps) {
                 <div className="border-l-4 border-[#000080] pl-3">
                   <p className="font-bold">Engenharia da Computacao</p>
                   <p className="text-sm">SENAI CIMATEC - Salvador, BA</p>
-                  <p className="text-xs text-gray-600">2020 - 2026 (Previsao)</p>
+                  <p className="text-xs text-gray-600">Fev 2020 - Dez 2025</p>
                 </div>
               </div>
 
