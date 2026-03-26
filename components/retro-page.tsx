@@ -412,9 +412,9 @@ export default function RetroPage({ onEnterModern }: RetroPageProps) {
                   </div>
                 </div>
                 <ul className="text-sm space-y-1 ml-4">
-                  <li>* Trajetoria iniciada em coding tradicional, evoluindo para projetos AI-first em producao</li>
-                  <li>* Pipeline ML end-to-end: anomaly detection em garantias (Keras + BigQuery + Vertex AI + GCP) em parceria com bolsista IEL</li>
-                  <li>* Deploy automatizado via Terraform (IaC) + CI/CD Tekton no Cloud Run</li>
+                  <li>* Trajetoria iniciada em coding tradicional, evoluindo para projetos AI-first</li>
+                  <li>* Pipeline ML end-to-end: anomaly detection em garantias (Keras + BigQuery + Vertex AI) em parceria com bolsista IEL</li>
+                  <li>* Deploy via Terraform (IaC) + Tekton no Cloud Run, adaptando infraestrutura Ford ao projeto</li>
                   <li>* Pipelines ETL no BigQuery para sensores veiculares e identificacao de disponibilidade de dados</li>
                   <li>* Ferramenta Python para calculo de torque + angulo usada em chao de fabrica</li>
                   <li>* Base tecnica com OCR (-60%+ tempo de busca), evoluida para pipeline GenAI duplo eliminando verificacao humana</li>

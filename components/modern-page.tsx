@@ -78,9 +78,9 @@ const EXPERIENCES = [
     period: "Mai 2024 - Presente",
     type: "Híbrido",
     highlights: [
-      "Trajetória iniciada em coding tradicional, evoluindo para projetos AI-first em produção no GCP",
+      "Trajetória iniciada em coding tradicional, evoluindo para projetos AI-first",
       "Projetei e implantei pipeline de ML end-to-end para detecção de anomalias em custos de garantia (Keras + BigQuery + Vertex AI) em parceria com bolsista IEL — focado em redução e recovery de custos",
-      "Automatizei o deploy via Terraform (IaC) e CI/CD com Tekton no Google Cloud Run",
+      "Deploy realizado via Terraform (IaC) e CI/CD com Tekton no Google Cloud Run, adaptando a infraestrutura existente da Ford ao projeto",
       "Construí pipelines ETL no BigQuery para ingestão de dados de sensores veiculares e identificação de disponibilidade de dados",
       "Desenvolvi ferramenta Python para cálculo de física de juntas (torque + ângulo) usada em chão de fábrica e em outras áreas da indústria",
       "Criei base de dados técnica com OCR para extração de PDFs (−60%+ no tempo de busca), posteriormente evoluída para pipeline GenAI duplo (extração + validação), eliminando a verificação humana"
