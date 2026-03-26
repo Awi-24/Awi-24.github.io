@@ -412,11 +412,13 @@ export default function RetroPage({ onEnterModern }: RetroPageProps) {
                   </div>
                 </div>
                 <ul className="text-sm space-y-1 ml-4">
-                  <li>* Pipeline de anomaly detection em producao no GCP (Keras + Vertex AI)</li>
-                  <li>* Pipelines ETL no BigQuery para sensores de manufatura</li>
-                  <li>* Infraestrutura como codigo com Terraform + CI/CD Tekton</li>
-                  <li>* Ferramenta de busca tecnica com OCR em PDFs (60%+ menos tempo)</li>
-                  <li>* Sistema de recomendacao de fixadores com LLM + SQL</li>
+                  <li>* Trajetoria iniciada em coding tradicional, evoluindo para projetos AI-first em producao</li>
+                  <li>* Pipeline ML end-to-end: anomaly detection em garantias (Keras + BigQuery + Vertex AI + GCP) em parceria com bolsista IEL</li>
+                  <li>* Deploy automatizado via Terraform (IaC) + CI/CD Tekton no Cloud Run</li>
+                  <li>* Pipelines ETL no BigQuery para sensores veiculares e identificacao de disponibilidade de dados</li>
+                  <li>* Ferramenta Python para calculo de torque + angulo usada em chao de fabrica</li>
+                  <li>* Base tecnica com OCR (-60%+ tempo de busca), evoluida para pipeline GenAI duplo eliminando verificacao humana</li>
+                  <li>* Sistema RAG de fixadores: scoring matematico + LLM assessment por Base Number</li>
                 </ul>
               </div>
 
@@ -486,9 +488,10 @@ export default function RetroPage({ onEnterModern }: RetroPageProps) {
                   {/* Fastener Hunter */}
                   <div className="bg-[#c0c0c0] text-black p-3 border-2 border-t-white border-l-white border-r-[#404040] border-b-[#404040]">
                     <h3 className="font-bold text-[#800000] text-sm mb-1">FASTENER_HUNTER.ai</h3>
-                    <p className="text-[10px] mb-2">Recomendacao de fixadores com busca em 3 BDs internos e assessment via LLM</p>
+                    <p className="text-[10px] mb-2">RAG 2 camadas: scoring matematico filtra Top-N candidatos por Base Number → LLM gera assessment com riscos e oportunidades</p>
                     <div className="flex flex-wrap gap-1">
                       <span className="bg-[#000080] text-white text-[10px] px-1">Python</span>
+                      <span className="bg-[#000080] text-white text-[10px] px-1">RAG</span>
                       <span className="bg-[#000080] text-white text-[10px] px-1">LLM</span>
                       <span className="bg-[#000080] text-white text-[10px] px-1">SQL</span>
                     </div>

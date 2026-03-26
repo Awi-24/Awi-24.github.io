@@ -78,13 +78,14 @@ const EXPERIENCES = [
     period: "Mai 2024 - Presente",
     type: "Híbrido",
     highlights: [
-      "Projetei e implantei pipeline de ML end-to-end para detecção de anomalias em custos de garantia (Keras + BigQuery + Vertex AI), atualmente em produção no GCP",
-      "Gerenciei infraestrutura cloud como código com Terraform (IaC) e CI/CD com Tekton",
-      "Construí pipelines ETL no BigQuery para ingestão e processamento de dados de sensores de múltiplas linhas de manufatura",
-      "Desenvolvi ferramenta Python para cálculo de física de juntas (torque + ângulo) usada em chão de fábrica",
-      "Criei base de dados técnica com extração automática de PDFs via OCR — redução de 60%+ no tempo de busca"
+      "Trajetória iniciada em coding tradicional, evoluindo para projetos AI-first em produção no GCP",
+      "Projetei e implantei pipeline de ML end-to-end para detecção de anomalias em custos de garantia (Keras + BigQuery + Vertex AI) em parceria com bolsista IEL — focado em redução e recovery de custos",
+      "Automatizei o deploy via Terraform (IaC) e CI/CD com Tekton no Google Cloud Run",
+      "Construí pipelines ETL no BigQuery para ingestão de dados de sensores veiculares e identificação de disponibilidade de dados",
+      "Desenvolvi ferramenta Python para cálculo de física de juntas (torque + ângulo) usada em chão de fábrica e em outras áreas da indústria",
+      "Criei base de dados técnica com OCR para extração de PDFs (−60%+ no tempo de busca), posteriormente evoluída para pipeline GenAI duplo (extração + validação), eliminando a verificação humana"
     ],
-    tags: ["Python", "GCP", "BigQuery", "Vertex AI", "Keras", "Terraform", "Tekton", "ETL", "Pandas", "Docker", "Plotly"]
+    tags: ["Python", "GCP", "BigQuery", "Vertex AI", "Keras", "Terraform", "Tekton", "ETL", "GenAI", "OCR", "Pandas", "Docker"]
   },
   {
     title: "Estagiário de Engenharia de Software",
@@ -179,10 +180,10 @@ const PROJECTS = [
   {
     id: "fastener-hunter",
     title: "FASTENER_HUNTER.ai",
-    description: "Sistema de recomendação de fixadores integrando 3 BDs internos Ford. Busca por BAS Number → recomendações ranqueadas com assessment de LLM e checklist de validação.",
-    previewHint: "Busca interativa nos BDs · Recomendações com score de match · Assessment automático via LLM",
-    demoType: "Busca + LLM",
-    tags: ["Python", "LLM", "SQL", "Prompt Engineering", "Recommendation"],
+    description: "Sistema RAG de 2 camadas: scoring matemático de similaridade em banco unificado (3 BDs Ford) filtra Top-N candidatos → LLM analisa riscos, oportunidades e gera assessment técnico por Base Number.",
+    previewHint: "Layer 1: score de similaridade · Layer 2: LLM assessment · Riscos, oportunidades e checklist",
+    demoType: "RAG · 2 camadas",
+    tags: ["Python", "LLM", "RAG", "SQL", "Prompt Engineering", "Recommendation"],
     status: "PROD",
     type: "ford"
   },
