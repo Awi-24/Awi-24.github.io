@@ -238,11 +238,11 @@ const PROJECTS = [
   },
   {
     id: "kdd-cup",
-    title: "KDD Cup 1999 — Model Comparison",
-    description: "Comparação de 5 modelos de ML (Random Forest, Decision Tree, Naive Bayes, KNN, MLP) para detecção de intrusão em rede. Dataset com 494k conexões e 41 features.",
-    previewHint: "Compare modelos ao vivo · Veja métricas F1/Precision/Recall · Explore matriz de confusão",
+    title: "KDD Cup 1999 — Anomaly Detection Benchmark",
+    description: "Benchmark de 5 abordagens (XGBoost, IsolationForest, LOF, Autoencoder, OneClassSVM) para detecção de intrusão em rede. Tarefa binária: normal vs. ataque. IsolationForest atinge 97.1% de recall sem nenhum rótulo de treino.",
+    previewHint: "Compare métricas ao vivo · Tabela com Precision/Recall/F1/ROC-AUC/PR-AUC · Entenda o caso do Autoencoder",
     demoType: "Benchmark ML",
-    tags: ["Python", "Sklearn", "Pandas", "Anomaly Detection", "KDD Cup"],
+    tags: ["Python", "XGBoost", "Sklearn", "Keras", "Anomaly Detection", "KDD Cup"],
     status: "PUB",
     type: "personal"
   },

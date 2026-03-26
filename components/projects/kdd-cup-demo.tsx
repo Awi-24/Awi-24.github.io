@@ -1,85 +1,145 @@
 "use client"
 
 import { useState } from "react"
-import { BarChart3, ExternalLink, Trophy, Target, Shield, Zap } from "lucide-react"
+import { BarChart3, ExternalLink, AlertTriangle, Lightbulb, Shield, Activity } from "lucide-react"
 
+// Real results from held-out 20% test split (binary: normal=0 vs attack=1)
 const MODELS = [
   {
-    id: "rf",
-    name: "Random Forest",
-    accuracy: 99.93,
-    precision: 99.91,
-    recall: 99.95,
-    f1: 99.93,
-    trainingTime: "4.2s",
+    id: "xgb",
+    name: "XGBoost",
+    type: "Supervisionado",
+    typeColor: "#FCE94F",
+    precision: 0.9997,
+    recall: 0.9992,
+    f1: 0.9995,
+    rocAuc: 1.0000,
+    prAuc: 1.0000,
     color: "#FCE94F",
-    desc: "Ensemble de 100 árvores. Melhor balanço geral entre precisão e tempo de treino.",
-    badge: "🏆 MELHOR"
+    badge: "🏆 MELHOR GERAL",
+    note: "Scores quase perfeitos são esperados no KDD Cup 1999: ataques DoS geram valores extremos de src_bytes/count trivialmente separáveis com rótulos.",
   },
   {
-    id: "dt",
-    name: "Decision Tree",
-    accuracy: 99.87,
-    precision: 99.84,
-    recall: 99.90,
-    f1: 99.87,
-    trainingTime: "0.8s",
+    id: "iforest",
+    name: "Isolation Forest",
+    type: "Não-supervisionado",
+    typeColor: "#00B4FF",
+    precision: 0.8684,
+    recall: 0.9709,
+    f1: 0.9168,
+    rocAuc: 0.9928,
+    prAuc: 0.9903,
     color: "#00B4FF",
-    desc: "Mais rápido para treinar. Interpretável. Ligeira queda em precision vs RF.",
-    badge: "⚡ MAIS RÁPIDO"
+    badge: "⭐ MELHOR UNSUP.",
+    note: "Recall de 97.1% sem nenhum rótulo de treino. Recomendado para cenários cold-start onde rótulos não estão disponíveis.",
   },
   {
-    id: "nb",
-    name: "Naive Bayes",
-    accuracy: 92.41,
-    precision: 95.12,
-    recall: 89.30,
-    f1: 92.11,
-    trainingTime: "0.1s",
-    color: "#FF4400",
-    desc: "Simples e ultrarrápido. Assume independência entre features — limita recall.",
-    badge: "📉 BASELINE"
-  },
-  {
-    id: "knn",
-    name: "K-Nearest Neighbors",
-    accuracy: 99.76,
-    precision: 99.70,
-    recall: 99.82,
-    f1: 99.76,
-    trainingTime: "0.02s",
+    id: "lof",
+    name: "LOF",
+    type: "Não-supervisionado",
+    typeColor: "#A855F7",
+    precision: 0.8561,
+    recall: 0.8284,
+    f1: 0.8420,
+    rocAuc: 0.9265,
+    prAuc: 0.9000,
     color: "#A855F7",
-    desc: "Alta acurácia mas custo quadrático em predição. Sem treino, alto custo de inferência.",
-    badge: null
+    badge: null,
+    note: "Bom para anomalias locais (pontos em regiões de baixa densidade). Custo computacional alto em datasets grandes — O(n²) em espaço.",
   },
   {
-    id: "nn",
-    name: "Neural Network (MLP)",
-    accuracy: 99.81,
-    precision: 99.78,
-    recall: 99.85,
-    f1: 99.81,
-    trainingTime: "18.4s",
-    color: "#22D3EE",
-    desc: "MLP com 2 camadas ocultas. Mais lento para treinar mas robusto a ruído.",
-    badge: null
+    id: "autoenc",
+    name: "Autoencoder",
+    type: "Semi-supervisionado",
+    typeColor: "#FF8C00",
+    precision: 0.9296,
+    recall: 0.0229,
+    f1: 0.0446,
+    rocAuc: 0.9856,
+    prAuc: 0.9524,
+    color: "#FF8C00",
+    badge: "🔬 VER NOTA",
+    note: "ROC-AUC=0.986 e PR-AUC=0.952 provam que o sinal é forte. O F1 baixo (4.5%) é um artefato do threshold conservador (μ+2σ) — reduzir o threshold troca precision por recall.",
+  },
+  {
+    id: "ocsvm",
+    name: "One-Class SVM",
+    type: "Não-supervisionado",
+    typeColor: "#888",
+    precision: 0.7691,
+    recall: 0.2644,
+    f1: 0.3935,
+    rocAuc: 0.8262,
+    prAuc: 0.6711,
+    color: "#888",
+    badge: "⚠ SUBSAMPLE",
+    note: "Treinado em 8k amostras normais (dataset completo é inviável para kernel RBF: O(n²)). A cobertura de treino reduzida explica o recall baixo.",
   },
 ]
 
-const ATTACK_TYPES = ["DoS", "Probe", "R2L", "U2R", "Normal"]
-const CONFUSION_RF = [
-  [67338, 12, 0, 0, 0],
-  [0, 3710, 3, 0, 0],
-  [0, 0, 1126, 0, 0],
-  [2, 0, 0, 52, 0],
-  [0, 0, 0, 0, 9711],
+type MetricKey = "f1" | "precision" | "recall" | "rocAuc" | "prAuc"
+
+const METRIC_LABELS: Record<MetricKey, string> = {
+  f1: "F1-Score",
+  precision: "Precision",
+  recall: "Recall",
+  rocAuc: "ROC-AUC",
+  prAuc: "PR-AUC",
+}
+
+const INSIGHTS = [
+  {
+    icon: "🏆",
+    color: "#FCE94F",
+    borderColor: "#FCE94F30",
+    bgColor: "#FCE94F08",
+    title: "XGBoost é trivialmente dominante",
+    body: "F1=0.9995 e ROC-AUC=1.000 são esperados: ataques DoS produzem src_bytes e count extremos que qualquer ensemble separa facilmente com rótulos disponíveis. O desafio real são as classes raras (U2R, R2L < 1% do dataset).",
+  },
+  {
+    icon: "⭐",
+    color: "#00B4FF",
+    borderColor: "#00B4FF30",
+    bgColor: "#00B4FF08",
+    title: "IsolationForest: melhor unsupervised",
+    body: "Recall de 97.1% com zero rótulos de treino é o resultado mais interessante do estudo. Recomendado para ambientes de cold-start em produção, onde rótulos de ataque ainda não existem ou são caros de obter.",
+  },
+  {
+    icon: "🔬",
+    color: "#FF8C00",
+    borderColor: "#FF8C0030",
+    bgColor: "#FF8C0008",
+    title: "Autoencoder: sinal forte, threshold errado",
+    body: "ROC-AUC=0.986 e PR-AUC=0.952 confirmam que o erro de reconstrução é um excelente sinal de anomalia. O F1 baixo (4.46%) é um artefato do threshold conservador (μ+2σ em dados normais). Reduzir o threshold melhora recall ao custo de precision.",
+  },
+  {
+    icon: "⚠️",
+    color: "#FF4400",
+    borderColor: "#FF440030",
+    bgColor: "#FF440008",
+    title: "OneClassSVM: limitação de escalabilidade",
+    body: "Underperformance (F1=0.39) causada pelo subsample forçado (8k amostras normais) necessário pelo custo O(n²) do kernel RBF no dataset completo. Não é fraqueza do modelo — é limitação de infra.",
+  },
+  {
+    icon: "📊",
+    color: "#A855F7",
+    borderColor: "#A855F730",
+    bgColor: "#A855F708",
+    title: "Features mais discriminativas",
+    body: "src_bytes, dst_bytes, count e dst_host_srv_count são as top features do XGBoost. Classes raras U2R e R2L (< 1% dos dados) permanecem o desafio prático para qualquer detector — mesmo com scores globais altos.",
+  },
 ]
 
 export default function KDDCupDemo() {
-  const [selectedModel, setSelectedModel] = useState("rf")
-  const [activeTab, setActiveTab] = useState<"metrics" | "confusion" | "insight">("metrics")
+  const [activeTab, setActiveTab] = useState<"table" | "chart" | "insights">("table")
+  const [activeMetric, setActiveMetric] = useState<MetricKey>("f1")
+  const [highlightId, setHighlightId] = useState<string | null>(null)
 
-  const model = MODELS.find(m => m.id === selectedModel)!
+  const sortedByMetric = [...MODELS].sort((a, b) => b[activeMetric] - a[activeMetric])
+  const maxVal = Math.max(...MODELS.map(m => m[activeMetric]))
+
+  const fmt = (v: number) => v.toFixed(4)
+  const fmtPct = (v: number) => (v * 100).toFixed(2) + "%"
 
   return (
     <div className="space-y-4">
@@ -87,7 +147,7 @@ export default function KDDCupDemo() {
       <div className="flex items-center justify-between">
         <div className="flex items-center gap-2 text-[#FCE94F]">
           <BarChart3 className="w-5 h-5" />
-          <h3 className="font-bold">KDD Cup 1999 — Comparação de Modelos</h3>
+          <h3 className="font-bold text-sm">KDD Cup 1999 — Anomaly Detection Benchmark</h3>
         </div>
         <a
           href="https://github.com/Awi-24/KDD-Cup-1999-Anomaly-Detection"
@@ -99,193 +159,188 @@ export default function KDDCupDemo() {
         </a>
       </div>
 
-      <p className="text-[#FCE94F]/60 text-xs font-mono">
-        Dataset: 494.021 conexões · 41 features · 5 classes de ataque · Intrusion Detection
+      <p className="text-[#FCE94F]/50 text-xs font-mono">
+        Tarefa binária: normal=0 vs attack=1 · 20% test split após deduplicação · 494k conexões · 41 features
       </p>
 
-      {/* Model Selector */}
-      <div className="grid grid-cols-2 sm:grid-cols-3 gap-2">
-        {MODELS.map(m => (
+      {/* Tab Nav */}
+      <div className="flex gap-0 border-b border-[#FCE94F]/20">
+        {([["table", "TABELA"], ["chart", "GRÁFICO"], ["insights", "INSIGHTS"]] as const).map(([id, label]) => (
           <button
-            key={m.id}
-            onClick={() => setSelectedModel(m.id)}
-            className={`p-2 rounded text-left transition-all border ${
-              selectedModel === m.id
-                ? "border-[#FCE94F] bg-[#FCE94F]/10"
-                : "border-[#FCE94F]/20 bg-[#0a0a0f] hover:border-[#FCE94F]/40"
-            }`}
-          >
-            <div className="flex items-center justify-between mb-1">
-              <span className="text-[#FCE94F] text-xs font-bold">{m.name}</span>
-            </div>
-            <div className="text-[10px] font-mono" style={{ color: m.color }}>
-              ACC: {m.accuracy.toFixed(1)}%
-            </div>
-            {m.badge && (
-              <div className="text-[9px] mt-1 text-[#FCE94F]/80">{m.badge}</div>
-            )}
-          </button>
-        ))}
-      </div>
-
-      {/* Tabs */}
-      <div className="flex gap-2 border-b border-[#FCE94F]/20">
-        {(["metrics", "confusion", "insight"] as const).map(tab => (
-          <button
-            key={tab}
-            onClick={() => setActiveTab(tab)}
-            className={`px-3 py-1.5 text-xs font-mono transition-colors border-b-2 -mb-px ${
-              activeTab === tab
+            key={id}
+            onClick={() => setActiveTab(id)}
+            className={`px-4 py-1.5 text-xs font-mono transition-colors border-b-2 -mb-px ${
+              activeTab === id
                 ? "border-[#FCE94F] text-[#FCE94F]"
                 : "border-transparent text-[#FCE94F]/40 hover:text-[#FCE94F]/70"
             }`}
           >
-            {tab.toUpperCase()}
+            {label}
           </button>
         ))}
       </div>
 
-      {/* METRICS Tab */}
-      {activeTab === "metrics" && (
+      {/* ===== TAB: TABLE ===== */}
+      {activeTab === "table" && (
         <div className="space-y-3">
-          <p className="text-[#FCE94F]/50 text-xs italic">{model.desc}</p>
-          {[
-            { label: "Accuracy", value: model.accuracy, icon: <Target className="w-4 h-4" /> },
-            { label: "Precision", value: model.precision, icon: <Shield className="w-4 h-4" /> },
-            { label: "Recall", value: model.recall, icon: <Zap className="w-4 h-4" /> },
-            { label: "F1-Score", value: model.f1, icon: <Trophy className="w-4 h-4" /> },
-          ].map(metric => (
-            <div key={metric.label}>
-              <div className="flex items-center justify-between text-xs mb-1">
-                <span className="flex items-center gap-1.5" style={{ color: model.color }}>
-                  {metric.icon} {metric.label}
-                </span>
-                <span className="font-mono text-[#FCE94F]">{metric.value.toFixed(2)}%</span>
-              </div>
-              <div className="h-2 bg-[#0a0a0f] rounded overflow-hidden border border-[#FCE94F]/10">
-                <div
-                  className="h-full rounded transition-all duration-700"
-                  style={{
-                    width: `${metric.value}%`,
-                    background: `linear-gradient(90deg, ${model.color}88, ${model.color})`,
-                    boxShadow: `0 0 6px ${model.color}`
-                  }}
-                />
-              </div>
-            </div>
-          ))}
-
-          {/* Training Time */}
-          <div className="mt-4 p-3 rounded border border-[#FCE94F]/20 bg-[#0a0a0f]">
-            <p className="text-[#FCE94F]/50 text-xs">Tempo de treino estimado (dataset completo)</p>
-            <p className="text-[#FCE94F] font-mono font-bold text-lg mt-1">{model.trainingTime}</p>
+          <div className="overflow-x-auto">
+            <table className="w-full text-[11px] font-mono border-collapse">
+              <thead>
+                <tr className="border-b border-[#FCE94F]/20">
+                  <th className="text-left py-1.5 pr-3 text-[#FCE94F]/50 font-normal">Modelo</th>
+                  <th className="text-left py-1.5 pr-3 text-[#FCE94F]/50 font-normal">Tipo</th>
+                  <th className="text-right py-1.5 pr-2 text-[#FCE94F]/50 font-normal">Precision</th>
+                  <th className="text-right py-1.5 pr-2 text-[#FCE94F]/50 font-normal">Recall</th>
+                  <th className="text-right py-1.5 pr-2 text-[#FCE94F]/50 font-normal">F1</th>
+                  <th className="text-right py-1.5 pr-2 text-[#FCE94F]/50 font-normal">ROC-AUC</th>
+                  <th className="text-right py-1.5 text-[#FCE94F]/50 font-normal">PR-AUC</th>
+                </tr>
+              </thead>
+              <tbody>
+                {MODELS.map((m) => (
+                  <tr
+                    key={m.id}
+                    className="border-b border-[#FCE94F]/10 cursor-pointer transition-colors"
+                    style={{ background: highlightId === m.id ? `${m.color}12` : "transparent" }}
+                    onMouseEnter={() => setHighlightId(m.id)}
+                    onMouseLeave={() => setHighlightId(null)}
+                  >
+                    <td className="py-2 pr-3 font-bold" style={{ color: m.color }}>
+                      {m.name}
+                      {m.badge && <span className="ml-1 text-[9px] opacity-70">{m.badge}</span>}
+                    </td>
+                    <td className="py-2 pr-3 text-[10px]" style={{ color: m.typeColor + "99" }}>{m.type}</td>
+                    <td className="py-2 pr-2 text-right" style={{ color: m.color }}>{fmt(m.precision)}</td>
+                    <td className="py-2 pr-2 text-right" style={{ color: m.id === "autoenc" ? "#FF4400" : m.color }}>
+                      {m.id === "autoenc" ? <span title="Artefato do threshold">⚠ {fmt(m.recall)}</span> : fmt(m.recall)}
+                    </td>
+                    <td className="py-2 pr-2 text-right font-bold" style={{ color: m.id === "autoenc" ? "#FF4400" : m.color }}>
+                      {fmt(m.f1)}
+                    </td>
+                    <td className="py-2 pr-2 text-right" style={{ color: m.color }}>{fmt(m.rocAuc)}</td>
+                    <td className="py-2 text-right" style={{ color: m.color }}>{fmt(m.prAuc)}</td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
           </div>
 
-          {/* Comparison bar chart */}
-          <div className="mt-2">
-            <p className="text-[#FCE94F]/50 text-xs mb-2 font-mono">ACCURACY COMPARATIVO:</p>
-            <div className="space-y-1.5">
-              {MODELS.map(m => (
-                <div key={m.id} className="flex items-center gap-2">
-                  <span className="text-[10px] text-[#FCE94F]/60 w-28 truncate">{m.name}</span>
-                  <div className="flex-1 h-1.5 bg-[#0a0a0f] rounded overflow-hidden">
-                    <div
-                      className="h-full rounded transition-all duration-500"
-                      style={{
-                        width: `${m.accuracy}%`,
-                        backgroundColor: m.id === selectedModel ? "#FCE94F" : `${m.color}66`,
-                        boxShadow: m.id === selectedModel ? "0 0 6px #FCE94F" : "none"
-                      }}
-                    />
-                  </div>
-                  <span className="text-[10px] font-mono w-14 text-right" style={{ color: m.color }}>
-                    {m.accuracy.toFixed(2)}%
-                  </span>
-                </div>
-              ))}
+          {/* Hover note */}
+          {highlightId && (
+            <div
+              className="p-3 rounded border text-xs transition-all"
+              style={{
+                borderColor: `${MODELS.find(m => m.id === highlightId)!.color}40`,
+                background: `${MODELS.find(m => m.id === highlightId)!.color}08`,
+                color: `${MODELS.find(m => m.id === highlightId)!.color}CC`
+              }}
+            >
+              <span className="font-bold">{MODELS.find(m => m.id === highlightId)!.name}:</span>{" "}
+              {MODELS.find(m => m.id === highlightId)!.note}
             </div>
-          </div>
+          )}
+
+          <p className="text-[#FCE94F]/30 text-[10px] font-mono italic">
+            ¹ Autoencoder: baixo recall por threshold conservador (μ+2σ) · ² OneClassSVM: treinado em 8k amostras (limitação O(n²))
+          </p>
         </div>
       )}
 
-      {/* CONFUSION MATRIX Tab (only for Random Forest) */}
-      {activeTab === "confusion" && (
-        <div>
-          <p className="text-[#FCE94F]/50 text-xs mb-3 font-mono">
-            Matriz de confusão — {selectedModel === "rf" ? "Random Forest (melhor modelo)" : "Ver RF para matrix completa"}
-          </p>
-          {selectedModel === "rf" ? (
-            <div className="overflow-x-auto">
-              <table className="text-[10px] font-mono w-full border-collapse">
-                <thead>
-                  <tr>
-                    <th className="p-1 text-[#FCE94F]/40 text-left">Pred ↓ Real →</th>
-                    {ATTACK_TYPES.map(t => (
-                      <th key={t} className="p-1 text-[#FCE94F]/70 text-center">{t}</th>
-                    ))}
-                  </tr>
-                </thead>
-                <tbody>
-                  {CONFUSION_RF.map((row, i) => (
-                    <tr key={i}>
-                      <td className="p-1 text-[#FCE94F]/70 font-bold">{ATTACK_TYPES[i]}</td>
-                      {row.map((val, j) => (
-                        <td
-                          key={j}
-                          className="p-1 text-center rounded"
-                          style={{
-                            backgroundColor: i === j
-                              ? `rgba(252,233,79,${Math.min(val / 70000, 0.4)})`
-                              : val > 0 ? "rgba(255,68,0,0.3)" : "transparent",
-                            color: i === j ? "#FCE94F" : val > 0 ? "#FF4400" : "#FCE94F22"
-                          }}
-                        >
-                          {val.toLocaleString()}
-                        </td>
-                      ))}
-                    </tr>
-                  ))}
-                </tbody>
-              </table>
-            </div>
-          ) : (
-            <div className="text-center py-6">
-              <p className="text-[#FCE94F]/50 text-sm">Selecione o Random Forest para ver a matriz de confusão completa.</p>
+      {/* ===== TAB: CHART ===== */}
+      {activeTab === "chart" && (
+        <div className="space-y-4">
+          {/* Metric picker */}
+          <div className="flex flex-wrap gap-2">
+            {(Object.keys(METRIC_LABELS) as MetricKey[]).map(k => (
               <button
-                onClick={() => setSelectedModel("rf")}
-                className="mt-3 text-xs text-[#FCE94F] border border-[#FCE94F]/40 px-3 py-1.5 rounded hover:bg-[#FCE94F]/10 transition-colors"
+                key={k}
+                onClick={() => setActiveMetric(k)}
+                className={`px-3 py-1 text-xs rounded font-mono transition-colors ${
+                  activeMetric === k
+                    ? "bg-[#FCE94F] text-[#0a0a0f] font-bold"
+                    : "border border-[#FCE94F]/30 text-[#FCE94F]/60 hover:text-[#FCE94F]"
+                }`}
               >
-                Ir para Random Forest
+                {METRIC_LABELS[k]}
               </button>
+            ))}
+          </div>
+
+          {/* Bars */}
+          <div className="space-y-3">
+            {sortedByMetric.map((m, rank) => {
+              const val = m[activeMetric]
+              const barWidth = maxVal > 0 ? (val / maxVal) * 100 : 0
+              const isAnomalous = m.id === "autoenc" && (activeMetric === "recall" || activeMetric === "f1")
+              return (
+                <div key={m.id}>
+                  <div className="flex items-center justify-between text-xs mb-1">
+                    <div className="flex items-center gap-2">
+                      <span className="text-[#FCE94F]/30 font-mono w-4">#{rank + 1}</span>
+                      <span className="font-bold" style={{ color: m.color }}>{m.name}</span>
+                      <span className="text-[9px] px-1.5 py-0.5 rounded-full" style={{ background: `${m.typeColor}20`, color: m.typeColor }}>
+                        {m.type}
+                      </span>
+                    </div>
+                    <span className="font-mono font-bold flex items-center gap-1" style={{ color: isAnomalous ? "#FF4400" : m.color }}>
+                      {isAnomalous && <AlertTriangle className="w-3 h-3" />}
+                      {fmt(val)}
+                    </span>
+                  </div>
+                  <div className="h-5 bg-[#0a0a0f] rounded overflow-hidden border border-[#FCE94F]/10 relative">
+                    <div
+                      className="h-full rounded transition-all duration-700 flex items-center justify-end pr-2"
+                      style={{
+                        width: `${barWidth}%`,
+                        background: isAnomalous
+                          ? "linear-gradient(90deg, #FF440044, #FF4400)"
+                          : `linear-gradient(90deg, ${m.color}55, ${m.color})`,
+                        boxShadow: `0 0 8px ${isAnomalous ? "#FF4400" : m.color}66`,
+                        minWidth: val > 0 ? "1%" : "0"
+                      }}
+                    />
+                    {isAnomalous && (
+                      <span className="absolute left-2 top-0 bottom-0 flex items-center text-[9px] text-[#FF4400] font-mono">
+                        threshold artefact — ROC-AUC: {fmt(m.rocAuc)}
+                      </span>
+                    )}
+                  </div>
+                </div>
+              )
+            })}
+          </div>
+
+          {/* Autoencoder note when relevant */}
+          {(activeMetric === "recall" || activeMetric === "f1") && (
+            <div className="p-3 rounded border border-[#FF8C00]/40 bg-[#FF8C00]/8 text-[#FF8C00]/90 text-xs">
+              <span className="font-bold">Autoencoder:</span> F1 baixo é artefato do threshold conservador (μ+2σ).
+              ROC-AUC={fmt(MODELS.find(m => m.id === "autoenc")!.rocAuc)} e PR-AUC={fmt(MODELS.find(m => m.id === "autoenc")!.prAuc)} confirmam que o sinal é forte.
+              Basta reduzir o threshold para recuperar recall.
             </div>
           )}
         </div>
       )}
 
-      {/* INSIGHT Tab */}
-      {activeTab === "insight" && (
-        <div className="space-y-3 text-xs">
-          <div className="p-3 rounded border border-[#FCE94F]/30 bg-[#FCE94F]/5">
-            <p className="text-[#FCE94F] font-bold mb-1">🏆 Conclusão Principal</p>
-            <p className="text-[#FCE94F]/70">
-              Random Forest e KNN dominam em acurácia ({">"}99.7%). O dataset KDD é altamente
-              separável — até DT simples atinge 99.87%. O diferencial está em R2L e U2R (ataques raros).
-            </p>
-          </div>
-          <div className="p-3 rounded border border-[#FF4400]/30 bg-[#FF4400]/5">
-            <p className="text-[#FF4400] font-bold mb-1">⚠ Ponto Crítico: Classes Raras</p>
-            <p className="text-[#FF4400]/70">
-              Ataques U2R (~50 amostras) e R2L (~1000) são sub-representados.
-              Naive Bayes falha justamente nessas classes (recall 89%).
-              RF e DT lidam melhor graças ao ensemble e bagging.
-            </p>
-          </div>
-          <div className="p-3 rounded border border-[#00B4FF]/30 bg-[#00B4FF]/5">
-            <p className="text-[#00B4FF] font-bold mb-1">📊 Análise do Dataset</p>
-            <p className="text-[#00B4FF]/70">
-              41 features: duração, protocolo, serviço, flag, bytes enviados/recebidos...
-              Feature engineering revelou que &quot;src_bytes&quot; e &quot;dst_bytes&quot; são as mais discriminativas
-              para distinguir DoS de tráfego normal.
+      {/* ===== TAB: INSIGHTS ===== */}
+      {activeTab === "insights" && (
+        <div className="space-y-3">
+          {INSIGHTS.map((ins, i) => (
+            <div
+              key={i}
+              className="p-3 rounded border text-xs leading-relaxed"
+              style={{ borderColor: ins.borderColor, background: ins.bgColor }}
+            >
+              <p className="font-bold mb-1" style={{ color: ins.color }}>
+                {ins.icon} {ins.title}
+              </p>
+              <p style={{ color: ins.color + "BB" }}>{ins.body}</p>
+            </div>
+          ))}
+
+          <div className="p-3 rounded border border-[#FCE94F]/20 bg-[#FCE94F]/5 text-xs">
+            <p className="text-[#FCE94F]/70 font-bold mb-1">📁 Estrutura do estudo</p>
+            <p className="text-[#FCE94F]/50 font-mono text-[10px]">
+              5 notebooks: EDA → Preprocessing → Baselines (IF/LOF/OCSVM) → Advanced (XGB + Autoencoder) → Evaluation
             </p>
           </div>
         </div>

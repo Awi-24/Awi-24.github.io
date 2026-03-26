@@ -570,12 +570,12 @@ export default function RetroPage({ onEnterModern }: RetroPageProps) {
 
                 {/* KDD Cup 1999 */}
                 <div className="bg-[#c0c0c0] text-black p-3 border-2 border-t-white border-l-white border-r-[#404040] border-b-[#404040]">
-                  <h3 className="font-bold text-[#800000] text-sm mb-1">KDD Cup 1999</h3>
-                  <p className="text-xs mb-2">Comparacao de 5 modelos ML para deteccao de intrusao (494k conexoes)</p>
+                  <h3 className="font-bold text-[#800000] text-sm mb-1">KDD Cup 1999 — Anomaly Detection</h3>
+                  <p className="text-xs mb-2">XGBoost vs IsolationForest vs LOF vs Autoencoder vs OCSVM. IsolationForest: 97.1% recall sem rotulos.</p>
                   <div className="flex flex-wrap gap-1">
-                    <span className="bg-[#000080] text-white text-[10px] px-1">Python</span>
+                    <span className="bg-[#000080] text-white text-[10px] px-1">XGBoost</span>
                     <span className="bg-[#000080] text-white text-[10px] px-1">Sklearn</span>
-                    <span className="bg-[#000080] text-white text-[10px] px-1">Pandas</span>
+                    <span className="bg-[#000080] text-white text-[10px] px-1">Keras</span>
                   </div>
                   <a href="https://github.com/Awi-24/KDD-Cup-1999-Anomaly-Detection" target="_blank" rel="noopener noreferrer" className="text-blue-600 text-xs hover:underline block mt-1">
                     Ver no GitHub
