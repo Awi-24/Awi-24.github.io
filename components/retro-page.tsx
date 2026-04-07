@@ -340,10 +340,10 @@ export default function RetroPage({ onEnterModern }: RetroPageProps) {
               <div className="bg-[#c0c0c0] text-black p-4 border-2 border-t-white border-l-white border-r-[#404040] border-b-[#404040] inline-block max-w-lg mx-auto">
                 <h2 className="text-lg font-bold text-[#800000] mb-2">Ola Amigo da Internet!</h2>
                 <p className="text-sm mb-2">
-                  Meu nome e <strong>Adrian Widmer</strong>, sou Engenheiro de Software na Ford Motor Company — 1,5 anos em ML, com pipelines de dados no GCP, sistemas de deteccao de anomalias e ferramentas com integracao LLM.
+                  Meu nome e <strong>Adrian Widmer</strong>, sou Engenheiro de Software e IA/ML na Ford Motor Company — 3+ anos desenvolvendo sistemas de ML em producao, pipelines de dados e ferramentas internas como unico dev na equipe de engenharia automotiva.
                 </p>
                 <p className="text-sm mb-2">
-                  Trabalho com <span className="text-red-600">Machine Learning</span>, <span className="text-red-600">BigQuery</span>, <span className="text-red-600">GCP</span> e <span className="text-red-600">Python</span>!
+                  Trabalho com <span className="text-red-600">Python</span>, <span className="text-red-600">FastAPI</span>, <span className="text-red-600">GCP</span>, <span className="text-red-600">RAG</span> e <span className="text-red-600">LLMs</span>!
                 </p>
                 <p className="text-sm">
                   Estou me formando em Engenharia da Computacao no SENAI CIMATEC em 2026.
@@ -357,7 +357,7 @@ export default function RetroPage({ onEnterModern }: RetroPageProps) {
                   <Cpu className="w-4 h-4" /> MINHAS SKILLS
                 </h3>
                 <div className="flex flex-wrap justify-center gap-1 text-xs">
-                  {["Python", "Keras", "PyTorch", "BigQuery", "GCP", "Terraform", "Docker", "React.js", "SQL", "Pandas", "Vertex AI", "PySpark"].map((skill, i) => (
+                  {["Python", "BigQuery", "GCP", "Docker", "FastAPI", "Pandas", "RAG", "Ollama", "SQL", "Plotly", "Streamlit", "Scikit-learn"].map((skill, i) => (
                     <span key={i} className="bg-[#000080] text-white px-2 py-0.5">{skill}</span>
                   ))}
                 </div>
@@ -400,62 +400,22 @@ export default function RetroPage({ onEnterModern }: RetroPageProps) {
                 </h2>
               </div>
 
-              {/* Engenheiro de IA/ML */}
+              {/* Ford Motor Company */}
               <div className="bg-[#c0c0c0] text-black p-4 border-2 border-t-white border-l-white border-r-[#404040] border-b-[#404040] max-w-2xl mx-auto">
                 <div className="flex items-center gap-2 mb-2">
                   <div className="w-8 h-8 bg-[#000080] flex items-center justify-center text-white font-bold text-xs">
-                    ML
+                    SW
                   </div>
                   <div>
-                    <h3 className="font-bold text-[#000080]">Software Dev Analyst (ML/Dados)</h3>
-                    <p className="text-xs text-gray-600">Ford Motor Company | Mai 2024 - Presente</p>
+                    <h3 className="font-bold text-[#000080]">Software Developer (de facto) — Product Development Analyst</h3>
+                    <p className="text-xs text-gray-600">Ford Motor Company | Jan 2023 - Presente</p>
                   </div>
                 </div>
                 <ul className="text-sm space-y-1 ml-4">
-                  <li>* Trajetoria iniciada em coding tradicional, evoluindo para projetos AI-first</li>
-                  <li>* Pipeline ML end-to-end: anomaly detection em garantias (Keras + BigQuery + Vertex AI) em parceria com bolsista IEL</li>
-                  <li>* Deploy via Terraform (IaC) + Tekton no Cloud Run, adaptando infraestrutura Ford ao projeto</li>
-                  <li>* Pipelines ETL no BigQuery para sensores veiculares e identificacao de disponibilidade de dados</li>
-                  <li>* Ferramenta Python para calculo de torque + angulo usada em chao de fabrica</li>
-                  <li>* Base tecnica com OCR (-60%+ tempo de busca), evoluida para pipeline GenAI duplo eliminando verificacao humana</li>
-                  <li>* Sistema RAG de fixadores: scoring matematico + LLM assessment por Base Number</li>
-                </ul>
-              </div>
-
-              {/* Estagiario Ford */}
-              <div className="bg-[#c0c0c0] text-black p-4 border-2 border-t-white border-l-white border-r-[#404040] border-b-[#404040] max-w-2xl mx-auto">
-                <div className="flex items-center gap-2 mb-2">
-                  <div className="w-8 h-8 bg-[#404080] flex items-center justify-center text-white font-bold text-xs">
-                    INT
-                  </div>
-                  <div>
-                    <h3 className="font-bold text-[#404080]">Estagiario de Engenharia de Software</h3>
-                    <p className="text-xs text-gray-600">Ford Brasil | Jan 2023 - Mai 2024</p>
-                  </div>
-                </div>
-                <ul className="text-sm space-y-1 ml-4">
-                  <li>* Automatizei rotinas de coleta e formatacao de dados com Python</li>
-                  <li>* Desenvolvi scripts de apoio para analises e fluxos operacionais</li>
-                  <li>* Iniciou na area de ML colaborando com time em projetos industriais</li>
-                </ul>
-              </div>
-
-              {/* Clube de Programacao */}
-              <div className="bg-[#c0c0c0] text-black p-4 border-2 border-t-white border-l-white border-r-[#404040] border-b-[#404040] max-w-2xl mx-auto">
-                <div className="flex items-center gap-2 mb-2">
-                  <div className="w-8 h-8 bg-[#008000] flex items-center justify-center text-white font-bold text-xs">
-                    CP
-                  </div>
-                  <div>
-                    <h3 className="font-bold text-[#008000]">Clube de Programacao CIMATEC</h3>
-                    <p className="text-xs text-gray-600">Dev Front-End + Mkt | Jun 2021 - Mai 2024</p>
-                  </div>
-                </div>
-                <ul className="text-sm space-y-1 ml-4">
-                  <li>* Desenvolvi apps web com React.js / Next.js e TypeScript</li>
-                  <li>* Criei identidade visual e conteudo do Instagram do Clube</li>
-                  <li>* Participei de competicoes de algoritmos (C++ e Python)</li>
-                  <li>* Contribui no site oficial do Clube com Figma + ReactJS</li>
+                  <li>* Warranty Anomaly Detection: pipeline ML end-to-end sobre centenas de concessionarias dos EUA — flagou fraude real confirmada sem contexto previo</li>
+                  <li>* Parts Search Engine (RAG + LLM): busca semantica sobre 20.000 pecas x 72 metricas — de 8-16h para &lt;5min (99%), usado por ~50 engenheiros/semana</li>
+                  <li>* PDF Extraction & Search DB: extracao automatizada de ~200 PDFs tecnicos, substituindo workflow manual de 1-2h por sessao</li>
+                  <li>* Stack: Python, FastAPI, Streamlit, GCP (BigQuery, Cloud Run), Docker, PostgreSQL</li>
                 </ul>
               </div>
 
@@ -592,10 +552,24 @@ export default function RetroPage({ onEnterModern }: RetroPageProps) {
                   </a>
                 </div>
 
-                {/* TSE Analyses */}
+                {/* JumpShip */}
                 <div className="bg-[#c0c0c0] text-black p-3 border-2 border-t-white border-l-white border-r-[#404040] border-b-[#404040]">
-                  <h3 className="font-bold text-[#800000] text-sm mb-1">TSE Analyses</h3>
-                  <p className="text-xs mb-2">EDA + Anomaly Detection sobre gastos CEAP de deputados federais</p>
+                  <h3 className="font-bold text-[#800000] text-sm mb-1">JumpShip</h3>
+                  <p className="text-xs mb-2">Plataforma local-first de busca de empregos com IA: resume upload → LLM parsing → scraping multi-plataforma → scoring por LLM</p>
+                  <div className="flex flex-wrap gap-1">
+                    <span className="bg-[#000080] text-white text-[10px] px-1">FastAPI</span>
+                    <span className="bg-[#000080] text-white text-[10px] px-1">React 19</span>
+                    <span className="bg-[#000080] text-white text-[10px] px-1">Ollama</span>
+                  </div>
+                  <a href="https://github.com/Awi-24/JumpShip" target="_blank" rel="noopener noreferrer" className="text-blue-600 text-xs hover:underline block mt-1">
+                    Ver no GitHub
+                  </a>
+                </div>
+
+                {/* CEAP Spending Analysis */}
+                <div className="bg-[#c0c0c0] text-black p-3 border-2 border-t-white border-l-white border-r-[#404040] border-b-[#404040]">
+                  <h3 className="font-bold text-[#800000] text-sm mb-1">CEAP Spending Analysis</h3>
+                  <p className="text-xs mb-2">EDA sobre gastos dos deputados federais — picos no fim do ano e convergencia partidaria por incentivo orcamentario. Em andamento como TCC.</p>
                   <div className="flex flex-wrap gap-1">
                     <span className="bg-[#000080] text-white text-[10px] px-1">Python</span>
                     <span className="bg-[#000080] text-white text-[10px] px-1">Pandas</span>
@@ -647,7 +621,7 @@ export default function RetroPage({ onEnterModern }: RetroPageProps) {
                 <div className="border-l-4 border-[#000080] pl-3">
                   <p className="font-bold">Engenharia da Computacao</p>
                   <p className="text-sm">SENAI CIMATEC - Salvador, BA</p>
-                  <p className="text-xs text-gray-600">Fev 2020 - Dez 2025</p>
+                  <p className="text-xs text-gray-600">Fev 2020 - Dez 2026 (previsto) | GPA 8.76/10</p>
                 </div>
               </div>
 
@@ -659,11 +633,13 @@ export default function RetroPage({ onEnterModern }: RetroPageProps) {
                 <div className="grid gap-2">
                   {[
                     { tag: "GCP", color: "bg-blue-500", name: "Google Cloud Fundamentals: Core Infrastructure", org: "Google | 2026" },
+                    { tag: "SRE", color: "bg-blue-500", name: "Google SRE Culture", org: "Google | 2026" },
                     { tag: "AWS", color: "bg-orange-500", name: "AWS Machine Learning Foundations", org: "Amazon Web Services | 2026" },
                     { tag: "DOE", color: "bg-[#000080]", name: "Designer de Experimentos (DOE)", org: "SENAI CIMATEC | 2025" },
                     { tag: "IBM", color: "bg-blue-700", name: "Supervised ML: Regression", org: "IBM / Coursera | 2025" },
                     { tag: "IBM", color: "bg-blue-700", name: "Exploratory Data Analysis for ML", org: "IBM / Coursera | 2024" },
                     { tag: "IBM", color: "bg-blue-700", name: "Introduction to AI", org: "IBM / Coursera | 2024" },
+                    { tag: "LNX", color: "bg-gray-600", name: "NDG Linux Essentials", org: "Cisco | 2024" },
                     { tag: "CIM", color: "bg-green-700", name: "Assistente de Engenharia", org: "SENAI CIMATEC | 2024" },
                     { tag: "AWS", color: "bg-orange-500", name: "AWS Cloud Practitioner Essentials", org: "Grupo Boticario | 2022" },
                     { tag: "AWS", color: "bg-orange-500", name: "Intro a Nuvem e Servicos de AWS", org: "Grupo Boticario | 2022" },
@@ -674,6 +650,28 @@ export default function RetroPage({ onEnterModern }: RetroPageProps) {
                         <p className="font-bold text-xs">{cert.name}</p>
                         <p className="text-[10px] text-gray-600">{cert.org}</p>
                       </div>
+                    </div>
+                  ))}
+                </div>
+              </div>
+
+              {/* Relevant Coursework */}
+              <div className="bg-[#c0c0c0] text-black p-4 border-2 border-t-white border-l-white border-r-[#404040] border-b-[#404040] max-w-2xl mx-auto">
+                <h3 className="font-bold text-[#000080] mb-3 flex items-center gap-2">
+                  <BookOpen className="w-5 h-5" /> MATERIAS RELEVANTES
+                </h3>
+                <div className="grid grid-cols-2 gap-2 text-xs">
+                  {[
+                    "Engenharia de Software",
+                    "Design Patterns (GoF)",
+                    "Clean Architecture / SOLID",
+                    "Scrum / Agile",
+                    "Algoritmos e Est. de Dados",
+                    "Redes de Computadores",
+                    "Sistemas Operacionais",
+                  ].map((subject, i) => (
+                    <div key={i} className="flex items-center gap-1 border-l-2 border-[#000080] pl-2">
+                      <span>{subject}</span>
                     </div>
                   ))}
                 </div>

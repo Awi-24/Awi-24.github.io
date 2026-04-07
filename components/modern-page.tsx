@@ -21,119 +21,84 @@ interface ModernPageProps {
 
 const SKILLS = {
   mlAi: [
-    { name: "Keras / TensorFlow", level: 70 },
-    { name: "PyTorch", level: 65 },
-    { name: "Scikit-learn", level: 72 },
-    { name: "Vertex AI", level: 65 },
-    { name: "MLflow", level: 62 },
+    { name: "Pandas / NumPy", level: 70 },
+    { name: "Scikit-learn", level: 60 },
+    { name: "RAG Pipelines", level: 65 },
+    { name: "LLM Integration", level: 68 },
+    { name: "Streamlit", level: 62 },
   ],
   mlTechniques: [
-    { name: "Detecção de Anomalias", level: 75 },
-    { name: "Regressão", level: 70 },
-    { name: "Clusterização", level: 65 },
-    { name: "PCA / EDA", level: 68 },
+    { name: "Anomaly Detection", level: 68 },
+    { name: "PCA / EDA", level: 58 },
+    { name: "Regression", level: 55 },
+    { name: "Clustering", level: 48 },
   ],
   dataEng: [
-    { name: "BigQuery", level: 72 },
-    { name: "Pandas / NumPy", level: 75 },
-    { name: "Pipelines ETL", level: 70 },
-    { name: "Alteryx", level: 62 },
+    { name: "BigQuery", level: 68 },
+    { name: "ETL Pipelines", level: 62 },
+    { name: "Plotly", level: 62 },
+    { name: "PostgreSQL", level: 48 },
   ],
   cloudMlops: [
-    { name: "GCP", level: 72 },
-    { name: "Terraform (IaC)", level: 65 },
-    { name: "Docker", level: 68 },
-    { name: "CI/CD / Tekton", level: 65 },
-    { name: "AWS", level: 62 },
+    { name: "GCP (BigQuery, Cloud Run)", level: 68 },
+    { name: "Linux / Git", level: 65 },
+    { name: "Docker", level: 62 },
+    { name: "FastAPI", level: 62 },
   ],
   languages: [
-    { name: "Python", level: 75 },
-    { name: "SQL", level: 72 },
-    { name: "TypeScript / JS", level: 68 },
-    { name: "C++", level: 62 },
+    { name: "Python", level: 65 },
+    { name: "SQL", level: 65 },
+    { name: "JavaScript / TypeScript", level: 52 },
+    { name: "C / C++", level: 45 },
   ],
   visualization: [
-    { name: "Plotly / Dash", level: 72 },
-    { name: "Matplotlib", level: 70 },
-    { name: "PyQt", level: 63 },
+    { name: "Plotly", level: 62 },
+    { name: "Streamlit", level: 62 },
+    { name: "Matplotlib", level: 55 },
   ],
   frontend: [
-    { name: "React.js / Next.js", level: 68 },
-    { name: "Tailwind CSS", level: 70 },
-    { name: "Figma", level: 63 },
+    { name: "React 19 / Next.js", level: 52 },
+    { name: "TypeScript", level: 52 },
+    { name: "Framer Motion", level: 42 },
   ],
   genAi: [
-    { name: "Claude API", level: 70 },
-    { name: "GPT-4", level: 68 },
-    { name: "Prompt Engineering", level: 75 },
-    { name: "LLM Integration", level: 70 },
+    { name: "Prompt Engineering", level: 70 },
+    { name: "Ollama", level: 62 },
+    { name: "Anthropic API", level: 62 },
+    { name: "OpenAI API", level: 60 },
+    { name: "Groq", level: 55 },
+  ],
+  methodologies: [
+    { name: "Scrum / Agile", level: 62 },
+    { name: "Engenharia de Software", level: 60 },
+    { name: "Design Patterns (GoF)", level: 58 },
+    { name: "Clean Arch / SOLID", level: 55 },
   ]
 }
 
 const EXPERIENCES = [
   {
-    title: "Software Development Analyst",
+    title: "Software Developer (de facto) — Título Oficial: Product Development Analyst",
     company: "Ford Motor Company",
     location: "Camaçari, BA",
-    period: "Mai 2024 - Presente",
+    period: "Jan 2023 - Presente",
     type: "Híbrido",
     highlights: [
-      "Trajetória iniciada em coding tradicional, evoluindo para projetos AI-first",
-      "Projetei e implantei pipeline de ML end-to-end para detecção de anomalias em custos de garantia (Keras + BigQuery + Vertex AI) em parceria com bolsista IEL — focado em redução e recovery de custos",
-      "Deploy realizado via Terraform (IaC) e CI/CD com Tekton no Google Cloud Run, adaptando a infraestrutura existente da Ford ao projeto",
-      "Construí pipelines ETL no BigQuery para ingestão de dados de sensores veiculares e identificação de disponibilidade de dados",
-      "Desenvolvi ferramenta Python para cálculo de física de juntas (torque + ângulo) usada em chão de fábrica e em outras áreas da indústria",
-      "Criei base de dados técnica com OCR para extração de PDFs (−60%+ no tempo de busca), posteriormente evoluída para pipeline GenAI duplo (extração + validação), eliminando a verificação humana"
+      "Warranty Anomaly Detection: pipeline ML end-to-end sobre dados de custo de garantia de centenas de concessionárias dos EUA — modelo flagou um caso real de fraude confirmada sem contexto prévio, validando a precisão",
+      "Parts Search Engine (RAG + LLM): sistema de busca semântica sobre 20.000 peças × 72 métricas de engenharia com algoritmo de scoring customizado e RAG com LLM — redução de 8–16h para <5min (99%), usado semanalmente por ~50 engenheiros",
+      "PDF Extraction & Search DB: extração estruturada automatizada de ~200 PDFs técnicos com interface de busca, substituindo workflow manual de 1–2h por sessão",
+      "Stack: Python, FastAPI, Streamlit, GCP (BigQuery, Cloud Run), Docker, PostgreSQL"
     ],
-    tags: ["Python", "GCP", "BigQuery", "Vertex AI", "Keras", "Terraform", "Tekton", "ETL", "GenAI", "OCR", "Pandas", "Docker"]
+    tags: ["Python", "FastAPI", "Streamlit", "GCP", "BigQuery", "Cloud Run", "Docker", "PostgreSQL", "RAG", "LLM"]
   },
   {
-    title: "Estagiário de Engenharia de Software",
-    company: "Ford Brasil",
-    location: "Salvador, BA",
-    period: "Jan 2023 - Mai 2024",
-    type: "Híbrido",
-    highlights: [
-      "Automatizei rotinas de coleta e formatação de dados com Python, eliminando retrabalho manual recorrente da equipe",
-      "Desenvolvi scripts e ferramentas de apoio para análises de dados e fluxos operacionais",
-      "Iniciou na área de ML colaborando com o time de engenharia em projetos de dados industriais"
-    ],
-    tags: ["Python", "Automação", "Pandas", "Otimização de Processos"]
-  },
-  {
-    title: "Desenvolvedor Web Front-End",
-    company: "Clube de Programação Cimatec",
-    location: "Salvador, BA",
-    period: "Jul 2022 - Mai 2024",
-    type: "Híbrido",
-    highlights: [
-      "Desenvolvi apps web com React.js / Next.js com foco em UX e SEO",
-      "Contribuí no desenvolvimento do site oficial do Clube de Programação com Figma e ReactJS",
-      "Participei de competições de algoritmos com C++ e Python"
-    ],
-    tags: ["React.js", "Next.js", "TypeScript", "Tailwind CSS", "Figma", "Vite"]
-  },
-  {
-    title: "Gerente de Marketing",
-    company: "Clube de Programação Cimatec",
-    location: "Salvador, BA",
-    period: "Jun 2021 - Mar 2023",
-    type: "Presencial",
-    highlights: [
-      "Criação da identidade visual do Instagram e demais eventos do Clube de Programação",
-      "Responsável pela comunicação com membros, venda de produtos e divulgação da iniciativa"
-    ],
-    tags: ["Marketing", "Design", "Identidade Visual", "Comunicação"]
-  },
-  {
-    title: "Iniciação Científica — Sistema MES / Indústria 4.0",
+    title: "Pesquisador de Iniciação Científica",
     company: "SENAI CIMATEC",
     location: "Salvador, BA",
     period: "Ago 2022 - Jan 2023",
     type: "Presencial",
     highlights: [
-      "Desenvolvimento de software de sistema de execução de manufaturas avançadas (MES)",
-      "Aplicação de recursos da Indústria 4.0 em ambiente de pesquisa e desenvolvimento"
+      "Desenvolveu módulos de software para um Sistema de Execução de Manufatura (MES) Indústria 4.0 com monitoramento em tempo real e automação de processos"
     ],
     tags: ["MES", "Indústria 4.0", "Pesquisa", "Desenvolvimento de Software"]
   }
@@ -156,11 +121,13 @@ const PUBLICATIONS = [
 
 const CERTIFICATIONS = [
   { name: "Google Cloud Fundamentals: Core Infrastructure", issuer: "Google", year: "2026" },
+  { name: "Google SRE Culture", issuer: "Google", year: "2026" },
   { name: "AWS Machine Learning Foundations", issuer: "Amazon Web Services", year: "2026" },
   { name: "Designer de Experimentos (DOE)", issuer: "SENAI CIMATEC", year: "2025" },
   { name: "Supervised ML: Regression", issuer: "IBM / Coursera", year: "2025" },
   { name: "Exploratory Data Analysis for ML", issuer: "IBM / Coursera", year: "2024" },
   { name: "Introduction to AI", issuer: "IBM / Coursera", year: "2024" },
+  { name: "NDG Linux Essentials", issuer: "Cisco", year: "2024" },
   { name: "Assistente de Engenharia", issuer: "SENAI CIMATEC", year: "2024" },
   { name: "AWS Cloud Practitioner Essentials", issuer: "Grupo Boticário", year: "2022" },
   { name: "Introdução à Nuvem e Serviços de AWS", issuer: "Grupo Boticário", year: "2022" },
@@ -228,12 +195,24 @@ const PROJECTS = [
     type: "personal"
   },
   {
+    id: "jumpship",
+    title: "JumpShip",
+    description: "Plataforma local-first de busca de empregos com IA: upload de currículo → parsing por LLM → scraping multi-plataforma (LinkedIn, Indeed, Gupy, RemoteOK) → scoring de compatibilidade por LLM.",
+    previewHint: "Ver código-fonte e arquitetura no GitHub",
+    demoType: "Open Source",
+    tags: ["FastAPI", "React 19", "TypeScript", "Ollama", "LLM"],
+    status: "DEV",
+    type: "personal",
+    github: "https://github.com/Awi-24/JumpShip",
+    noDemo: true
+  },
+  {
     id: "tse-analyses",
-    title: "TSE Analyses",
-    description: "EDA + ML sobre gastos CEAP de deputados federais. Anomaly detection revela inconsistências ocultas que passam despercebidas no relatório oficial.",
+    title: "CEAP Spending Analysis",
+    description: "EDA sobre gastos CEAP dos deputados federais brasileiros — identificou picos de gastos no fim do ano e convergência comportamental entre partidos por mecanismo de incentivo de redução orçamentária. Em andamento como TCC.",
     previewHint: "Passe o mouse no gráfico · Revele anomalias escondidas · Veja valores reais vs relatório oficial",
     demoType: "Visualização EDA",
-    tags: ["Python", "Pandas", "Anomaly Detection", "EDA"],
+    tags: ["Python", "Pandas", "Plotly", "Anomaly Detection", "EDA"],
     status: "PROD",
     type: "personal"
   },
@@ -387,12 +366,11 @@ export default function ModernPage({ onBack, glitchIntensity }: ModernPageProps)
               />
               
               <p className="text-lg sm:text-2xl text-[#FF4400] mb-2 font-mono">
-                {"< ENGENHEIRO DE SOFTWARE />"}
+                {"< SOFTWARE ENGINEER · DATA ENGINEER · AI/ML />"}
               </p>
 
               <p className="text-[#00B4FF]/70 max-w-2xl mb-4 text-base sm:text-lg px-4">
-                Engenheiro de Computação na Ford Motor Company — 1,5 anos em ML, construindo pipelines de dados no GCP,
-                sistemas de detecção de anomalias veiculares e financeiras, e ferramentas internas com Python e integração com modelos LLM.
+                Engenheiro de Software e IA/ML com 3+ anos na Ford Motor Company desenvolvendo sistemas de ML em produção, pipelines de dados e ferramentas internas como único desenvolvedor na equipe. Atualmente estudando arquiteturas de IA agêntica e pipelines multi-agente. Open to remote roles.
               </p>
 
               <p className="text-[#FCE94F]/50 text-sm mb-8">
@@ -419,8 +397,8 @@ export default function ModernPage({ onBack, glitchIntensity }: ModernPageProps)
               <div className="grid grid-cols-2 sm:grid-cols-4 gap-6 sm:gap-8 mt-16 pt-8 border-t border-[#FCE94F]/20 w-full max-w-3xl">
                 {[
                   { label: "Anos exp.", value: "3+" },
-                  { label: "Projetos", value: "8" },
-                  { label: "Certificações", value: "9" },
+                  { label: "Projetos", value: "9" },
+                  { label: "Certificações", value: "11" },
                   { label: "Publicações", value: "2" },
                 ].map((stat, i) => (
                   <div key={i} className="text-center">
@@ -436,7 +414,7 @@ export default function ModernPage({ onBack, glitchIntensity }: ModernPageProps)
                   <GraduationCap className="w-5 h-5 text-[#FF4400]" />
                   <span className="text-[#FCE94F] font-bold">B.Sc. Engenharia da Computação</span>
                 </div>
-                <p className="text-[#00B4FF]/70 text-sm">SENAI CIMATEC | 2020 - 2026 | IEEE EMBS Cimatec</p>
+                <p className="text-[#00B4FF]/70 text-sm">SENAI CIMATEC | 2020 - 2026 | GPA 8.76/10 | IEEE EMBS Cimatec</p>
               </div>
             </section>
           )}
@@ -529,6 +507,17 @@ export default function ModernPage({ onBack, glitchIntensity }: ModernPageProps)
                     {SKILLS.genAi.map((s, i) => renderSkillBar(s.name, s.level, i))}
                   </div>
                 </CyberCard>
+
+                {/* Architecture & Methodologies */}
+                <CyberCard delay={0.7}>
+                  <div className="p-5">
+                    <div className="flex items-center gap-3 mb-4">
+                      <Server className="w-6 h-6 text-[#FF4400]" />
+                      <span className="text-[#FCE94F] font-bold">Arquitetura & Métodos</span>
+                    </div>
+                    {SKILLS.methodologies.map((s, i) => renderSkillBar(s.name, s.level, i))}
+                  </div>
+                </CyberCard>
               </div>
 
               {/* Prompt Engineering Expertise */}
@@ -538,9 +527,9 @@ export default function ModernPage({ onBack, glitchIntensity }: ModernPageProps)
                   <h3 className="text-xl font-bold text-[#00B4FF]">EXPERTISE: PROMPT ENGINEERING & LLMs</h3>
                 </div>
                 <p className="text-[#FCE94F]/80 text-sm leading-relaxed">
-                  Expertise em disseminação de conhecimento em prompt engineering e uso de ferramentas generativas em ambientes corporativos. 
-                  Desenvolvimento de estratégias avançadas de prompting (Chain-of-Thought, Few-Shot, Role-Based), integração de LLMs em pipelines ML, 
-                  fine-tuning de modelos e implementação de RAG (Retrieval-Augmented Generation) para casos de uso empresariais.
+                  Desenvolvimento de pipelines LLM integrados com Ollama, OpenAI, Anthropic e Groq. Experiência com RAG (Retrieval-Augmented Generation)
+                  em produção, estratégias avançadas de prompting (Chain-of-Thought, Few-Shot, Role-Based) e estudo atual de arquiteturas de IA agêntica
+                  com LangGraph e AutoGen para workflows autônomos em produção.
                 </p>
               </div>
 
@@ -781,13 +770,25 @@ export default function ModernPage({ onBack, glitchIntensity }: ModernPageProps)
                                 </span>
                               ))}
                             </div>
-                            <button
-                              onClick={() => setSelectedProject(project.id)}
-                              className="w-full flex items-center justify-center gap-2 px-4 py-2.5 bg-[#00B4FF]/10 border border-[#00B4FF]/30 text-[#00B4FF] rounded hover:bg-[#00B4FF]/20 hover:border-[#00B4FF]/60 transition-all text-sm font-medium group"
-                            >
-                              <Play className="w-4 h-4 group-hover:scale-110 transition-transform" />
-                              Abrir Demo Interativo
-                            </button>
+                            {(project as any).noDemo ? (
+                              <a
+                                href={(project as any).github}
+                                target="_blank"
+                                rel="noopener noreferrer"
+                                className="w-full flex items-center justify-center gap-2 px-4 py-2.5 bg-[#00B4FF]/10 border border-[#00B4FF]/30 text-[#00B4FF] rounded hover:bg-[#00B4FF]/20 hover:border-[#00B4FF]/60 transition-all text-sm font-medium"
+                              >
+                                <Github className="w-4 h-4" />
+                                Ver no GitHub
+                              </a>
+                            ) : (
+                              <button
+                                onClick={() => setSelectedProject(project.id)}
+                                className="w-full flex items-center justify-center gap-2 px-4 py-2.5 bg-[#00B4FF]/10 border border-[#00B4FF]/30 text-[#00B4FF] rounded hover:bg-[#00B4FF]/20 hover:border-[#00B4FF]/60 transition-all text-sm font-medium group"
+                              >
+                                <Play className="w-4 h-4 group-hover:scale-110 transition-transform" />
+                                Abrir Demo Interativo
+                              </button>
+                            )}
                           </div>
                         </CyberCard>
                       ))}
