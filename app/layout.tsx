@@ -8,7 +8,7 @@ const _geistMono = Geist_Mono({ subsets: ["latin"], variable: "--font-geist-mono
 const _orbitron = Orbitron({ subsets: ["latin"], variable: "--font-orbitron" });
 
 export const metadata: Metadata = {
-  title: 'Adrian.DEV | Portfólio Cyberpunk',
+  title: 'Awi-24',
   description: 'Portfólio interativo com estética cyberpunk - Full Stack Developer',
   icons: {
     icon: [
