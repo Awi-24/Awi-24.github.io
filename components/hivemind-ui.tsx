@@ -148,8 +148,29 @@ export function HiveMindCard({
   )
 }
 
-export function Terminal({ command, className = "" }: { command: string, className?: string }) {
+export function Terminal({ command, className = "", animate = true }: { command: string, className?: string, animate?: boolean }) {
   const [copied, setCopied] = useState(false)
+  const [displayText, setDisplayText] = useState(animate ? "" : command)
+  const [isTyping, setIsTyping] = useState(animate)
+
+  useEffect(() => {
+    if (!animate) return
+    
+    let current = ""
+    let index = 0
+    const interval = setInterval(() => {
+      if (index < command.length) {
+        current += command[index]
+        setDisplayText(current)
+        index++
+      } else {
+        clearInterval(interval)
+        setIsTyping(false)
+      }
+    }, 50)
+
+    return () => clearInterval(interval)
+  }, [command, animate])
 
   const handleCopy = () => {
     navigator.clipboard.writeText(command)
@@ -171,7 +192,10 @@ export function Terminal({ command, className = "" }: { command: string, classNa
       </div>
       <div className="p-4 flex gap-3">
         <span className="text-[#F5C518] shrink-0">$</span>
-        <code className="text-[#F0F0F0] whitespace-nowrap overflow-x-auto">{command}</code>
+        <div className="flex-1 overflow-x-auto whitespace-nowrap scrollbar-hide">
+          <code className="text-[#F0F0F0]">{displayText}</code>
+          {isTyping && <span className="inline-block w-2 h-4 bg-[#F5C518] ml-1 animate-pulse" />}
+        </div>
       </div>
     </div>
   )
