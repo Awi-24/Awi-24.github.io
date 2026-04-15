@@ -1,6 +1,7 @@
 "use client"
 
 import { useState, useEffect } from "react"
+import Link from "next/link"
 import { Code2, User, Briefcase, Mail, ExternalLink, Github, Linkedin, Terminal, Cpu, Shield, Database, Globe, ChevronRight, Zap, Lock, ArrowLeft, Brain, Cloud, BarChart3, FileCode, Layers, Server, Microscope, GraduationCap, Award, Languages, Play } from "lucide-react"
 import AsciiRain from "@/components/ascii-rain"
 import GlitchText from "@/components/glitch-text"
@@ -163,6 +164,18 @@ const PROJECTS = [
     tags: ["Python", "PyQt", "NumPy", "Matplotlib", "Physics"],
     status: "PROD",
     type: "ford"
+  },
+  {
+    id: "hivemind",
+    title: "HiveMind Protocol",
+    description: "Framework open-source para orquestração de multi-agentes de IA com memória persistente, token compression e model routing automático.",
+    previewHint: "Veja a documentação dedicada · Explore o fluxo de multi-agentes · Guia de instalação rápida",
+    demoType: "Site Dedicado",
+    tags: ["IA", "Agents", "Orchestration", "LLM", "Memory"],
+    status: "NEW",
+    type: "personal",
+    isExternalLink: true,
+    href: "/hivemind"
   },
   {
     id: "vannex-cycle",
@@ -770,7 +783,15 @@ export default function ModernPage({ onBack, glitchIntensity }: ModernPageProps)
                                 </span>
                               ))}
                             </div>
-                            {(project as any).noDemo ? (
+                            {(project as any).isExternalLink ? (
+                              <Link
+                                href={(project as any).href}
+                                className="w-full flex items-center justify-center gap-2 px-4 py-2.5 bg-[#00B4FF]/10 border border-[#00B4FF]/30 text-[#00B4FF] rounded hover:bg-[#00B4FF]/20 hover:border-[#00B4FF]/60 transition-all text-sm font-medium group"
+                              >
+                                <Play className="w-4 h-4 group-hover:scale-110 transition-transform" />
+                                Abrir Site Dedicado
+                              </Link>
+                            ) : (project as any).noDemo ? (
                               <a
                                 href={(project as any).github}
                                 target="_blank"

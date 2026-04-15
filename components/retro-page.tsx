@@ -511,6 +511,25 @@ export default function RetroPage({ onEnterModern }: RetroPageProps) {
                 </div>
               </div>
               <div className="grid md:grid-cols-2 gap-4 max-w-3xl mx-auto">
+                {/* HiveMind Protocol */}
+                <div className="bg-[#c0c0c0] text-black p-3 border-2 border-t-white border-l-white border-r-[#404040] border-b-[#404040]">
+                  <h3 className="font-bold text-[#800000] text-sm mb-1">HiveMind Protocol</h3>
+                  <p className="text-xs mb-2">Framework open-source para orquestracao de multi-agentes de IA com memoria persistente e model routing.</p>
+                  <div className="flex flex-wrap gap-1">
+                    <span className="bg-[#000080] text-white text-[10px] px-1">Python</span>
+                    <span className="bg-[#000080] text-white text-[10px] px-1">Agents</span>
+                    <span className="bg-[#000080] text-white text-[10px] px-1">LLM</span>
+                  </div>
+                  <div className="flex gap-2 mt-2">
+                    <a href="https://github.com/Awi-24/HiveMind-Protocol" target="_blank" rel="noopener noreferrer" className="text-blue-600 text-xs hover:underline block">
+                      GitHub
+                    </a>
+                    <a href="/hivemind" className="text-red-600 text-xs hover:underline font-bold block">
+                      SITE DEDICADO
+                    </a>
+                  </div>
+                </div>
+
                 {/* Vannex Cycle */}
                 <div className="bg-[#c0c0c0] text-black p-3 border-2 border-t-white border-l-white border-r-[#404040] border-b-[#404040]">
                   <h3 className="font-bold text-[#800000] text-sm mb-1">Vannex Cycle</h3>
