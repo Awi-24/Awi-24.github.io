@@ -768,7 +768,7 @@ export default function ModernPage({ onBack, glitchIntensity }: ModernPageProps)
                           </div>
                           <div className="bg-black/30 p-4 border border-[#00B4FF]/20 rounded">
                             <h4 className="text-[#00B4FF] text-xs font-bold uppercase mb-2">My Solution</h4>
-                            <p className="text-xs text-[#FCE94F]/70">End-to-end pipeline: SQL in BigQuery for massive aggregation -> Feature Engineering (Python) -> Autoencoder Model (Keras) to identify outliers -> Vertex AI Deployment.</p>
+                            <p className="text-xs text-[#FCE94F]/70">End-to-end pipeline: SQL in BigQuery for massive aggregation &rarr; Feature Engineering (Python) &rarr; Autoencoder Model (Keras) to identify outliers &rarr; Vertex AI Deployment.</p>
                           </div>
                         </div>
                         <div className="bg-[#FF4400]/5 border border-[#FF4400]/20 p-4 rounded">
