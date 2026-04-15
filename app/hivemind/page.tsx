@@ -142,13 +142,88 @@ export default function HiveMindPage() {
         </div>
       </section>
 
-      {/* 4. FEATURES GRID (The "How") */}
-      <section className="py-32 px-4 relative z-10 bg-[#050505] border-y border-[#1E1E1E] scroll-reveal">
+      {/* 4. THE ARCHITECTURE (New: Directory Structure) */}
+      <section className="py-32 px-4 scroll-reveal">
+        <div className="max-w-5xl mx-auto">
+          <div className="grid md:grid-cols-2 gap-16 items-center">
+            <div>
+              <h2 className="text-3xl font-bold text-white mb-6">Built on Markdown. <br/>Controlled by Protocol.</h2>
+              <p className="text-[#888888] mb-8 leading-relaxed">
+                HiveMind isn't a complex binary—it's a file-based protocol. Your agents read and write to a structured directory, making the entire "mind" of the project human-readable, version-controlled, and 100% local.
+              </p>
+              <div className="space-y-4">
+                <div className="flex gap-4 p-4 bg-[#141414] rounded border border-[#1E1E1E]">
+                  <Database className="w-5 h-5 text-[#F5C518] shrink-0" />
+                  <div>
+                    <h4 className="text-sm font-bold text-white">Local-First Privacy</h4>
+                    <p className="text-xs text-[#888888]">No proprietary cloud. Your context stays in your repo.</p>
+                  </div>
+                </div>
+                <div className="flex gap-4 p-4 bg-[#141414] rounded border border-[#1E1E1E]">
+                  <Workflow className="w-5 h-5 text-[#F5C518] shrink-0" />
+                  <div>
+                    <h4 className="text-sm font-bold text-white">The Handoff Queue</h4>
+                    <p className="text-xs text-[#888888]">Asynchronous task delegation between specialized agent profiles.</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+            
+            <div className="bg-[#0D0D0D] p-6 rounded-lg border border-[#1E1E1E] font-mono text-xs leading-relaxed overflow-hidden shadow-2xl">
+              <div className="text-[#F5C518] mb-2 opacity-50 text-[10px] uppercase tracking-widest">Project Structure</div>
+              <div className="text-[#888888]">
+                <div>📂 .hivemind/</div>
+                <div className="pl-4">📂 profiles/ <span className="text-[#444]"># CTO.md, Security.md, etc.</span></div>
+                <div className="pl-4">📂 memory/</div>
+                <div className="pl-8 text-white/80">📄 shared-context.md</div>
+                <div className="pl-8 text-white/80">📄 decisions-log.md</div>
+                <div className="pl-8 text-white/80">📄 handoff-queue.md</div>
+                <div className="pl-4 text-[#F5C518]">📄 project.json <span className="text-[#444]"># Tech stack & model routing</span></div>
+                <div className="pl-4">📂 state/</div>
+                <div className="pl-8 text-white/80">📄 agent-frontend.json</div>
+                <div className="pl-8 text-white/80">📄 agent-devops.json</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* 5. USE CASES (New: Scenarios) */}
+      <section className="py-32 px-4 bg-[#050505] border-y border-[#1E1E1E] scroll-reveal">
         <div className="max-w-6xl mx-auto">
           <div className="text-center mb-16">
-            <h2 className="text-3xl font-bold text-white mb-4">A complete orchestration toolkit.</h2>
-            <p className="text-[#888888]">Everything you need to manage a high-performance multi-agent team.</p>
+            <h2 className="text-3xl font-bold text-white mb-4">When to use HiveMind.</h2>
+            <p className="text-[#888888]">From greenfield startups to enterprise scale-ups.</p>
           </div>
+          <div className="grid md:grid-cols-3 gap-8">
+            {[
+              {
+                title: "Greenfield MVP",
+                desc: "Go from idea to full-stack implementation with agents handling Frontend, Backend, and Database in parallel.",
+                icon: Zap
+              },
+              {
+                title: "Legacy Refactor",
+                desc: "Let the Security and Architecture agents audit your old code while the DevOps agent prepares the containerization.",
+                icon: Shield
+              },
+              {
+                title: "Enterprise Modules",
+                desc: "Manage massive features within existing repos without losing context or violating architectural boundaries.",
+                icon: Layers
+              }
+            ].map((useCase, i) => (
+              <div key={i} className="p-8 border border-[#1E1E1E] rounded hover:border-[#F5C518]/30 transition-colors group">
+                <useCase.icon className="w-8 h-8 text-[#F5C518] mb-6 group-hover:scale-110 transition-transform" />
+                <h4 className="text-lg font-bold text-white mb-3">{useCase.title}</h4>
+                <p className="text-sm text-[#888888] leading-relaxed">{useCase.desc}</p>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* 6. FEATURES GRID */}
           <div className="grid md:grid-cols-3 gap-6">
             <HiveMindCard title="Persistent Memory" icon={Layers}>
               File-based memory system shared across all agents. shared-context, decisions log, and state files persist across every session.
