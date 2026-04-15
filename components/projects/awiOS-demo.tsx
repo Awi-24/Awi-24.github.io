@@ -18,7 +18,7 @@ const DIALOGUE = [
   { speaker: "Serena", avatar: "S", text: "Ooh be gah! Gerbit gerbit!", emotion: "excited" },
   { speaker: "Adrian", avatar: "A", text: "Shpansaa! Benzi cansen firby!", emotion: "happy", isPlayer: true },
   { speaker: "Serena", avatar: "S", text: "Wabadebadoo! Sul sul, dag dag!", emotion: "wave" },
-  { speaker: "Narrador", avatar: "N", text: "[choice] -> Abracar Serena | -> Dar presente | -> Sair", isSystem: true },
+  { speaker: "Narrador", avatar: "N", text: "[choice] → Abracar Serena | → Dar presente | → Sair", isSystem: true },
   { speaker: "Adrian", avatar: "A", text: "Nooboo nooboo! *abraca*", emotion: "love", isPlayer: true },
   { speaker: "Serena", avatar: "S", text: "Ohhh! Myshuno myshuno! Sul sul!", emotion: "heart" },
 ]
@@ -34,11 +34,11 @@ const CODE_EXAMPLE = `// awiOS Engine - Syntax
   player.say("Dag dag!")
   
   [choice: interacao]
-    -> "Abracar" {
+    → "Abracar" {
       relationship += 10
       goto: romance_path
     }
-    -> "Dar presente" {
+    → "Dar presente" {
       if inventory.has("flor")
         relationship += 20
       goto: gift_scene
