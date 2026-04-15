@@ -251,7 +251,7 @@ export default function RetroPage({ onEnterModern }: RetroPageProps) {
           <div className="flex items-center gap-2">
             <Monitor className="w-4 h-4 text-white" />
             <span className="text-white text-sm font-bold">
-              Internet Explorer - PORTFOLIO DO ADRIAN WIDMER
+              Internet Explorer - ADRIAN WIDMER PORTFOLIO
             </span>
           </div>
           <div className="flex gap-1">
@@ -263,21 +263,21 @@ export default function RetroPage({ onEnterModern }: RetroPageProps) {
 
         {/* Menu Bar */}
         <div className="bg-[#c0c0c0] px-2 py-1 border-b border-[#808080] text-xs flex gap-4">
-          <span className="hover:bg-[#000080] hover:text-white px-1 cursor-pointer">Arquivo</span>
-          <span className="hover:bg-[#000080] hover:text-white px-1 cursor-pointer">Editar</span>
-          <span className="hover:bg-[#000080] hover:text-white px-1 cursor-pointer">Exibir</span>
-          <span className="hover:bg-[#000080] hover:text-white px-1 cursor-pointer">Favoritos</span>
-          <span className="hover:bg-[#000080] hover:text-white px-1 cursor-pointer">Ajuda</span>
+          <span className="hover:bg-[#000080] hover:text-white px-1 cursor-pointer">File</span>
+          <span className="hover:bg-[#000080] hover:text-white px-1 cursor-pointer">Edit</span>
+          <span className="hover:bg-[#000080] hover:text-white px-1 cursor-pointer">View</span>
+          <span className="hover:bg-[#000080] hover:text-white px-1 cursor-pointer">Favorites</span>
+          <span className="hover:bg-[#000080] hover:text-white px-1 cursor-pointer">Help</span>
         </div>
 
         {/* Address Bar */}
         <div className="bg-[#c0c0c0] px-2 py-1 flex items-center gap-2 border-b border-[#808080]">
-          <span className="text-xs">Endereco:</span>
-          <div className="flex-1 bg-white border border-[#808080] px-1 py-0.5 text-xs">
+          <span className="text-xs">Address:</span>
+          <div className="flex-1 bg-white border border-[#808080] px-1 py-0.5 text-xs text-black">
             http://www.geocities.com/adrian_widmer_ml_engineer_2000/{activeTab === "home" ? "" : activeTab + ".html"}
           </div>
-          <button className="bg-[#c0c0c0] border border-t-white border-l-white border-r-[#404040] border-b-[#404040] px-2 py-0.5 text-xs hover:bg-[#d0d0d0]">
-            Ir
+          <button className="bg-[#c0c0c0] border border-t-white border-l-white border-r-[#404040] border-b-[#404040] px-2 py-0.5 text-xs hover:bg-[#d0d0d0] text-black">
+            Go
           </button>
         </div>
 
@@ -287,13 +287,13 @@ export default function RetroPage({ onEnterModern }: RetroPageProps) {
             HOME
           </RetroButton>
           <RetroButton active={activeTab === "experiencia"} onClick={() => setActiveTab("experiencia")}>
-            EXPERIENCIA
+            EXPERIENCE
           </RetroButton>
           <RetroButton active={activeTab === "projetos"} onClick={() => setActiveTab("projetos")}>
-            PROJETOS
+            PROJECTS
           </RetroButton>
           <RetroButton active={activeTab === "formacao"} onClick={() => setActiveTab("formacao")}>
-            FORMACAO
+            EDUCATION
           </RetroButton>
         </div>
 
@@ -303,7 +303,7 @@ export default function RetroPage({ onEnterModern }: RetroPageProps) {
           <div className="flex justify-center mb-4">
             <div className="flex items-center gap-2 text-yellow-400 animate-pulse">
               <Zap className="w-6 h-6" />
-              <span className="text-xs">EM CONSTRUCAO - VOLTE SEMPRE!</span>
+              <span className="text-xs">UNDER CONSTRUCTION - COME BACK SOON!</span>
               <Zap className="w-6 h-6" />
             </div>
           </div>
@@ -312,9 +312,9 @@ export default function RetroPage({ onEnterModern }: RetroPageProps) {
           <div className="overflow-hidden whitespace-nowrap mb-4">
             <div className="animate-marquee inline-block">
               <span className="text-2xl font-bold text-yellow-300" style={{ textShadow: "2px 2px #ff0000" }}>
-                ~~ BEM VINDO AO PORTFOLIO DO ADRIAN WIDMER ~~ {" "}
+                ~~ WELCOME TO ADRIAN WIDMER'S PORTFOLIO ~~ {" "}
                 <Star className="inline w-5 h-5 text-yellow-400" /> {" "}
-                ~~ ENGENHEIRO DE SOFTWARE ~~ {" "}
+                ~~ SOFTWARE ENGINEER ~~ {" "}
                 <Star className="inline w-5 h-5 text-yellow-400" /> {" "}
                 ~~ FORD MOTOR COMPANY ~~ {" "}
                 <Star className="inline w-5 h-5 text-yellow-400" /> {" "}
@@ -329,7 +329,7 @@ export default function RetroPage({ onEnterModern }: RetroPageProps) {
               {/* Visitor Counter */}
               <div className="inline-block bg-black p-2 border-2 border-yellow-400">
                 <div className="text-xs text-lime-400 font-mono">
-                  VOCE E O VISITANTE Nro
+                  YOU ARE VISITOR No.
                 </div>
                 <div className="text-2xl font-bold text-red-500 font-mono">
                   {visitCount.toString().padStart(6, '0')}
@@ -338,15 +338,15 @@ export default function RetroPage({ onEnterModern }: RetroPageProps) {
 
               {/* Welcome Message */}
               <div className="bg-[#c0c0c0] text-black p-4 border-2 border-t-white border-l-white border-r-[#404040] border-b-[#404040] inline-block max-w-lg mx-auto">
-                <h2 className="text-lg font-bold text-[#800000] mb-2">Ola Amigo da Internet!</h2>
+                <h2 className="text-lg font-bold text-[#800000] mb-2">Hello Internet Friend!</h2>
                 <p className="text-sm mb-2">
-                  Meu nome e <strong>Adrian Widmer</strong>, sou Engenheiro de Software e IA/ML na Ford Motor Company — 3+ anos desenvolvendo sistemas de ML em producao, pipelines de dados e ferramentas internas como unico dev na equipe de engenharia automotiva.
+                  I worked as a solo dev developing automation solutions with <strong>Python</strong> and <strong>Alteryx</strong> before migrating to the data area.
                 </p>
                 <p className="text-sm mb-2">
-                  Trabalho com <span className="text-red-600">Python</span>, <span className="text-red-600">FastAPI</span>, <span className="text-red-600">GCP</span>, <span className="text-red-600">RAG</span> e <span className="text-red-600">LLMs</span>!
+                  Currently, I am responsible for spreading the use of <strong>AI</strong> and best practices in an engineering team at Ford Motor Company. I study <strong>MLOps</strong> and focus on agentic models with my <strong>HiveMind Protocol</strong> framework.
                 </p>
                 <p className="text-sm">
-                  Estou me formando em Engenharia da Computacao no SENAI CIMATEC em 2026.
+                  I am graduating in Computer Engineering at SENAI CIMATEC in 2026.
                   {blinkVisible && <span className="text-red-500"> _</span>}
                 </p>
               </div>
@@ -354,7 +354,7 @@ export default function RetroPage({ onEnterModern }: RetroPageProps) {
               {/* Skills Box */}
               <div className="bg-[#c0c0c0] text-black p-3 border-2 border-t-white border-l-white border-r-[#404040] border-b-[#404040] inline-block max-w-md mx-auto">
                 <h3 className="text-sm font-bold text-[#000080] mb-2 flex items-center justify-center gap-1">
-                  <Cpu className="w-4 h-4" /> MINHAS SKILLS
+                  <Cpu className="w-4 h-4" /> MY SKILLS
                 </h3>
                 <div className="flex flex-wrap justify-center gap-1 text-xs">
                   {["Python", "BigQuery", "GCP", "Docker", "FastAPI", "Pandas", "RAG", "Ollama", "SQL", "Plotly", "Streamlit", "Scikit-learn"].map((skill, i) => (
@@ -366,26 +366,26 @@ export default function RetroPage({ onEnterModern }: RetroPageProps) {
               {/* Links Section */}
               <div className="grid grid-cols-2 gap-4 max-w-md mx-auto text-left">
                 <a href="https://github.com/Awi-24" target="_blank" rel="noopener noreferrer" className="text-lime-400 hover:text-yellow-400 flex items-center gap-2 text-sm">
-                  <Code className="w-4 h-4" /> Meu GitHub (Awi-24)
+                  <Code className="w-4 h-4" /> My GitHub (Awi-24)
                 </a>
                 <a href="mailto:adrianwidmer.work@gmail.com" className="text-lime-400 hover:text-yellow-400 flex items-center gap-2 text-sm">
-                  <Mail className="w-4 h-4" /> Mande um Email
+                  <Mail className="w-4 h-4" /> Send an Email
                 </a>
                 <a href="https://linkedin.com/in/adrian-widmer-0587a9230" target="_blank" rel="noopener noreferrer" className="text-lime-400 hover:text-yellow-400 flex items-center gap-2 text-sm">
-                  <Globe className="w-4 h-4" /> Meu LinkedIn
+                  <Globe className="w-4 h-4" /> My LinkedIn
                 </a>
                 <a href="#" className="text-lime-400 hover:text-yellow-400 flex items-center gap-2 text-sm">
-                  <Star className="w-4 h-4" /> Livro de Visitas
+                  <Star className="w-4 h-4" /> Guestbook
                 </a>
               </div>
 
               {/* Webring */}
               <div className="border border-yellow-400 p-2 inline-block">
-                <div className="text-xs text-yellow-400 mb-1">WEBRING DOS ENGENHEIROS DE ML</div>
+                <div className="text-xs text-yellow-400 mb-1">ML ENGINEERS WEBRING</div>
                 <div className="flex gap-2 text-xs">
-                  <a href="#" className="text-cyan-400 hover:text-white">{"<< Anterior"}</a>
+                  <a href="#" className="text-cyan-400 hover:text-white">{"<< Previous"}</a>
                   <span className="text-white">|</span>
-                  <a href="#" className="text-cyan-400 hover:text-white">{"Proximo >>"}</a>
+                  <a href="#" className="text-cyan-400 hover:text-white">{"Next >>"}</a>
                 </div>
               </div>
             </div>
@@ -412,10 +412,11 @@ export default function RetroPage({ onEnterModern }: RetroPageProps) {
                   </div>
                 </div>
                 <ul className="text-sm space-y-1 ml-4">
-                  <li>* Warranty Anomaly Detection: pipeline ML end-to-end sobre centenas de concessionarias dos EUA — flagou fraude real confirmada sem contexto previo</li>
-                  <li>* Parts Search Engine (RAG + LLM): busca semantica sobre 20.000 pecas x 72 metricas — de 8-16h para &lt;5min (99%), usado por ~50 engenheiros/semana</li>
-                  <li>* PDF Extraction & Search DB: extracao automatizada de ~200 PDFs tecnicos, substituindo workflow manual de 1-2h por sessao</li>
-                  <li>* Stack: Python, FastAPI, Streamlit, GCP (BigQuery, Cloud Run), Docker, PostgreSQL</li>
+                  <li>* Liderança técnica na difusão de IA e boas práticas para times de engenharia mecânica/produção</li>
+                  <li>* Warranty Anomaly Detection: pipeline ML end-to-end sobre concessionarias EUA — flagou fraude real confirmada</li>
+                  <li>* Parts Search Engine (RAG + LLM): busca semantica sobre 20.000 pecas x 72 metricas — redução de 8-16h para &lt;5min (99%)</li>
+                  <li>* Solo Dev Automation: Automações em Python/Alteryx migradas para ferramentas de dados de larga escala</li>
+                  <li>* Stack: Python, FastAPI, Streamlit, GCP, LangGraph, LLMs</li>
                 </ul>
               </div>
 
@@ -505,44 +506,40 @@ export default function RetroPage({ onEnterModern }: RetroPageProps) {
               </div>
 
               {/* Personal Projects Section */}
-              <div className="mb-4 max-w-3xl mx-auto">
+              <div className="mb-6 max-w-3xl mx-auto">
                 <div className="bg-[#008000] text-white px-2 py-1 text-sm font-bold mb-2 inline-block">
-                  PROJETOS PESSOAIS (Open Source)
+                  PROJETOS PESSOAIS (Destaques)
+                </div>
+                <div className="grid md:grid-cols-2 gap-4">
+                  {/* HiveMind Protocol */}
+                  <div className="bg-[#c0c0c0] text-black p-3 border-2 border-t-white border-l-white border-r-[#404040] border-b-[#404040]">
+                    <h3 className="font-bold text-[#800000] text-sm mb-1">HiveMind Protocol</h3>
+                    <p className="text-xs mb-2">Framework proprietario para orquestracao de agentes de IA multi-nivel.</p>
+                    <div className="flex flex-wrap gap-1">
+                      <span className="bg-[#000080] text-white text-[10px] px-1">Python</span>
+                      <span className="bg-[#000080] text-white text-[10px] px-1">Agentic AI</span>
+                      <span className="bg-[#000080] text-white text-[10px] px-1">LangGraph</span>
+                    </div>
+                  </div>
+
+                  {/* JumpShip */}
+                  <div className="bg-[#c0c0c0] text-black p-3 border-2 border-t-white border-l-white border-r-[#404040] border-b-[#404040]">
+                    <h3 className="font-bold text-[#800000] text-sm mb-1">JumpShip</h3>
+                    <p className="text-xs mb-2">Plataforma de busca de empregos com IA. Versao ALPHA em desenvolvimento.</p>
+                    <div className="flex flex-wrap gap-1">
+                      <span className="bg-[#000080] text-white text-[10px] px-1">FastAPI</span>
+                      <span className="bg-[#000080] text-white text-[10px] px-1">LLM</span>
+                      <span className="bg-[#000080] text-white text-[10px] px-1">DEV ALPHA</span>
+                    </div>
+                  </div>
                 </div>
               </div>
+
               <div className="grid md:grid-cols-2 gap-4 max-w-3xl mx-auto">
-                {/* Vannex Cycle */}
-                <div className="bg-[#c0c0c0] text-black p-3 border-2 border-t-white border-l-white border-r-[#404040] border-b-[#404040]">
-                  <h3 className="font-bold text-[#800000] text-sm mb-1">Vannex Cycle</h3>
-                  <p className="text-xs mb-2">App Flutter de ciclo menstrual. Privacy-first: 100% local, sem cloud.</p>
-                  <div className="flex flex-wrap gap-1">
-                    <span className="bg-[#000080] text-white text-[10px] px-1">Flutter</span>
-                    <span className="bg-[#000080] text-white text-[10px] px-1">Dart</span>
-                    <span className="bg-[#000080] text-white text-[10px] px-1">SQLite</span>
-                  </div>
-                  <a href="https://github.com/Awi-24/Vannex-Cycleo" target="_blank" rel="noopener noreferrer" className="text-blue-600 text-xs hover:underline block mt-1">
-                    Ver no GitHub
-                  </a>
-                </div>
-
-                {/* Monnex */}
-                <div className="bg-[#c0c0c0] text-black p-3 border-2 border-t-white border-l-white border-r-[#404040] border-b-[#404040]">
-                  <h3 className="font-bold text-[#800000] text-sm mb-1">Monnex</h3>
-                  <p className="text-xs mb-2">App Flutter de financas pessoais. Privacy-first: dados so no dispositivo.</p>
-                  <div className="flex flex-wrap gap-1">
-                    <span className="bg-[#000080] text-white text-[10px] px-1">Flutter</span>
-                    <span className="bg-[#000080] text-white text-[10px] px-1">Dart</span>
-                    <span className="bg-[#000080] text-white text-[10px] px-1">SQLite</span>
-                  </div>
-                  <a href="https://github.com/Awi-24/Monnex" target="_blank" rel="noopener noreferrer" className="text-blue-600 text-xs hover:underline block mt-1">
-                    Ver no GitHub
-                  </a>
-                </div>
-
                 {/* AwiOS */}
                 <div className="bg-[#c0c0c0] text-black p-3 border-2 border-t-white border-l-white border-r-[#404040] border-b-[#404040]">
                   <h3 className="font-bold text-[#800000] text-sm mb-1">AwiOS Engine</h3>
-                  <p className="text-xs mb-2">Engine Flutter para visual novels com linguagem de scripting propria e branching narrativo</p>
+                  <p className="text-xs mb-2">Engine Flutter para visual novels com linguagem de scripting propria.</p>
                   <div className="flex flex-wrap gap-1">
                     <span className="bg-[#000080] text-white text-[10px] px-1">Flutter</span>
                     <span className="bg-[#000080] text-white text-[10px] px-1">Dart</span>
@@ -552,28 +549,13 @@ export default function RetroPage({ onEnterModern }: RetroPageProps) {
                   </a>
                 </div>
 
-                {/* JumpShip */}
-                <div className="bg-[#c0c0c0] text-black p-3 border-2 border-t-white border-l-white border-r-[#404040] border-b-[#404040]">
-                  <h3 className="font-bold text-[#800000] text-sm mb-1">JumpShip</h3>
-                  <p className="text-xs mb-2">Plataforma local-first de busca de empregos com IA: resume upload → LLM parsing → scraping multi-plataforma → scoring por LLM</p>
-                  <div className="flex flex-wrap gap-1">
-                    <span className="bg-[#000080] text-white text-[10px] px-1">FastAPI</span>
-                    <span className="bg-[#000080] text-white text-[10px] px-1">React 19</span>
-                    <span className="bg-[#000080] text-white text-[10px] px-1">Ollama</span>
-                  </div>
-                  <a href="https://github.com/Awi-24/JumpShip" target="_blank" rel="noopener noreferrer" className="text-blue-600 text-xs hover:underline block mt-1">
-                    Ver no GitHub
-                  </a>
-                </div>
-
                 {/* CEAP Spending Analysis */}
                 <div className="bg-[#c0c0c0] text-black p-3 border-2 border-t-white border-l-white border-r-[#404040] border-b-[#404040]">
                   <h3 className="font-bold text-[#800000] text-sm mb-1">CEAP Spending Analysis</h3>
-                  <p className="text-xs mb-2">EDA sobre gastos dos deputados federais — picos no fim do ano e convergencia partidaria por incentivo orcamentario. Em andamento como TCC.</p>
+                  <p className="text-xs mb-2">Analise de gastos dos deputados. Projeto Academico / Faculdade.</p>
                   <div className="flex flex-wrap gap-1">
                     <span className="bg-[#000080] text-white text-[10px] px-1">Python</span>
-                    <span className="bg-[#000080] text-white text-[10px] px-1">Pandas</span>
-                    <span className="bg-[#000080] text-white text-[10px] px-1">Plotly</span>
+                    <span className="bg-[#000080] text-white text-[10px] px-1">EDA</span>
                   </div>
                   <a href="https://github.com/Awi-24/TSE-DataAnalytics" target="_blank" rel="noopener noreferrer" className="text-blue-600 text-xs hover:underline block mt-1">
                     Ver no GitHub
@@ -582,12 +564,11 @@ export default function RetroPage({ onEnterModern }: RetroPageProps) {
 
                 {/* KDD Cup 1999 */}
                 <div className="bg-[#c0c0c0] text-black p-3 border-2 border-t-white border-l-white border-r-[#404040] border-b-[#404040]">
-                  <h3 className="font-bold text-[#800000] text-sm mb-1">KDD Cup 1999 — Anomaly Detection</h3>
-                  <p className="text-xs mb-2">XGBoost vs IsolationForest vs LOF vs Autoencoder vs OCSVM. IsolationForest: 97.1% recall sem rotulos.</p>
+                  <h3 className="font-bold text-[#800000] text-sm mb-1">KDD Cup 1999 — Anomaly</h3>
+                  <p className="text-xs mb-2">Benchmark de deteccao de intrusao em rede. IsolationForest: 97.1% recall.</p>
                   <div className="flex flex-wrap gap-1">
-                    <span className="bg-[#000080] text-white text-[10px] px-1">XGBoost</span>
-                    <span className="bg-[#000080] text-white text-[10px] px-1">Sklearn</span>
-                    <span className="bg-[#000080] text-white text-[10px] px-1">Keras</span>
+                    <span className="bg-[#000080] text-white text-[10px] px-1">ML</span>
+                    <span className="bg-[#000080] text-white text-[10px] px-1">Python</span>
                   </div>
                   <a href="https://github.com/Awi-24/KDD-Cup-1999-Anomaly-Detection" target="_blank" rel="noopener noreferrer" className="text-blue-600 text-xs hover:underline block mt-1">
                     Ver no GitHub
@@ -616,33 +597,33 @@ export default function RetroPage({ onEnterModern }: RetroPageProps) {
               {/* Education */}
               <div className="bg-[#c0c0c0] text-black p-4 border-2 border-t-white border-l-white border-r-[#404040] border-b-[#404040] max-w-2xl mx-auto">
                 <h3 className="font-bold text-[#000080] mb-3 flex items-center gap-2">
-                  <GraduationCap className="w-5 h-5" /> EDUCACAO
+                  <GraduationCap className="w-5 h-5" /> EDUCATION
                 </h3>
-                <div className="border-l-4 border-[#000080] pl-3">
-                  <p className="font-bold">Engenharia da Computacao</p>
-                  <p className="text-sm">SENAI CIMATEC - Salvador, BA</p>
-                  <p className="text-xs text-gray-600">Fev 2020 - Dez 2026 (previsto) | GPA 8.76/10</p>
+                <div className="border-l-4 border-[#000080] pl-3 text-black">
+                  <p className="font-bold">Computer Engineering</p>
+                  <p className="text-sm">SENAI CIMATEC - Salvador, Brazil</p>
+                  <p className="text-xs text-gray-600">Feb 2020 - Dec 2026 (expected) | GPA 8.76/10</p>
                 </div>
               </div>
 
               {/* Certifications */}
               <div className="bg-[#c0c0c0] text-black p-4 border-2 border-t-white border-l-white border-r-[#404040] border-b-[#404040] max-w-2xl mx-auto">
                 <h3 className="font-bold text-[#000080] mb-3 flex items-center gap-2">
-                  <Award className="w-5 h-5" /> CERTIFICACOES
+                  <Award className="w-5 h-5" /> CERTIFICATIONS
                 </h3>
-                <div className="grid gap-2">
+                <div className="grid gap-2 text-black">
                   {[
                     { tag: "GCP", color: "bg-blue-500", name: "Google Cloud Fundamentals: Core Infrastructure", org: "Google | 2026" },
                     { tag: "SRE", color: "bg-blue-500", name: "Google SRE Culture", org: "Google | 2026" },
                     { tag: "AWS", color: "bg-orange-500", name: "AWS Machine Learning Foundations", org: "Amazon Web Services | 2026" },
-                    { tag: "DOE", color: "bg-[#000080]", name: "Designer de Experimentos (DOE)", org: "SENAI CIMATEC | 2025" },
+                    { tag: "DOE", color: "bg-[#000080]", name: "Design of Experiments (DOE)", org: "SENAI CIMATEC | 2025" },
                     { tag: "IBM", color: "bg-blue-700", name: "Supervised ML: Regression", org: "IBM / Coursera | 2025" },
                     { tag: "IBM", color: "bg-blue-700", name: "Exploratory Data Analysis for ML", org: "IBM / Coursera | 2024" },
                     { tag: "IBM", color: "bg-blue-700", name: "Introduction to AI", org: "IBM / Coursera | 2024" },
                     { tag: "LNX", color: "bg-gray-600", name: "NDG Linux Essentials", org: "Cisco | 2024" },
-                    { tag: "CIM", color: "bg-green-700", name: "Assistente de Engenharia", org: "SENAI CIMATEC | 2024" },
+                    { tag: "CIM", color: "bg-green-700", name: "Engineering Assistant", org: "SENAI CIMATEC | 2024" },
                     { tag: "AWS", color: "bg-orange-500", name: "AWS Cloud Practitioner Essentials", org: "Grupo Boticario | 2022" },
-                    { tag: "AWS", color: "bg-orange-500", name: "Intro a Nuvem e Servicos de AWS", org: "Grupo Boticario | 2022" },
+                    { tag: "AWS", color: "bg-orange-500", name: "Intro to Cloud and AWS Services", org: "Grupo Boticario | 2022" },
                   ].map((cert, i) => (
                     <div key={i} className="flex items-center gap-2 border-l-4 border-[#000080] pl-2">
                       <div className={`w-8 h-8 ${cert.color} flex items-center justify-center text-white font-bold text-[9px] flex-shrink-0`}>{cert.tag}</div>
@@ -658,17 +639,17 @@ export default function RetroPage({ onEnterModern }: RetroPageProps) {
               {/* Relevant Coursework */}
               <div className="bg-[#c0c0c0] text-black p-4 border-2 border-t-white border-l-white border-r-[#404040] border-b-[#404040] max-w-2xl mx-auto">
                 <h3 className="font-bold text-[#000080] mb-3 flex items-center gap-2">
-                  <BookOpen className="w-5 h-5" /> MATERIAS RELEVANTES
+                  <BookOpen className="w-5 h-5" /> RELEVANT COURSEWORK
                 </h3>
-                <div className="grid grid-cols-2 gap-2 text-xs">
+                <div className="grid grid-cols-2 gap-2 text-xs text-black">
                   {[
-                    "Engenharia de Software",
+                    "Software Engineering",
                     "Design Patterns (GoF)",
                     "Clean Architecture / SOLID",
                     "Scrum / Agile",
-                    "Algoritmos e Est. de Dados",
-                    "Redes de Computadores",
-                    "Sistemas Operacionais",
+                    "Algorithms and Data Structures",
+                    "Computer Networks",
+                    "Operating Systems",
                   ].map((subject, i) => (
                     <div key={i} className="flex items-center gap-1 border-l-2 border-[#000080] pl-2">
                       <span>{subject}</span>
@@ -679,22 +660,22 @@ export default function RetroPage({ onEnterModern }: RetroPageProps) {
 
               {/* Languages */}
               <div className="bg-black/50 p-4 border border-cyan-400 max-w-2xl mx-auto">
-                <h3 className="text-cyan-400 text-sm font-bold mb-3">IDIOMAS:</h3>
+                <h3 className="text-cyan-400 text-sm font-bold mb-3 uppercase">Languages:</h3>
                 <div className="grid grid-cols-3 gap-4 text-center">
                   <div>
                     <div className="text-2xl mb-1">PT</div>
-                    <div className="text-xs text-lime-300">Portugues</div>
-                    <div className="text-[10px] text-gray-400">Nativo</div>
+                    <div className="text-xs text-lime-300">Portuguese</div>
+                    <div className="text-[10px] text-gray-400">Native</div>
                   </div>
                   <div>
                     <div className="text-2xl mb-1">EN</div>
-                    <div className="text-xs text-lime-300">Ingles</div>
-                    <div className="text-[10px] text-gray-400">Fluente</div>
+                    <div className="text-xs text-lime-300">English</div>
+                    <div className="text-[10px] text-gray-400">Fluent</div>
                   </div>
                   <div>
                     <div className="text-2xl mb-1">DE</div>
-                    <div className="text-xs text-lime-300">Alemao</div>
-                    <div className="text-[10px] text-gray-400">Intermediario</div>
+                    <div className="text-xs text-lime-300">German</div>
+                    <div className="text-[10px] text-gray-400">Intermediate</div>
                   </div>
                 </div>
               </div>
@@ -709,20 +690,20 @@ export default function RetroPage({ onEnterModern }: RetroPageProps) {
               className="bg-gradient-to-r from-red-600 to-orange-500 text-white px-6 py-3 text-lg font-bold border-2 border-t-white border-l-white border-r-[#404040] border-b-[#404040] hover:from-red-500 hover:to-orange-400 transition-all animate-pulse"
               style={{ textShadow: "1px 1px 2px black" }}
             >
-              SAIBA MAIS
+              LEARN MORE
             </button>
             <p className="text-xs text-cyan-400 mt-2 animate-pulse">
-              {">>> CLIQUE PARA VER A VERSAO CYBERPUNK 2077 <<<"}
+              {">>> CLICK TO SEE THE CYBERPUNK 2077 VERSION <<<"}
             </p>
           </div>
 
           {/* Footer */}
           <div className="mt-8 pt-4 border-t border-[#404080] text-center">
             <p className="text-xs text-cyan-300">
-              Ultima atualizacao: {currentTime}
+              Last update: {currentTime}
             </p>
             <p className="text-xs text-yellow-400 mt-1">
-              Melhor visualizado em Internet Explorer 5.0 | Resolucao 800x600
+              Best viewed in Internet Explorer 5.0 | 800x600 Resolution
             </p>
             <div className="flex justify-center gap-4 mt-2">
               <div className="bg-white text-black text-[8px] px-1 border border-black">
@@ -739,9 +720,9 @@ export default function RetroPage({ onEnterModern }: RetroPageProps) {
         </div>
 
         {/* Status Bar */}
-        <div className="bg-[#c0c0c0] px-2 py-1 text-xs border-t border-white flex justify-between">
-          <span>Concluido</span>
-          <span>Zona da Internet</span>
+        <div className="bg-[#c0c0c0] px-2 py-1 text-xs border-t border-white flex justify-between text-black">
+          <span>Done</span>
+          <span>Internet Zone</span>
         </div>
       </div>
       </div>{/* closes z-20 IE wrapper */}
