@@ -4,12 +4,12 @@ import { useState } from 'react'
 import { AlertTriangle, TrendingUp, Building2 } from 'lucide-react'
 
 const DEALERSHIP_DATA = [
-  { dealership: 'Concessionária A', repairCost: 2500, avgCost: 2200, overcharge: 300, alert: true },
-  { dealership: 'Concessionária B', repairCost: 2100, avgCost: 2200, overcharge: -100, alert: false },
-  { dealership: 'Concessionária C', repairCost: 3200, avgCost: 2200, overcharge: 1000, alert: true },
-  { dealership: 'Concessionária D', repairCost: 2180, avgCost: 2200, overcharge: -20, alert: false },
-  { dealership: 'Concessionária E', repairCost: 5800, avgCost: 2200, overcharge: 3600, alert: true },
-  { dealership: 'Concessionária F', repairCost: 2210, avgCost: 2200, overcharge: 10, alert: false },
+  { dealership: 'Dealership A', repairCost: 2500, avgCost: 2200, overcharge: 300, alert: true },
+  { dealership: 'Dealership B', repairCost: 2100, avgCost: 2200, overcharge: -100, alert: false },
+  { dealership: 'Dealership C', repairCost: 3200, avgCost: 2200, overcharge: 1000, alert: true },
+  { dealership: 'Dealership D', repairCost: 2180, avgCost: 2200, overcharge: -20, alert: false },
+  { dealership: 'Dealership E', repairCost: 5800, avgCost: 2200, overcharge: 3600, alert: true },
+  { dealership: 'Dealership F', repairCost: 2210, avgCost: 2200, overcharge: 10, alert: false },
 ]
 
 export default function FordAnomalyDemo() {
@@ -22,16 +22,16 @@ export default function FordAnomalyDemo() {
       {/* Summary */}
       <div className="grid grid-cols-3 gap-2">
         <div className="bg-[#1a1a2e] rounded border border-[#00ffff]/20 p-3">
-          <p className="text-[#00ffff]/50 text-xs mb-1">Concessionárias</p>
+          <p className="text-[#00ffff]/50 text-xs mb-1">Dealerships</p>
           <p className="text-[#00ffff] font-bold">{DEALERSHIP_DATA.length}</p>
         </div>
         <div className="bg-[#1a1a2e] rounded border border-[#ff0040]/20 p-3">
-          <p className="text-[#ff0040]/50 text-xs mb-1">Anomalias</p>
+          <p className="text-[#ff0040]/50 text-xs mb-1">Anomalies</p>
           <p className="text-[#ff0040] font-bold">{anomalies.length}</p>
         </div>
         <div className="bg-[#1a1a2e] rounded border border-[#ff6600]/20 p-3">
-          <p className="text-[#ff6600]/50 text-xs mb-1">Overcharge Total</p>
-          <p className="text-[#ff6600] font-bold">R$ {totalOvercharge.toLocaleString()}</p>
+          <p className="text-[#ff6600]/50 text-xs mb-1">Total Overcharge</p>
+          <p className="text-[#ff6600] font-bold">$ {totalOvercharge.toLocaleString()}</p>
         </div>
       </div>
 
@@ -39,7 +39,7 @@ export default function FordAnomalyDemo() {
       <div className="bg-[#1a1a2e] rounded border border-[#00ffff]/20 p-4">
         <div className="flex items-center gap-2 mb-4">
           <Building2 className="w-4 h-4 text-[#ff00ff]" />
-          <h4 className="text-[#00ffff] font-bold text-sm">ANÁLISE POR CONCESSIONÁRIA</h4>
+          <h4 className="text-[#00ffff] font-bold text-sm">DEALERSHIP ANALYSIS</h4>
         </div>
 
         <div className="space-y-3">
@@ -63,7 +63,7 @@ export default function FordAnomalyDemo() {
                     <span className="text-[#00ffff] text-xs font-mono">{dealer.dealership}</span>
                   </div>
                   <span className={`text-xs font-bold ${dealer.alert ? 'text-[#ff0040]' : 'text-[#00ff9f]'}`}>
-                    {dealer.alert ? '⚠️' : '✓'} R$ {dealer.repairCost}
+                    {dealer.alert ? '⚠️' : '✓'} $ {dealer.repairCost}
                   </span>
                 </div>
 
@@ -82,17 +82,17 @@ export default function FordAnomalyDemo() {
                 {isSelected && (
                   <div className="mt-3 p-3 bg-[#0a0a0f] border border-[#00ffff]/20 rounded text-xs space-y-2">
                     <div className="flex justify-between">
-                      <span className="text-[#00ffff]/70">Custo Médio:</span>
-                      <span className="text-[#00ffff]">R$ {dealer.avgCost}</span>
+                      <span className="text-[#00ffff]/70">Average Cost:</span>
+                      <span className="text-[#00ffff]">$ {dealer.avgCost}</span>
                     </div>
                     <div className="flex justify-between">
-                      <span className="text-[#00ffff]/70">Custo Atual:</span>
-                      <span className="text-[#ff0040]">R$ {dealer.repairCost}</span>
+                      <span className="text-[#00ffff]/70">Current Cost:</span>
+                      <span className="text-[#ff0040]">$ {dealer.repairCost}</span>
                     </div>
                     <div className="flex justify-between pt-2 border-t border-[#00ffff]/10">
-                      <span className="text-[#ff0040] font-bold">Diferença:</span>
+                      <span className="text-[#ff0040] font-bold">Difference:</span>
                       <span className={`font-bold ${dealer.overcharge > 0 ? 'text-[#ff0040]' : 'text-[#00ff9f]'}`}>
-                        {dealer.overcharge > 0 ? '+' : ''} R$ {dealer.overcharge} ({percentDiff}%)
+                        {dealer.overcharge > 0 ? '+' : ''} $ {dealer.overcharge} ({percentDiff}%)
                       </span>
                     </div>
                   </div>
@@ -108,11 +108,11 @@ export default function FordAnomalyDemo() {
         <div className="flex items-start gap-3">
           <TrendingUp className="w-5 h-5 text-[#ff00ff] flex-shrink-0 mt-0.5" />
           <div className="space-y-2 text-xs">
-            <p className="text-[#ff00ff] font-bold">MODELO ML - DETECÇÃO DE ANOMALIAS</p>
+            <p className="text-[#ff00ff] font-bold">ML MODEL - ANOMALY DETECTION</p>
             <p className="text-[#00ffff]/70">
-              Dados de garantia processados via BigQuery + Vertex AI. 
-              Algoritmos: Isolation Forest + Z-Score Normalization. 
-              Acurácia: 97.2% | Anomalias detectadas: {anomalies.length}/{DEALERSHIP_DATA.length}
+              Warranty data processed via BigQuery + Vertex AI. 
+              Algorithms: Isolation Forest + Z-Score Normalization. 
+              Accuracy: 97.2% | Anomalies detected: {anomalies.length}/{DEALERSHIP_DATA.length}
             </p>
           </div>
         </div>

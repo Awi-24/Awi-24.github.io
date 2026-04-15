@@ -78,7 +78,7 @@ const EXPERIENCES = [
   {
     title: "Software Developer (de facto) — Official Title: Product Development Analyst",
     company: "Ford Motor Company",
-    location: "Camaçari, Brazil",
+    location: "Camacari, Brazil",
     period: "Jan 2023 - Present",
     type: "Hybrid",
     highlights: [
@@ -128,8 +128,8 @@ const CERTIFICATIONS = [
   { name: "Introduction to AI", issuer: "IBM / Coursera", year: "2024" },
   { name: "NDG Linux Essentials", issuer: "Cisco", year: "2024" },
   { name: "Engineering Assistant", issuer: "SENAI CIMATEC", year: "2024" },
-  { name: "AWS Cloud Practitioner Essentials", issuer: "Grupo Boticário", year: "2022" },
-  { name: "Introduction to Cloud and AWS Services", issuer: "Grupo Boticário", year: "2022" },
+  { name: "AWS Cloud Practitioner Essentials", issuer: "Grupo Boticario", year: "2022" },
+  { name: "Introduction to Cloud and AWS Services", issuer: "Grupo Boticario", year: "2022" },
 ]
 
 const PROJECTS = [
@@ -403,36 +403,36 @@ export default function ModernPage({ onBack, glitchIntensity }: ModernPageProps)
               </p>
 
               <p className="text-[#00B4FF]/70 max-w-2xl mb-4 text-base sm:text-lg px-4">
-                Trabalhei como solo dev desenvolvendo soluções de automação com Python e Alteryx antes de migrar para a área de dados, onde desenvolvi ferramentas de larga escala. Atualmente, sou responsável por difundir o uso de IA e melhores práticas em um time de engenharia na Ford Motor Company. Estudo MLOps (Google) e foco em arquiteturas agênticas com o meu framework <strong>HiveMind Protocol</strong>.
+                Worked as a solo dev developing automation solutions with Python and Alteryx before migrating to the data field, where I developed large-scale tools. Currently responsible for spreading AI usage and best practices in an engineering team at Ford Motor Company. Studying MLOps (Google) and focusing on agentic architectures with my <strong>HiveMind Protocol</strong> framework.
               </p>
 
               <p className="text-[#FCE94F]/50 text-sm mb-8">
-                Salvador, BA | Inglês C1 | Alemão B1 | Foco em Performance alavancada por IA
+                Salvador, Brazil | English C1 | German B1 | Focus on AI-leveraged Performance
               </p>
 
               <div className="flex flex-wrap justify-center gap-4">
                 <button 
-                  onClick={() => setActiveSection("projetos")}
+                  onClick={() => setActiveSection("projects")}
                   className="px-6 sm:px-8 py-3 bg-transparent border-2 border-[#FCE94F] text-[#FCE94F] font-bold uppercase tracking-wider hover:bg-[#FCE94F] hover:text-[#0a0a0f] transition-all neon-pulse text-sm sm:text-base"
                 >
-                  Ver Projetos
+                  View Projects
                 </button>
                 <button 
-                  onClick={() => setActiveSection("contato")}
+                  onClick={() => setActiveSection("contact")}
                   className="px-6 sm:px-8 py-3 bg-[#FF4400] text-white font-bold uppercase tracking-wider hover:bg-[#FF4400]/80 transition-all text-sm sm:text-base"
                   style={{ boxShadow: "0 0 20px rgba(255, 68, 0, 0.5)" }}
                 >
-                  Contato
+                  Contact
                 </button>
               </div>
 
               {/* Stats */}
               <div className="grid grid-cols-2 sm:grid-cols-4 gap-6 sm:gap-8 mt-16 pt-8 border-t border-[#FCE94F]/20 w-full max-w-3xl">
                 {[
-                  { label: "Anos exp.", value: "3+" },
-                  { label: "Projetos", value: "9" },
-                  { label: "Certificações", value: "11" },
-                  { label: "Publicações", value: "2" },
+                  { label: "Years Exp.", value: "3+" },
+                  { label: "Projects", value: "9" },
+                  { label: "Certifications", value: "11" },
+                  { label: "Publications", value: "2" },
                 ].map((stat, i) => (
                   <div key={i} className="text-center">
                     <div className="text-2xl sm:text-4xl font-bold text-[#FCE94F] cyber-glow">{stat.value}</div>
@@ -444,8 +444,7 @@ export default function ModernPage({ onBack, glitchIntensity }: ModernPageProps)
               {/* Education */}
               <div className="mt-12 p-4 border border-[#FCE94F]/20 rounded bg-[#0a0a0f]/50 backdrop-blur max-w-md">
                 <div className="flex items-center gap-3 mb-2">
-                  <GraduationCap className="w-5 h-5 text-[#FF4400]" />
-                  <span className="text-[#FCE94F] font-bold">B.Sc. Engenharia da Computação</span>
+                  <span className="text-[#FCE94F] font-bold">B.Sc. Computer Engineering</span>
                 </div>
                 <p className="text-[#00B4FF]/70 text-sm">SENAI CIMATEC | 2020 - 2026 | GPA 8.76/10 | IEEE EMBS Cimatec</p>
               </div>
@@ -562,9 +561,7 @@ export default function ModernPage({ onBack, glitchIntensity }: ModernPageProps)
                   <h3 className="text-xl font-bold text-[#00B4FF]">EXPERTISE: PROMPT ENGINEERING & LLMs</h3>
                 </div>
                 <p className="text-[#FCE94F]/80 text-sm leading-relaxed">
-                  Desenvolvimento de pipelines LLM integrados com Ollama, OpenAI, Anthropic e Groq. Experiência com RAG (Retrieval-Augmented Generation)
-                  em produção, estratégias avançadas de prompting (Chain-of-Thought, Few-Shot, Role-Based) e estudo atual de arquiteturas de IA agêntica
-                  com LangGraph e AutoGen para workflows autônomos em produção.
+                  Development of LLM pipelines integrated with Ollama, OpenAI, Anthropic, and Groq. Experience with production-grade RAG (Retrieval-Augmented Generation), advanced prompting strategies (Chain-of-Thought, Few-Shot, Role-Based), and current research on agentic AI architectures with LangGraph and AutoGen for autonomous production workflows.
                 </p>
               </div>
 
@@ -572,7 +569,7 @@ export default function ModernPage({ onBack, glitchIntensity }: ModernPageProps)
               <div className="mt-12">
                 <h3 className="text-xl font-bold text-[#FCE94F] mb-6 flex items-center gap-2">
                   <Award className="w-5 h-5 text-[#FF4400]" />
-                  Certificações
+                  Certifications
                 </h3>
                 <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-4">
                   {CERTIFICATIONS.map((cert, i) => (
@@ -588,13 +585,13 @@ export default function ModernPage({ onBack, glitchIntensity }: ModernPageProps)
               <div className="mt-12">
                 <h3 className="text-xl font-bold text-[#FCE94F] mb-6 flex items-center gap-2">
                   <Languages className="w-5 h-5 text-[#FF4400]" />
-                  Idiomas
+                  Languages
                 </h3>
                 <div className="flex flex-wrap gap-4">
                   {[
-                    { lang: "Português", level: "Nativo | C2" },
-                    { lang: "Inglês", level: "Avançado | C1" },
-                    { lang: "Alemão", level: "Intermediário | B1" },
+                    { lang: "Portuguese", level: "Native | C2" },
+                    { lang: "English", level: "Advanced | C1" },
+                    { lang: "German", level: "Intermediate | B1" },
                   ].map((l, i) => (
                     <div key={i} className="px-4 py-2 border border-[#FF4400]/30 rounded bg-[#FF4400]/5">
                       <span className="text-[#FCE94F] font-medium">{l.lang}</span>
@@ -607,10 +604,10 @@ export default function ModernPage({ onBack, glitchIntensity }: ModernPageProps)
           )}
 
           {/* Experience Section */}
-          {activeSection === "experiencia" && (
+          {activeSection === "experience" && (
             <section className="py-16">
               <GlitchText 
-                text="// EXPERIÊNCIA" 
+                text="// EXPERIENCE" 
                 className="text-2xl sm:text-3xl font-bold text-[#FCE94F] mb-12 text-center"
               />
 
@@ -655,7 +652,7 @@ export default function ModernPage({ onBack, glitchIntensity }: ModernPageProps)
               <div className="mt-16">
                 <h3 className="text-xl font-bold text-[#FCE94F] mb-6 flex items-center gap-2">
                   <Microscope className="w-5 h-5 text-[#FF4400]" />
-                  Pesquisa & Publicações
+                  Research & Publications
                 </h3>
                 <div className="space-y-4">
                   {PUBLICATIONS.map((pub, i) => (
@@ -673,10 +670,10 @@ export default function ModernPage({ onBack, glitchIntensity }: ModernPageProps)
           )}
 
           {/* Projects Section */}
-          {activeSection === "projetos" && (
+          {activeSection === "projects" && (
             <section className="py-16">
               <GlitchText 
-                text="// PROJETOS" 
+                text="// PROJECTS" 
                 className="text-2xl sm:text-3xl font-bold text-[#FCE94F] mb-12 text-center"
               />
 
@@ -689,7 +686,7 @@ export default function ModernPage({ onBack, glitchIntensity }: ModernPageProps)
                       className="flex items-center gap-2 text-[#FF4400] hover:text-[#FCE94F] transition-colors text-sm"
                     >
                       <ArrowLeft className="w-4 h-4" />
-                      Voltar aos Projetos
+                      Back to Projects
                     </button>
                     {(() => {
                       const proj = PROJECTS.find(p => p.id === selectedProject)

@@ -11,14 +11,14 @@ export default function RetroPage({ onEnterModern }: RetroPageProps) {
   const [visitCount, setVisitCount] = useState(1337)
   const [currentTime, setCurrentTime] = useState("")
   const [blinkVisible, setBlink] = useState(true)
-  const [activeTab, setActiveTab] = useState<"home" | "experiencia" | "projetos" | "formacao">("home")
+  const [activeTab, setActiveTab] = useState<"home" | "experience" | "projects" | "education">("home")
   const [msnVisible, setMsnVisible] = useState(false)
-  const [msnMsg] = useState("Adrian diz: Oi! Bem-vindo ao meu portfolio! 😎")
+  const [msnMsg] = useState("Adrian says: Hi! Welcome to my portfolio! 😎")
   const [xpTime, setXpTime] = useState("")
 
   useEffect(() => {
     const timer = setInterval(() => {
-      setCurrentTime(new Date().toLocaleString("pt-BR"))
+      setCurrentTime(new Date().toLocaleString("en-US"))
       setBlink(prev => !prev)
     }, 500)
     return () => clearInterval(timer)
@@ -35,7 +35,7 @@ export default function RetroPage({ onEnterModern }: RetroPageProps) {
   useEffect(() => {
     const updateClock = () => {
       const now = new Date()
-      setXpTime(now.toLocaleTimeString("pt-BR", { hour: "2-digit", minute: "2-digit" }))
+      setXpTime(now.toLocaleTimeString("en-US", { hour: "2-digit", minute: "2-digit" }))
     }
     updateClock()
     const t = setInterval(updateClock, 1000)
@@ -100,8 +100,8 @@ export default function RetroPage({ onEnterModern }: RetroPageProps) {
       {/* ===== DESKTOP ICONS (fixed, left side) ===== */}
       <div className="fixed top-3 left-3 z-10 flex flex-col gap-3 select-none pointer-events-none">
         {[
-          { label: "Meu Computador", icon: "🖥️" },
-          { label: "Meus Documentos", icon: "📁" },
+          { label: "My Computer", icon: "🖥️" },
+          { label: "My Documents", icon: "📁" },
           { label: "Recycle Bin", icon: "🗑️" },
           { label: "Internet\nExplorer", icon: "🌐" },
           { label: "MSN Messenger", icon: "💬" },
@@ -187,7 +187,7 @@ export default function RetroPage({ onEnterModern }: RetroPageProps) {
           cursor: "pointer",
           boxShadow: "inset 0 1px 0 rgba(255,255,255,0.3)"
         }}>
-          <span style={{ fontSize: 16 }}>🏁</span> Iniciar
+          <span style={{ fontSize: 16 }}>🏁</span> Start
         </button>
 
         {/* Taskbar items */}
@@ -207,7 +207,7 @@ export default function RetroPage({ onEnterModern }: RetroPageProps) {
             textOverflow: "ellipsis",
             whiteSpace: "nowrap"
           }}>
-            🌐 Portfolio do Adrian Widmer — Internet Explorer
+            🌐 Adrian Widmer Portfolio — Internet Explorer
           </div>
           <div style={{
             background: "rgba(0,0,50,0.2)",
@@ -237,7 +237,7 @@ export default function RetroPage({ onEnterModern }: RetroPageProps) {
           color: "white"
         }}>
           <span title="Volume">🔊</span>
-          <span title="Rede">🌐</span>
+          <span title="Network">🌐</span>
           <span style={{ fontSize: 12, fontWeight: "bold", letterSpacing: 0.5 }}>{xpTime}</span>
         </div>
       </div>
@@ -286,13 +286,13 @@ export default function RetroPage({ onEnterModern }: RetroPageProps) {
           <RetroButton active={activeTab === "home"} onClick={() => setActiveTab("home")}>
             HOME
           </RetroButton>
-          <RetroButton active={activeTab === "experiencia"} onClick={() => setActiveTab("experiencia")}>
+          <RetroButton active={activeTab === "experience"} onClick={() => setActiveTab("experience")}>
             EXPERIENCE
           </RetroButton>
-          <RetroButton active={activeTab === "projetos"} onClick={() => setActiveTab("projetos")}>
+          <RetroButton active={activeTab === "projects"} onClick={() => setActiveTab("projects")}>
             PROJECTS
           </RetroButton>
-          <RetroButton active={activeTab === "formacao"} onClick={() => setActiveTab("formacao")}>
+          <RetroButton active={activeTab === "education"} onClick={() => setActiveTab("education")}>
             EDUCATION
           </RetroButton>
         </div>
@@ -391,31 +391,31 @@ export default function RetroPage({ onEnterModern }: RetroPageProps) {
             </div>
           )}
 
-          {/* TAB: EXPERIENCIA */}
-          {activeTab === "experiencia" && (
+          {/* TAB: EXPERIENCE */}
+          {activeTab === "experience" && (
             <div className="space-y-6">
               <div className="text-center mb-4">
-                <h2 className="text-xl font-bold text-yellow-300 flex items-center justify-center gap-2" style={{ textShadow: "2px 2px #ff0000" }}>
-                  <Briefcase className="w-6 h-6" /> EXPERIENCIA PROFISSIONAL
+                <h2 className="text-xl font-bold text-yellow-300 flex items-center justify-center gap-2 uppercase tracking-wide" style={{ textShadow: "2px 2px #ff0000" }}>
+                  <Briefcase className="w-6 h-6" /> Professional Experience
                 </h2>
               </div>
 
               {/* Ford Motor Company */}
               <div className="bg-[#c0c0c0] text-black p-4 border-2 border-t-white border-l-white border-r-[#404040] border-b-[#404040] max-w-2xl mx-auto">
                 <div className="flex items-center gap-2 mb-2">
-                  <div className="w-8 h-8 bg-[#000080] flex items-center justify-center text-white font-bold text-xs">
+                  <div className="w-8 h-8 bg-[#000080] flex items-center justify-center text-white font-bold text-xs uppercase">
                     SW
                   </div>
                   <div>
-                    <h3 className="font-bold text-[#000080]">Software Developer (de facto) — Product Development Analyst</h3>
-                    <p className="text-xs text-gray-600">Ford Motor Company | Jan 2023 - Presente</p>
+                    <h3 className="font-bold text-[#000080] text-sm sm:text-base">Software Developer (de facto) — Product Development Analyst</h3>
+                    <p className="text-[10px] text-gray-600 font-bold uppercase">Ford Motor Company | Jan 2023 - Present</p>
                   </div>
                 </div>
-                <ul className="text-sm space-y-1 ml-4">
-                  <li>* Liderança técnica na difusão de IA e boas práticas para times de engenharia mecânica/produção</li>
-                  <li>* Warranty Anomaly Detection: pipeline ML end-to-end sobre concessionarias EUA — flagou fraude real confirmada</li>
-                  <li>* Parts Search Engine (RAG + LLM): busca semantica sobre 20.000 pecas x 72 metricas — redução de 8-16h para &lt;5min (99%)</li>
-                  <li>* Solo Dev Automation: Automações em Python/Alteryx migradas para ferramentas de dados de larga escala</li>
+                <ul className="text-sm space-y-1 ml-4 leading-snug">
+                  <li>* Technical leadership in spreading AI and best practices for mechanical/production engineering teams</li>
+                  <li>* Warranty Anomaly Detection: end-to-end ML pipeline on US dealerships &rarr; flagged real confirmed fraud</li>
+                  <li>* Parts Search Engine (RAG + LLM): semantic search on 20,000 parts x 72 metrics &rarr; 99% efficiency gain</li>
+                  <li>* Solo Dev Automation: Python/Alteryx automations migrated to large-scale data tools</li>
                   <li>* Stack: Python, FastAPI, Streamlit, GCP, LangGraph, LLMs</li>
                 </ul>
               </div>
@@ -423,83 +423,81 @@ export default function RetroPage({ onEnterModern }: RetroPageProps) {
               {/* IC CIMATEC */}
               <div className="bg-[#c0c0c0] text-black p-4 border-2 border-t-white border-l-white border-r-[#404040] border-b-[#404040] max-w-2xl mx-auto">
                 <div className="flex items-center gap-2 mb-2">
-                  <div className="w-8 h-8 bg-[#800000] flex items-center justify-center text-white font-bold text-xs">
-                    IC
+                  <div className="w-8 h-8 bg-[#800000] flex items-center justify-center text-white font-bold text-xs uppercase">
+                    RS
                   </div>
                   <div>
-                    <h3 className="font-bold text-[#800000]">Iniciacao Cientifica — MES / Industria 4.0</h3>
-                    <p className="text-xs text-gray-600">SENAI CIMATEC | Ago 2022 - Jan 2023</p>
+                    <h3 className="font-bold text-[#800000] text-sm sm:text-base">Scientific Initiation Researcher — MES / Industry 4.0</h3>
+                    <p className="text-[10px] text-gray-600 font-bold uppercase">SENAI CIMATEC | Aug 2022 - Jan 2023</p>
                   </div>
                 </div>
-                <ul className="text-sm space-y-1 ml-4">
-                  <li>* Desenvolvimento de software MES (Manufacturing Execution System)</li>
-                  <li>* Aplicacao de recursos de Industria 4.0 em ambiente de P&D</li>
+                <ul className="text-sm space-y-1 ml-4 leading-snug">
+                  <li>* Development of MES (Manufacturing Execution System) software</li>
+                  <li>* Application of Industry 4.0 features in R&D environment</li>
                 </ul>
               </div>
 
               {/* Publications */}
-              <div className="bg-black/50 p-4 border border-cyan-400 max-w-2xl mx-auto">
-                <h3 className="text-cyan-400 text-sm font-bold mb-3 flex items-center gap-2">
-                  <BookOpen className="w-4 h-4" /> PUBLICACOES CIENTIFICAS
+              <div className="bg-black/50 p-4 border border-cyan-400 max-w-2xl mx-auto shadow-inner">
+                <h3 className="text-cyan-400 text-sm font-bold mb-3 flex items-center gap-2 uppercase tracking-tighter">
+                  <BookOpen className="w-4 h-4" /> Scientific Publications
                 </h3>
                 <div className="space-y-3">
                   <div className="border-l-2 border-lime-400 pl-3">
-                    <p className="text-lime-300 text-sm font-bold">SIINTEC 2022</p>
-                    <p className="text-white text-xs">Statistical Study of Eco-Efficiency in Compact and Average Cars</p>
+                    <p className="text-lime-300 text-sm font-bold uppercase">SIINTEC 2022</p>
+                    <p className="text-white text-xs leading-relaxed">Statistical Study of Eco-Efficiency in Compact and Average Cars</p>
                   </div>
                   <div className="border-l-2 border-lime-400 pl-3">
-                    <p className="text-lime-300 text-sm font-bold">SIINTEC 2021</p>
-                    <p className="text-white text-xs">Viability of Piezoelectric Devices as a Power Source in Salvador</p>
+                    <p className="text-lime-300 text-sm font-bold uppercase">SIINTEC 2021</p>
+                    <p className="text-white text-xs leading-relaxed">Viability of Piezoelectric Devices as a Power Source in Salvador</p>
                   </div>
                 </div>
               </div>
             </div>
           )}
 
-          {/* TAB: PROJETOS */}
-          {activeTab === "projetos" && (
+          {/* TAB: PROJECTS */}
+          {activeTab === "projects" && (
             <div className="space-y-6">
               <div className="text-center mb-4">
-                <h2 className="text-xl font-bold text-yellow-300 flex items-center justify-center gap-2" style={{ textShadow: "2px 2px #ff0000" }}>
-                  <Folder className="w-6 h-6" /> MEUS PROJETOS
+                <h2 className="text-xl font-bold text-yellow-300 flex items-center justify-center gap-2 uppercase tracking-wide" style={{ textShadow: "2px 2px #ff0000" }}>
+                  <Folder className="w-6 h-6" /> My Projects
                 </h2>
               </div>
 
               {/* Ford Projects Section */}
               <div className="mb-6 max-w-3xl mx-auto">
-                <div className="bg-[#000080] text-white px-2 py-1 text-sm font-bold mb-2 inline-block">
-                  PROJETOS FORD (Privados)
+                <div className="bg-[#800000] text-white px-2 py-1 text-sm font-bold mb-2 inline-block uppercase tracking-tighter">
+                  Ford Projects (Private / Corporate)
                 </div>
                 <div className="grid md:grid-cols-3 gap-3">
                   {/* Anomaly Detection */}
                   <div className="bg-[#c0c0c0] text-black p-3 border-2 border-t-white border-l-white border-r-[#404040] border-b-[#404040]">
-                    <h3 className="font-bold text-[#800000] text-sm mb-1">ANOMALY_DETECT.ai</h3>
-                    <p className="text-[10px] mb-2">Deteccao de anomalias em garantias usando Keras Autoencoder</p>
+                    <h3 className="font-bold text-[#000080] text-sm mb-1 uppercase">Anomaly Detect AI</h3>
+                    <p className="text-[10px] mb-2 leading-relaxed">End-to-end ML system for detecting financial anomalies in warranty data.</p>
                     <div className="flex flex-wrap gap-1">
-                      <span className="bg-[#000080] text-white text-[10px] px-1">Keras</span>
-                      <span className="bg-[#000080] text-white text-[10px] px-1">BigQuery</span>
+                      <span className="bg-[#000080] text-white text-[10px] px-1 font-bold">BigQuery</span>
+                      <span className="bg-[#000080] text-white text-[10px] px-1 font-bold">Vertex AI</span>
                     </div>
                   </div>
 
                   {/* Fastener Hunter */}
                   <div className="bg-[#c0c0c0] text-black p-3 border-2 border-t-white border-l-white border-r-[#404040] border-b-[#404040]">
-                    <h3 className="font-bold text-[#800000] text-sm mb-1">FASTENER_HUNTER.ai</h3>
-                    <p className="text-[10px] mb-2">RAG 2 camadas: scoring matematico filtra Top-N candidatos por Base Number → LLM gera assessment com riscos e oportunidades</p>
+                    <h3 className="font-bold text-[#000080] text-sm mb-1 uppercase">Fastener Hunter AI</h3>
+                    <p className="text-[10px] mb-2 leading-relaxed">2-layer RAG system for engineering search. 99% reduction in search time.</p>
                     <div className="flex flex-wrap gap-1">
-                      <span className="bg-[#000080] text-white text-[10px] px-1">Python</span>
-                      <span className="bg-[#000080] text-white text-[10px] px-1">RAG</span>
-                      <span className="bg-[#000080] text-white text-[10px] px-1">LLM</span>
-                      <span className="bg-[#000080] text-white text-[10px] px-1">SQL</span>
+                      <span className="bg-[#000080] text-white text-[10px] px-1 font-bold">Python</span>
+                      <span className="bg-[#000080] text-white text-[10px] px-1 font-bold">LLM/RAG</span>
                     </div>
                   </div>
 
                   {/* Torque Calculator */}
                   <div className="bg-[#c0c0c0] text-black p-3 border-2 border-t-white border-l-white border-r-[#404040] border-b-[#404040]">
-                    <h3 className="font-bold text-[#800000] text-sm mb-1">TORQUE_CALC.py</h3>
-                    <p className="text-[10px] mb-2">Calculadora de torque automotivo com analise de especificacoes</p>
+                    <h3 className="font-bold text-[#000080] text-sm mb-1 uppercase">Torque Calc AI</h3>
+                    <p className="text-[10px] mb-2 leading-relaxed">Automotive torque calculator with engineering specification analysis.</p>
                     <div className="flex flex-wrap gap-1">
-                      <span className="bg-[#000080] text-white text-[10px] px-1">Python</span>
-                      <span className="bg-[#000080] text-white text-[10px] px-1">NumPy</span>
+                      <span className="bg-[#000080] text-white text-[10px] px-1 font-bold">Python</span>
+                      <span className="bg-[#000080] text-white text-[10px] px-1 font-bold">NumPy</span>
                     </div>
                   </div>
                 </div>
@@ -507,29 +505,27 @@ export default function RetroPage({ onEnterModern }: RetroPageProps) {
 
               {/* Personal Projects Section */}
               <div className="mb-6 max-w-3xl mx-auto">
-                <div className="bg-[#008000] text-white px-2 py-1 text-sm font-bold mb-2 inline-block">
-                  PROJETOS PESSOAIS (Destaques)
+                <div className="bg-[#008000] text-white px-2 py-1 text-sm font-bold mb-2 inline-block uppercase tracking-tighter">
+                  Personal Projects (Highlights)
                 </div>
                 <div className="grid md:grid-cols-2 gap-4">
                   {/* HiveMind Protocol */}
                   <div className="bg-[#c0c0c0] text-black p-3 border-2 border-t-white border-l-white border-r-[#404040] border-b-[#404040]">
-                    <h3 className="font-bold text-[#800000] text-sm mb-1">HiveMind Protocol</h3>
-                    <p className="text-xs mb-2">Framework proprietario para orquestracao de agentes de IA multi-nivel.</p>
+                    <h3 className="font-bold text-[#800000] text-sm mb-1 uppercase tracking-tighter">HiveMind Protocol</h3>
+                    <p className="text-xs mb-2 leading-relaxed">Proprietary framework for multi-level AI agent orchestration.</p>
                     <div className="flex flex-wrap gap-1">
-                      <span className="bg-[#000080] text-white text-[10px] px-1">Python</span>
-                      <span className="bg-[#000080] text-white text-[10px] px-1">Agentic AI</span>
-                      <span className="bg-[#000080] text-white text-[10px] px-1">LangGraph</span>
+                      <span className="bg-[#000080] text-white text-[10px] px-1 font-bold">Agentic AI</span>
+                      <span className="bg-[#000080] text-white text-[10px] px-1 font-bold">LangGraph</span>
                     </div>
                   </div>
 
                   {/* JumpShip */}
                   <div className="bg-[#c0c0c0] text-black p-3 border-2 border-t-white border-l-white border-r-[#404040] border-b-[#404040]">
-                    <h3 className="font-bold text-[#800000] text-sm mb-1">JumpShip</h3>
-                    <p className="text-xs mb-2">Plataforma de busca de empregos com IA. Versao ALPHA em desenvolvimento.</p>
+                    <h3 className="font-bold text-[#800000] text-sm mb-1 uppercase tracking-tighter">JumpShip AI</h3>
+                    <p className="text-xs mb-2 leading-relaxed">Autonomous AI job search engine. Version ALPHA in development.</p>
                     <div className="flex flex-wrap gap-1">
-                      <span className="bg-[#000080] text-white text-[10px] px-1">FastAPI</span>
-                      <span className="bg-[#000080] text-white text-[10px] px-1">LLM</span>
-                      <span className="bg-[#000080] text-white text-[10px] px-1">DEV ALPHA</span>
+                      <span className="bg-[#000080] text-white text-[10px] px-1 font-bold">FastAPI</span>
+                      <span className="bg-[#000080] text-white text-[10px] px-1 font-bold">DEV ALPHA</span>
                     </div>
                   </div>
                 </div>
@@ -538,67 +534,148 @@ export default function RetroPage({ onEnterModern }: RetroPageProps) {
               <div className="grid md:grid-cols-2 gap-4 max-w-3xl mx-auto">
                 {/* AwiOS */}
                 <div className="bg-[#c0c0c0] text-black p-3 border-2 border-t-white border-l-white border-r-[#404040] border-b-[#404040]">
-                  <h3 className="font-bold text-[#800000] text-sm mb-1">AwiOS Engine</h3>
-                  <p className="text-xs mb-2">Engine Flutter para visual novels com linguagem de scripting propria.</p>
+                  <h3 className="font-bold text-[#800000] text-sm mb-1 uppercase tracking-tighter">AwiOS Engine</h3>
+                  <p className="text-xs mb-2 leading-relaxed">Flutter engine for visual novels with proprietary scripting language.</p>
                   <div className="flex flex-wrap gap-1">
-                    <span className="bg-[#000080] text-white text-[10px] px-1">Flutter</span>
-                    <span className="bg-[#000080] text-white text-[10px] px-1">Dart</span>
+                    <span className="bg-[#000080] text-white text-[10px] px-1 font-bold">Flutter</span>
+                    <span className="bg-[#000080] text-white text-[10px] px-1 font-bold">Dart</span>
                   </div>
-                  <a href="https://github.com/Awi-24/AwiOS" target="_blank" rel="noopener noreferrer" className="text-blue-600 text-xs hover:underline block mt-1">
-                    Ver no GitHub
+                  <a href="https://github.com/Awi-24/AwiOS" target="_blank" rel="noopener noreferrer" className="text-blue-600 text-[10px] hover:underline block mt-1 font-bold uppercase">
+                    View on GitHub
                   </a>
                 </div>
 
                 {/* CEAP Spending Analysis */}
                 <div className="bg-[#c0c0c0] text-black p-3 border-2 border-t-white border-l-white border-r-[#404040] border-b-[#404040]">
-                  <h3 className="font-bold text-[#800000] text-sm mb-1">CEAP Spending Analysis</h3>
-                  <p className="text-xs mb-2">Analise de gastos dos deputados. Projeto Academico / Faculdade.</p>
+                  <h3 className="font-bold text-[#800000] text-sm mb-1 uppercase tracking-tighter">CEAP Spending</h3>
+                  <p className="text-xs mb-2 leading-relaxed">Deputy spending analysis. Academic / College Project.</p>
                   <div className="flex flex-wrap gap-1">
-                    <span className="bg-[#000080] text-white text-[10px] px-1">Python</span>
-                    <span className="bg-[#000080] text-white text-[10px] px-1">EDA</span>
+                    <span className="bg-[#000080] text-white text-[10px] px-1 font-bold">Python</span>
+                    <span className="bg-[#000080] text-white text-[10px] px-1 font-bold">EDA</span>
                   </div>
-                  <a href="https://github.com/Awi-24/TSE-DataAnalytics" target="_blank" rel="noopener noreferrer" className="text-blue-600 text-xs hover:underline block mt-1">
-                    Ver no GitHub
+                  <a href="https://github.com/Awi-24/TSE-DataAnalytics" target="_blank" rel="noopener noreferrer" className="text-blue-600 text-[10px] hover:underline block mt-1 font-bold uppercase">
+                    View on GitHub
                   </a>
                 </div>
 
                 {/* KDD Cup 1999 */}
                 <div className="bg-[#c0c0c0] text-black p-3 border-2 border-t-white border-l-white border-r-[#404040] border-b-[#404040]">
-                  <h3 className="font-bold text-[#800000] text-sm mb-1">KDD Cup 1999 — Anomaly</h3>
-                  <p className="text-xs mb-2">Benchmark de deteccao de intrusao em rede. IsolationForest: 97.1% recall.</p>
+                  <h3 className="font-bold text-[#800000] text-sm mb-1 uppercase tracking-tighter">KDD Cup 1999</h3>
+                  <p className="text-xs mb-2 leading-relaxed">Benchmark for network intrusion detection. IsolationForest: 97.1% recall.</p>
                   <div className="flex flex-wrap gap-1">
-                    <span className="bg-[#000080] text-white text-[10px] px-1">ML</span>
-                    <span className="bg-[#000080] text-white text-[10px] px-1">Python</span>
+                    <span className="bg-[#000080] text-white text-[10px] px-1 font-bold">ML</span>
+                    <span className="bg-[#000080] text-white text-[10px] px-1 font-bold">Python</span>
                   </div>
-                  <a href="https://github.com/Awi-24/KDD-Cup-1999-Anomaly-Detection" target="_blank" rel="noopener noreferrer" className="text-blue-600 text-xs hover:underline block mt-1">
-                    Ver no GitHub
+                  <a href="https://github.com/Awi-24/KDD-Cup-1999-Anomaly-Detection" target="_blank" rel="noopener noreferrer" className="text-blue-600 text-[10px] hover:underline block mt-1 font-bold uppercase">
+                    View on GitHub
                   </a>
                 </div>
-
               </div>
 
-              <div className="text-center">
-                <a href="https://github.com/Awi-24" target="_blank" rel="noopener noreferrer" className="inline-block bg-[#c0c0c0] text-[#000080] px-4 py-2 border-2 border-t-white border-l-white border-r-[#404040] border-b-[#404040] hover:bg-[#d0d0d0] text-sm font-bold">
-                  VER TODOS OS PROJETOS NO GITHUB
+              <div className="text-center mt-4">
+                <a href="https://github.com/Awi-24" target="_blank" rel="noopener noreferrer" className="inline-block bg-[#c0c0c0] text-[#000080] px-4 py-2 border-2 border-t-white border-l-white border-r-[#404040] border-b-[#404040] hover:bg-[#d0d0d0] text-sm font-bold uppercase tracking-widest shadow-md active:shadow-inner">
+                  View all projects on GitHub
                 </a>
               </div>
             </div>
           )}
 
-          {/* TAB: FORMACAO */}
-          {activeTab === "formacao" && (
+          {/* TAB: EDUCATION */}
+          {activeTab === "education" && (
             <div className="space-y-6">
               <div className="text-center mb-4">
-                <h2 className="text-xl font-bold text-yellow-300 flex items-center justify-center gap-2" style={{ textShadow: "2px 2px #ff0000" }}>
-                  <GraduationCap className="w-6 h-6" /> FORMACAO E CERTIFICACOES
+                <h2 className="text-xl font-bold text-yellow-300 flex items-center justify-center gap-2 uppercase tracking-wide" style={{ textShadow: "2px 2px #ff0000" }}>
+                  <GraduationCap className="w-6 h-6" /> Education & Certifications
                 </h2>
               </div>
 
-              {/* Education */}
+              {/* Academic Background */}
               <div className="bg-[#c0c0c0] text-black p-4 border-2 border-t-white border-l-white border-r-[#404040] border-b-[#404040] max-w-2xl mx-auto">
-                <h3 className="font-bold text-[#000080] mb-3 flex items-center gap-2">
-                  <GraduationCap className="w-5 h-5" /> EDUCATION
+                <h3 className="font-bold text-[#000080] mb-3 flex items-center gap-2 uppercase">
+                  <GraduationCap className="w-5 h-5" /> Academic Background
                 </h3>
+                <div className="border-l-4 border-[#000080] pl-3 text-black font-medium leading-relaxed">
+                  <p className="font-bold text-[#000080]">Computer Engineering (B.Sc.)</p>
+                  <p className="text-sm">SENAI CIMATEC - Salvador, Brazil</p>
+                  <p className="text-xs text-gray-600 font-bold">Feb 2020 - Dec 2026 (expected) | GPA 8.76/10</p>
+                </div>
+              </div>
+
+              {/* Professional Certifications */}
+              <div className="bg-[#c0c0c0] text-black p-4 border-2 border-t-white border-l-white border-r-[#404040] border-b-[#404040] max-w-2xl mx-auto">
+                <h3 className="font-bold text-[#000080] mb-3 flex items-center gap-2 uppercase">
+                  <Award className="w-5 h-5" /> Professional Certifications
+                </h3>
+                <div className="grid gap-2 text-black">
+                  {[
+                    { tag: "GCP", color: "bg-blue-500", name: "Google Cloud Fundamentals: Core Infrastructure", org: "Google | 2026" },
+                    { tag: "SRE", color: "bg-blue-500", name: "Google SRE Culture", org: "Google | 2026" },
+                    { tag: "AWS", color: "bg-orange-500", name: "AWS Machine Learning Foundations", org: "Amazon Web Services | 2026" },
+                    { tag: "DOE", color: "bg-[#000080]", name: "Design of Experiments (DOE)", org: "SENAI CIMATEC | 2025" },
+                    { tag: "IBM", color: "bg-blue-700", name: "Supervised ML: Regression", org: "IBM / Coursera | 2025" },
+                    { tag: "IBM", color: "bg-blue-700", name: "Exploratory Data Analysis for ML", org: "IBM / Coursera | 2024" },
+                    { tag: "IBM", color: "bg-blue-700", name: "Introduction to AI", org: "IBM / Coursera | 2024" },
+                    { tag: "LNX", color: "bg-gray-600", name: "NDG Linux Essentials", org: "Cisco | 2024" },
+                    { tag: "CIM", color: "bg-green-700", name: "Engineering Assistant", org: "SENAI CIMATEC | 2024" },
+                    { tag: "AWS", color: "bg-orange-500", name: "AWS Cloud Practitioner Essentials", org: "Grupo Boticario | 2022" },
+                    { tag: "AWS", color: "bg-orange-500", name: "Intro to Cloud and AWS Services", org: "Grupo Boticario | 2022" },
+                  ].map((cert, i) => (
+                    <div key={i} className="flex items-center gap-2 border-l-4 border-[#000080] pl-2">
+                      <div className={`w-8 h-8 ${cert.color} flex items-center justify-center text-white font-bold text-[9px] flex-shrink-0 shadow-sm border border-white/20`}>{cert.tag}</div>
+                      <div>
+                        <p className="font-bold text-[11px] leading-tight">{cert.name}</p>
+                        <p className="text-[9px] text-gray-600 font-bold uppercase">{cert.org}</p>
+                      </div>
+                    </div>
+                  ))}
+                </div>
+              </div>
+
+              {/* Relevant Coursework */}
+              <div className="bg-[#c0c0c0] text-black p-4 border-2 border-t-white border-l-white border-r-[#404040] border-b-[#404040] max-w-2xl mx-auto">
+                <h3 className="font-bold text-[#000080] mb-3 flex items-center gap-2 uppercase">
+                  <BookOpen className="w-5 h-5" /> Relevant Coursework
+                </h3>
+                <div className="grid grid-cols-2 gap-2 text-xs text-black font-medium leading-relaxed">
+                  {[
+                    "Software Engineering",
+                    "Design Patterns (GoF)",
+                    "Clean Architecture / SOLID",
+                    "Scrum / Agile",
+                    "Algorithms and Data Structures",
+                    "Computer Networks",
+                    "Operating Systems",
+                  ].map((subject, i) => (
+                    <div key={i} className="flex items-center gap-1 border-l-2 border-[#000080] pl-2">
+                      <span>{subject}</span>
+                    </div>
+                  ))}
+                </div>
+              </div>
+
+              {/* Languages */}
+              <div className="bg-black/50 p-4 border border-cyan-400 max-w-2xl mx-auto shadow-inner">
+                <h3 className="text-cyan-400 text-sm font-bold mb-3 uppercase tracking-tighter">Communication Skills:</h3>
+                <div className="grid grid-cols-3 gap-4 text-center font-bold">
+                  <div>
+                    <div className="text-2xl mb-1 text-white text-shadow-sm">PT</div>
+                    <div className="text-[10px] text-lime-300 uppercase tracking-tighter">Portuguese</div>
+                    <div className="text-[9px] text-gray-400 uppercase tracking-tighter">Native</div>
+                  </div>
+                  <div>
+                    <div className="text-2xl mb-1 text-white text-shadow-sm">EN</div>
+                    <div className="text-[10px] text-lime-300 uppercase tracking-tighter">English</div>
+                    <div className="text-[9px] text-gray-400 uppercase tracking-tighter">Fluent / C1</div>
+                  </div>
+                  <div>
+                    <div className="text-2xl mb-1 text-white text-shadow-sm">DE</div>
+                    <div className="text-[10px] text-lime-300 uppercase tracking-tighter">German</div>
+                    <div className="text-[9px] text-gray-400 uppercase tracking-tighter">Intermediate / B1</div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          )}
                 <div className="border-l-4 border-[#000080] pl-3 text-black">
                   <p className="font-bold">Computer Engineering</p>
                   <p className="text-sm">SENAI CIMATEC - Salvador, Brazil</p>

@@ -1,199 +1,118 @@
-"use client"
+'use client'
 
-import { useState, useEffect } from "react"
-import { Calculator, AlertTriangle, CheckCircle, RotateCw } from "lucide-react"
+import { useState } from 'react'
+import { Cpu, RotateCcw, AlertCircle, CheckCircle2 } from 'lucide-react'
 
 const JOINT_TYPES = [
-  { id: "hard", name: "Junta Rígida", kFactor: 0.12, description: "Metal-Metal, sem compressão" },
-  { id: "soft", name: "Junta Macia", kFactor: 0.18, description: "Com gaxeta ou material compressível" },
-  { id: "gasket", name: "Com Vedação", kFactor: 0.15, description: "Junta com O-ring ou vedante" },
-]
-
-const FASTENER_SIZES = [
-  { id: "m6", name: "M6", diameter: 6, pitch: 1.0 },
-  { id: "m8", name: "M8", diameter: 8, pitch: 1.25 },
-  { id: "m10", name: "M10", diameter: 10, pitch: 1.5 },
-  { id: "m12", name: "M12", diameter: 12, pitch: 1.75 },
+  { id: "hard", name: "Hard Joint", kFactor: 0.12, description: "Metal-to-Metal, no compression" },
+  { id: "soft", name: "Soft Joint", kFactor: 0.18, description: "With gasket or compressible material" },
+  { id: "gasket", name: "Sealed Joint", kFactor: 0.15, description: "Joint with O-ring or sealant" },
 ]
 
 export default function TorqueCalcDemo() {
-  const [torque, setTorque] = useState(25)
-  const [jointType, setJointType] = useState("hard")
-  const [fastenerSize, setFastenerSize] = useState("m10")
-  const [calculatedAngle, setCalculatedAngle] = useState(0)
-  const [isCalculating, setIsCalculating] = useState(false)
-  const [status, setStatus] = useState<"safe" | "warning" | "danger">("safe")
+  const [torque, setTorque] = useState(50)
+  const [jointType, setJointType] = useState(JOINT_TYPES[0])
+  const [diameter, setDiameter] = useState(10)
 
-  const selectedJoint = JOINT_TYPES.find(j => j.id === jointType)!
-  const selectedFastener = FASTENER_SIZES.find(f => f.id === fastenerSize)!
-
-  useEffect(() => {
-    setIsCalculating(true)
-    const timer = setTimeout(() => {
-      // Angle-after-torque calculation
-      // Based on bolt elongation method: after reaching initial torque,
-      // the additional angle determines final clamp load.
-      // Formula: θ = (T × K_joint × 90) / (d × 0.8)
-      // Gives realistic range: ~25° (safe) to ~160°+ (danger) for the given inputs
-      const kFactor = selectedJoint.kFactor
-      const diameter = selectedFastener.diameter
-
-      const angle = Math.round((torque * kFactor * 90) / (diameter * 0.8))
-      const clamped = Math.min(angle, 180)
-
-      setCalculatedAngle(clamped)
-
-      if (angle > 135) setStatus("danger")
-      else if (angle > 80) setStatus("warning")
-      else setStatus("safe")
-
-      setIsCalculating(false)
-    }, 300)
-
-    return () => clearTimeout(timer)
-  }, [torque, jointType, fastenerSize, selectedJoint, selectedFastener])
-
-  const statusColors = {
-    safe: { bg: "#0d3d2e", border: "#00B4FF", text: "#00B4FF" },
-    warning: { bg: "#3d3d0d", border: "#ffcc00", text: "#ffcc00" },
-    danger: { bg: "#3d0d0d", border: "#ff0040", text: "#ff0040" },
-  }
+  // Simplified physics calculation for angle
+  const angle = Math.round((torque * jointType.kFactor * 360) / (diameter * 0.5))
+  const status = angle > 180 ? "warning" : "safe"
 
   return (
-    <div className="space-y-4">
-      {/* Header */}
-      <div className="flex items-center gap-2 text-[#FCE94F]">
-        <Calculator className="w-5 h-5" />
-        <h3 className="font-bold">Calculadora Torque + Angulo</h3>
-      </div>
-
-      {/* Input Controls */}
-      <div className="grid grid-cols-2 gap-3">
-        {/* Torque Input */}
-        <div className="bg-[#1a1a2e] rounded-lg border border-[#FCE94F]/20 p-3">
-          <label className="text-[#FCE94F]/70 text-xs block mb-2">Torque (Nm)</label>
-          <input
-            type="range"
-            min="5"
-            max="100"
-            value={torque}
-            onChange={(e) => setTorque(Number(e.target.value))}
-            className="w-full accent-[#FF4400]"
-          />
-          <div className="text-center mt-2">
-            <span className="text-2xl font-bold text-[#FF4400]">{torque}</span>
-            <span className="text-[#FCE94F]/50 text-sm ml-1">Nm</span>
-          </div>
-        </div>
-
-        {/* Fastener Size */}
-        <div className="bg-[#1a1a2e] rounded-lg border border-[#FCE94F]/20 p-3">
-          <label className="text-[#FCE94F]/70 text-xs block mb-2">Tamanho Fixador</label>
-          <div className="grid grid-cols-2 gap-1">
-            {FASTENER_SIZES.map(f => (
-              <button
-                key={f.id}
-                onClick={() => setFastenerSize(f.id)}
-                className={`py-2 rounded text-xs font-mono transition-all ${
-                  fastenerSize === f.id
-                    ? "bg-[#FF4400] text-[#0a0a0f]"
-                    : "bg-[#0a0a0f] text-[#FCE94F] border border-[#FCE94F]/20 hover:border-[#FCE94F]/50"
-                }`}
-              >
-                {f.name}
-              </button>
-            ))}
-          </div>
+    <div className="space-y-6">
+      <div className="flex items-center justify-between">
+        <h4 className="text-[#00ffff] text-sm font-bold flex items-center gap-2">
+          <Cpu className="w-4 h-4" /> TORQUE & ANGLE CALCULATOR
+        </h4>
+        <div className={`px-2 py-1 rounded text-[10px] font-bold uppercase ${status === 'safe' ? 'bg-green-500/20 text-green-500' : 'bg-yellow-500/20 text-yellow-500 animate-pulse'}`}>
+          {status === 'safe' ? 'System Ready' : 'Angle Limit Alert'}
         </div>
       </div>
 
-      {/* Joint Type Selection */}
-      <div className="bg-[#1a1a2e] rounded-lg border border-[#FCE94F]/20 p-3">
-        <label className="text-[#FCE94F]/70 text-xs block mb-2">Tipo de Junta</label>
-        <div className="space-y-2">
-          {JOINT_TYPES.map(j => (
-            <button
-              key={j.id}
-              onClick={() => setJointType(j.id)}
-              className={`w-full p-2 rounded text-left transition-all ${
-                jointType === j.id
-                  ? "bg-[#FCE94F]/10 border border-[#FCE94F]"
-                  : "bg-[#0a0a0f] border border-[#FCE94F]/10 hover:border-[#FCE94F]/30"
-              }`}
-            >
-              <div className="flex justify-between items-center">
-                <span className="text-[#FCE94F] text-sm font-medium">{j.name}</span>
-                <span className="text-[#FF4400] text-xs font-mono">K={j.kFactor}</span>
-              </div>
-              <p className="text-[#FCE94F]/50 text-xs mt-1">{j.description}</p>
-            </button>
-          ))}
-        </div>
-      </div>
-
-      {/* Result Display */}
-      <div 
-        className="rounded-lg p-4 border-2 transition-all"
-        style={{ 
-          backgroundColor: statusColors[status].bg,
-          borderColor: statusColors[status].border
-        }}
-      >
-        <div className="flex items-center justify-between mb-3">
-          <span className="text-[#FCE94F]/70 text-sm">Angulo Calculado</span>
-          {isCalculating ? (
-            <RotateCw className="w-5 h-5 text-[#FCE94F] animate-spin" />
-          ) : status === "safe" ? (
-            <CheckCircle className="w-5 h-5" style={{ color: statusColors[status].text }} />
-          ) : (
-            <AlertTriangle className="w-5 h-5" style={{ color: statusColors[status].text }} />
-          )}
-        </div>
-        
-        <div className="text-center">
-          <span 
-            className="text-5xl font-bold"
-            style={{ color: statusColors[status].text }}
-          >
-            {calculatedAngle}°
-          </span>
-        </div>
-
-        {/* Visual Angle Indicator */}
-        <div className="mt-4 flex justify-center">
-          <div className="relative w-32 h-16 overflow-hidden">
-            <div className="absolute bottom-0 left-1/2 w-32 h-32 border-2 border-[#FCE94F]/30 rounded-full -translate-x-1/2" />
-            <div 
-              className="absolute bottom-0 left-1/2 w-1 h-14 origin-bottom transition-transform duration-300"
-              style={{ 
-                backgroundColor: statusColors[status].text,
-                transform: `translateX(-50%) rotate(${calculatedAngle - 90}deg)`,
-                boxShadow: `0 0 10px ${statusColors[status].text}`
-              }}
+      <div className="grid md:grid-cols-2 gap-6">
+        {/* Controls */}
+        <div className="space-y-4">
+          <div>
+            <label className="text-[10px] text-[#00ffff]/50 uppercase block mb-2">Target Torque (Nm)</label>
+            <input 
+              type="range" min="10" max="200" value={torque} 
+              onChange={(e) => setTorque(Number(e.target.value))}
+              className="w-full h-1 bg-[#00ffff]/20 rounded-lg appearance-none cursor-pointer accent-[#00ffff]"
             />
-            <div className="absolute bottom-0 left-1/2 w-3 h-3 bg-[#FCE94F] rounded-full -translate-x-1/2 translate-y-1/2" />
+            <div className="text-right text-[#00ffff] font-mono font-bold mt-1">{torque} Nm</div>
+          </div>
+
+          <div>
+            <label className="text-[10px] text-[#00ffff]/50 uppercase block mb-2">Joint Type</label>
+            <div className="grid grid-cols-1 gap-2">
+              {JOINT_TYPES.map((type) => (
+                <button
+                  key={type.id}
+                  onClick={() => setJointType(type)}
+                  className={`text-left p-2 rounded text-[10px] transition-all border ${
+                    jointType.id === type.id 
+                      ? "bg-[#00ffff]/10 border-[#00ffff]/50 text-[#00ffff]" 
+                      : "border-[#00ffff]/10 text-[#00ffff]/40 hover:border-[#00ffff]/30"
+                  }`}
+                >
+                  <div className="font-bold">{type.name}</div>
+                  <div className="opacity-60">{type.description}</div>
+                </button>
+              ))}
+            </div>
           </div>
         </div>
 
-        {/* Status Message */}
-        <p 
-          className="text-center text-xs mt-3"
-          style={{ color: statusColors[status].text }}
-        >
-          {status === "safe" && "Angulo seguro - Junta será fixada corretamente"}
-          {status === "warning" && "Atencao - Proximo do limite. Verificar especificacoes"}
-          {status === "danger" && "PERIGO - Angulo excessivo pode danificar a junta!"}
-        </p>
+        {/* Display */}
+        <div className="bg-[#0a0a0f] border border-[#00ffff]/20 rounded p-6 flex flex-col items-center justify-center relative overflow-hidden">
+          {/* Animated Gauge */}
+          <div className="relative w-32 h-32 flex items-center justify-center">
+            <svg className="w-full h-full -rotate-90">
+              <circle
+                cx="64" cy="64" r="60"
+                fill="none" stroke="currentColor" strokeWidth="8"
+                className="text-[#00ffff]/10"
+              />
+              <circle
+                cx="64" cy="64" r="60"
+                fill="none" stroke="currentColor" strokeWidth="8"
+                strokeDasharray="377"
+                strokeDashoffset={377 - (377 * Math.min(angle, 360)) / 360}
+                className={`transition-all duration-500 ${status === 'safe' ? 'text-[#00ffff]' : 'text-yellow-500'}`}
+              />
+            </svg>
+            <div className="absolute inset-0 flex flex-col items-center justify-center">
+              <span className="text-2xl font-bold font-mono text-white">{angle}°</span>
+              <span className="text-[8px] text-[#00ffff]/50 uppercase tracking-widest">Calculated Angle</span>
+            </div>
+          </div>
+
+          <div className="mt-6 w-full space-y-2">
+            <div className="flex items-center gap-2 p-2 rounded bg-black/40 text-[10px]">
+              {status === "safe" ? (
+                <>
+                  <CheckCircle2 className="w-3 h-3 text-green-500" />
+                  <span className="text-green-500/80">Safe Angle - Joint will be correctly fixed</span>
+                </>
+              ) : (
+                <>
+                  <AlertCircle className="w-3 h-3 text-yellow-500" />
+                  <span className="text-yellow-500/80">High Angle - Risk of yield limit deformation</span>
+                </>
+              )}
+            </div>
+          </div>
+
+          {/* Background formula decoration */}
+          <div className="absolute bottom-2 right-2 text-[8px] font-mono text-[#00ffff]/10">
+            θ = (T * K * 360) / (d * 0.5)
+          </div>
+        </div>
       </div>
 
-      {/* Formula Info */}
-      <div className="bg-[#0a0a0f] rounded border border-[#FCE94F]/10 p-3">
-        <p className="text-[#FCE94F]/50 text-xs font-mono">
-          θ = (T × 360) / (π × d × p × K)
-        </p>
-        <p className="text-[#FCE94F]/30 text-[10px] mt-1">
-          Onde: T=Torque, d=Diâmetro, p=Passo, K=Fator de atrito
-        </p>
+      <div className="p-3 bg-[#00ffff]/5 border border-[#00ffff]/10 rounded text-[9px] text-[#00ffff]/40">
+        <p className="font-bold mb-1 uppercase tracking-widest text-[#00ffff]/60">Physical Model Notes:</p>
+        <p>Calculation based on linear elastic deformation model for M10-M14 automotive bolts. Actual results may vary depending on surface coating and lubricant factors (K-Factor).</p>
       </div>
     </div>
   )
