@@ -14,9 +14,12 @@ import {
   Globe,
   Check,
   Copy,
-  ArrowRight
+  ArrowRight,
+  TrendingUp,
+  Brain,
+  Scale
 } from "lucide-react"
-import { HiveMindLogo, NodeBackground, HiveMindCard, Terminal } from "@/components/hivemind-ui"
+import { NodeBackground, HiveMindCard, Terminal } from "@/components/hivemind-ui"
 
 export default function HiveMindPage() {
   const [copied, setCopied] = useState(false)
@@ -28,7 +31,6 @@ export default function HiveMindPage() {
     setTimeout(() => setCopied(false), 2000)
   }
 
-  // Scroll Reveal Logic
   useEffect(() => {
     const observer = new IntersectionObserver((entries) => {
       entries.forEach(entry => {
@@ -47,10 +49,8 @@ export default function HiveMindPage() {
       <NodeBackground />
 
       {/* Hero Section */}
-      <section className="relative pt-24 pb-32 px-4 z-10">
+      <section className="relative pt-32 pb-32 px-4 z-10">
         <div className="max-w-4xl mx-auto text-center scroll-reveal">
-          <HiveMindLogo className="mx-auto mb-12" />
-          
           <h1 className="text-6xl md:text-8xl font-black text-white mb-6 tracking-tighter">
             HiveMind Protocol
           </h1>
@@ -90,7 +90,7 @@ export default function HiveMindPage() {
         <div className="max-w-3xl mx-auto text-center">
           <h2 className="text-2xl font-bold text-white mb-4">AI agents forget everything between sessions.</h2>
           <p className="text-[#888888] leading-relaxed">
-            Every new session means re-explaining the stack, the architecture, the decisions already made. 
+            Every new session means re-explaining the stack, the architecture, and the decisions already made. 
             Your agents have no memory, no roles, and no rules — so they hallucinate, repeat work, and drift.
           </p>
         </div>
@@ -101,27 +101,27 @@ export default function HiveMindPage() {
         <div className="max-w-6xl mx-auto">
           <div className="grid md:grid-cols-3 gap-6">
             <HiveMindCard title="Persistent Memory" icon={Layers}>
-              File-based memory system shared across all agents. shared-context, decisions log, handoff queue, and per-agent state files persist across every session.
+              File-based memory system shared across all agents. shared-context, decisions log, and state files persist across every session.
             </HiveMindCard>
 
             <HiveMindCard title="Smart Model Routing" icon={Cpu}>
-              Tasks are automatically routed to the right model tier. Haiku for reads and logs. Sonnet for code and logic. Opus for architecture and security audits.
+              Tasks are automatically routed to the right model tier. Haiku for reads, Sonnet for logic, Opus for architecture audits.
             </HiveMindCard>
 
             <HiveMindCard title="65% Token Reduction" icon={Zap}>
-              Caveman-inspired communication rules eliminate filler and preamble from every agent response. Memory files use compressed prose.
+              Caveman-inspired communication rules eliminate filler and preamble. Memory files use compressed prose to save costs.
             </HiveMindCard>
 
             <HiveMindCard title="12 Agent Profiles" icon={Users}>
-              CTO, Lead Dev, Backend, Frontend, DevOps, Security, QA, Data, Docs, Mobile, AI/ML, Product Manager — each with explicit ownership and boundaries.
+              CTO, Lead Dev, Backend, DevOps, Security, QA, and more — each with explicit ownership and behavioral boundaries.
             </HiveMindCard>
 
             <HiveMindCard title="Built-in Railguards" icon={Shield}>
-              Anti-loop limits, forbidden operations (rm -rf, DROP TABLE, force push), code ownership boundaries, and confirmation gates for destructive actions.
+              Anti-loop limits, forbidden operations, code ownership boundaries, and confirmation gates for destructive actions.
             </HiveMindCard>
 
             <HiveMindCard title="Model-Agnostic" icon={Globe}>
-              Designed for Claude Code but works with GPT, Gemini, or any LLM. Swap model IDs in project.json — everything else stays the same.
+              Designed for Claude Code but works with GPT, Gemini, or any LLM. Swap model IDs in project.json easily.
             </HiveMindCard>
           </div>
         </div>
@@ -131,8 +131,10 @@ export default function HiveMindPage() {
       <section className="py-32 px-4 border-y border-[#1E1E1E] scroll-reveal">
         <div className="max-w-5xl mx-auto">
           <div className="text-center mb-16">
-            <h2 className="text-3xl font-bold text-white mb-4">Escape the Vibe Coding Cliff.</h2>
-            <p className="text-[#888888] max-w-2xl mx-auto">Conventional AI coding (Vibe Coding) starts fast but collapses as complexity grows. HiveMind maintains high productivity and total control via protocol-driven orchestration.</p>
+            <h2 className="text-3xl font-bold text-white mb-4">Regain Grip. Scale with Confidence.</h2>
+            <p className="text-[#888888] max-w-3xl mx-auto">
+              Conventional AI coding (Vibe Coding) starts fast but collapses as complexity grows. HiveMind allows you to **maintain control and learn** from every change, making it perfect for escalating medium applications or managing massive enterprise modules.
+            </p>
           </div>
 
           <div className="grid md:grid-cols-2 gap-12 items-center">
@@ -146,14 +148,15 @@ export default function HiveMindPage() {
                 ))}
               </div>
               <ul className="space-y-3 text-xs text-[#888888]">
-                <li className="flex items-center gap-2"><div className="w-1.5 h-1.5 rounded-full bg-red-500" /> Constant context repetition</li>
-                <li className="flex items-center gap-2"><div className="w-1.5 h-1.5 rounded-full bg-red-500" /> No code ownership boundaries</li>
+                <li className="flex items-center gap-2"><div className="w-1.5 h-1.5 rounded-full bg-red-500" /> Loss of technical grip as files grow</li>
+                <li className="flex items-center gap-2"><div className="w-1.5 h-1.5 rounded-full bg-red-500" /> "Black box" code generation</li>
+                <li className="flex items-center gap-2"><div className="w-1.5 h-1.5 rounded-full bg-red-500" /> Collapses at enterprise complexity</li>
               </ul>
             </div>
 
             {/* HiveMind Side */}
             <div className="bg-[#0D0D0D] p-8 rounded border border-[#F5C518]/30 relative overflow-hidden group">
-              <div className="absolute top-0 right-0 p-2 bg-[#F5C518]/10 text-[#F5C518] text-[10px] font-bold uppercase tracking-widest border-b border-l border-[#F5C518]/20">Total Control</div>
+              <div className="absolute top-0 right-0 p-2 bg-[#F5C518]/10 text-[#F5C518] text-[10px] font-bold uppercase tracking-widest border-b border-l border-[#F5C518]/20">Sustained Grip</div>
               <h3 className="text-xl font-bold text-white mb-6">HiveMind Protocol</h3>
               <div className="h-24 flex items-end gap-1 mb-6">
                 {[80, 82, 85, 84, 86, 88].map((h, i) => (
@@ -161,8 +164,56 @@ export default function HiveMindPage() {
                 ))}
               </div>
               <ul className="space-y-3 text-xs text-[#888888]">
-                <li className="flex items-center gap-2"><div className="w-1.5 h-1.5 rounded-full bg-[#F5C518]" /> Persistent per-agent memory</li>
-                <li className="flex items-center gap-2"><div className="w-1.5 h-1.5 rounded-full bg-[#F5C518]" /> Strict behavioral railguards</li>
+                <li className="flex items-center gap-2"><div className="w-1.5 h-1.5 rounded-full bg-[#F5C518]" /> Learn architecture through agent logs</li>
+                <li className="flex items-center gap-2"><div className="w-1.5 h-1.5 rounded-full bg-[#F5C518]" /> Total control over medium/large apps</li>
+                <li className="flex items-center gap-2"><div className="w-1.5 h-1.5 rounded-full bg-[#F5C518]" /> Scalable enterprise module management</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Market Comparison Section */}
+      <section className="py-32 px-4 scroll-reveal">
+        <div className="max-w-5xl mx-auto">
+          <div className="text-center mb-16">
+            <h2 className="text-3xl font-bold text-white mb-4">How we compare.</h2>
+            <p className="text-[#888888]">The only protocol designed for multi-session orchestration and local memory.</p>
+          </div>
+          
+          <div className="grid md:grid-cols-3 gap-6">
+            <div className="bg-[#141414] p-6 rounded border border-[#1E1E1E]">
+              <h4 className="text-white font-bold mb-4 flex items-center gap-2">
+                <Brain className="w-4 h-4 text-[#888888]" /> Cursor / Windsurf
+              </h4>
+              <ul className="text-xs text-[#888888] space-y-2">
+                <li>• Single-session context only</li>
+                <li>• No agent-to-agent delegation</li>
+                <li>• Proprietary memory cloud</li>
+                <li>• Limited custom guardrails</li>
+              </ul>
+            </div>
+            <div className="bg-[#141414] p-6 rounded border border-[#F5C518]/40 shadow-[0_0_20px_rgba(245,197,24,0.1)]">
+              <h4 className="text-[#F5C518] font-bold mb-4 flex items-center gap-2">
+                <TrendingUp className="w-4 h-4" /> HiveMind Protocol
+              </h4>
+              <ul className="text-xs text-[#F0F0F0] space-y-2">
+                <li>• Persistent file-based memory</li>
+                <li>• Multi-agent role orchestration</li>
+                <li>• 100% Local context files</li>
+                <li>• Cross-LLM model routing</li>
+                <li>• Built-in security railguards</li>
+              </ul>
+            </div>
+            <div className="bg-[#141414] p-6 rounded border border-[#1E1E1E]">
+              <h4 className="text-white font-bold mb-4 flex items-center gap-2">
+                <Scale className="w-4 h-4 text-[#888888]" /> Standard Copilots
+              </h4>
+              <ul className="text-xs text-[#888888] space-y-2">
+                <li>• Autocomplete focus only</li>
+                <li>• No architectural awareness</li>
+                <li>• High repetition rates</li>
+                <li>• No behavioral boundaries</li>
               </ul>
             </div>
           </div>
@@ -200,34 +251,25 @@ export default function HiveMindPage() {
       <section className="py-32 px-4 scroll-reveal">
         <div className="max-w-3xl mx-auto">
           <h2 className="text-3xl font-bold text-white mb-20 text-center">Up in 30 seconds.</h2>
-
           <div className="relative space-y-24">
-            {/* Step 1 */}
             <div className="flex flex-col items-center text-center">
               <div className="w-12 h-12 rounded-full bg-[#F5C518] text-[#0A0A0A] flex items-center justify-center font-bold text-xl mb-6 relative z-10 shadow-[0_0_20px_rgba(245,197,24,0.4)]">1</div>
               <h3 className="text-2xl font-bold text-white mb-4">Scaffold</h3>
-              <p className="text-[#888888] mb-8 max-w-md">Initialize the project structure with the official template.</p>
               <div className="w-full max-w-md space-y-4">
                 <Terminal command="npx create-hivemind-protocol my-project" />
                 <Terminal command="git clone https://github.com/Awi-24/HiveMind-Protocol.git" />
               </div>
             </div>
-
-            {/* Step 2 */}
             <div className="flex flex-col items-center text-center">
               <div className="w-12 h-12 rounded-full bg-[#F5C518] text-[#0A0A0A] flex items-center justify-center font-bold text-xl mb-6 relative z-10 shadow-[0_0_20px_rgba(245,197,24,0.4)]">2</div>
               <h3 className="text-2xl font-bold text-white mb-4">Configure</h3>
-              <p className="text-[#888888] max-w-md">Edit <code className="text-[#F5C518]">project.json</code> to set your tech stack and active agent profiles.</p>
+              <p className="text-[#888888] max-w-md">Edit <code className="text-[#F5C518]">project.json</code> to set tech stack and agent profiles.</p>
             </div>
-
-            {/* Step 3 */}
             <div className="flex flex-col items-center text-center">
               <div className="w-12 h-12 rounded-full bg-[#F5C518] text-[#0A0A0A] flex items-center justify-center font-bold text-xl mb-6 relative z-10 shadow-[0_0_20px_rgba(245,197,24,0.4)]">3</div>
               <h3 className="text-2xl font-bold text-white mb-4">Initialize</h3>
-              <p className="text-[#888888] max-w-md">Launch your AI assistant (Claude Code/GPT) and run <code className="text-[#F5C518]">/init</code>.</p>
+              <p className="text-[#888888] max-w-md">Launch your assistant and run <code className="text-[#F5C518]">/init</code>.</p>
             </div>
-
-            {/* Connection Line */}
             <div className="absolute top-0 bottom-0 left-1/2 w-px bg-gradient-to-b from-transparent via-[#F5C518]/20 to-transparent -translate-x-1/2 z-0" />
           </div>
         </div>
@@ -258,7 +300,7 @@ export default function HiveMindPage() {
       {/* Footer */}
       <footer className="py-20 px-4 scroll-reveal">
         <div className="max-w-6xl mx-auto flex flex-col md:flex-row items-center justify-between gap-8 border-t border-[#1E1E1E] pt-12">
-          <div className="flex items-center gap-4"><HiveMindLogo size={40} /><span className="text-xl font-bold text-white">HiveMind Protocol</span></div>
+          <div className="text-xl font-bold text-white">HiveMind Protocol</div>
           <div className="flex gap-8 text-sm text-[#888888]">
             <a href="https://github.com/Awi-24/HiveMind-Protocol" className="hover:text-[#F5C518]">GitHub</a>
             <a href="#" className="hover:text-[#F5C518]">CLAUDE.md</a>
@@ -275,15 +317,6 @@ export default function HiveMindPage() {
         .reveal-active {
           opacity: 1;
           transform: translateY(0);
-        }
-        @keyframes shockwave {
-          0% { transform: scale(0.5); opacity: 0; }
-          10% { opacity: 0.5; }
-          50% { opacity: 0; }
-          100% { transform: scale(4); opacity: 0; }
-        }
-        .animate-shockwave {
-          animation: shockwave 10s infinite;
         }
       `}</style>
     </div>

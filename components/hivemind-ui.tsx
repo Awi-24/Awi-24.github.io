@@ -3,64 +3,6 @@
 import { useEffect, useRef, useState, ReactNode } from "react"
 import { Copy, Check } from "lucide-react"
 
-export function HiveMindLogo({ size = 120, className = "" }: { size?: number, className?: string }) {
-  const points = 12
-  const innerRadius = 22
-  const outerRadius = 42
-  const centerRadius = 14
-
-  return (
-    <div className={`relative flex items-center justify-center ${className}`}>
-      {/* Shockwave effect */}
-      <div className="absolute inset-0 flex items-center justify-center pointer-events-none">
-        <div className="w-full h-full rounded-full border border-[#F5C518] animate-shockwave opacity-0" />
-      </div>
-      
-      <svg 
-        width={size} 
-        height={size} 
-        viewBox="0 0 100 100" 
-        fill="none" 
-        xmlns="http://www.w3.org/2000/svg"
-        className="relative z-10"
-      >
-        <circle cx="50" cy="50" r={centerRadius} fill="#F5C518" />
-        <circle cx="50" cy="50" r={centerRadius + 2} stroke="#F5C518" strokeWidth="0.5" opacity="0.3" />
-
-        {Array.from({ length: points }).map((_, i) => {
-          const angle = (i * 360) / points
-          const rad = (angle * Math.PI) / 180
-          const ix = 50 + Math.cos(rad) * innerRadius
-          const iy = 50 + Math.sin(rad) * innerRadius
-          const ox = 50 + Math.cos(rad) * outerRadius
-          const oy = 50 + Math.sin(rad) * outerRadius
-
-          const cp1x = 50 + Math.cos(rad - 0.1) * (innerRadius * 0.5)
-          const cp1y = 50 + Math.sin(rad - 0.1) * (innerRadius * 0.5)
-          const cp2x = 50 + Math.cos(rad + 0.1) * (innerRadius + (outerRadius - innerRadius) * 0.5)
-          const cp2y = 50 + Math.sin(rad + 0.1) * (innerRadius + (outerRadius - innerRadius) * 0.5)
-
-          const nextRad = ((i + 1) * 360 / points * Math.PI) / 180
-          const nix = 50 + Math.cos(nextRad) * innerRadius
-          const niy = 50 + Math.sin(nextRad) * innerRadius
-          const cpWebX = 50 + Math.cos(rad + (Math.PI / points)) * (innerRadius * 0.8)
-          const cpWebY = 50 + Math.sin(rad + (Math.PI / points)) * (innerRadius * 0.8)
-
-          return (
-            <g key={i}>
-              <path d={`M 50 50 Q ${cp1x} ${cp1y} ${ix} ${iy}`} stroke="#F5C518" strokeWidth="1.5" opacity="0.4" fill="none" />
-              <path d={`M ${ix} ${iy} Q ${cp2x} ${cp2y} ${ox} ${oy}`} stroke="#F5C518" strokeWidth="1.5" opacity="0.4" fill="none" />
-              <path d={`M ${ix} ${iy} Q ${cpWebX} ${cpWebY} ${nix} ${niy}`} stroke="#F5C518" strokeWidth="1" opacity="0.2" fill="none" />
-              <circle cx={ix} cy={iy} r="3" fill="#F5C518" opacity="0.8" />
-              <circle cx={ox} cy={oy} r="4" fill="#F5C518" />
-            </g>
-          )
-        })}
-      </svg>
-    </div>
-  )
-}
-
 export function NodeBackground() {
   const canvasRef = useRef<HTMLCanvasElement>(null)
   const mouseRef = useRef({ x: -1000, y: -1000 })
@@ -104,11 +46,9 @@ export function NodeBackground() {
       ctx.strokeStyle = "#F5C518"
 
       nodes.forEach((node, i) => {
-        // Natural movement
         node.x += node.vx
         node.y += node.vy
 
-        // Mouse influence
         const mdx = mouseRef.current.x - node.x
         const mdy = mouseRef.current.y - node.y
         const mdist = Math.sqrt(mdx * mdx + mdy * mdy)
@@ -126,7 +66,6 @@ export function NodeBackground() {
         ctx.arc(node.x, node.y, 1.2, 0, Math.PI * 2)
         ctx.fill()
 
-        // Connect to neighbors
         for (let j = i + 1; j < nodes.length; j++) {
           const other = nodes[j]
           const dx = node.x - other.x
@@ -143,7 +82,6 @@ export function NodeBackground() {
           }
         }
 
-        // Connect specifically to mouse
         if (mdist < 200) {
           ctx.globalAlpha = (1 - mdist / 200) * 0.3
           ctx.lineWidth = 0.8
