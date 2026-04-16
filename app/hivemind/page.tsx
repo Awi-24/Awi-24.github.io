@@ -224,6 +224,8 @@ export default function HiveMindPage() {
       </section>
 
       {/* 6. FEATURES GRID */}
+      <section className="py-32 px-4 scroll-reveal">
+        <div className="max-w-6xl mx-auto">
           <div className="grid md:grid-cols-3 gap-6">
             <HiveMindCard title="Persistent Memory" icon={Layers}>
               File-based memory system shared across all agents. shared-context, decisions log, and state files persist across every session.
