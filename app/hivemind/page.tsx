@@ -330,9 +330,8 @@ export default function HiveMindPage() {
             </div>
             <div className="flex flex-col md:items-end gap-10">
               <div className="flex flex-wrap gap-x-12 gap-y-4 font-orbitron font-black text-xs tracking-[0.2em] uppercase">
-                <a href="https://github.com/Awi-24/HiveMind-Protocol" className="hover:text-[#F5C518] transition-colors">GitHub</a>
-                <a href="#" className="hover:text-[#F5C518] transition-colors">NPM_PKG</a>
-                <a href="#" className="hover:text-[#F5C518] transition-colors">CLAUDE.md</a>
+                <a href="https://github.com/Awi-24/HiveMind-Protocol" className="hover:text-[#F5C518] border-b-2 border-black/5 hover:border-[#F5C518] transition-all">GitHub</a>
+                <a href="https://www.npmjs.com/package/create-hivemind-protocol" target="_blank" className="hover:text-[#F5C518] border-b-2 border-black/5 hover:border-[#F5C518] transition-all">NPM_PKG</a>
               </div>
               <p className="text-[9px] font-black uppercase opacity-20 leading-relaxed text-right tracking-tighter">© 2026 MIT LICENSE. BUILT BY AWI-24.<br/>ALL MODELS COMPATIBLE THROUGH PROTOCOL INJECTION.</p>
             </div>
