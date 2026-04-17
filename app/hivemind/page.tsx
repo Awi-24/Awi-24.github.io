@@ -80,8 +80,9 @@ export default function HiveMindPage() {
             </div>
             
             <p className="text-xl md:text-2xl text-[#888888] font-orbitron mb-12 max-w-3xl mx-auto leading-relaxed tracking-wide opacity-0 animate-slide-up" style={{ animationDelay: '1.2s', animationFillMode: 'forwards' }}>
-              Stateless agents are dead. Long live the <span className="text-white relative group">Technical Soul.<span className="absolute bottom-0 left-0 w-full h-[1px] bg-[#F5C518] scale-x-0 group-hover:scale-x-100 transition-transform origin-left" /></span>
+              Stateless agents are dead. Long live <span className="text-white relative group">Context Engineering.<span className="absolute bottom-0 left-0 w-full h-[1px] bg-[#F5C518] scale-x-0 group-hover:scale-x-100 transition-transform origin-left" /></span>
             </p>
+
 
             <div className="flex flex-col sm:flex-row justify-center gap-6 mb-20 opacity-0 animate-slide-up" style={{ animationDelay: '1.5s', animationFillMode: 'forwards' }}>
               <button 
@@ -142,14 +143,14 @@ export default function HiveMindPage() {
             <h2 className="text-3xl font-orbitron font-black text-white mb-24 text-center tracking-[0.4em] uppercase">
               <ScrambleText text="CORE_CONCEPTS" delay={500} />
             </h2>
-            <div className="grid md:grid-cols-4 gap-6">
+            <div className="grid md:grid-cols-4 gap-6 items-stretch">
               {[
                 { title: "MANIFEST", icon: Database, desc: "Self-sufficient Tier 0 index. Read first, always. Zero Speculation." },
                 { title: "ENTRY ID", icon: Command, desc: "Stable immutable references that survive refactors and reorders." },
                 { title: "HANDOFF", icon: Workflow, desc: "Asynchronous task delegation between specialized agent profiles." },
                 { title: "RAILGUARD", icon: Lock, desc: "Hard limits preventing token waste, loops, or unauthorized destructive ops." }
               ].map((concept, i) => (
-                <div key={i} className="stagger-item opacity-0">
+                <div key={i} className="stagger-item opacity-0 h-full">
                   <HiveMindCard title={concept.title} icon={concept.icon}>
                     {concept.desc}
                   </HiveMindCard>
@@ -176,7 +177,6 @@ export default function HiveMindPage() {
                   <div className="flex gap-3 hover:text-white transition-colors"><span>📂</span> .claude/commands/ <span className="text-white/10 text-[10px]">22 files</span></div>
                   <div className="flex gap-3 text-white"><span>📂</span> .hivemind/</div>
                   <div className="pl-8 border-l-2 border-[#F5C518]/20 space-y-3 py-2 relative">
-                    <div className="absolute top-0 left-[-2px] w-2 h-2 bg-[#F5C518] rounded-full animate-ping" />
                     <div className="flex gap-3 text-white/40 hover:text-white transition-colors cursor-default"><span>📂</span> agents/</div>
                     <div className="flex gap-3 text-white/40 hover:text-white transition-colors cursor-default"><span>📂</span> memory/ <span className="text-[#F5C518]/60 text-[9px] font-bold">ACTIVE</span></div>
                     <div className="flex gap-3 text-white/40 hover:text-white transition-colors cursor-default"><span>📂</span> reports/</div>
@@ -189,7 +189,7 @@ export default function HiveMindPage() {
             <div className="stagger-item opacity-0">
               <h2 className="text-4xl font-orbitron font-black text-white mb-8 uppercase tracking-tight">Technical Infrastructure</h2>
               <p className="text-[#888888] mb-10 leading-relaxed font-medium text-lg">
-                HiveMind isn't a complex binary—it's a <span className="text-white">markdown-first</span> architecture. It makes the entire "mind" of your project human-readable, version-controlled, and private.
+                HiveMind isn't a complex binary: it's a <span className="text-white">markdown-first</span> architecture. It makes the entire "mind" of your project human-readable, version-controlled, and private.
               </p>
               <div className="grid grid-cols-1 gap-8">
                 {[
@@ -264,9 +264,9 @@ export default function HiveMindPage() {
             </h2>
             <div className="grid md:grid-cols-3 gap-8">
               {[
-                { tier: "LITE", model: "Haiku 4.5", desc: "Log generation & context reads.", icon: Zap },
-                { tier: "STANDARD", model: "Sonnet 4.6", desc: "Feature dev & implementation.", icon: Code2 },
-                { tier: "HEAVY", model: "Opus 4.6", desc: "Architecture & security audits.", icon: Brain }
+                { tier: "LITE", model: "Haiku 4.5", desc: "Log generation and context reads.", icon: Zap },
+                { tier: "STANDARD", model: "Sonnet 4.6", desc: "Feature dev and implementation.", icon: Code2 },
+                { tier: "HEAVY", model: "Opus 4.6", desc: "Architecture and security audits.", icon: Brain }
               ].map((item, i) => (
                 <div key={i} className="stagger-item opacity-0 bg-[#0D0D0D] p-10 border border-white/5 rounded-lg group hover:border-[#F5C518]/40 transition-all duration-500">
                   <item.icon className="w-6 h-6 text-[#F5C518] mb-8 mx-auto group-hover:rotate-[360deg] transition-transform duration-700" />
@@ -282,7 +282,7 @@ export default function HiveMindPage() {
         {/* 7. INSTALLATION */}
         <section className="py-40 px-4 scroll-reveal">
           <div className="max-w-4xl mx-auto">
-            <h2 className="text-5xl font-orbitron font-black text-white mb-32 text-center tracking-tighter uppercase">Deployment</h2>
+            <h2 className="text-5xl font-orbitron font-black text-white mb-32 text-center tracking-tighter uppercase underline decoration-[#F5C518] decoration-4 underline-offset-[20px]">Deployment</h2>
             
             <div className="space-y-32 relative">
               <div className="stagger-item opacity-0 bg-[#0D0D0D] p-12 border border-white/10 rounded-xl relative z-10 hover:shadow-[0_0_50px_rgba(245,197,24,0.1)] transition-shadow">
@@ -307,7 +307,7 @@ export default function HiveMindPage() {
               <div className="stagger-item opacity-0 text-center pt-20 relative z-10">
                 <div className="w-16 h-16 rounded-full bg-white text-black flex items-center justify-center font-orbitron font-black text-3xl mx-auto mb-10 shadow-[0_0_30px_rgba(255,255,255,0.1)]">02</div>
                 <h3 className="text-3xl font-orbitron font-black text-[#F5C518] mb-6 uppercase tracking-widest">Activate Protocol</h3>
-                <p className="text-[#888888] mb-12 max-w-lg mx-auto font-medium">Launch your AI assistant at the root and trigger the CTO onboarding form.</p>
+                <p className="text-[#888888] mb-12 max-w-lg mx-auto font-medium">Launch your AI assistant at the root and trigger the onboarding form.</p>
                 <div className="inline-flex flex-col items-center group cursor-pointer" onClick={() => handleCopyNpx()}>
                   <div className="px-16 py-10 border-2 border-[#F5C518]/20 bg-[#0D0D0D] rounded-lg group-hover:border-[#F5C518] group-hover:shadow-[0_0_40px_rgba(245,197,24,0.2)] transition-all">
                     <code className="text-5xl font-orbitron font-black text-white tracking-[0.3em]">/init</code>
@@ -326,7 +326,7 @@ export default function HiveMindPage() {
           <div className="max-w-6xl mx-auto grid md:grid-cols-2 gap-20 items-center">
             <div>
               <span className="text-6xl font-orbitron font-black block mb-4 tracking-tighter">HIVEMIND</span>
-              <p className="text-xs font-bold uppercase tracking-[0.4em] opacity-30 leading-loose">Technical Souls for Digital Repositories</p>
+              <p className="text-xs font-bold uppercase tracking-[0.4em] opacity-30 leading-loose">Context Engineering for Digital Repositories</p>
             </div>
             <div className="flex flex-col md:items-end gap-10">
               <div className="flex flex-wrap gap-x-12 gap-y-4 font-orbitron font-black text-xs tracking-[0.2em] uppercase">

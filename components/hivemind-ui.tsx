@@ -46,20 +46,17 @@ export function NodeBackground() {
 
     let animationId: number
     let nodes: { x: number, y: number, vx: number, vy: number }[] = []
-    const nodeCount = 80
+    const nodeCount = 120 // Increased from 80
 
     const resize = () => {
       canvas.width = window.innerWidth
       canvas.height = window.innerHeight
-      nodes = Array.from({ length: nodeCount }, () => {
-        const x = Math.random() * canvas.width
-        const y = Math.random() * canvas.height
-        return {
-          x, y, 
-          vx: (Math.random() - 0.5) * 0.4,
-          vy: (Math.random() - 0.5) * 0.4
-        }
-      })
+      nodes = Array.from({ length: nodeCount }, () => ({
+        x: Math.random() * canvas.width,
+        y: Math.random() * canvas.height,
+        vx: (Math.random() - 0.5) * 0.6, // Slightly faster
+        vy: (Math.random() - 0.5) * 0.6
+      }))
     }
 
     const handleMouseMove = (e: MouseEvent) => {
@@ -72,9 +69,7 @@ export function NodeBackground() {
 
     const animate = () => {
       ctx.clearRect(0, 0, canvas.width, canvas.height)
-      ctx.fillStyle = "#F5C518"
-      ctx.strokeStyle = "#F5C518"
-
+      
       nodes.forEach((node, i) => {
         node.x += node.vx
         node.y += node.vy
@@ -85,17 +80,22 @@ export function NodeBackground() {
         
         if (mdist < 250) {
           const force = (250 - mdist) / 250
-          node.x -= (mdx / mdist) * force * 1.5
-          node.y -= (mdy / mdist) * force * 1.5
+          node.x -= (mdx / mdist) * force * 2
+          node.y -= (mdy / mdist) * force * 2
         }
 
         if (node.x < 0 || node.x > canvas.width) node.vx *= -1
         if (node.y < 0 || node.y > canvas.height) node.vy *= -1
 
+        // Draw nodes stronger
+        ctx.fillStyle = "#F5C518"
+        ctx.globalAlpha = 0.6
         ctx.beginPath()
-        ctx.arc(node.x, node.y, 1.2, 0, Math.PI * 2)
+        ctx.arc(node.x, node.y, 1.5, 0, Math.PI * 2)
         ctx.fill()
 
+        // Connect to neighbors
+        ctx.strokeStyle = "#F5C518"
         for (let j = i + 1; j < nodes.length; j++) {
           const other = nodes[j]
           const dx = node.x - other.x
@@ -103,8 +103,8 @@ export function NodeBackground() {
           const dist = Math.sqrt(dx * dx + dy * dy)
 
           if (dist < 150) {
-            ctx.globalAlpha = (1 - dist / 150) * 0.15
-            ctx.lineWidth = 0.5
+            ctx.globalAlpha = (1 - dist / 150) * 0.3 // Increased opacity
+            ctx.lineWidth = 0.8 // Thicker lines
             ctx.beginPath()
             ctx.moveTo(node.x, node.y)
             ctx.lineTo(other.x, other.y)
@@ -112,9 +112,10 @@ export function NodeBackground() {
           }
         }
 
+        // Connect to mouse
         if (mdist < 200) {
-          ctx.globalAlpha = (1 - mdist / 200) * 0.25
-          ctx.lineWidth = 0.8
+          ctx.globalAlpha = (1 - mdist / 200) * 0.5
+          ctx.lineWidth = 1.2
           ctx.beginPath()
           ctx.moveTo(node.x, node.y)
           ctx.lineTo(mouseRef.current.x, mouseRef.current.y)
@@ -133,12 +134,12 @@ export function NodeBackground() {
     }
   }, [])
 
-  return <canvas ref={canvasRef} className="fixed inset-0 pointer-events-none z-0 opacity-40" />
+  return <canvas ref={canvasRef} className="fixed inset-0 pointer-events-none z-0 opacity-60" />
 }
 
 export function HiveMindCard({ children, title, icon: Icon, className = "" }: { children: ReactNode, title: string, icon: any, className?: string }) {
   return (
-    <div className={`bg-[#141414] border border-white/5 border-l-4 border-l-[#F5C518] rounded-r-lg p-6 flex flex-col gap-4 shadow-xl transition-all duration-300 hover:bg-[#1a1a1a] hover:shadow-[0_0_30px_rgba(245,197,24,0.1)] group relative overflow-hidden scroll-reveal ${className}`}>
+    <div className={`bg-[#141414] border border-white/5 border-l-4 border-l-[#F5C518] rounded-r-lg p-6 flex flex-col gap-4 shadow-xl transition-all duration-300 hover:bg-[#1a1a1a] hover:shadow-[0_0_30px_rgba(245,197,24,0.1)] group relative overflow-hidden h-full ${className}`}>
       {/* Light Sweep Animation */}
       <div className="absolute top-0 -left-[100%] w-[50%] h-full bg-gradient-to-r from-transparent via-white/5 to-transparent skew-x-[-25deg] group-hover:left-[150%] transition-all duration-1000 ease-in-out pointer-events-none" />
       
@@ -146,7 +147,7 @@ export function HiveMindCard({ children, title, icon: Icon, className = "" }: { 
         <Icon className="w-6 h-6 text-[#F5C518] group-hover:scale-110 transition-transform duration-300" />
         <h3 className="text-[#F0F0F0] font-orbitron font-bold text-base tracking-wider">{title}</h3>
       </div>
-      <div className="text-[#888888] text-sm leading-relaxed relative z-10 group-hover:text-[#F0F0F0] transition-colors duration-300">
+      <div className="text-[#888888] text-sm leading-relaxed relative z-10 group-hover:text-[#F0F0F0] transition-colors duration-300 flex-1">
         {children}
       </div>
     </div>
