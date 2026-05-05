@@ -36,3 +36,4 @@ pnpm-debug.log*
 # temporary files
 _tmp_*
 preview-out/
+.cursor/rules/ui-ux-frontend.mdc

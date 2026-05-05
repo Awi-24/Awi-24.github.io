@@ -2,6 +2,7 @@
 
 import { useState, useEffect, useRef } from "react"
 import { Code } from "lucide-react"
+import { ProjectDemoHero3D } from "@/components/project-demo-hero-3d"
 
 // Simlish-style gibberish generator
 const SIMLISH_WORDS = [
@@ -85,6 +86,7 @@ export default function AwiOSDemo() {
 
   return (
     <div className="space-y-4">
+      <ProjectDemoHero3D shape="layers" accent="#3a9fe8" secondary="#ff6b9d" />
       {/* Chat Window - Sims Style */}
       <div className="bg-gradient-to-b from-[#1a3a5c] to-[#0d2840] rounded-2xl overflow-hidden border-2 border-[#2a5a8c] shadow-lg">
         {/* Header */}

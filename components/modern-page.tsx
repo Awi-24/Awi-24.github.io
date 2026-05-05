@@ -6,8 +6,6 @@ import { Code2, User, Briefcase, Mail, ExternalLink, Github, Linkedin, Terminal,
 import AsciiRain from "@/components/ascii-rain"
 import GlitchText from "@/components/glitch-text"
 import CyberCard from "@/components/cyber-card"
-import VannexCycleoDemo from "@/components/projects/vannex-cycleo-demo"
-import MonnexDemo from "@/components/projects/monnex-demo"
 import AwiOSDemo from "@/components/projects/awiOS-demo"
 import TSEAnalysesDemo from "@/components/projects/tse-analyses-demo"
 import AnomalyDetectionDemo from "@/components/projects/anomaly-detection-demo"
@@ -79,14 +77,14 @@ const SKILLS = {
 
 const EXPERIENCES = [
   {
-    title: "Software Developer (de facto) — Título Oficial: Product Development Analyst",
+    title: "Software Developer (de facto), título oficial: Product Development Analyst",
     company: "Ford Motor Company",
     location: "Camaçari, BA",
     period: "Jan 2023 - Presente",
     type: "Híbrido",
     highlights: [
-      "Warranty Anomaly Detection: pipeline ML end-to-end sobre dados de custo de garantia de centenas de concessionárias dos EUA — modelo flagou um caso real de fraude confirmada sem contexto prévio, validando a precisão",
-      "Parts Search Engine (RAG + LLM): sistema de busca semântica sobre 20.000 peças × 72 métricas de engenharia com algoritmo de scoring customizado e RAG com LLM — redução de 8–16h para <5min (99%), usado semanalmente por ~50 engenheiros",
+      "Warranty Anomaly Detection: pipeline ML end-to-end sobre dados de custo de garantia de centenas de concessionárias dos EUA. O modelo flagou um caso real de fraude confirmada sem contexto prévio, validando a precisão",
+      "Parts Search Engine (RAG + LLM): sistema de busca semântica sobre 20.000 peças × 72 métricas de engenharia com algoritmo de scoring customizado e RAG com LLM. Redução de 8 a 16 h para <5min (99%), usado semanalmente por ~50 engenheiros",
       "PDF Extraction & Search DB: extração estruturada automatizada de ~200 PDFs técnicos com interface de busca, substituindo workflow manual de 1–2h por sessão",
       "Stack: Python, FastAPI, Streamlit, GCP (BigQuery, Cloud Run), Docker, PostgreSQL"
     ],
@@ -175,27 +173,21 @@ const PROJECTS = [
     status: "NEW",
     type: "personal",
     isExternalLink: true,
-    href: "/hivemind"
+    href: "/hivemind",
+    github: "https://github.com/Awi-24/HiveMind-Protocol",
   },
   {
-    id: "vannex-cycle",
-    title: "Vannex Cycle",
-    description: "App Flutter de rastreamento de ciclo menstrual com previsões de fertilidade e insights personalizados. 100% privacy-first: SQLite local, sem cloud, sem tracking.",
-    previewHint: "Explore features do app · Veja UI do ciclo mensal · Privacidade e arquitetura técnica",
-    demoType: "Preview UI",
-    tags: ["Flutter", "Dart", "SQLite", "Privacy First", "Health Tech"],
-    status: "PROD",
-    type: "personal"
-  },
-  {
-    id: "monnex",
-    title: "Monnex",
-    description: "App Flutter de finanças pessoais com análise de gastos, metas e score de saúde financeira. Privacy-first: dados 100% locais com criptografia AES-256.",
-    previewHint: "Navegue pelo dashboard · Veja gráficos de gastos · Score de saúde financeira",
-    demoType: "Preview UI",
-    tags: ["Flutter", "Dart", "SQLite", "Privacy First", "FinTech"],
-    status: "PROD",
-    type: "personal"
+    id: "hivemind-cli",
+    title: "Hivemind CLI",
+    description: "TUI de terminal cyberpunk: harness multi-agente com loop de tools, MCP, memória e suporte a Ollama e LM Studio, sem nuvem obrigatória.",
+    previewHint: "Instalação npm · Providers locais · Documentação da CLI",
+    demoType: "Site · CLI",
+    tags: ["CLI", "Node", "Ink", "Ollama", "MCP"],
+    status: "NEW",
+    type: "personal",
+    isExternalLink: true,
+    href: "/hivemind-cli",
+    github: "https://github.com/Awi-24/hivemind-cli",
   },
   {
     id: "awiOS",
@@ -210,19 +202,20 @@ const PROJECTS = [
   {
     id: "jumpship",
     title: "JumpShip",
-    description: "Plataforma local-first de busca de empregos com IA: upload de currículo → parsing por LLM → scraping multi-plataforma (LinkedIn, Indeed, Gupy, RemoteOK) → scoring de compatibilidade por LLM.",
-    previewHint: "Ver código-fonte e arquitetura no GitHub",
+    description: "Plataforma local-first de busca de empregos com IA: agregação multi-board, scoring por LLM, PDFs de currículo por vaga, Kanban e stack FastAPI + React 19.",
+    previewHint: "Landing dedicada · README com quick start · Código no GitHub",
     demoType: "Open Source",
     tags: ["FastAPI", "React 19", "TypeScript", "Ollama", "LLM"],
-    status: "DEV",
+    status: "1.0",
     type: "personal",
+    isExternalLink: true,
+    href: "/jumpship",
     github: "https://github.com/Awi-24/JumpShip",
-    noDemo: true
   },
   {
     id: "tse-analyses",
     title: "CEAP Spending Analysis",
-    description: "EDA sobre gastos CEAP dos deputados federais brasileiros — identificou picos de gastos no fim do ano e convergência comportamental entre partidos por mecanismo de incentivo de redução orçamentária. Em andamento como TCC.",
+    description: "EDA sobre gastos CEAP dos deputados federais brasileiros. Identificou picos de gastos no fim do ano e convergência comportamental entre partidos por mecanismo de incentivo de redução orçamentária. Em andamento como TCC.",
     previewHint: "Passe o mouse no gráfico · Revele anomalias escondidas · Veja valores reais vs relatório oficial",
     demoType: "Visualização EDA",
     tags: ["Python", "Pandas", "Plotly", "Anomaly Detection", "EDA"],
@@ -231,7 +224,7 @@ const PROJECTS = [
   },
   {
     id: "kdd-cup",
-    title: "KDD Cup 1999 — Anomaly Detection Benchmark",
+    title: "KDD Cup 1999: Anomaly Detection Benchmark",
     description: "Benchmark de 5 abordagens (XGBoost, IsolationForest, LOF, Autoencoder, OneClassSVM) para detecção de intrusão em rede. Tarefa binária: normal vs. ataque. IsolationForest atinge 97.1% de recall sem nenhum rótulo de treino.",
     previewHint: "Compare métricas ao vivo · Tabela com Precision/Recall/F1/ROC-AUC/PR-AUC · Entenda o caso do Autoencoder",
     demoType: "Benchmark ML",
@@ -684,8 +677,6 @@ export default function ModernPage({ onBack, glitchIntensity }: ModernPageProps)
 
                   <div key={selectedProject} className="bg-[#1a1a2e] rounded border border-[#FCE94F]/20 p-6" style={{ animation: "panelExpand 0.3s cubic-bezier(0.16,1,0.3,1)" }}>
                     {/* Personal Projects */}
-                    {selectedProject === "vannex-cycle" && <VannexCycleoDemo />}
-                    {selectedProject === "monnex" && <MonnexDemo />}
                     {selectedProject === "awiOS" && <AwiOSDemo />}
                     {selectedProject === "tse-analyses" && <TSEAnalysesDemo />}
                     {selectedProject === "kdd-cup" && <KDDCupDemo />}
@@ -783,7 +774,26 @@ export default function ModernPage({ onBack, glitchIntensity }: ModernPageProps)
                                 </span>
                               ))}
                             </div>
-                            {(project as any).isExternalLink ? (
+                            {(project as any).isExternalLink && (project as any).github ? (
+                              <div className="flex flex-col gap-2 sm:flex-row">
+                                <Link
+                                  href={(project as any).href}
+                                  className="flex flex-1 items-center justify-center gap-2 rounded px-4 py-2.5 bg-[#00B4FF]/10 border border-[#00B4FF]/30 text-[#00B4FF] hover:bg-[#00B4FF]/20 hover:border-[#00B4FF]/60 transition-all text-sm font-medium group"
+                                >
+                                  <Play className="w-4 h-4 group-hover:scale-110 transition-transform" />
+                                  Site dedicado
+                                </Link>
+                                <a
+                                  href={(project as any).github}
+                                  target="_blank"
+                                  rel="noopener noreferrer"
+                                  className="flex flex-1 items-center justify-center gap-2 rounded px-4 py-2.5 bg-[#00B4FF]/10 border border-[#00B4FF]/30 text-[#00B4FF] hover:bg-[#00B4FF]/20 hover:border-[#00B4FF]/60 transition-all text-sm font-medium"
+                                >
+                                  <Github className="w-4 h-4" />
+                                  GitHub
+                                </a>
+                              </div>
+                            ) : (project as any).isExternalLink ? (
                               <Link
                                 href={(project as any).href}
                                 className="w-full flex items-center justify-center gap-2 px-4 py-2.5 bg-[#00B4FF]/10 border border-[#00B4FF]/30 text-[#00B4FF] rounded hover:bg-[#00B4FF]/20 hover:border-[#00B4FF]/60 transition-all text-sm font-medium group"

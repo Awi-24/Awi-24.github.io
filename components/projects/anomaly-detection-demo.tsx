@@ -2,6 +2,7 @@
 
 import { useState } from "react"
 import { AlertTriangle, MapPin, DollarSign, Play, CheckCircle } from "lucide-react"
+import { ProjectDemoHero3D } from "@/components/project-demo-hero-3d"
 
 const DEALERSHIPS = [
   { id: 1, name: "Ford North Station", city: "New York", avgCost: 1200, currentCost: 1350, risk: "low" },
@@ -36,6 +37,7 @@ export default function AnomalyDetectionDemo() {
 
   return (
     <div className="space-y-4">
+      <ProjectDemoHero3D shape="cube" accent="#00ffff" secondary="#00ff9f" />
       <div className="flex items-center justify-between mb-4">
         <div>
           <h4 className="text-[#00ffff] text-sm font-bold uppercase tracking-wider">Warranty Anomaly Monitor</h4>

@@ -2,6 +2,7 @@
 
 import { useState } from 'react'
 import { Cpu, RotateCcw, AlertCircle, CheckCircle2 } from 'lucide-react'
+import { ProjectDemoHero3D } from "@/components/project-demo-hero-3d"
 
 const JOINT_TYPES = [
   { id: "hard", name: "Hard Joint", kFactor: 0.12, description: "Metal-to-Metal, no compression" },
@@ -20,6 +21,7 @@ export default function TorqueCalcDemo() {
 
   return (
     <div className="space-y-6">
+      <ProjectDemoHero3D shape="prism" accent="#00ffff" secondary="#a855f7" />
       <div className="flex items-center justify-between">
         <h4 className="text-[#00ffff] text-sm font-bold flex items-center gap-2">
           <Cpu className="w-4 h-4" /> TORQUE & ANGLE CALCULATOR

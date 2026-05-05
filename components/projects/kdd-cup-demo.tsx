@@ -2,6 +2,7 @@
 
 import { useState } from 'react'
 import { Table, BarChart3, Brain, ArrowRight, ShieldCheck, AlertCircle } from 'lucide-react'
+import { ProjectDemoHero3D } from "@/components/project-demo-hero-3d"
 
 const MODELS = [
   { 
@@ -86,6 +87,7 @@ export default function KDDCupDemo() {
 
   return (
     <div className="space-y-6">
+      <ProjectDemoHero3D shape="prism" accent="#00ffff" secondary="#00ff9f" />
       <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
         <div>
           <h4 className="text-[#00ffff] text-sm font-bold flex items-center gap-2">

@@ -34,7 +34,7 @@ export function ScrambleText({ text, delay = 0 }: { text: string, delay?: number
   return <span>{displayText}</span>
 }
 
-export function NodeBackground() {
+export function NodeBackground({ accent = "#F5C518" }: { accent?: string }) {
   const canvasRef = useRef<HTMLCanvasElement>(null)
   const mouseRef = useRef({ x: -1000, y: -1000 })
 
@@ -88,14 +88,14 @@ export function NodeBackground() {
         if (node.y < 0 || node.y > canvas.height) node.vy *= -1
 
         // Draw nodes stronger
-        ctx.fillStyle = "#F5C518"
+        ctx.fillStyle = accent
         ctx.globalAlpha = 0.6
         ctx.beginPath()
         ctx.arc(node.x, node.y, 1.5, 0, Math.PI * 2)
         ctx.fill()
 
         // Connect to neighbors
-        ctx.strokeStyle = "#F5C518"
+        ctx.strokeStyle = accent
         for (let j = i + 1; j < nodes.length; j++) {
           const other = nodes[j]
           const dx = node.x - other.x
@@ -132,7 +132,7 @@ export function NodeBackground() {
       window.removeEventListener("resize", resize)
       window.removeEventListener("mousemove", handleMouseMove)
     }
-  }, [])
+  }, [accent])
 
   return <canvas ref={canvasRef} className="fixed inset-0 pointer-events-none z-0 opacity-60" />
 }

@@ -24,9 +24,29 @@ import {
   Box,
   Layout,
   Command,
-  ChevronDown
+  ChevronDown,
+  AlertTriangle,
 } from "lucide-react"
 import { NodeBackground, HiveMindCard, Terminal, ScrambleText } from "@/components/hivemind-ui"
+
+function HivemindCliInstallCopy({ className = "" }: { className?: string }) {
+  const [copied, setCopied] = useState(false)
+  const cmd = "npm install -g @awi-24/hivemind-cli"
+  return (
+    <button
+      type="button"
+      onClick={() => {
+        navigator.clipboard.writeText(cmd)
+        setCopied(true)
+        setTimeout(() => setCopied(false), 2000)
+      }}
+      className={`inline-flex w-full items-center justify-center gap-2 rounded-xl border border-white/15 bg-black/50 px-4 py-3 text-center font-orbitron text-xs font-black uppercase tracking-wider text-[#FCEE0A] transition-all hover:border-[#FCEE0A]/45 hover:bg-black/60 ${className}`}
+    >
+      {copied ? <Check className="h-4 w-4 shrink-0 text-emerald-400" /> : <Copy className="h-4 w-4 shrink-0" />}
+      {copied ? "Copiado" : "Copiar instalação"}
+    </button>
+  )
+}
 
 export default function HiveMindPage() {
   const [copied, setCopied] = useState(false)
@@ -64,7 +84,20 @@ export default function HiveMindPage() {
 
       {/* Main scrollable container */}
       <main className="h-screen overflow-y-auto scroll-smooth custom-scrollbar relative z-10">
-        
+        <div
+          role="status"
+          className="sticky top-0 z-20 flex flex-wrap items-center justify-center gap-x-2 gap-y-1 border-b border-amber-500/35 bg-amber-950/90 px-4 py-3 text-center text-xs font-orbitron font-bold uppercase tracking-wider text-amber-100 backdrop-blur-sm sm:text-sm"
+        >
+          <AlertTriangle className="h-4 w-4 shrink-0 text-amber-400" aria-hidden />
+          <span>
+            <strong className="text-amber-300">HiveMind Protocol is abandoned.</strong>{" "}
+            <Link href="/hivemind-cli" className="underline decoration-amber-400/50 underline-offset-2 hover:text-white">
+              Use Hivemind CLI instead
+            </Link>
+            .
+          </span>
+        </div>
+
         {/* 1. HERO SECTION */}
         <section className="min-h-screen flex flex-col items-center justify-center pt-20 pb-32 px-4 relative">
           <div className="max-w-5xl mx-auto text-center scroll-reveal">
@@ -72,13 +105,7 @@ export default function HiveMindPage() {
               <ScrambleText text="HIVEMIND" delay={200} /><br/>
               <span className="text-[#F5C518]"><ScrambleText text="PROTOCOL" delay={800} /></span>
             </h1>
-            
-            <div className="inline-block px-4 py-1 border border-[#F5C518]/30 rounded-full mb-8 bg-[#F5C518]/5 backdrop-blur-sm animate-pulse-slow">
-              <p className="text-[#F5C518] font-orbitron text-[10px] font-bold tracking-[0.4em] uppercase">
-                Autonomous Multi-Agent Orchestration
-              </p>
-            </div>
-            
+
             <p className="text-xl md:text-2xl text-[#888888] font-orbitron mb-12 max-w-3xl mx-auto leading-relaxed tracking-wide opacity-0 animate-slide-up" style={{ animationDelay: '1.2s', animationFillMode: 'forwards' }}>
               Stateless agents are dead. Long live <span className="text-white relative group">Context Engineering.<span className="absolute bottom-0 left-0 w-full h-[1px] bg-[#F5C518] scale-x-0 group-hover:scale-x-100 transition-transform origin-left" /></span>
             </p>
@@ -103,6 +130,40 @@ export default function HiveMindPage() {
 
             <div className="absolute bottom-10 left-1/2 -translate-x-1/2 animate-bounce opacity-20">
               <ChevronDown className="w-8 h-8" />
+            </div>
+          </div>
+        </section>
+
+        {/* Hub: Protocol vs CLI */}
+        <section className="relative z-20 border-y border-[#F5C518]/15 bg-[#0D0D0D]/95 px-4 py-16 backdrop-blur-md">
+          <div className="mx-auto max-w-5xl">
+            <p className="mb-8 text-center font-orbitron text-[10px] font-bold uppercase tracking-[0.45em] text-[#F5C518]/70">
+              Família HiveMind
+            </p>
+            <div className="grid gap-6 md:grid-cols-2">
+              <div className="rounded-2xl border border-white/10 bg-[#141414] p-8 transition-all hover:border-[#F5C518]/30">
+                <h3 className="font-orbitron text-lg font-black uppercase tracking-wide text-white">HiveMind Protocol</h3>
+                <p className="mt-3 text-sm leading-relaxed text-[#888]">
+                  Markdown-first no repositório: manifest, agentes, memória versionada e governança para assistentes de código.
+                </p>
+                <p className="mt-4 font-mono text-[10px] uppercase tracking-wider text-white/35">Você está aqui. Role para baixo.</p>
+              </div>
+              <div className="rounded-2xl border border-[#FF003C]/25 bg-gradient-to-br from-[#1a0a0f]/80 to-[#141414] p-8 transition-all hover:border-[#FF003C]/45">
+                <h3 className="font-orbitron text-lg font-black uppercase tracking-wide text-[#FCEE0A]">Hivemind CLI</h3>
+                <p className="mt-3 text-sm leading-relaxed text-[#aaa]">
+                  Terminal TUI multi-agente para Ollama, LM Studio e APIs compatíveis: tools, MCP, vault e harness completo no shell.
+                </p>
+                <div className="mt-6 grid grid-cols-1 gap-3 sm:grid-cols-2 sm:items-stretch">
+                  <Link
+                    href="/hivemind-cli"
+                    className="inline-flex min-h-[52px] items-center justify-center gap-2 rounded-xl bg-[#FCEE0A] px-4 py-3 text-center font-orbitron text-xs font-black uppercase tracking-wider text-black transition-transform hover:scale-[1.01] active:scale-[0.99]"
+                  >
+                    Explorar CLI
+                    <ArrowRight className="h-4 w-4 shrink-0 opacity-80" />
+                  </Link>
+                  <HivemindCliInstallCopy className="min-h-[52px]" />
+                </div>
+              </div>
             </div>
           </div>
         </section>

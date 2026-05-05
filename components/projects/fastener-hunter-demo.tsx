@@ -2,6 +2,7 @@
 
 import { useState } from 'react'
 import { Search, Database, Bot, CheckCircle, AlertTriangle, ChevronRight, Layers, Filter, Cpu } from 'lucide-react'
+import { ProjectDemoHero3D } from "@/components/project-demo-hero-3d"
 
 const SAMPLE_RESULTS = [
   {
@@ -71,6 +72,7 @@ export default function FastenerHunterDemo() {
 
   return (
     <div className="space-y-6">
+      <ProjectDemoHero3D shape="layers" accent="#FCE94F" secondary="#FF4400" />
       <div className="bg-[#1a1a2e] rounded-lg border border-[#FCE94F]/20 p-4">
         <form onSubmit={handleSearch} className="flex gap-2">
           <div className="relative flex-1">

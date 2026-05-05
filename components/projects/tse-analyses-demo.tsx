@@ -2,6 +2,7 @@
 
 import { useState } from 'react'
 import { LineChart, BarChart, AlertCircle, Info } from 'lucide-react'
+import { ProjectDemoHero3D } from "@/components/project-demo-hero-3d"
 
 const CEAP_DATA = [
   { month: "Jan", value: 120000, anomaly: false, reason: "" },
@@ -23,6 +24,7 @@ export default function TSEAnalysesDemo() {
 
   return (
     <div className="space-y-6">
+      <ProjectDemoHero3D shape="cube" accent="#00ffff" secondary="#f472b6" />
       <div className="flex items-center justify-between">
         <h4 className="text-[#00ffff] text-sm font-bold flex items-center gap-2">
           <LineChart className="w-4 h-4" /> CEAP SPENDING ANALYSIS

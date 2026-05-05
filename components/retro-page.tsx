@@ -520,7 +520,7 @@ export default function RetroPage({ onEnterModern }: RetroPageProps) {
                     <span className="bg-[#000080] text-white text-[10px] px-1">Agents</span>
                     <span className="bg-[#000080] text-white text-[10px] px-1">LLM</span>
                   </div>
-                  <div className="flex gap-2 mt-2">
+                  <div className="flex gap-2 mt-2 flex-wrap">
                     <a href="https://github.com/Awi-24/HiveMind-Protocol" target="_blank" rel="noopener noreferrer" className="text-blue-600 text-xs hover:underline block">
                       GitHub
                     </a>
@@ -530,32 +530,23 @@ export default function RetroPage({ onEnterModern }: RetroPageProps) {
                   </div>
                 </div>
 
-                {/* Vannex Cycle */}
+                {/* Hivemind CLI */}
                 <div className="bg-[#c0c0c0] text-black p-3 border-2 border-t-white border-l-white border-r-[#404040] border-b-[#404040]">
-                  <h3 className="font-bold text-[#800000] text-sm mb-1">Vannex Cycle</h3>
-                  <p className="text-xs mb-2">App Flutter de ciclo menstrual. Privacy-first: 100% local, sem cloud.</p>
+                  <h3 className="font-bold text-[#800000] text-sm mb-1">Hivemind CLI</h3>
+                  <p className="text-xs mb-2">Terminal TUI multi-agente para LLMs locais: tools, MCP, memoria .hivemind/ e Ollama / LM Studio.</p>
                   <div className="flex flex-wrap gap-1">
-                    <span className="bg-[#000080] text-white text-[10px] px-1">Flutter</span>
-                    <span className="bg-[#000080] text-white text-[10px] px-1">Dart</span>
-                    <span className="bg-[#000080] text-white text-[10px] px-1">SQLite</span>
+                    <span className="bg-[#000080] text-white text-[10px] px-1">Node</span>
+                    <span className="bg-[#000080] text-white text-[10px] px-1">CLI</span>
+                    <span className="bg-[#000080] text-white text-[10px] px-1">Ink</span>
                   </div>
-                  <a href="https://github.com/Awi-24/Vannex-Cycleo" target="_blank" rel="noopener noreferrer" className="text-blue-600 text-xs hover:underline block mt-1">
-                    Ver no GitHub
-                  </a>
-                </div>
-
-                {/* Monnex */}
-                <div className="bg-[#c0c0c0] text-black p-3 border-2 border-t-white border-l-white border-r-[#404040] border-b-[#404040]">
-                  <h3 className="font-bold text-[#800000] text-sm mb-1">Monnex</h3>
-                  <p className="text-xs mb-2">App Flutter de financas pessoais. Privacy-first: dados so no dispositivo.</p>
-                  <div className="flex flex-wrap gap-1">
-                    <span className="bg-[#000080] text-white text-[10px] px-1">Flutter</span>
-                    <span className="bg-[#000080] text-white text-[10px] px-1">Dart</span>
-                    <span className="bg-[#000080] text-white text-[10px] px-1">SQLite</span>
+                  <div className="flex gap-2 mt-2 flex-wrap">
+                    <a href="https://github.com/Awi-24/hivemind-cli" target="_blank" rel="noopener noreferrer" className="text-blue-600 text-xs hover:underline block">
+                      GitHub
+                    </a>
+                    <a href="/hivemind-cli" className="text-red-600 text-xs hover:underline font-bold block">
+                      SITE DEDICADO
+                    </a>
                   </div>
-                  <a href="https://github.com/Awi-24/Monnex" target="_blank" rel="noopener noreferrer" className="text-blue-600 text-xs hover:underline block mt-1">
-                    Ver no GitHub
-                  </a>
                 </div>
 
                 {/* AwiOS */}
@@ -580,9 +571,14 @@ export default function RetroPage({ onEnterModern }: RetroPageProps) {
                     <span className="bg-[#000080] text-white text-[10px] px-1">React 19</span>
                     <span className="bg-[#000080] text-white text-[10px] px-1">Ollama</span>
                   </div>
-                  <a href="https://github.com/Awi-24/JumpShip" target="_blank" rel="noopener noreferrer" className="text-blue-600 text-xs hover:underline block mt-1">
-                    Ver no GitHub
-                  </a>
+                  <div className="flex gap-2 mt-2 flex-wrap">
+                    <a href="https://github.com/Awi-24/JumpShip" target="_blank" rel="noopener noreferrer" className="text-blue-600 text-xs hover:underline block">
+                      GitHub
+                    </a>
+                    <a href="/jumpship" className="text-red-600 text-xs hover:underline font-bold block">
+                      SITE DEDICADO
+                    </a>
+                  </div>
                 </div>
 
                 {/* CEAP Spending Analysis */}

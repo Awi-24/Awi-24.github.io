@@ -14,11 +14,21 @@ This portfolio showcases my professional journey as a Software and Data Engineer
 
 ## 🛠️ Technical Stack
 
-- **Framework:** [Next.js 15](https://nextjs.org/) (App Router)
+- **Framework:** [Next.js](https://nextjs.org/) 16 (App Router)
 - **Styling:** Tailwind CSS / Vanilla CSS / Framer Motion
 - **Language:** TypeScript
 - **AI Integration:** LangGraph, OpenAI, Anthropic, Ollama
 - **Deployment:** GitHub Actions + GitHub Pages
+
+## 🌐 GitHub Pages (publish)
+
+The site is a [Next.js static export](https://nextjs.org/docs/app/building-your-application/deploying/static-exports) (`output: 'export'` → `out/`). `public/.nojekyll` disables Jekyll so assets under `_next/` are served.
+
+1. In the repo: **Settings → Pages → Build and deployment**, set **Source** to **GitHub Actions** (not “Deploy from a branch”).
+2. Push to `main` or run the **Deploy to GitHub Pages** workflow manually (**Actions → … → Run workflow**).
+3. For this **`<user>.github.io`** repository, the live URL is `https://awi-24.github.io/` (no `basePath`). If you ever use a project site at `https://awi-24.github.io/<repo>/`, set `basePath: '/<repo>'` and `assetPrefix: '/<repo>'` in `next.config.mjs`.
+
+Local check: `npm run build` then open `out/index.html` via a static server if you want to verify the export.
 
 ## 📂 Project Highlights
 
