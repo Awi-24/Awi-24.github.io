@@ -8,8 +8,8 @@ const _geistMono = Geist_Mono({ subsets: ["latin"], variable: "--font-geist-mono
 const _orbitron = Orbitron({ subsets: ["latin"], variable: "--font-orbitron" });
 
 export const metadata: Metadata = {
-  title: 'Awi-24',
-  description: 'Portfólio interativo com estética cyberpunk - Full Stack Developer',
+  title: 'Adrian Widmer — Software Engineer & Researcher',
+  description: 'Portfólio de Adrian Widmer: engenharia de software, machine learning e pesquisa aplicada.',
   icons: {
     icon: [
       {
@@ -21,7 +21,7 @@ export const metadata: Metadata = {
 }
 
 export const viewport: Viewport = {
-  themeColor: "#0a0a0f",
+  themeColor: "#0a0a0a",
 }
 
 export default function RootLayout({
