@@ -29,7 +29,9 @@ jobs:
       - name: Setup Node.js
         uses: actions/setup-node@v4
         with:
-          node-version: "20"
+          # 22+: pnpm mais recente exige 22.13+, e o build do Agamoto usa node:sqlite
+          # (nativo, só existe a partir do Node 22.5).
+          node-version: "22"
           cache: "pnpm"
 
       - name: Setup Pages
