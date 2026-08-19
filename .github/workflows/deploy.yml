@@ -41,6 +41,32 @@ jobs:
       - name: Build
         run: pnpm build
 
+      # Agamoto (agamoto.awi-24.dev/agamoto ou awi-24.github.io/agamoto): repositório separado
+      # e privado (Awi-24/agamoto), com seu próprio SQLite versionado. O código-fonte fica lá,
+      # aqui só o HTML já exportado entra no artefato do Pages — nunca no histórico deste repo.
+      # Precisa do secret AGAMOTO_PAT (fine-grained PAT, só leitura, escopo repositório
+      # Awi-24/agamoto) porque o GITHUB_TOKEN padrão não enxerga outro repositório privado.
+      - name: Checkout Agamoto
+        if: ${{ vars.AGAMOTO_ENABLED == 'true' }}
+        uses: actions/checkout@v4
+        with:
+          repository: Awi-24/agamoto
+          token: ${{ secrets.AGAMOTO_PAT }}
+          path: agamoto-src
+
+      - name: Build Agamoto (export estático)
+        if: ${{ vars.AGAMOTO_ENABLED == 'true' }}
+        working-directory: agamoto-src/web
+        run: |
+          npm ci
+          npm run build:static
+
+      - name: Mesclar Agamoto no build
+        if: ${{ vars.AGAMOTO_ENABLED == 'true' }}
+        run: |
+          mkdir -p out/agamoto
+          cp -r agamoto-src/web/out/. out/agamoto/
+
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
         with:
