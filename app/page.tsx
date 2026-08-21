@@ -1,14 +1,19 @@
+"use client";
+
 import { Space_Grotesk, IBM_Plex_Mono, IBM_Plex_Sans } from "next/font/google";
 import { SynapseNetwork } from "@/components/synapse/network";
+import { useLanguage, LangToggle } from "@/lib/i18n";
 
 const display = Space_Grotesk({ subsets: ["latin"], variable: "--font-display", weight: ["500", "600", "700"] });
 const mono = IBM_Plex_Mono({ subsets: ["latin"], variable: "--font-mono", weight: ["400", "500"] });
 const body = IBM_Plex_Sans({ subsets: ["latin"], variable: "--font-body", weight: ["400", "500"] });
 
-// Página raiz, independente da estética cyberpunk das outras rotas (/jumpship, /hivemind):
-// o wrapper abaixo define bg/texto explícitos, então nada aqui herda as variáveis cyan/magenta
-// de app/layout.tsx — essa troca fica só nesta árvore.
+// Página raiz — a rede de neurônios, preto e branco. /jumpship, /archivist e /ez-down têm
+// cada uma sua própria identidade visual (ver seus respectivos app/*/page.tsx); o wrapper
+// abaixo define bg/texto explícitos, então nada aqui herda as variáveis cyan/magenta de
+// app/layout.tsx.
 export default function Home() {
+  const { lang } = useLanguage();
   return (
     <main
       className={`${display.variable} ${mono.variable} ${body.variable} relative h-dvh w-full overflow-hidden bg-[#0a0a0a] text-[#f5f4f0]`}
@@ -23,12 +28,14 @@ export default function Home() {
         </p>
       </header>
 
+      <LangToggle className="pointer-events-auto absolute right-6 top-6 z-10 text-[#8a8a85] sm:right-10 sm:top-10" />
+
       <div className="absolute inset-0">
         <SynapseNetwork />
       </div>
 
       <p className="pointer-events-none absolute bottom-6 left-6 font-mono text-[10px] uppercase tracking-[0.18em] text-[#5a5a56] sm:left-10">
-        Toque num neurônio
+        {lang === "pt" ? "Toque num neurônio" : "Touch a neuron"}
       </p>
     </main>
   );

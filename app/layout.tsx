@@ -1,6 +1,7 @@
 import type { Metadata, Viewport } from 'next'
 import { Geist, Geist_Mono, Orbitron } from 'next/font/google'
 import { Analytics } from '@vercel/analytics/next'
+import { LanguageProvider } from '@/lib/i18n'
 import './globals.css'
 
 const _geist = Geist({ subsets: ["latin"], variable: "--font-geist" });
@@ -32,7 +33,7 @@ export default function RootLayout({
   return (
     <html lang="pt-BR" className="dark">
       <body className={`${_geist.variable} ${_geistMono.variable} ${_orbitron.variable} font-sans antialiased bg-[#0a0a0f] text-[#00ffff]`}>
-        {children}
+        <LanguageProvider>{children}</LanguageProvider>
         <Analytics />
       </body>
     </html>
