@@ -10,7 +10,6 @@
  */
 
 const UPDATED = "16 de setembro de 2026"
-const CONTACT = "adrianwidmer2@gmail.com"
 
 function Section({ title, children }: { title: string; children: React.ReactNode }) {
   return (
@@ -173,9 +172,15 @@ export default function NaiahPrivacidade() {
 
       <Section title="Contato">
         <p>
-          Dúvidas sobre privacidade ou sobre o app:{" "}
-          <a className="underline underline-offset-4" href={`mailto:${CONTACT}`}>
-            {CONTACT}
+          Dúvidas sobre privacidade ou sobre o app: use o e-mail de contato do desenvolvedor
+          publicado na ficha do Naiah na Google Play, ou abra uma questão em{" "}
+          <a
+            className="underline underline-offset-4"
+            href="https://github.com/Awi-24"
+            rel="noopener noreferrer"
+            target="_blank"
+          >
+            github.com/Awi-24
           </a>
           .
         </p>
