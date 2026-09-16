@@ -1,6 +1,7 @@
 import type { Metadata, Viewport } from 'next'
 import { Geist, Geist_Mono, Orbitron } from 'next/font/google'
 import { Analytics } from '@vercel/analytics/next'
+import { LanguageProvider } from '@/lib/i18n'
 import './globals.css'
 
 const _geist = Geist({ subsets: ["latin"], variable: "--font-geist" });
@@ -8,8 +9,8 @@ const _geistMono = Geist_Mono({ subsets: ["latin"], variable: "--font-geist-mono
 const _orbitron = Orbitron({ subsets: ["latin"], variable: "--font-orbitron" });
 
 export const metadata: Metadata = {
-  title: 'Awi-24',
-  description: 'Portfólio interativo com estética cyberpunk - Full Stack Developer',
+  title: 'Adrian Widmer — Software Engineer & Researcher',
+  description: 'Portfólio de Adrian Widmer: engenharia de software, machine learning e pesquisa aplicada.',
   icons: {
     icon: [
       {
@@ -21,7 +22,7 @@ export const metadata: Metadata = {
 }
 
 export const viewport: Viewport = {
-  themeColor: "#0a0a0f",
+  themeColor: "#0a0a0a",
 }
 
 export default function RootLayout({
@@ -32,7 +33,7 @@ export default function RootLayout({
   return (
     <html lang="pt-BR" className="dark">
       <body className={`${_geist.variable} ${_geistMono.variable} ${_orbitron.variable} font-sans antialiased bg-[#0a0a0f] text-[#00ffff]`}>
-        {children}
+        <LanguageProvider>{children}</LanguageProvider>
         <Analytics />
       </body>
     </html>
